@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerMovement : ActorsMovement
 {
     public Direction direction = new Direction();
-    public float moveSpeed = 2f;
+    public float frontMoveSpeed;
+    private float moveSpeed;
     public Animator animator;
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
@@ -20,6 +21,9 @@ public class PlayerMovement : ActorsMovement
 
     private bool axisMoved;
 
+    public Transform minScale;
+    public Transform maxScale;
+
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -27,10 +31,7 @@ public class PlayerMovement : ActorsMovement
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         previousPosition = transform.position;
 
-        //Order in layer according to cell
-        //grid = GameObject.Find("Grid").GetComponent<GridLayout>();
-        //int newOrderInLayer = grid.WorldToCell(transform.position).y * -1;
-        //spriteRenderer.sortingOrder = newOrderInLayer;
+        moveSpeed = frontMoveSpeed;
 
         switch (direction)
         {
@@ -66,13 +67,8 @@ public class PlayerMovement : ActorsMovement
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        // if (grid.WorldToCell(transform.position).y != grid.WorldToCell(previousPosition).y)
-        // {
-        //     int newOrderInLayer = grid.WorldToCell(transform.position).y * -1;
-        //     spriteRenderer.sortingOrder = newOrderInLayer;
-        //     previousPosition = transform.position;
-        // }
         CheckAxisMoved();
+        UpdateSizeForDepth();
     }
     private void FixedUpdate()
     {
@@ -98,6 +94,13 @@ public class PlayerMovement : ActorsMovement
         {
             direction = Direction.bottom;
         }
+    }
+
+    private void UpdateSizeForDepth()
+    {
+        float scaleValue = Mathf.Lerp(minScale.localScale.y, maxScale.localScale.y, Mathf.InverseLerp(minScale.position.y, maxScale.position.y, transform.position.y));
+        transform.localScale = new Vector3(scaleValue, scaleValue, 0);
+        moveSpeed = scaleValue * frontMoveSpeed / maxScale.localScale.y;
     }
 
     private void CheckAxisMoved()
