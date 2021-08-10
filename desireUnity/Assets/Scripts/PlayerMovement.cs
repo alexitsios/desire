@@ -50,9 +50,18 @@ public class PlayerMovement : ActorsMovement
             default:
                 break;
         }
+        UpdateSizeForDepth();
     }
     private void Update()
     {
+        if (gameManager.inConversation)
+        {
+            movement.x = 0;
+            movement.y = 0;
+            animator.SetFloat("Speed", 0);
+            return;
+        }
+
         if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
         {
             movement.x = 0;
