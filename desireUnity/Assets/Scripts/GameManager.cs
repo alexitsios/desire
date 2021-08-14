@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] allNPC;
 
     public bool inConversation;
+    public GameObject clickIndicator;
 
     private Flowchart flowchart;
 
@@ -46,7 +47,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
+        if (Input.GetMouseButtonDown(0) && !inConversation)
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            clickIndicator.transform.position = mousePosition;
+            clickIndicator.GetComponent<ParticleSystem>().Play();
+        }
     }
 
     public void LoadState(Scene scene, LoadSceneMode mode)
@@ -58,7 +64,7 @@ public class GameManager : MonoBehaviour
     {
         inConversation = true;
         flowchart.ExecuteBlock(NPC);
-        Debug.Log("STARTED CONVERSATION WITH" + NPC);
+        Debug.Log("STARTED CONVERSATION WITH " + NPC);
     }
 
     public void FinishConversation()

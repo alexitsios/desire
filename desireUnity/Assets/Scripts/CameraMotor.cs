@@ -34,7 +34,6 @@ public class CameraMotor : MonoBehaviour
 
         // This is to check if we're inside the bounds on the X axis
         float deltaX = lookAt.position.x - transform.position.x;
-        //Debug.Log("THE DELTA X " + deltaX + "THE BOUNDX" + boundX);
         if (deltaX > boundX || deltaX < -boundX)
         {
             if (transform.position.x < lookAt.position.x)
