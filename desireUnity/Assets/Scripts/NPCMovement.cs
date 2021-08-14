@@ -71,6 +71,11 @@ public class NPCMovement : ActorsMovement
             {
                 lookingForThis = true;
             }
+            else
+            {
+                lookingForThis = false;
+                spriteRenderer.color = Color.white;
+            }
         }
 
         ActionRange.OverlapCollider(filter, hits);
