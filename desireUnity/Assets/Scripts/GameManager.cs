@@ -1,17 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Fungus;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private PlayerMovement player;
     private GameObject[] allNPC;
-
     public bool inConversation;
     public GameObject clickIndicator;
-
     private Flowchart flowchart;
+
+    private GameObject itemsMenu;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerMovement>();
         allNPC = GameObject.FindGameObjectsWithTag("NPC");
         flowchart = GameObject.FindGameObjectsWithTag("Flowchart")[0].GetComponent<Flowchart>();
+        itemsMenu = GameObject.FindGameObjectsWithTag("ItemsMenu")[0];
         inConversation = false;
     }
 
