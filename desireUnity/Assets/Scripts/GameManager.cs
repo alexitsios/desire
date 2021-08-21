@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Fungus;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject clickIndicator;
     private Flowchart flowchart;
 
-    private GameObject itemsMenu;
+    //private GameObject itemsMenu;
 
     private void Awake()
     {
@@ -29,7 +28,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerMovement>();
         allNPC = GameObject.FindGameObjectsWithTag("NPC");
         flowchart = GameObject.FindGameObjectsWithTag("Flowchart")[0].GetComponent<Flowchart>();
-        itemsMenu = GameObject.FindGameObjectsWithTag("ItemsMenu")[0];
+        //itemsMenu = GameObject.FindGameObjectsWithTag("ItemsMenu")[0];
         inConversation = false;
     }
 
@@ -57,11 +56,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //SceneStates
+    public void StartGame()
+    {
+        SceneManager.LoadScene("01_Prion");
+    }
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("00_StartGame");
+    }
     public void LoadState(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("LoadState");
     }
 
+
+
+    //GamePlay
     public void StartConversation(string NPC)
     {
         inConversation = true;
@@ -73,6 +84,11 @@ public class GameManager : MonoBehaviour
     {
         inConversation = false;
         Debug.Log("FINISHED CONVERSATION");
+    }
+
+    public void UsedItem(string itemName)
+    {
+        Debug.Log("USED ITEM " + itemName);
     }
 
 }
