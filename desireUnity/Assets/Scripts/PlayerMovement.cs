@@ -11,18 +11,12 @@ public class PlayerMovement : ActorsMovement
     public Animator animator;
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
-    private RaycastHit2D hit;
-    Vector2 movement;
     private GameManager gameManager;
-
     private Vector3 previousPosition;
-
-    private GridLayout grid;
-
-    private bool axisMoved;
-
     public Transform minScale;
     public Transform maxScale;
+    private Vector2 lastClickedPos;
+    bool moving;
 
     private void Start()
     {
@@ -56,52 +50,61 @@ public class PlayerMovement : ActorsMovement
     {
         if (gameManager.inConversation)
         {
-            movement.x = 0;
-            movement.y = 0;
+            lastClickedPos = transform.position;
             animator.SetFloat("Speed", 0);
             return;
         }
 
-        if (Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0)
+        //Point to move
+        if (Input.GetMouseButtonDown(0))
         {
-            movement.x = 0;
-            movement.y = 0;
-            animator.SetFloat("Speed", 0);
-            axisMoved = false;
-            return;
+            lastClickedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            moving = true;
         }
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
-
-        CheckAxisMoved();
         UpdateSizeForDepth();
     }
     private void FixedUpdate()
     {
-        transform.Translate(0, movement.y * moveSpeed * Time.fixedDeltaTime, 0);
-        transform.Translate(movement.x * moveSpeed * Time.fixedDeltaTime, 0, 0);
-    }
+        if (moving && (Vector2)transform.position != lastClickedPos)
+        {
+            float step = moveSpeed * Time.fixedDeltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, lastClickedPos, step);
+            animator.SetFloat("Speed", step);
 
-    private void UpdateDirection()
-    {
-        if (animator.GetFloat("Horizontal") == 1)
-        {
-            direction = Direction.right;
+            float xDifference = Math.Abs(transform.position.x - lastClickedPos.x);
+            float yDifference = Math.Abs(transform.position.y - lastClickedPos.y);
+
+            if (yDifference > xDifference)
+            {
+                if (lastClickedPos.y > transform.position.y)
+                {
+                    animator.SetFloat("Vertical", 1);
+                    animator.SetFloat("Horizontal", 0);
+                }
+                if (lastClickedPos.y < transform.position.y)
+                {
+                    animator.SetFloat("Vertical", -1);
+                    animator.SetFloat("Horizontal", 0);
+                }
+            }
+            else
+            {
+                if (lastClickedPos.x > transform.position.x)
+                {
+                    animator.SetFloat("Horizontal", 1);
+                    animator.SetFloat("Vertical", 0);
+                }
+                if (lastClickedPos.x < transform.position.x)
+                {
+                    animator.SetFloat("Horizontal", -1);
+                    animator.SetFloat("Vertical", 0);
+                }
+            }
         }
-        if (animator.GetFloat("Horizontal") == -1)
+        else
         {
-            direction = Direction.left;
-        }
-        if (animator.GetFloat("Vertical") == 1)
-        {
-            direction = Direction.top;
-        }
-        if (animator.GetFloat("Vertical") == -1)
-        {
-            direction = Direction.bottom;
+            moving = false;
+            animator.SetFloat("Speed", 0);
         }
     }
 
@@ -110,41 +113,5 @@ public class PlayerMovement : ActorsMovement
         float scaleValue = Mathf.Lerp(minScale.localScale.y, maxScale.localScale.y, Mathf.InverseLerp(minScale.position.y, maxScale.position.y, transform.position.y));
         transform.localScale = new Vector3(scaleValue, scaleValue, 0);
         moveSpeed = scaleValue * frontMoveSpeed / maxScale.localScale.y;
-    }
-
-    private void CheckAxisMoved()
-    {
-        if (Input.GetAxisRaw("Horizontal") == 1)
-        {
-            if (axisMoved == false)
-            {
-                UpdateDirection();
-                axisMoved = true;
-            }
-        }
-        else if (Input.GetAxisRaw("Horizontal") == -1)
-        {
-            if (axisMoved == false)
-            {
-                UpdateDirection();
-                axisMoved = true;
-            }
-        }
-        else if (Input.GetAxisRaw("Vertical") == 1)
-        {
-            if (axisMoved == false)
-            {
-                UpdateDirection();
-                axisMoved = true;
-            }
-        }
-        else if (Input.GetAxisRaw("Vertical") == -1)
-        {
-            if (axisMoved == false)
-            {
-                UpdateDirection();
-                axisMoved = true;
-            }
-        }
     }
 }

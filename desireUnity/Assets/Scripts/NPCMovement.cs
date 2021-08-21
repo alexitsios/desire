@@ -12,17 +12,20 @@ public class NPCMovement : ActorsMovement
     private GameManager gameManager;
     public Transform minScale;
     public Transform maxScale;
-    public BoxCollider2D conversationRange;
-    private bool inConversationRange;
+    public BoxCollider2D ActionRange;
+    public BoxCollider2D ClickArea;
+    private bool inActionRange;
     public ContactFilter2D filter;
     private Collider2D[] hits = new Collider2D[10];
+    private bool lookingForThis;
 
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        inConversationRange = false;
+        inActionRange = false;
+        lookingForThis = false;
 
         switch (direction)
         {
@@ -45,13 +48,38 @@ public class NPCMovement : ActorsMovement
     }
     private void Update()
     {
-        if (inConversationRange && Input.GetButtonDown("Fire1") && !gameManager.inConversation)
+        //Highlight NPC/Item
+        if (lookingForThis)
         {
+            spriteRenderer.color = Color.green;
+        }
+
+        //Init Conversation
+        if (inActionRange && lookingForThis && !gameManager.inConversation)
+        {
+            lookingForThis = false;
+            spriteRenderer.color = Color.white;
             gameManager.StartConversation(gameObject.name);
             return;
         }
-        conversationRange.OverlapCollider(filter, hits);
-        inConversationRange = CheckCollisions();
+
+        //Get input
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (ClickArea.OverlapPoint(mousePosition))
+            {
+                lookingForThis = true;
+            }
+            else
+            {
+                lookingForThis = false;
+                spriteRenderer.color = Color.white;
+            }
+        }
+
+        ActionRange.OverlapCollider(filter, hits);
+        inActionRange = CheckCollisions();
     }
 
     private void FixedUpdate()
@@ -99,5 +127,23 @@ public class NPCMovement : ActorsMovement
             hits[i] = null;
         }
         return felt;
+    }
+
+    void OnMouseOver()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (ClickArea.OverlapPoint(mousePosition) && !lookingForThis && !gameManager.inConversation)
+        {
+            spriteRenderer.color = Color.blue;
+        }
+    }
+
+    void OnMouseExit()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (!ClickArea.OverlapPoint(mousePosition) && !lookingForThis && !gameManager.inConversation)
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
 }
