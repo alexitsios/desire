@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     //SceneStates
     public void StartGame()
     {
-        SceneManager.LoadScene("01_Prion");
+        SceneManager.LoadScene("01_Stern");
     }
     public void GoToMainMenu()
     {
