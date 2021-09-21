@@ -18,7 +18,7 @@ public class CameraMotor : MonoBehaviour
 
     //Update after char finishes moving
 
-    private void Start()
+    private void Start ()
     {
         float vertExtent = Camera.main.orthographicSize;
         float horzExtent = vertExtent * Screen.width / Screen.height;
@@ -27,20 +27,8 @@ public class CameraMotor : MonoBehaviour
         rightBound = backgroundBounds.sprite.bounds.size.x / 2.0f - horzExtent;
         bottomBound = vertExtent - backgroundBounds.sprite.bounds.size.y / 2.0f;
         topBound = backgroundBounds.sprite.bounds.size.y / 2.0f - vertExtent;
-
-        //TODO: Why is it working in one and not the other?
-
-        Debug.Log("horzExt" + horzExtent);
-        Debug.Log("bounds X" + backgroundBounds.sprite.bounds.size.x);
-        Debug.Log("vertExtent" + vertExtent);
-        Debug.Log("bounds Y" + backgroundBounds.sprite.bounds.size.y);
-
-        Debug.Log("The right bound" + rightBound);
-        Debug.Log("The left bound" + leftBound);
-        Debug.Log("The top bound" + topBound);
-        Debug.Log("The bottom bound" + bottomBound);
     }
-    private void LateUpdate()
+    private void LateUpdate ()
     {
         Vector3 delta = Vector3.zero;
 
@@ -73,10 +61,10 @@ public class CameraMotor : MonoBehaviour
         }
         //transform.position += new Vector3(delta.x, delta.y, 0);
 
-        Vector3 newPosition = transform.position + new Vector3(delta.x, delta.y, 0);
+        Vector3 newPosition = transform.position + new Vector3 (delta.x, delta.y, 0);
 
-        newPosition.x = Mathf.Clamp(newPosition.x, leftBound, rightBound);
-        newPosition.y = Mathf.Clamp(newPosition.y, bottomBound, topBound);
+        newPosition.x = Mathf.Clamp (newPosition.x, leftBound, rightBound);
+        newPosition.y = Mathf.Clamp (newPosition.y, bottomBound, topBound);
 
         transform.position = newPosition;
     }
