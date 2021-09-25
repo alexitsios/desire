@@ -14945,6 +14945,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4992334496352891077, guid: 9106d74b619ab8b45b9dedb27141eebc, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4992334496352891079, guid: 9106d74b619ab8b45b9dedb27141eebc, type: 3}
       propertyPath: trapped
       value: 1
