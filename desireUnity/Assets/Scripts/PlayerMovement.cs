@@ -19,6 +19,8 @@ public class PlayerMovement : ActorsMovement
     private Rigidbody2D rigidBody;
     bool moving;
 
+    public bool trapped;
+
     private void Start ()
     {
         boxCollider = GetComponent<BoxCollider2D> ();
@@ -69,7 +71,15 @@ public class PlayerMovement : ActorsMovement
     {
         if (moving && (Vector2) transform.position != lastClickedPos)
         {
+
             float step = moveSpeed * Time.fixedDeltaTime;
+
+            //Allow only rotation
+            if (trapped)
+            {
+                step = 0;
+            }
+
             transform.position = Vector2.MoveTowards (transform.position, lastClickedPos, step);
 
             animator.SetFloat ("Speed", step);
@@ -103,6 +113,12 @@ public class PlayerMovement : ActorsMovement
                     animator.SetFloat ("Vertical", 0);
                 }
             }
+
+            //Stop continous movement
+            if (trapped)
+            {
+                lastClickedPos = transform.position;
+            }
         }
         else
         {
@@ -116,5 +132,12 @@ public class PlayerMovement : ActorsMovement
         float scaleValue = Mathf.Lerp (minScale.localScale.y, maxScale.localScale.y, Mathf.InverseLerp (minScale.position.y, maxScale.position.y, transform.position.y));
         transform.localScale = new Vector3 (scaleValue, scaleValue, 0);
         moveSpeed = scaleValue * frontMoveSpeed / maxScale.localScale.y;
+
+        spriteRenderer.sortingOrder = (int) (transform.position.y * -1);
+    }
+
+    public void ToogleTrapped ()
+    {
+        trapped = !trapped;
     }
 }
