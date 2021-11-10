@@ -7,7 +7,7 @@ public abstract class NPCBase : NPCMovement, IInteractable
 
     void Start()
     {
-        Flowchart = GameObject.FindGameObjectWithTag("Flowchart").GetComponent<Flowchart>();
+        Flowchart = GameObject.Find("NPCsFlowchart").GetComponent<Flowchart>();
     }
 
     public abstract void Interact();

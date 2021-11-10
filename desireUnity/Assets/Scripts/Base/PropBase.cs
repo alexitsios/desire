@@ -7,7 +7,7 @@ public abstract class PropBase : MonoBehaviour, IInteractable
 
 	void Start()
     {
-        Flowchart = GameObject.FindGameObjectWithTag("Flowchart").GetComponent<Flowchart>();
+        Flowchart = GameObject.Find("PropsFlowchart").GetComponent<Flowchart>();
     }
 
     public abstract void Interact();

@@ -13,11 +13,6 @@ public class NPCMovement : MovementBase
 	private float moveSpeed;
 	public bool canMove;
 
-	//Conversation
-	public bool blockLoop;
-	public float totalBlocks;
-	private float currentBlock = 0;
-
 	private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();

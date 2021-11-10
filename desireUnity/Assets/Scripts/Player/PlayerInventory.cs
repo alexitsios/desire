@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private List<ItemBase> inventory;
+    private List<InventoryItem> inventory = new List<InventoryItem>();
     private ItemsMenu inventoryScreen;
 
 	public void Start()
@@ -15,11 +15,12 @@ public class PlayerInventory : MonoBehaviour
 	/// <summary>
 	///     Adds a new item to the player's inventory
 	/// </summary>
-	public void AddItem(ItemBase item)
+	public void AddItem(InventoryItem item)
     {
+        Debug.Log("ADDING ITEM " + item._type.ToString());
         inventory.Add(item);
 
-        inventoryScreen.UpdateInventoryScreen(inventory);
+        //inventoryScreen.UpdateInventoryScreen(inventory);
     }
 
     /// <summary>
@@ -27,9 +28,9 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     public void RemoveItem(ItemType itemType)
     {
-        var item = inventory.Where(i => i.itemType == itemType).ToList()[0];
+        var item = inventory.Where(i => i._type == itemType).ToList()[0];
         inventory.Remove(item);
 
-        inventoryScreen.UpdateInventoryScreen(inventory);
+        //inventoryScreen.UpdateInventoryScreen(inventory);
     }
 }

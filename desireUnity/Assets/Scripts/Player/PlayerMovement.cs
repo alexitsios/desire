@@ -11,17 +11,13 @@ public class PlayerMovement : MovementBase
 	private PlayerInteraction playerInteraction;
 	private float moveSpeed;
 	private SpriteRenderer spriteRenderer;
-	private GameManager gameManager;
-	private Vector3 previousPosition;
 	private Vector2 lastClickedPos;
 	private bool moving;
 
 	private void Start()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		playerInteraction = GetComponent<PlayerInteraction>();
-		previousPosition = transform.position;
 
 		moveSpeed = frontMoveSpeed;
 

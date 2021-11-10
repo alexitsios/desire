@@ -2,7 +2,7 @@ using Fungus;
 
 public interface IInteractable
 {
-	public Flowchart Flowchart { get; set; }
+	Flowchart Flowchart { get; set; }
 
-	void Interact();
+	abstract void Interact();
 }

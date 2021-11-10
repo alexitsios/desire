@@ -4,7 +4,9 @@ public class VacuumRobot : NPCBase
 {
 
 	public GameObject trashBin;
+
 	private float speed;
+	private int currentBlock = 0;
 
 	public void CleanTrashBin()
 	{
@@ -15,7 +17,10 @@ public class VacuumRobot : NPCBase
 
 	public override void Interact()
 	{
-		var blockName = "VacuumRobot_0";
+		var blockName = "VacuumRobot_" + currentBlock;
 		Flowchart.ExecuteBlock(blockName);
+
+		if(currentBlock == 0)
+			currentBlock++;
 	}
 }

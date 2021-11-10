@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
 	private readonly Collider2D[] _objectsInRange = new Collider2D[10];
 	private BoxCollider2D _playerActionRange;
-	public Collider2D objectOutOfReach = null;
+	public Collider2D _objectOutOfReach = null;
 
 	public ContactFilter2D filter;
 	public bool isInteracting = false;
@@ -17,23 +18,27 @@ public class PlayerInteraction : MonoBehaviour
 	private void Update()
 	{
 		// If the player tried to interact with an object out of reach
-		if(objectOutOfReach != null)
+		if(_objectOutOfReach != null)
 		{
+			Array.Clear(_objectsInRange, 0, _objectsInRange.Length);
 			_playerActionRange.OverlapCollider(filter, _objectsInRange);
 
 			// Interacts with the object when it's in reach
-			if(IsObjectColliding(objectOutOfReach))
+			if(IsObjectColliding(_objectOutOfReach))
 			{
-				objectOutOfReach.gameObject.GetComponent<IInteractable>().Interact();
+				_objectOutOfReach.gameObject.GetComponent<IInteractable>().Interact();
 				isInteracting = true;
-				objectOutOfReach = null;
+				_objectOutOfReach = null;
 			}
 		}
 
 		// Gets all objects in range whenever the player left clicks. If the clicked object is interactable, interact with it
 		if(Input.GetMouseButtonDown(0))
 		{
+			Array.Clear(_objectsInRange, 0, _objectsInRange.Length);
 			_playerActionRange.OverlapCollider(filter, _objectsInRange);
+
+			_objectOutOfReach = null;
 
 			var clickPosition = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -53,7 +58,7 @@ public class PlayerInteraction : MonoBehaviour
 				// If the clicked object is out of reach
 				else if(clickedObject != null)
 				{
-					objectOutOfReach = hit.collider;
+					_objectOutOfReach = hit.collider;
 				}
 			}
 		}

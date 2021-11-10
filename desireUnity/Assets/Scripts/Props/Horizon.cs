@@ -1,8 +1,8 @@
-public class DataPad : ItemBase
+public class Horizon : PropBase
 {
 	public override void Interact()
 	{
-		var blockName = "DataPad_0";
+		var blockName = "Horizon_0";
 		Flowchart.ExecuteBlock(blockName);
 	}
 }

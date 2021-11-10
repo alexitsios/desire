@@ -8,9 +8,12 @@ public abstract class ItemBase : MonoBehaviour, IInteractable
 
 	public Flowchart Flowchart { get; set; }
 
+	protected PlayerInventory playerIventory;
+
 	private void Start()
 	{
-		Flowchart = GameObject.FindGameObjectWithTag("Flowchart").GetComponent<Flowchart>();
+		Flowchart = GameObject.Find("ItemsFlowchart").GetComponent<Flowchart>();
+		playerIventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
 	}
 
 	public abstract void Interact();
