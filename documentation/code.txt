@@ -1,0 +1,22 @@
+FOLDERS:
+    /Base - Contains all the base classes (ItemBase, for inventory items; NPCBase, for NPCs; PropBase, for items you can interact in the world)
+    /Enums - Contains all the enums used throughout the code
+    /Interfaces - Contains all Interfaces
+    /NPCs - Contains the individual implementations for each NPC. Those NPCs will most likely inherit NPCBase, having access to movement and interactability
+    /Player - Contains all the scripts related to the player character, like inventory, interaction, movement, etc.
+    /Props - Contains the individual implementations for each Prop. Those props will most likely inherit PropBase, having access to interactability
+
+INTERACTIONS:
+    To allow interactions, an object (Prop, NPC, or anything else) needs to implement the interface IInteractable. After implementing the Flowchart parameter, you can create a 
+    public void Interact(), detailing inside it what exactly will happen when an interaction occurs. On the player side, every time the player left-clicks, the script PlayerInteraction
+    checks all Colliders colliding with the player Action Area (a BoxCollider2D determining the area the player can interact with). If the clicked object is inside this area AND
+    is a IInteractable, the player interacts with it. 
+    
+    Since each interactable object implements the Interact() method from the interface, the script doesn't need to now exactly what kind of object is being interacted with, or what will happen.
+    All of this logic is controlled by the object
+
+INVENTORY
+    For now, the inventory is a List of ItemBase objects. Each object is a Prefab with an ItemBase script component, and this scripts contains two major variables: the item type (an Enum, with 
+    each value representing a different collectible item), and the item sprite. All of the inventory logic (adding or removing items, selecting items, etc.) is controlled by the class PlayerInventory.
+    The inventory screen is an UI element (saved in another scene because Unity's UI workflow is a nightmare), and the inventory scripts sends the inventory List whenever the screen needs to be updated.
+    Appart from some simple methods, the inventory is non-functional

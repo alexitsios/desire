@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,21 +5,15 @@ using UnityEngine.EventSystems;
 
 public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    // Start is called before the first frame update
     private Animator animator;
     private GameManager gameManager;
+    private GameObject[] inventorySlots;
 
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
+        inventorySlots = GameObject.FindGameObjectsWithTag("ItemSlot");
     }
 
     public void UseItem(GameObject item)
@@ -43,4 +36,12 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             animator.SetBool("isDown", false);
         }
     }
+
+    public void UpdateInventoryScreen(List<ItemBase> inventory)
+	{
+        for(int i = 0; i < inventorySlots.Length; i++)
+		{
+            inventorySlots[i].GetComponent<Image>().sprite = inventory[i].itemImage ?? null;
+        }
+	}
 }

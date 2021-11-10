@@ -5,26 +5,29 @@ using Fungus;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private PlayerMovement player;
-    private GameObject[] allNPC;
     public bool inConversation;
     public GameObject clickIndicator;
+
     private Flowchart flowchart;
+    private GameObject[] allNPC;
+    private PlayerMovement player;
 
     //private GameObject itemsMenu;
 
     private void Awake()
     {
-        if (GameManager.instance != null)
+        if(instance != null)
         {
             Destroy(gameObject);
             return;
         }
+
         PlayerPrefs.DeleteAll();
         instance = this;
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
+
         player = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerMovement>();
         allNPC = GameObject.FindGameObjectsWithTag("NPC");
         flowchart = GameObject.FindGameObjectsWithTag("Flowchart")[0].GetComponent<Flowchart>();
@@ -71,7 +74,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-
     //GamePlay
     public void StartConversation(string NPC)
     {
@@ -90,5 +92,4 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("USED ITEM " + itemName);
     }
-
 }

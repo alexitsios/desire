@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : ActorsMovement
+public class PlayerMovement : MonoBehaviour
 {
     public Direction direction = new Direction ();
     public float frontMoveSpeed;
@@ -33,16 +33,16 @@ public class PlayerMovement : ActorsMovement
 
         switch (direction)
         {
-            case Direction.top:
+            case Direction.Top:
                 animator.SetFloat ("Vertical", 1);
                 break;
-            case Direction.right:
+            case Direction.Right:
                 animator.SetFloat ("Horizontal", 1);
                 break;
-            case Direction.bottom:
+            case Direction.Bottom:
                 animator.SetFloat ("Vertical", -1);
                 break;
-            case Direction.left:
+            case Direction.Left:
                 animator.SetFloat ("Horizontal", -1);
                 break;
             default:

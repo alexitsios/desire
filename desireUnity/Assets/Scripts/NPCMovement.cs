@@ -1,260 +1,181 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCMovement : ActorsMovement
+public class NPCMovement : MonoBehaviour
 {
-    public Direction direction = new Direction ();
-    public Animator animator;
-    private BoxCollider2D boxCollider;
-    private SpriteRenderer spriteRenderer;
-    private GameManager gameManager;
-    public Transform minScale;
-    public Transform maxScale;
-    public BoxCollider2D ActionRange;
-    public BoxCollider2D ClickArea;
-    private bool inActionRange;
-    public ContactFilter2D filter;
-    private Collider2D[] hits = new Collider2D[10];
-    private bool lookingForThis;
+	public Direction direction;
+	public Animator animator;
+	private SpriteRenderer spriteRenderer;
+	private GameManager gameManager;
+	public Transform minScale;
+	public Transform maxScale;
 
-    //Movement
-    bool moving;
-    private Vector2 objective;
-    private float moveSpeed;
-    public bool toggleMovement;
+	private bool lookingForThis;
 
-    //Conversation
-    public bool blockLoop;
-    public float totalBlocks;
-    private float currentBlock = 0;
+	//Movement
+	bool moving;
+	private Vector2 objective;
+	private float moveSpeed;
+	public bool canMove;
 
-    private void Start ()
-    {
-        boxCollider = GetComponent<BoxCollider2D> ();
-        spriteRenderer = GetComponent<SpriteRenderer> ();
-        gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
-        inActionRange = false;
-        lookingForThis = false;
+	//Conversation
+	public bool blockLoop;
+	public float totalBlocks;
+	private float currentBlock = 0;
 
-        //Movement
-        objective = transform.position;
-        moveSpeed = 0;
-        toggleMovement = false;
+	private void Awake()
+	{
+		spriteRenderer = GetComponent<SpriteRenderer>();
+		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+		lookingForThis = false;
 
-        if (animator)
-        {
-            switch (direction)
-            {
-                case Direction.top:
-                    animator.SetFloat ("Vertical", 1);
-                    break;
-                case Direction.right:
-                    animator.SetFloat ("Horizontal", 1);
-                    break;
-                case Direction.bottom:
-                    animator.SetFloat ("Vertical", -1);
-                    break;
-                case Direction.left:
-                    animator.SetFloat ("Horizontal", -1);
-                    break;
-                default:
-                    break;
-            }
-        }
-        UpdateSizeForDepth ();
-    }
+		//Movement
+		objective = transform.position;
+		moveSpeed = 0;
+		canMove = false;
 
-    private void Update ()
-    {
-        //Highlight NPC/Item
-        if (lookingForThis)
-        {
-            spriteRenderer.color = Color.green;
-        }
+		if(animator)
+		{
+			switch(direction)
+			{
+				case Direction.Top:
+					animator.SetFloat("Vertical", 1);
+					break;
+				case Direction.Right:
+					animator.SetFloat("Horizontal", 1);
+					break;
+				case Direction.Bottom:
+					animator.SetFloat("Vertical", -1);
+					break;
+				case Direction.Left:
+					animator.SetFloat("Horizontal", -1);
+					break;
+				default:
+					break;
+			}
+		}
+		UpdateSizeForDepth();
+	}
 
-        //Init Conversation
-        if (inActionRange && lookingForThis && !gameManager.inConversation)
-        {
-            lookingForThis = false;
-            spriteRenderer.color = Color.white;
-            StartConversation ();
-            return;
-        }
+	private void Update()
+	{
+		UpdateSizeForDepth();
+	}
 
-        //Get input
-        if (Input.GetMouseButtonDown (0))
-        {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-            if (ClickArea.OverlapPoint (mousePosition))
-            {
-                lookingForThis = true;
-            }
-            else
-            {
-                lookingForThis = false;
-                spriteRenderer.color = Color.white;
-            }
-        }
+	private void FixedUpdate()
+	{
+		if(!animator)
+		{
+			return;
+		}
 
-        ActionRange.OverlapCollider (filter, hits);
-        inActionRange = CheckCollisions ();
+		if(moving && (Vector2) transform.position != objective)
+		{
+			float step = moveSpeed * Time.fixedDeltaTime;
 
-        UpdateSizeForDepth ();
-    }
+			//Allow only rotation
+			if(!canMove)
+			{
+				step = 0;
+			}
 
-    private void FixedUpdate ()
-    {
-        if (!animator)
-        {
-            return;
-        }
+			transform.position = Vector2.MoveTowards(transform.position, objective, step);
 
-        if (moving && (Vector2) transform.position != objective)
-        {
-            float step = moveSpeed * Time.fixedDeltaTime;
+			animator.SetFloat("Speed", step);
 
-            //Allow only rotation
-            if (!toggleMovement)
-            {
-                step = 0;
-            }
+			float xDifference = Math.Abs(transform.position.x - objective.x);
+			float yDifference = Math.Abs(transform.position.y - objective.y);
 
-            transform.position = Vector2.MoveTowards (transform.position, objective, step);
+			if(yDifference > xDifference)
+			{
+				if(objective.y > transform.position.y)
+				{
+					animator.SetFloat("Vertical", 1);
+					animator.SetFloat("Horizontal", 0);
+				}
+				if(objective.y < transform.position.y)
+				{
+					animator.SetFloat("Vertical", -1);
+					animator.SetFloat("Horizontal", 0);
+				}
+			}
+			else
+			{
+				if(objective.x > transform.position.x)
+				{
+					animator.SetFloat("Horizontal", 1);
+					animator.SetFloat("Vertical", 0);
+				}
+				if(objective.x < transform.position.x)
+				{
+					animator.SetFloat("Horizontal", -1);
+					animator.SetFloat("Vertical", 0);
+				}
+			}
+			//Stop continous movement
+			if(!canMove)
+			{
+				objective = transform.position;
+			}
+		}
+		else
+		{
+			moving = false;
+			animator.SetFloat("Speed", 0);
+		}
+	}
 
-            animator.SetFloat ("Speed", step);
+	private void UpdateDirection()
+	{
+		if(!animator)
+		{
+			return;
+		}
+		if(animator.GetFloat("Horizontal") == 1)
+		{
+			direction = Direction.Right;
+		}
+		if(animator.GetFloat("Horizontal") == -1)
+		{
+			direction = Direction.Left;
+		}
+		if(animator.GetFloat("Vertical") == 1)
+		{
+			direction = Direction.Top;
+		}
+		if(animator.GetFloat("Vertical") == -1)
+		{
+			direction = Direction.Bottom;
+		}
+	}
 
-            float xDifference = Math.Abs (transform.position.x - objective.x);
-            float yDifference = Math.Abs (transform.position.y - objective.y);
+	private void UpdateSizeForDepth()
+	{
+		float scaleValue = Mathf.Lerp(minScale.localScale.y, maxScale.localScale.y, Mathf.InverseLerp(minScale.position.y, maxScale.position.y, transform.position.y));
+		transform.localScale = new Vector3(scaleValue, scaleValue, 0);
 
-            if (yDifference > xDifference)
-            {
-                if (objective.y > transform.position.y)
-                {
-                    animator.SetFloat ("Vertical", 1);
-                    animator.SetFloat ("Horizontal", 0);
-                }
-                if (objective.y < transform.position.y)
-                {
-                    animator.SetFloat ("Vertical", -1);
-                    animator.SetFloat ("Horizontal", 0);
-                }
-            }
-            else
-            {
-                if (objective.x > transform.position.x)
-                {
-                    animator.SetFloat ("Horizontal", 1);
-                    animator.SetFloat ("Vertical", 0);
-                }
-                if (objective.x < transform.position.x)
-                {
-                    animator.SetFloat ("Horizontal", -1);
-                    animator.SetFloat ("Vertical", 0);
-                }
-            }
-            //Stop continous movement
-            if (!toggleMovement)
-            {
-                objective = transform.position;
-            }
-        }
-        else
-        {
-            moving = false;
-            animator.SetFloat ("Speed", 0);
-        }
-    }
+		spriteRenderer.sortingOrder = (int) (transform.position.y * -1);
+	}
 
-    private void UpdateDirection ()
-    {
-        if (!animator)
-        {
-            return;
-        }
-        if (animator.GetFloat ("Horizontal") == 1)
-        {
-            direction = Direction.right;
-        }
-        if (animator.GetFloat ("Horizontal") == -1)
-        {
-            direction = Direction.left;
-        }
-        if (animator.GetFloat ("Vertical") == 1)
-        {
-            direction = Direction.top;
-        }
-        if (animator.GetFloat ("Vertical") == -1)
-        {
-            direction = Direction.bottom;
-        }
-    }
+	private void StartConversation()
+	{
+		string dialogueId = gameObject.name + "_" + currentBlock;
+		gameManager.StartConversation(dialogueId);
+		if(currentBlock < totalBlocks)
+		{
+			currentBlock++;
+		}
+		else if(currentBlock == totalBlocks && blockLoop)
+		{
+			currentBlock = 0;
+		}
 
-    private void UpdateSizeForDepth ()
-    {
-        float scaleValue = Mathf.Lerp (minScale.localScale.y, maxScale.localScale.y, Mathf.InverseLerp (minScale.position.y, maxScale.position.y, transform.position.y));
-        transform.localScale = new Vector3 (scaleValue, scaleValue, 0);
+	}
 
-        spriteRenderer.sortingOrder = (int) (transform.position.y * -1);
-    }
-
-    private void StartConversation ()
-    {
-        string dialogueId = gameObject.name + "_" + currentBlock;
-        gameManager.StartConversation (dialogueId);
-        if (currentBlock < totalBlocks)
-        {
-            currentBlock++;
-        }
-        else if (currentBlock == totalBlocks && blockLoop)
-        {
-            currentBlock = 0;
-        }
-
-    }
-
-    public void GoTo (Vector2 newObjective, float speed)
-    {
-        objective = newObjective;
-        moveSpeed = speed;
-        moving = true;
-    }
-
-    protected bool CheckCollisions ()
-    {
-        bool felt = false;
-        for (int i = 0; i < hits.Length; i++)
-        {
-            if (hits[i] == null)
-            {
-                continue;
-            }
-            if (hits[i].name == "Player")
-            {
-                felt = true;
-            }
-            hits[i] = null;
-        }
-        return felt;
-    }
-
-    void OnMouseOver ()
-    {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-
-        if (ClickArea.OverlapPoint (mousePosition) && !lookingForThis && !gameManager.inConversation)
-        {
-            spriteRenderer.color = Color.blue;
-        }
-    }
-
-    void OnMouseExit ()
-    {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-        if (!ClickArea.OverlapPoint (mousePosition) && !lookingForThis && !gameManager.inConversation)
-        {
-            spriteRenderer.color = Color.white;
-        }
-    }
+	public void GoTo(Vector2 newObjective, float speed)
+	{
+		objective = newObjective;
+		moveSpeed = speed;
+		moving = true;
+	}
 }
