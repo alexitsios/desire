@@ -9,6 +9,8 @@ TagManager:
   - NPC
   - Flowchart
   - ItemsMenu
+  - Prop
+  - Background
   layers:
   - Default
   - TransparentFX

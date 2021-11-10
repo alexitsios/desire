@@ -1,16 +1,11 @@
 using System;
 using UnityEngine;
 
-public class NPCMovement : MonoBehaviour
+public class NPCMovement : MovementBase
 {
 	public Direction direction;
 	public Animator animator;
 	private SpriteRenderer spriteRenderer;
-	private GameManager gameManager;
-	public Transform minScale;
-	public Transform maxScale;
-
-	private bool lookingForThis;
 
 	//Movement
 	bool moving;
@@ -26,8 +21,6 @@ public class NPCMovement : MonoBehaviour
 	private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-		lookingForThis = false;
 
 		//Movement
 		objective = transform.position;
@@ -54,12 +47,13 @@ public class NPCMovement : MonoBehaviour
 					break;
 			}
 		}
-		UpdateSizeForDepth();
+
+		UpdateSizeForDepth(spriteRenderer);
 	}
 
 	private void Update()
 	{
-		UpdateSizeForDepth();
+		UpdateSizeForDepth(spriteRenderer);
 	}
 
 	private void FixedUpdate()
@@ -147,29 +141,6 @@ public class NPCMovement : MonoBehaviour
 		{
 			direction = Direction.Bottom;
 		}
-	}
-
-	private void UpdateSizeForDepth()
-	{
-		float scaleValue = Mathf.Lerp(minScale.localScale.y, maxScale.localScale.y, Mathf.InverseLerp(minScale.position.y, maxScale.position.y, transform.position.y));
-		transform.localScale = new Vector3(scaleValue, scaleValue, 0);
-
-		spriteRenderer.sortingOrder = (int) (transform.position.y * -1);
-	}
-
-	private void StartConversation()
-	{
-		string dialogueId = gameObject.name + "_" + currentBlock;
-		gameManager.StartConversation(dialogueId);
-		if(currentBlock < totalBlocks)
-		{
-			currentBlock++;
-		}
-		else if(currentBlock == totalBlocks && blockLoop)
-		{
-			currentBlock = 0;
-		}
-
 	}
 
 	public void GoTo(Vector2 newObjective, float speed)

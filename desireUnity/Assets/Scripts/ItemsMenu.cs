@@ -6,24 +6,24 @@ using UnityEngine.EventSystems;
 public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Animator animator;
-    private GameManager gameManager;
     private GameObject[] inventorySlots;
+    private PlayerInteraction playerInteraction;
 
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         inventorySlots = GameObject.FindGameObjectsWithTag("ItemSlot");
+        playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
     }
 
     public void UseItem(GameObject item)
     {
-        gameManager.UsedItem(item.name);
+        //gameManager.UsedItem(item.name);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!animator.GetBool("isDown") && !gameManager.inConversation)
+        if (!animator.GetBool("isDown") && !playerInteraction.isInteracting)
         {
             animator.SetBool("isDown", true);
         }
