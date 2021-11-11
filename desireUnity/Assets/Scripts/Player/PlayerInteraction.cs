@@ -5,7 +5,8 @@ public class PlayerInteraction : MonoBehaviour
 {
 	private readonly Collider2D[] _objectsInRange = new Collider2D[10];
 	private BoxCollider2D _playerActionRange;
-	public Collider2D _objectOutOfReach = null;
+	private Collider2D _objectOutOfReach = null;
+	private ItemType _selectedItem;
 
 	public ContactFilter2D filter;
 	public bool isInteracting = false;
@@ -13,6 +14,7 @@ public class PlayerInteraction : MonoBehaviour
 	private void Start()
 	{
 		_playerActionRange = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
+		_selectedItem = ItemType.NoItem;
 	}
 
 	private void Update()
@@ -26,7 +28,7 @@ public class PlayerInteraction : MonoBehaviour
 			// Interacts with the object when it's in reach
 			if(IsObjectColliding(_objectOutOfReach))
 			{
-				_objectOutOfReach.gameObject.GetComponent<IInteractable>().Interact();
+				_objectOutOfReach.gameObject.GetComponent<IInteractable>().Interact(_selectedItem);
 				isInteracting = true;
 				_objectOutOfReach = null;
 			}
@@ -51,7 +53,7 @@ public class PlayerInteraction : MonoBehaviour
 				// If the clicked object is in reach
 				if(clickedObject != null && IsObjectColliding(hit.collider))
 				{
-					clickedObject.Interact();
+					clickedObject.Interact(_selectedItem);
 					isInteracting = true;
 					Debug.Log("INTERACTING WITH " + hit.collider.name);
 				}

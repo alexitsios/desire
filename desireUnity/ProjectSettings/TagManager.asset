@@ -11,6 +11,7 @@ TagManager:
   - ItemsMenu
   - Prop
   - Background
+  - ItemSlot
   layers:
   - Default
   - TransparentFX

@@ -3,6 +3,7 @@
 /// </summary>
 public enum ItemType
 {
+	NoItem,
 	AllInOneTool,
 	ServiceKit,
 	MemoryComponent,

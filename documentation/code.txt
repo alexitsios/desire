@@ -15,8 +15,33 @@ INTERACTIONS:
     Since each interactable object implements the Interact() method from the interface, the script doesn't need to now exactly what kind of object is being interacted with, or what will happen.
     All of this logic is controlled by the object
 
-INVENTORY
-    For now, the inventory is a List of ItemBase objects. Each object is a Prefab with an ItemBase script component, and this scripts contains two major variables: the item type (an Enum, with 
+INVENTORY:
+    For now, the inventory is a List of IventoryItem objects. Each object is a Prefab with an IventoryItem script component, and this scripts contains two major variables: the item type (an Enum, with 
     each value representing a different collectible item), and the item sprite. All of the inventory logic (adding or removing items, selecting items, etc.) is controlled by the class PlayerInventory.
     The inventory screen is an UI element (saved in another scene because Unity's UI workflow is a nightmare), and the inventory scripts sends the inventory List whenever the screen needs to be updated.
     Appart from some simple methods, the inventory is non-functional
+
+SETTING UP NEW INTERACTIONS:
+    Create a new empty Game Object and name it whatever you like. Add a 2D Collider, and set it's dimensions to the appropriate values. If the object has a sprite, add a Sprite Renderer as well.
+    Create a new script, with a name equal to the Game Object's name, change the ": MonoBehaviour" part for the appropriate base class, depending on the type of interaction you're creating (the
+    options are NPCBase, ItemBase, and PropBase. You can create new ones, but I don't think it's necessary). All three of the base classes have an Interact method that needs to be overriden, so
+    delete the Start and Update methods (unless you need them) and add a "public override void Interact(ItemType item)". The base classes have a public variable called "Flowchart" that you can use to 
+    access the appropriate flowchart. The ItemBase class has a public variable called "_playerInventory" that you can use to access the player's inventory (to add or remove items).
+    The "item" parameter tells the method which item (if any) was selected by the player when the object was clicked
+
+    After the script is created, add it to the object you created earlier. Open the appropriate flowchart and add a new block. The last thing this new block should do is call a FinishConversation
+    block, to tell the Game Manager the interaction is over. If you're creating an interaction in a scene where the needed flowchart doesn't exist, you can create it (but you MUST name it NPCsFlowchart,
+    PropsFlowchart, or ItemsFlowchart. The name is case-sensitive and is used by the base classes to set up the Flowchart variable). After this point, the interaction should already be working
+
+    Here's a list of needed steps:
+
+    - Create object
+    - Add 2D Collider
+    - (Optional) Add Sprite Renderer
+    - Create script that inherits the appropriate base class
+    - Override the Interact method
+    - Add the script to the object
+    - (Optional) Create new flowchart named NPCsFlowchart, ItemsFlowchart, or PropsFlowchart
+    - Create new block in appropriate flowchart
+    - Set up the new block
+    - Connect new block to the FinishInteraction block

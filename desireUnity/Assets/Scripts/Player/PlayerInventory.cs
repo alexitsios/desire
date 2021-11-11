@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -20,7 +19,7 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log("ADDING ITEM " + item._type.ToString());
         inventory.Add(item);
 
-        //inventoryScreen.UpdateInventoryScreen(inventory);
+        inventoryScreen.UpdateInventoryScreen(inventory);
     }
 
     /// <summary>
@@ -28,9 +27,16 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     public void RemoveItem(ItemType itemType)
     {
-        var item = inventory.Where(i => i._type == itemType).ToList()[0];
-        inventory.Remove(item);
+        Debug.Log("REMOVING ITEM " + itemType.ToString());
+        foreach(var item in inventory)
+		{
+            if(item._type == itemType)
+			{
+                inventory.Remove(item);
+                break;
+            }
+		}
 
-        //inventoryScreen.UpdateInventoryScreen(inventory);
+        inventoryScreen.UpdateInventoryScreen(inventory);
     }
 }

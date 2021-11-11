@@ -14,6 +14,9 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         animator = gameObject.GetComponent<Animator>();
         inventorySlots = GameObject.FindGameObjectsWithTag("ItemSlot");
         playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
+
+        // Updates the inventory screen when the game starts, disabling all the icons
+        UpdateInventoryScreen(null);
     }
 
     public void UseItem(GameObject item)
@@ -37,11 +40,24 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
     }
 
-    public void UpdateInventoryScreen(List<ItemBase> inventory)
+    /// <summary>
+    ///     Changes the slots on the Inventory UI to reflect the player's inventory
+    /// </summary>
+    public void UpdateInventoryScreen(List<InventoryItem> inventory)
 	{
         for(int i = 0; i < inventorySlots.Length; i++)
 		{
-            inventorySlots[i].GetComponent<Image>().sprite = inventory[i].itemImage ?? null;
+            // If the current inventory slot contains an item, change the UI slot
+            if(i < inventory.Count)
+			{
+                inventorySlots[i].GetComponent<Image>().enabled = true;
+                inventorySlots[i].GetComponent<Image>().sprite = inventory[i]._sprite;
+            }
+            // Otherwise, disable the UI slot
+            else
+			{
+                inventorySlots[i].GetComponent<Image>().enabled = false;
+            }
         }
 	}
 }

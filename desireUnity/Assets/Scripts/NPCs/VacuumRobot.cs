@@ -15,7 +15,7 @@ public class VacuumRobot : NPCBase
 		GoTo(trashBin.transform.position, speed);
 	}
 
-	public override void Interact()
+	public override void Interact(ItemType item)
 	{
 		var blockName = "VacuumRobot_" + currentBlock;
 		Flowchart.ExecuteBlock(blockName);
