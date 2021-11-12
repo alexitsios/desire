@@ -33,6 +33,9 @@ SETTING UP NEW INTERACTIONS:
     block, to tell the Game Manager the interaction is over. If you're creating an interaction in a scene where the needed flowchart doesn't exist, you can create it (but you MUST name it NPCsFlowchart,
     PropsFlowchart, or ItemsFlowchart. The name is case-sensitive and is used by the base classes to set up the Flowchart variable). After this point, the interaction should already be working
 
+    Note: if all the created object does when interacted with is call a block (and nothing else), you can simply add a base class script (PropBase, ItemBase, NPCBase) to it. Make sure the name of the 
+    object matches the name of the block
+
     Here's a list of needed steps:
 
     - Create object
@@ -45,3 +48,11 @@ SETTING UP NEW INTERACTIONS:
     - Create new block in appropriate flowchart
     - Set up the new block
     - Connect new block to the FinishInteraction block
+
+QUEST SYSTEM:
+    The GameManager has a script attached to it called QuestController. Inside this script, there's a public variable called Quests, containing all the quests in the game. A quest is defined as a 
+    pair of enums (QuestName and QuestStatus). The first is a list of all quests available, and the second is the quest's current status (completed, failed, active, inactive, etc.). Because of this,
+    the Quests variable is a Dictionary, and the status of a quest can be accesses by "Quests[questName]". Inside this class you'll also find a public method to update the status of a quest. This can
+    be used by other classes, as well as Flowcharts, to update quests whenever the player do something.
+
+    To add a new quest to the game, simply add a new entry on the QuestName enum. It'll be automatically added to the GameManager when the game starts

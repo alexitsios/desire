@@ -1,18 +1,21 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestController : MonoBehaviour
 {
-    public Dictionary<string, QuestStatus> Quests = new Dictionary<string, QuestStatus>();
+    public Dictionary<QuestName, QuestStatus> Quests = new Dictionary<QuestName, QuestStatus>();
 
 	private void Start()
-	{
-		Quests.Add("RecoveredArm", QuestStatus.Active);
-		Quests.Add("RecoveredLeg", QuestStatus.Active);
-		Quests.Add("SternDoorOpened", QuestStatus.Inactive);
+	{ 
+		// Adds each quest to the Disctionary, with a status of Inactive
+		foreach(QuestName quest in Enum.GetValues(typeof(QuestName)))
+		{
+			Quests.Add(quest, QuestStatus.Inactive);
+		}
 	}
 
-	public void SetQuestStatus(string questName, QuestStatus questStatus)
+	public void SetQuestStatus(QuestName questName, QuestStatus questStatus)
 	{
 		Quests[questName] = questStatus;
 	}

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Fungus;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class GameManager : MonoBehaviour
 
     private PlayerInteraction playerInteraction;
     private bool isPlaying = false;
+    private CursorAction currentAction = CursorAction.Pointer;
+
+    public Texture2D[] mousePointerToQuestion;
+    public Texture2D[] mousePointerToRightArrow;
+    public Texture2D[] mousePointerToLeftArrow;
+    //public Texture2D[] mousePointerToWait;
 
     //private GameObject itemsMenu;
 
@@ -25,6 +32,8 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
+
+        //Cursor.SetCursor(mousePoint, Vector2.zero, CursorMode.Auto);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -76,4 +85,45 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("LoadState");
     }
+
+    public void SetCursorAction(CursorAction newAction)
+	{
+        StartCoroutine(AnimateCursorTransition(currentAction, newAction));
+	}
+
+    private IEnumerator AnimateCursorTransition(CursorAction currentAction, CursorAction newAction)
+	{
+        Texture2D[] textureArray = new Texture2D[1];
+        bool isAnimationReversed;
+
+        isAnimationReversed = (newAction == CursorAction.Pointer);
+
+        switch((isAnimationReversed) ? currentAction : newAction)
+		{
+            case CursorAction.LeftArrow:
+                textureArray = mousePointerToLeftArrow;
+                break;
+
+            case CursorAction.RightArrow:
+                textureArray = mousePointerToRightArrow;
+                break;
+
+            case CursorAction.Question:
+                textureArray = mousePointerToQuestion;
+                break;
+
+            case CursorAction.Wait:
+                break;
+		}
+
+        for(int i = 0; i < textureArray.Length; i++)
+		{
+            var j = (isAnimationReversed ? (textureArray.Length - i - 1) : i);
+
+            Cursor.SetCursor(textureArray[j], Vector2.zero, CursorMode.Auto);
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        this.currentAction = newAction;
+	}
 }
