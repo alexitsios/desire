@@ -19,7 +19,7 @@ public abstract class NPCBase : NPCMovement, IInteractable
 
     public virtual void OnPointerEnter(PointerEventData pointerEventData)
     {
-        gameManager.SetCursorAction(CursorAction.Question);
+        gameManager.SetCursorAction(CursorAction.Dialog);
     }
 
     public virtual void OnPointerExit(PointerEventData pointerEventData)

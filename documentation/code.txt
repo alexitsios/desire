@@ -55,4 +55,5 @@ QUEST SYSTEM:
     the Quests variable is a Dictionary, and the status of a quest can be accesses by "Quests[questName]". Inside this class you'll also find a public method to update the status of a quest. This can
     be used by other classes, as well as Flowcharts, to update quests whenever the player do something.
 
-    To add a new quest to the game, simply add a new entry on the QuestName enum. It'll be automatically added to the GameManager when the game starts
+    To add a new quest to the game, simply add a new entry on the QuestName enum. It'll be automatically added to the GameManager when the game starts. The quests's requirements, as well as win/fail
+    conditions must be implemented manually, unfortunately

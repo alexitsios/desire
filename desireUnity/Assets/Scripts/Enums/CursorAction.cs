@@ -4,5 +4,6 @@ public enum CursorAction
 	LeftArrow,
 	RightArrow,
 	Question,
-	Wait
+	Wait,
+	Dialog
 }

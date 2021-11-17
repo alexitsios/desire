@@ -8355,9 +8355,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 347045299}
     - target: {fileID: 2529225222367899803, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
+      propertyPath: mousePointerToDialog.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529225222367899803, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
       propertyPath: mousePointerToQuestion.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2529225222367899803, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
+      propertyPath: mousePointerToDialog.Array.data[0]
+      value: 
+      objectReference: {fileID: 2800000, guid: f25357113803426459984d23d967d27a, type: 3}
+    - target: {fileID: 2529225222367899803, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
+      propertyPath: mousePointerToDialog.Array.data[1]
+      value: 
+      objectReference: {fileID: 2800000, guid: 2d0de1f8e7a145846817f698c653a56c, type: 3}
+    - target: {fileID: 2529225222367899803, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
+      propertyPath: mousePointerToDialog.Array.data[2]
+      value: 
+      objectReference: {fileID: 2800000, guid: 56d6da6214ba35b4094f3f9b0adc5630, type: 3}
+    - target: {fileID: 2529225222367899803, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
+      propertyPath: mousePointerToDialog.Array.data[3]
+      value: 
+      objectReference: {fileID: 2800000, guid: b365af4cbdc985b4f9db8f8038910275, type: 3}
+    - target: {fileID: 2529225222367899803, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
+      propertyPath: mousePointerToDialog.Array.data[4]
+      value: 
+      objectReference: {fileID: 2800000, guid: 5ecffc20aadb2cc45be0f52da42bb8d3, type: 3}
+    - target: {fileID: 2529225222367899803, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
+      propertyPath: mousePointerToDialog.Array.data[5]
+      value: 
+      objectReference: {fileID: 2800000, guid: d171b87980e10bd44baac65de7003c9a, type: 3}
     - target: {fileID: 2529225222367899803, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
       propertyPath: mousePointerToLeftArrow.Array.size
       value: 4
@@ -15302,6 +15330,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3221069455321229870, guid: 356777f174b924849927d0f6f0ba19fc, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221069455321229870, guid: 356777f174b924849927d0f6f0ba19fc, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221069455321229871, guid: 356777f174b924849927d0f6f0ba19fc, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221069455321229871, guid: 356777f174b924849927d0f6f0ba19fc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7279826026942191979, guid: 052a08732c89dac4e8856e7ae67f08b1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 356777f174b924849927d0f6f0ba19fc, type: 3}
 --- !u!1001 &8776127366068812774

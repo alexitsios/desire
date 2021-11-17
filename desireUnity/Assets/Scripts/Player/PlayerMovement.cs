@@ -14,6 +14,8 @@ public class PlayerMovement : MovementBase
 	private Vector2 lastClickedPos;
 	private bool moving;
 
+	public float step;
+
 	private void Start()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -63,7 +65,7 @@ public class PlayerMovement : MovementBase
 		if(moving && (Vector2) transform.position != lastClickedPos)
 		{
 
-			float step = moveSpeed * Time.fixedDeltaTime;
+			step = moveSpeed * Time.fixedDeltaTime;
 
 			//Allow only rotation
 			if(trapped)

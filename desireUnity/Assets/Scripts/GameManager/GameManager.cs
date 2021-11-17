@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Fungus;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,11 +11,12 @@ public class GameManager : MonoBehaviour
 
     private PlayerInteraction playerInteraction;
     private bool isPlaying = false;
-    private CursorAction currentAction = CursorAction.Pointer;
+    public CursorAction currentAction = CursorAction.Pointer;
 
     public Texture2D[] mousePointerToQuestion;
     public Texture2D[] mousePointerToRightArrow;
     public Texture2D[] mousePointerToLeftArrow;
+    public Texture2D[] mousePointerToDialog;
     //public Texture2D[] mousePointerToWait;
 
     //private GameObject itemsMenu;
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
     //SceneStates
     public void StartGame()
     {
-        // Loads the first scene, and adds the inventory to it (scene 0 is UI_Inventory)
+        // Loads the first scene
         SceneManager.LoadScene("01_Stern");
 
         isPlaying = true;
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("00_StartGame");
     }
+
     public void LoadState(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("LoadState");
@@ -91,11 +94,15 @@ public class GameManager : MonoBehaviour
         StartCoroutine(AnimateCursorTransition(currentAction, newAction));
 	}
 
+    /// <summary>
+    ///     Animates the cursor from the current action to the desired action
+    /// </summary>
     private IEnumerator AnimateCursorTransition(CursorAction currentAction, CursorAction newAction)
 	{
         Texture2D[] textureArray = new Texture2D[1];
         bool isAnimationReversed;
 
+        // If the animation is going from <Action> to Pointer, then play the animation from Pointer to <Action>, but reversed
         isAnimationReversed = (newAction == CursorAction.Pointer);
 
         switch((isAnimationReversed) ? currentAction : newAction)
@@ -112,10 +119,18 @@ public class GameManager : MonoBehaviour
                 textureArray = mousePointerToQuestion;
                 break;
 
+            case CursorAction.Dialog:
+                textureArray = mousePointerToDialog;
+                break;
+
             case CursorAction.Wait:
                 break;
 		}
 
+        this.currentAction = newAction;
+
+        // If the animation is not reversed, applies the frames from the animation array going from 0 to (size - 1)
+        // If the animation IS reversed, applies the frames going from (size - 1) to 0
         for(int i = 0; i < textureArray.Length; i++)
 		{
             var j = (isAnimationReversed ? (textureArray.Length - i - 1) : i);
@@ -123,7 +138,5 @@ public class GameManager : MonoBehaviour
             Cursor.SetCursor(textureArray[j], Vector2.zero, CursorMode.Auto);
             yield return new WaitForSeconds(0.05f);
         }
-
-        this.currentAction = newAction;
 	}
 }
