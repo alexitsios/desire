@@ -5,10 +5,12 @@ public class PlayerInventory : MonoBehaviour
 {
     private List<InventoryItem> inventory = new List<InventoryItem>();
     private ItemsMenu inventoryScreen;
+    private PlayerInteraction _interaction;
 
 	public void Start()
 	{
         inventoryScreen = GameObject.FindGameObjectWithTag("ItemsMenu").GetComponent<ItemsMenu>();
+        _interaction = GetComponent<PlayerInteraction>();
 	}
 
 	/// <summary>
@@ -38,5 +40,14 @@ public class PlayerInventory : MonoBehaviour
 		}
 
         inventoryScreen.UpdateInventoryScreen(inventory);
+    }
+
+    /// <summary>
+    ///     Sets up an item to be used the next time the player interacts with something
+    /// </summary>
+    public void UseItem(int slotNumber)
+    {
+        var item = inventory[slotNumber]._type;
+        _interaction.SetSelectedItem(item);
     }
 }

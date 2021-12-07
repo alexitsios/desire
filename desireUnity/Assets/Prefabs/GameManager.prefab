@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2529225222367899803}
   - component: {fileID: 1226066315}
   - component: {fileID: 1226066317}
+  - component: {fileID: 1226066316}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -46,6 +47,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickIndicator: {fileID: 0}
+  mousePointerToQuestion:
+  - {fileID: 2800000, guid: c117e9ecead5a9346975a20f806fac5b, type: 3}
+  - {fileID: 2800000, guid: 4161b7466e04e3644979ee93d6e7225c, type: 3}
+  - {fileID: 2800000, guid: a51869e66e4c41047a171e37511564b1, type: 3}
+  - {fileID: 2800000, guid: fbf17ec106830164bb81b423b312b983, type: 3}
+  mousePointerToRightArrow:
+  - {fileID: 2800000, guid: 5644b0387200b3d499a47297fcd3bede, type: 3}
+  - {fileID: 2800000, guid: 765de3b465d96d1499e51f8b6a65a783, type: 3}
+  - {fileID: 2800000, guid: 964d2026b91afdc408fc6867dac2d90d, type: 3}
+  - {fileID: 2800000, guid: d5836e9c21d29294b9f5493cc8361bee, type: 3}
+  mousePointerToLeftArrow:
+  - {fileID: 2800000, guid: bf1e1c23f08f4cd4ba4653ffb0ee42e7, type: 3}
+  - {fileID: 2800000, guid: 7c3c74407f3199845b3dbe7cd15fbb6d, type: 3}
+  - {fileID: 2800000, guid: 274a80479eededd49a902fbea9d20da4, type: 3}
+  - {fileID: 2800000, guid: 25497b17aed94e8408e6d19bd426c7df, type: 3}
+  mousePointerToDialog:
+  - {fileID: 2800000, guid: f25357113803426459984d23d967d27a, type: 3}
+  - {fileID: 2800000, guid: 2d0de1f8e7a145846817f698c653a56c, type: 3}
+  - {fileID: 2800000, guid: 56d6da6214ba35b4094f3f9b0adc5630, type: 3}
+  - {fileID: 2800000, guid: b365af4cbdc985b4f9db8f8038910275, type: 3}
+  - {fileID: 2800000, guid: 5ecffc20aadb2cc45be0f52da42bb8d3, type: 3}
+  - {fileID: 2800000, guid: d171b87980e10bd44baac65de7003c9a, type: 3}
 --- !u!114 &1226066315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,3 +97,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b16877f1f51b8be4db68622160a34702, type: 3}
   - {fileID: 21300000, guid: 1df3dd90ab9ec054ebce30dcf50b7909, type: 3}
   - {fileID: 21300000, guid: 663b4d3df269cd34da1d0cea283020e2, type: 3}
+--- !u!114 &1226066316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2529225222367899802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07326692683e40e47a7d721ab1347cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textAsset: {fileID: 4900000, guid: 58358432145807748b6f325716b8ec7b, type: 3}
+  _sayDialog: {fileID: 0}
+  _stage: {fileID: 0}

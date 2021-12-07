@@ -19,11 +19,6 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         UpdateInventoryScreen(null);
     }
 
-    public void UseItem(GameObject item)
-    {
-        //gameManager.UsedItem(item.name);
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!animator.GetBool("isDown") && !playerInteraction.isInteracting)

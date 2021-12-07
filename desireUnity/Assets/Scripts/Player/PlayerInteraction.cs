@@ -9,7 +9,7 @@ public class PlayerInteraction : MonoBehaviour
 	private ItemType _selectedItem;
 
 	public ContactFilter2D filter;
-	public bool isInteracting = false;
+	public bool isInteracting = true;
 
 	private void Start()
 	{
@@ -35,7 +35,7 @@ public class PlayerInteraction : MonoBehaviour
 		}
 
 		// Gets all objects in range whenever the player left clicks. If the clicked object is interactable, interact with it
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetMouseButtonDown(0) && !isInteracting)
 		{
 			Array.Clear(_objectsInRange, 0, _objectsInRange.Length);
 			_playerActionRange.OverlapCollider(filter, _objectsInRange);
@@ -48,14 +48,13 @@ public class PlayerInteraction : MonoBehaviour
 			if(hit.collider != null)
 			{
 				var clickedObject = hit.collider.gameObject.GetComponent<IInteractable>();
-				Debug.Log("CLICKED ON " + hit.collider.name);
 
 				// If the clicked object is in reach
 				if(clickedObject != null && IsObjectColliding(hit.collider))
 				{
 					clickedObject.Interact(_selectedItem);
 					isInteracting = true;
-					Debug.Log("INTERACTING WITH " + hit.collider.name);
+					SetSelectedItem(ItemType.NoItem);
 				}
 				// If the clicked object is out of reach
 				else if(clickedObject != null)
@@ -81,5 +80,10 @@ public class PlayerInteraction : MonoBehaviour
 		}
 
 		return false;
+	}
+
+	public void SetSelectedItem(ItemType item)
+	{
+		_selectedItem = item;
 	}
 }

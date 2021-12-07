@@ -8,9 +8,11 @@ public class NPCMovement : MovementBase
 	private SpriteRenderer spriteRenderer;
 
 	//Movement
-	bool moving;
+	public bool moving;
 	private Vector2 objective;
 	private float moveSpeed;
+	private float defaultSpeed = 2;
+
 	public bool canMove;
 
 	private void Awake()
@@ -20,7 +22,7 @@ public class NPCMovement : MovementBase
 		//Movement
 		objective = transform.position;
 		moveSpeed = 0;
-		canMove = false;
+		canMove = true;
 
 		if(animator)
 		{
@@ -138,10 +140,10 @@ public class NPCMovement : MovementBase
 		}
 	}
 
-	public void GoTo(Vector2 newObjective, float speed)
+	public void MoveTo(Vector2 newObjective)
 	{
 		objective = newObjective;
-		moveSpeed = speed;
+		moveSpeed = defaultSpeed;
 		moving = true;
 	}
 }

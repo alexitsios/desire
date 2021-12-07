@@ -527,10 +527,11 @@ namespace Fungus
         /// </summary>
         /// <param name="character"></param>
         /// <param name="position">Named position on stage</param>
-        public virtual void Show(Character character, string position)
+        public virtual void Show(Character character, string portrait, string position)
         {
             PortraitOptions options = new PortraitOptions(true);
             options.character = character;
+            options.portrait = character.GetPortrait(portrait);
             options.fromPosition = options.toPosition = stage.GetPosition(position);
 
             Show(options);
