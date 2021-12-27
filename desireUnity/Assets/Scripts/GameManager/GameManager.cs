@@ -1,9 +1,9 @@
+﻿using Fungus;
+using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Fungus;
-using System.Collections;
-using UnityEngine.UI;
-using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,18 +14,22 @@ public class GameManager : MonoBehaviour
         public Texture2D[] mousePointerToRightArrow;
         public Texture2D[] mousePointerToLeftArrow;
         public Texture2D[] mousePointerToDialog;
+        public Texture2D[] mousePointerToTarget;
+        public Texture2D[] mouseWait;
     }
 
     public static GameManager instance;
     public GameObject clickIndicator;
+    public CursorAnimations cursor;
+    public InventoryItem[] itemList;
+    public bool CanCursorChange { get; set; } = true;
 
     private PlayerInteraction playerInteraction;
     private bool isPlaying = false;
     private CursorAction currentAction = CursorAction.Pointer;
     private Flowchart flowchart;
-
-    public CursorAnimations cursor;
-    public InventoryItem[] itemList;
+    private TextMeshProUGUI interactDialog;
+    private Coroutine cursorWaitCoroutine;
 
     private void Awake()
     {
@@ -40,32 +44,29 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
-
-        //Cursor.SetCursor(mousePoint, Vector2.zero, CursorMode.Auto);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name != "00_StartGame")
+        if(scene.name != "00_StartGame" && scene.name != "UI_Inventory")
 		{
             playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
 
             // Loads the Inventory UI if it's not already loaded
-            if(!SceneManager.GetSceneByBuildIndex(0).isLoaded)
-                SceneManager.LoadScene(0, LoadSceneMode.Additive);
+            if(!SceneManager.GetSceneByBuildIndex(1).isLoaded)
+                SceneManager.LoadScene(1, LoadSceneMode.Additive);
 
             flowchart = GameObject.Find("CutscenesFlowchart").GetComponent<Flowchart>();
             GetComponent<InkManager>().StartInkManager();
+            GetComponent<CanvasManager>().StartCanvasManager();
+            interactDialog = GameObject.FindGameObjectWithTag("InteractDialog").GetComponent<TextMeshProUGUI>();
 
-            switch(scene.buildIndex)
-			{
-                case (int) SceneName.Stern:
-                    flowchart.ExecuteBlock("Opening");
-                    break;
+            Cursor.SetCursor(cursor.mousePointerToQuestion[0], Vector2.zero, CursorMode.Auto);
+            SetInteractDialogActive(false);
+            isPlaying = true;
 
-                case (int) SceneName.Funnel:
-                    break;
-			}
+            GetComponent<CanvasManager>().LoadLastBackground((SceneName) scene.buildIndex);
+            flowchart.ExecuteBlock("OnLoad");
         } 
     }
 
@@ -79,12 +80,8 @@ public class GameManager : MonoBehaviour
     {
         if(isPlaying)
 		{
-            if(Input.GetMouseButtonDown(0) && !playerInteraction.isInteracting)
-            {
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                //clickIndicator.transform.position = mousePosition;
-                //clickIndicator.GetComponent<ParticleSystem>().Play();
-            }
+            Vector3 dialogPosition = new Vector3(Input.mousePosition.x + 40, Input.mousePosition.y - 50, 0);
+            interactDialog.transform.position = dialogPosition;
         }
     }
 
@@ -94,7 +91,6 @@ public class GameManager : MonoBehaviour
         // Loads the first scene
         SceneManager.LoadScene("01_Stern");
 
-        isPlaying = true;
     }
     public void GoToMainMenu()
     {
@@ -108,7 +104,33 @@ public class GameManager : MonoBehaviour
 
     public void SetCursorAction(CursorAction newAction)
 	{
-        StartCoroutine(AnimateCursorTransition(currentAction, newAction));
+        if(newAction == CursorAction.Wait)
+		{
+            cursorWaitCoroutine = StartCoroutine(SetCursorToWait());
+            CanCursorChange = false;
+		}
+        else
+            StartCoroutine(AnimateCursorTransition(currentAction, newAction));
+    }
+
+    public IEnumerator SetCursorToWait()
+	{
+        var textureArray = cursor.mouseWait;
+        int i = 0;
+
+        // Continuously animate the Wait cursor. This coroutine only stops when explicitly told to
+        while(true)
+		{
+            Cursor.SetCursor(textureArray[i++ % textureArray.Length], Vector2.zero, CursorMode.Auto);
+            yield return new WaitForSeconds(0.1f);
+        }
+	}
+
+    public void EndCursorWait()
+	{
+        CanCursorChange = true;
+        StopCoroutine(cursorWaitCoroutine);
+        SetCursorAction(CursorAction.Pointer);
 	}
 
     /// <summary>
@@ -116,45 +138,58 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private IEnumerator AnimateCursorTransition(CursorAction currentAction, CursorAction newAction)
 	{
-        Texture2D[] textureArray = new Texture2D[1];
+        Texture2D[] textureArray = null;
         bool isAnimationReversed;
+        bool isAnimationLooped = false;
 
         // If the animation is going from <Action> to Pointer, then play the animation from Pointer to <Action>, but reversed
         isAnimationReversed = (newAction == CursorAction.Pointer);
 
-        switch((isAnimationReversed) ? currentAction : newAction)
+        if(CanCursorChange)
 		{
-            case CursorAction.LeftArrow:
-                textureArray = cursor.mousePointerToLeftArrow;
-                break;
+            switch((isAnimationReversed) ? currentAction : newAction)
+            {
+                case CursorAction.LeftArrow:
+                    textureArray = cursor.mousePointerToLeftArrow;
+                    break;
 
-            case CursorAction.RightArrow:
-                textureArray = cursor.mousePointerToRightArrow;
-                break;
+                case CursorAction.RightArrow:
+                    textureArray = cursor.mousePointerToRightArrow;
+                    break;
 
-            case CursorAction.Question:
-                textureArray = cursor.mousePointerToQuestion;
-                break;
+                case CursorAction.Question:
+                    textureArray = cursor.mousePointerToQuestion;
+                    break;
 
-            case CursorAction.Dialog:
-                textureArray = cursor.mousePointerToDialog;
-                break;
+                case CursorAction.Dialog:
+                    textureArray = cursor.mousePointerToDialog;
+                    break;
 
-            case CursorAction.Wait:
-                break;
-		}
+                case CursorAction.ItemSelected:
+                    CanCursorChange = false;
+                    textureArray = cursor.mousePointerToTarget;
+                    break;
+            }
 
-        this.currentAction = newAction;
+            this.currentAction = newAction;
 
-        // If the animation is not reversed, applies the frames from the animation array going from 0 to (size - 1)
-        // If the animation IS reversed, applies the frames going from (size - 1) to 0
-        for(int i = 0; i < textureArray.Length; i++)
-		{
-            var j = (isAnimationReversed ? (textureArray.Length - i - 1) : i);
+            if(textureArray != null)
+			{
+                // If the animation is not reversed, applies the frames from the animation array going from 0 to (size - 1)
+                // If the animation IS reversed, applies the frames going from (size - 1) to 0
+                for(int i = 0; i < textureArray.Length; i++)
+		        {
+                    var j = (isAnimationReversed ? (textureArray.Length - i - 1) : i);
 
-            Cursor.SetCursor(textureArray[j], Vector2.zero, CursorMode.Auto);
-            yield return new WaitForSeconds(0.05f);
+                    Cursor.SetCursor(textureArray[j], Vector2.zero, CursorMode.Auto);
+                    yield return new WaitForSeconds(0.05f);
+			    }
+            }
+
+            if(isAnimationLooped)
+                SetCursorAction(this.currentAction);
         }
+
 	}
 
     public InventoryItem GetItemProperties(ItemType type)
@@ -168,5 +203,26 @@ public class GameManager : MonoBehaviour
 		}
 
         return new InventoryItem(ItemType.NoItem, null);
+	}
+
+    public void SetInteractDialogActive(bool active)
+	{
+        interactDialog.gameObject.SetActive(active);
+	}
+
+    public void SetInteractDialogText(string text)
+	{
+        SetInteractDialogActive(true);
+        interactDialog.text = playerInteraction._selectedItem != ItemType.NoItem ? $"{playerInteraction._selectedItem} → " : "";
+
+        interactDialog.text += text;
+	}
+
+    public void SpawnPlayerAtPoint(int spawnIndex)
+	{
+        var player = GameObject.FindGameObjectWithTag("Player");
+        var spawnPoint = GameObject.Find($"Spawn{spawnIndex}");
+
+        player.transform.position = spawnPoint.transform.position;
 	}
 }

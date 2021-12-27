@@ -4,7 +4,6 @@ using UnityEngine;
 public class NPCMovement : MovementBase
 {
 	public Direction direction;
-	public Animator animator;
 	private SpriteRenderer spriteRenderer;
 
 	//Movement
@@ -12,12 +11,14 @@ public class NPCMovement : MovementBase
 	private Vector2 objective;
 	private float moveSpeed;
 	private float defaultSpeed = 2;
+	private Animator animator;
 
 	public bool canMove;
 
 	private void Awake()
 	{
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		animator = GetComponent<Animator>();
 
 		//Movement
 		objective = transform.position;

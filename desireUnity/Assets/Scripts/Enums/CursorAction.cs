@@ -5,5 +5,6 @@ public enum CursorAction
 	RightArrow,
 	Question,
 	Wait,
-	Dialog
+	Dialog,
+	ItemSelected
 }

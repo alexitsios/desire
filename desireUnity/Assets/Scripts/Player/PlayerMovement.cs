@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MovementBase
 {
 	public Direction direction = new Direction();
 	public float frontMoveSpeed;
-	public bool trapped;
+	public bool IsTrapped { get; set; }
 	public Animator animator;
 
 	private PlayerInteraction playerInteraction;
@@ -13,6 +14,7 @@ public class PlayerMovement : MovementBase
 	private SpriteRenderer spriteRenderer;
 	private Vector2 lastClickedPos;
 	private bool moving;
+	private Vector3 lastPosition = Vector3.zero;
 
 	public float step;
 
@@ -54,8 +56,12 @@ public class PlayerMovement : MovementBase
 		//Point to move
 		if(Input.GetMouseButtonDown(0) && !playerInteraction.isInteracting)
 		{
-			lastClickedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			moving = true;
+			// Only moves the character if the player has not clicked on an inventory item
+			if(EventSystem.current.currentSelectedGameObject == null)
+			{
+				lastClickedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				moving = true;
+			}
 		}
 
 		UpdateSizeForDepth(spriteRenderer);
@@ -64,16 +70,16 @@ public class PlayerMovement : MovementBase
 	{
 		if(moving && (Vector2) transform.position != lastClickedPos)
 		{
-
 			step = moveSpeed * Time.fixedDeltaTime;
 
 			//Allow only rotation
-			if(trapped)
+			if(IsTrapped)
 			{
 				step = 0;
 			}
 
 			transform.position = Vector2.MoveTowards(transform.position, lastClickedPos, step);
+			lastPosition = transform.position;
 
 			animator.SetFloat("Speed", step);
 
@@ -108,7 +114,7 @@ public class PlayerMovement : MovementBase
 			}
 
 			//Stop continous movement
-			if(trapped)
+			if(IsTrapped)
 			{
 				lastClickedPos = transform.position;
 			}
@@ -118,10 +124,5 @@ public class PlayerMovement : MovementBase
 			moving = false;
 			animator.SetFloat("Speed", 0);
 		}
-	}
-
-	public void ToogleTrapped()
-	{
-		trapped = !trapped;
 	}
 }

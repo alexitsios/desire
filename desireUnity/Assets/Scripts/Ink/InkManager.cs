@@ -4,38 +4,78 @@ using System;
 using System.Collections;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InkManager : MonoBehaviour
 {
     public TextAsset _textAsset;
-    public SayDialog _sayDialog;
-	public Stage _stage;
+	public AudioClip charaudio;
 
 	private Story _story;
 	private CanvasManager _canvasManager;
 	private PlayerInteraction _interaction;
+	private PlayerMovement _playerMovement;
+    private SayDialog _sayDialog;
+	private Stage _stage;
 	private GameManager _gameManager;
+	private MenuDialog _menuDialog;
+	private QuestController _questController;
+
+	private void Awake()
+	{
+		_story = new Story(_textAsset.text);
+	}
 
 	public void StartInkManager()
 	{
 		_interaction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
-		_story = new Story(_textAsset.text);
+		_playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 		_canvasManager = GetComponent<CanvasManager>();
 		_gameManager = GetComponent<GameManager>();
+		_questController = GetComponent<QuestController>();
+		_sayDialog = GameObject.FindGameObjectWithTag("SayDialog").GetComponent<SayDialog>();
+		_stage = GameObject.FindGameObjectWithTag("Stage").GetComponent<Stage>();
+		_menuDialog = GameObject.FindGameObjectWithTag("MenuDialog").GetComponent<MenuDialog>();
 	}
 
-	public IEnumerator InkJumpTo(string path)
+	public void InkJumpTo(string path)
 	{
 		_story.ChoosePathString(path);
 
+		StartCoroutine(RunStory());
+	}
+
+	private IEnumerator RunStory()
+	{
+		_interaction.isInteracting = true;
 		var block = _story.ContinueMaximally().Split('\n');
-		
+
 		foreach(string line in block)
 		{
 			if(line.Equals(""))
 				continue;
 
 			yield return StartCoroutine(ProcessPath(line));
+		}
+
+		if(_story.currentChoices.Count > 0)
+		{
+			_menuDialog.SetActive(true);
+			_menuDialog.Clear();
+
+			for(int i = 0; i < _story.currentChoices.Count; ++i)
+			{
+				int copy = i;
+				void action()
+				{
+					_story.ChooseChoiceIndex(copy);
+					StartCoroutine(RunStory());
+					_menuDialog.SetActive(false);
+					return;
+				}
+
+				_menuDialog.AddOption(_story.currentChoices[i].text, true, false, action);
+			}
 		}
 
 		if(_stage != null)
@@ -55,15 +95,19 @@ public class InkManager : MonoBehaviour
 	{
 		if(line.StartsWith(">>"))
 		{
+			_gameManager.SetCursorAction(CursorAction.Wait);
+
 			yield return StartCoroutine(ProcessCommand(line));
+
+			_gameManager.EndCursorWait();
 		}
 		else
 		{
 			var block = Regex.Split(line, "[\"]+");
 			var characterAttributes = block[0].Split(' ');
-			Character character = GameObject.Find(characterAttributes[0] + "_Character").GetComponent<Character>();
+			Character character = GameObject.Find(characterAttributes[0] + "_Character")?.GetComponent<Character>();
 
-			if(_stage != null)
+			if(_stage != null && character != null)
 			{
 				foreach(var currentChar in _stage.CharactersOnStage)
 				{
@@ -93,12 +137,15 @@ public class InkManager : MonoBehaviour
 				break;
 
 			case "bgchange":
+				yield return StartCoroutine(_canvasManager.Fade(0, 1));
+				GetComponent<CanvasManager>().UpdateBackground(commandList[1]);
+				yield return new WaitForSeconds(1);
+				yield return StartCoroutine(_canvasManager.Fade(1, 1));
 				break;
 
 			case "moveto":
 				var actor = GameObject.Find(commandList[1]).GetComponent<NPCMovement>();
 				var destination = GameObject.Find(commandList[2]).transform.position;
-
 				actor.MoveTo(destination);
 
 				break;
@@ -106,7 +153,21 @@ public class InkManager : MonoBehaviour
 			case "additem":
 				var itemType = (ItemType) Enum.Parse(typeof(ItemType), commandList[1]);
 				var item = _gameManager.GetItemProperties(itemType);
-				GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().AddItem(item);
+				GetComponent<PlayerInventory>().AddItem(item);
+
+				break;
+
+			case "quest":
+				Enum.TryParse(commandList[1], out QuestName quest);
+				Enum.TryParse(commandList[2], out QuestStatus status);
+
+				_questController.SetQuestStatus(quest, status);
+
+				break;
+
+			case "settrapped":
+				var state = bool.Parse(commandList[1]);
+				_playerMovement.IsTrapped = state;
 
 				break;
 		}

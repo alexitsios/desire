@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class VacuumRobot : NPCBase
 {
-
-	public GameObject trashBin;
-
 	private int currentBlock = 0;
+	protected override string FancyName { get { return "Vacuum Robot"; } }
 
 	public override void Interact(ItemType item)
 	{

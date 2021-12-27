@@ -7,7 +7,8 @@ public abstract class NPCBase : NPCMovement, IInteractable
     public Flowchart Flowchart { get; set; }
     public QuestController QuestController { get; set; }
 
-    protected GameManager gameManager; 
+    protected GameManager gameManager;
+    protected abstract string FancyName { get; }
 
     void Start()
     {
@@ -20,11 +21,13 @@ public abstract class NPCBase : NPCMovement, IInteractable
     public virtual void OnPointerEnter(PointerEventData pointerEventData)
     {
         gameManager.SetCursorAction(CursorAction.Dialog);
+        gameManager.SetInteractDialogText(FancyName);
     }
 
     public virtual void OnPointerExit(PointerEventData pointerEventData)
     {
         gameManager.SetCursorAction(CursorAction.Pointer);
+        gameManager.SetInteractDialogActive(false);
     }
 
     public abstract void Interact(ItemType item);

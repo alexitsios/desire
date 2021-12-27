@@ -287,7 +287,7 @@ namespace Fungus
         /// <param name="interactable">If false, the option is displayed but is not selectable.</param>
         /// <param name="hideOption">If true, the option is not displayed but the menu knows that option can or did exist</param>
         /// <param name="action">Action attached to the button on the menu item</param>
-        private bool AddOption(string text, bool interactable, bool hideOption, UnityEngine.Events.UnityAction action)
+        public bool AddOption(string text, bool interactable, bool hideOption, UnityEngine.Events.UnityAction action)
         {
             if (nextOptionIndex >= CachedButtons.Length)
             {

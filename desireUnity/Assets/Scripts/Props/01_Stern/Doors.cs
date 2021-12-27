@@ -3,13 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class Doors : PropBase
 {
+	protected override string FancyName { get { return "Doors"; } }
+
 	public override void Interact(ItemType item)
 	{
 		// Checks if the left doors are open
 		if(QuestController.Quests[QuestName.OpenSternDoor] == QuestStatus.Completed)
 		{
 			// TODO: This needs to change
-			SceneManager.LoadScene(3);
+			SceneManager.LoadScene((int) SceneName.Funnel);
 		}
 		else
 		{
@@ -21,7 +23,10 @@ public class Doors : PropBase
 	public override void OnPointerEnter(PointerEventData pointerEventData)
 	{
 		if(QuestController.Quests[QuestName.OpenSternDoor] == QuestStatus.Completed)
+		{
 			gameManager.SetCursorAction(CursorAction.LeftArrow);
+			gameManager.SetInteractDialogText("Go to Funnel");
+		}
 		else
 			base.OnPointerEnter(pointerEventData);
 	}

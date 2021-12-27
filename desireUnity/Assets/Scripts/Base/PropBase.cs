@@ -8,6 +8,7 @@ public abstract class PropBase : MonoBehaviour, IInteractable
     public QuestController QuestController { get; set; }
 
     protected GameManager gameManager;
+    protected abstract string FancyName { get; }
 
     void Start()
     {
@@ -20,11 +21,13 @@ public abstract class PropBase : MonoBehaviour, IInteractable
     public virtual void OnPointerEnter(PointerEventData pointerEventData)
 	{
         gameManager.SetCursorAction(CursorAction.Question);
+        gameManager.SetInteractDialogText(FancyName);
 	}
 
     public virtual void OnPointerExit(PointerEventData pointerEventData)
 	{
         gameManager.SetCursorAction(CursorAction.Pointer);
+        gameManager.SetInteractDialogActive(false);
     }
 
     /// <summary>
@@ -32,7 +35,14 @@ public abstract class PropBase : MonoBehaviour, IInteractable
     /// </summary>
     public virtual void Interact(ItemType item)
 	{
-        var blockName = gameObject.name;
-        Flowchart.ExecuteBlock(blockName);
+        if(item == ItemType.NoItem)
+		{
+            var blockName = gameObject.name;
+            Flowchart.ExecuteBlock(blockName);
+		}
+        else
+		{
+            Flowchart.ExecuteBlock("ItemUseError");
+		}
 	}
 }

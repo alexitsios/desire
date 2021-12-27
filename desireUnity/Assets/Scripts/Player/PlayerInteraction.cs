@@ -6,15 +6,17 @@ public class PlayerInteraction : MonoBehaviour
 	private readonly Collider2D[] _objectsInRange = new Collider2D[10];
 	private BoxCollider2D _playerActionRange;
 	private Collider2D _objectOutOfReach = null;
-	private ItemType _selectedItem;
+	private GameManager _gameManager;
 
+	public ItemType _selectedItem;
 	public ContactFilter2D filter;
 	public bool isInteracting = true;
 
 	private void Start()
 	{
-		_playerActionRange = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
+		_playerActionRange = GetComponent<BoxCollider2D>();
 		_selectedItem = ItemType.NoItem;
+		_gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 	}
 
 	private void Update()
@@ -31,6 +33,7 @@ public class PlayerInteraction : MonoBehaviour
 				_objectOutOfReach.gameObject.GetComponent<IInteractable>().Interact(_selectedItem);
 				isInteracting = true;
 				_objectOutOfReach = null;
+				_selectedItem = ItemType.NoItem;
 			}
 		}
 
@@ -39,6 +42,9 @@ public class PlayerInteraction : MonoBehaviour
 		{
 			Array.Clear(_objectsInRange, 0, _objectsInRange.Length);
 			_playerActionRange.OverlapCollider(filter, _objectsInRange);
+
+			_gameManager.CanCursorChange = true;
+			_gameManager.SetCursorAction(CursorAction.Pointer);
 
 			_objectOutOfReach = null;
 
@@ -62,6 +68,9 @@ public class PlayerInteraction : MonoBehaviour
 					_objectOutOfReach = hit.collider;
 				}
 			}
+
+			if(_objectOutOfReach == null)
+				_selectedItem = ItemType.NoItem;
 		}
 	}
 

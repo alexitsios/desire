@@ -15,8 +15,19 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         inventorySlots = GameObject.FindGameObjectsWithTag("ItemSlot");
         playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
 
+        for(int i = 0; i < inventorySlots.Length; i++)
+		{
+            var slotNumber = i;
+            var btn = inventorySlots[slotNumber].GetComponent<Button>();
+
+            btn.onClick.AddListener(() => {
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<PlayerInventory>().UseItem(slotNumber);
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().SetCursorAction(CursorAction.ItemSelected);
+            });
+		}
+
         // Updates the inventory screen when the game starts, disabling all the icons
-        UpdateInventoryScreen(null);
+        UpdateInventoryScreen(new List<InventoryItem>());
     }
 
     public void OnPointerEnter(PointerEventData eventData)
