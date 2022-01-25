@@ -25,7 +25,8 @@ public class CanvasManager : MonoBehaviour
 		CurrentBackgrounds = new Dictionary<SceneName, string>
 		{
 			{ SceneName.Stern, "stern_default" },
-			{ SceneName.Funnel, "funnel_default" }
+			{ SceneName.Funnel, "funnel_default" },
+			{ SceneName.Superstructure_out, "superstructure_out_default" }
 		};
 	}
 

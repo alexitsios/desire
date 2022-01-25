@@ -30,5 +30,19 @@ public abstract class NPCBase : NPCMovement, IInteractable
         gameManager.SetInteractDialogActive(false);
     }
 
-    public abstract void Interact(ItemType item);
+    /// <summary>
+    ///     Default implementation of Interact. Override if you want to execute different code
+    /// </summary>
+    public virtual void Interact(ItemType item)
+    {
+        if(item == ItemType.NoItem)
+        {
+            var blockName = gameObject.name;
+            Flowchart.ExecuteBlock(blockName);
+        }
+        else
+        {
+            Flowchart.ExecuteBlock("ItemUseError");
+        }
+    }
 }

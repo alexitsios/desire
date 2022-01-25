@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 1226066315}
   - component: {fileID: 1226066317}
   - component: {fileID: 1226066316}
-  - component: {fileID: 8667634133957619004}
+  - component: {fileID: 7285031140089232049}
+  - component: {fileID: 526554797}
+  - component: {fileID: 1070409186}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -87,6 +89,11 @@ MonoBehaviour:
     _sprite: {fileID: 21300000, guid: 54e5db1676a669d4c920eaca5271f744, type: 3}
   - _type: 2
     _sprite: {fileID: 21300000, guid: 1e57c82c26b4b9c40ab1f5ba99fdc13c, type: 3}
+  SFX:
+  - sfxName: led_boot
+    sfx: {fileID: 8300000, guid: b16a51d6cfc988d45aafe64442b80dba, type: 3}
+  - sfxName: puzzle_complete
+    sfx: {fileID: 8300000, guid: ce51f501c8556b04f8df48ad20df2a42, type: 3}
 --- !u!114 &1226066315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textAsset: {fileID: 4900000, guid: 58358432145807748b6f325716b8ec7b, type: 3}
   charaudio: {fileID: 8300000, guid: 2965940c483986f42b809a0ec191e5aa, type: 3}
---- !u!114 &8667634133957619004
+--- !u!114 &7285031140089232049
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,6 +150,117 @@ MonoBehaviour:
   m_GameObject: {fileID: 2529225222367899802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6ddf781bdfe6845b080799c8f39601, type: 3}
+  m_Script: {fileID: 11500000, guid: 608c46af1f9020143a323affd7b8e29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &526554797
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2529225222367899802}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1070409186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2529225222367899802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb2cc272e927ab74895d344e9adc1dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationFiles:
+  - {fileID: 4900000, guid: 855aa29c720fd5e4ea9d5a964eb109d1, type: 3}
+  - {fileID: 4900000, guid: 99ec66ec17f5fe347b1cc4c7b8cef94d, type: 3}

@@ -16,6 +16,8 @@ public class CameraMotor : MonoBehaviour
     private float topBound;
     private float bottomBound;
 
+    public bool IsShaking { get; set; } = false;
+
     //Update after char finishes moving
 
     private void Start ()
@@ -28,7 +30,8 @@ public class CameraMotor : MonoBehaviour
         bottomBound = vertExtent - backgroundBounds.sprite.bounds.size.y / 2.0f;
         topBound = backgroundBounds.sprite.bounds.size.y / 2.0f - vertExtent;
     }
-    private void LateUpdate ()
+
+	private void LateUpdate ()
     {
         Vector3 delta = Vector3.zero;
 
@@ -62,6 +65,12 @@ public class CameraMotor : MonoBehaviour
         //transform.position += new Vector3(delta.x, delta.y, 0);
 
         Vector3 newPosition = transform.position + new Vector3 (delta.x, delta.y, 0);
+
+        if(IsShaking)
+        {
+            newPosition.x += Random.insideUnitSphere.x * 0.1f;
+            newPosition.y += Random.insideUnitSphere.y * 0.1f;
+        }
 
         newPosition.x = Mathf.Clamp (newPosition.x, leftBound, rightBound);
         newPosition.y = Mathf.Clamp (newPosition.y, bottomBound, topBound);

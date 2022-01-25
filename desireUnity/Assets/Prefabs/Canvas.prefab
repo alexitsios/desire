@@ -909,7 +909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1258266921
 RectTransform:
   m_ObjectHideFlags: 0
@@ -926,8 +926,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1000}
-  m_SizeDelta: {x: 1000, y: 1000}
+  m_AnchoredPosition: {x: 0, y: -862.84}
+  m_SizeDelta: {x: 597.464, y: 597.464}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1258266923
 CanvasRenderer:
@@ -7611,8 +7611,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27.091, y: -190}
-  m_SizeDelta: {x: 819.817, y: 50}
+  m_AnchoredPosition: {x: 0, y: -190}
+  m_SizeDelta: {x: 382.82, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8499775645248665284
 CanvasRenderer:
@@ -7642,7 +7642,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Item \u2192 Target"
+  m_text: Object -> Target
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 610bbc8aa1d97734bbad724802997c56, type: 2}
   m_sharedMaterial: {fileID: -5597074787026792579, guid: 610bbc8aa1d97734bbad724802997c56, type: 2}
@@ -7685,7 +7685,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -7705,7 +7705,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -0.00012972666, y: 0, z: 1.668541, w: 0}
+  m_margin: {x: -0.00012972666, y: 0, z: -1.6234207, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

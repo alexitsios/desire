@@ -8,6 +8,7 @@ public class NPCMovement : MovementBase
 
 	//Movement
 	public bool moving;
+
 	private Vector2 objective;
 	private float moveSpeed;
 	private float defaultSpeed = 2;

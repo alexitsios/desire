@@ -9,8 +9,9 @@ public class DeadServiceRobot : PropBase
 		// Retrieves the arm if the All-In-One Tool is used here
 		if(item == ItemType.AllInOneTool)
 			blockName = "DeadServiceRobot_1";
-		else if(item == ItemType.NoItem)
-			blockName = "DeadServiceRobot_0";
+		// Retrieves the memory drive
+		else if(item == ItemType.ServiceKit)
+			blockName = "DeadServiceRobot_2";
 		else
 			blockName = "DeadServiceRobot_0";
 

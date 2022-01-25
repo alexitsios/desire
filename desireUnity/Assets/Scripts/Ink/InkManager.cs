@@ -3,6 +3,7 @@ using Ink.Runtime;
 using System;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.Web;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,10 +21,17 @@ public class InkManager : MonoBehaviour
 	private GameManager _gameManager;
 	private MenuDialog _menuDialog;
 	private QuestController _questController;
+	private TranslationManager _translationManager;
+	private SceneName _currentScene;
 
 	private void Awake()
 	{
 		_story = new Story(_textAsset.text);
+	}
+
+	public T GetVariable<T>(string var)
+	{
+		return (T) _story.variablesState[var];
 	}
 
 	public void StartInkManager()
@@ -36,6 +44,7 @@ public class InkManager : MonoBehaviour
 		_sayDialog = GameObject.FindGameObjectWithTag("SayDialog").GetComponent<SayDialog>();
 		_stage = GameObject.FindGameObjectWithTag("Stage").GetComponent<Stage>();
 		_menuDialog = GameObject.FindGameObjectWithTag("MenuDialog").GetComponent<MenuDialog>();
+		_translationManager = GetComponent<TranslationManager>();
 	}
 
 	public void InkJumpTo(string path)
@@ -117,8 +126,11 @@ public class InkManager : MonoBehaviour
 				_stage.Show(character, character.Portraits[0].name, characterAttributes[1]);
 			}
 
+			var lineIndex = Convert.ToInt32(block[1]);
+			var translatedLine = _translationManager.GetTranslatedLine(_currentScene, lineIndex - 1);
+
 			_sayDialog.SetCharacter(character);
-			yield return StartCoroutine(_sayDialog.DoSay(block[1], true, true, true, false, false, null, null));
+			yield return StartCoroutine(_sayDialog.DoSay(translatedLine, true, true, true, false, false, null, null));
 		}
 	}
 
@@ -153,7 +165,13 @@ public class InkManager : MonoBehaviour
 			case "additem":
 				var itemType = (ItemType) Enum.Parse(typeof(ItemType), commandList[1]);
 				var item = _gameManager.GetItemProperties(itemType);
-				GetComponent<PlayerInventory>().AddItem(item);
+				GetComponent<InventoryManager>().AddItem(item);
+
+				break;
+
+			case "removeitem":
+				var i = (ItemType) Enum.Parse(typeof(ItemType), commandList[1]);
+				GetComponent<InventoryManager>().RemoveItem(i);
 
 				break;
 
@@ -169,6 +187,30 @@ public class InkManager : MonoBehaviour
 				var state = bool.Parse(commandList[1]);
 				_playerMovement.IsTrapped = state;
 
+				break;
+
+			case "screenshake":
+				var action = bool.Parse(commandList[1]);
+				Camera.main.GetComponent<CameraMotor>().IsShaking = action;
+
+				break;
+
+			case "sfx":
+				var sound = commandList[1];
+				var waitForFinish = bool.Parse(commandList[2]);
+				var clip = _gameManager.GetSFXByName(sound);
+				var audioSource = GetComponent<AudioSource>();
+
+				audioSource.clip = clip;
+				audioSource.Play();
+
+				while(waitForFinish && audioSource.isPlaying)
+					yield return null;
+
+				break;
+
+			case "setscene":
+				Enum.TryParse(commandList[1], out _currentScene);
 				break;
 		}
 	}

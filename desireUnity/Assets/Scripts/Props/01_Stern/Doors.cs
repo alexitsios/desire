@@ -10,8 +10,7 @@ public class Doors : PropBase
 		// Checks if the left doors are open
 		if(QuestController.Quests[QuestName.OpenSternDoor] == QuestStatus.Completed)
 		{
-			// TODO: This needs to change
-			SceneManager.LoadScene((int) SceneName.Funnel);
+			gameManager.LoadSceneAndSpawnPlayer(SceneName.Funnel, 1);
 		}
 		else
 		{

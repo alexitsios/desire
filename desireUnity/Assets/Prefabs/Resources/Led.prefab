@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 3221069455321229857}
   - component: {fileID: 3221069455321229856}
   - component: {fileID: 7636939883416416534}
-  - component: {fileID: 7636939883416416529}
   - component: {fileID: 7636939883416416528}
   m_Layer: 2
   m_Name: Led
@@ -154,7 +153,6 @@ MonoBehaviour:
   maxScale: {x: 7, y: 7, z: 1}
   direction: 2
   frontMoveSpeed: 5
-  trapped: 0
   animator: {fileID: 3221069455321229856}
   step: 0
 --- !u!95 &3221069455321229856
@@ -192,18 +190,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
   m_Radius: 0.09
---- !u!114 &7636939883416416529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3221069455321229859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6ddf781bdfe6845b080799c8f39601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7636939883416416528
 MonoBehaviour:
   m_ObjectHideFlags: 0

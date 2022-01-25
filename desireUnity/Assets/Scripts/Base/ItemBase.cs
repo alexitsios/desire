@@ -10,7 +10,7 @@ public abstract class ItemBase : MonoBehaviour, IInteractable
 	public Flowchart Flowchart { get; set; }
 	public QuestController QuestController { get; set; }
 
-	protected PlayerInventory playerIventory;
+	protected InventoryManager playerIventory;
 	protected GameManager gameManager;
 	protected abstract string FancyName { get; }
 
@@ -19,7 +19,7 @@ public abstract class ItemBase : MonoBehaviour, IInteractable
 		Flowchart = GameObject.Find("ItemsFlowchart").GetComponent<Flowchart>();
 		QuestController = GameObject.FindGameObjectWithTag("GameController").GetComponent<QuestController>();
 
-		playerIventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+		playerIventory = GameObject.FindGameObjectWithTag("Player").GetComponent<InventoryManager>();
 		gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 	}
 

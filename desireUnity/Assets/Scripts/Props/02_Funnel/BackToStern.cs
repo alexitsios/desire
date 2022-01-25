@@ -13,6 +13,6 @@ public class BackToStern : PropBase
 
 	public override void Interact(ItemType item)
 	{
-		SceneManager.LoadScene((int) SceneName.Stern);
+		gameManager.LoadSceneAndSpawnPlayer(SceneName.Stern, 2);
 	}
 }

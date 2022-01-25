@@ -1,33 +1,36 @@
-VAR aquired_arm = false
+VAR acquired_arm = false
+VAR acquired_leg = false
 VAR stern_door_open = false
-VAR aquired_tool = false
-VAR aquired_service_kit = false
+VAR acquired_tool = false
+VAR acquired_service_kit = false
 VAR ship_is_sinking = false
 VAR stern_visited = false
 VAR funnel_visited = false
-
+VAR superstructure_out_visited = false
+ 
 == stern_load ==
+>> setscene Stern
 {
     - !stern_visited:
         >> settrapped true
         >> fadein 2
-        Led Left "Uh... Wh- what's going on? I- I don't remember- Oh crap- M- my leg! My arm! They're gone!"
-        VacuumRobot Right "So dirty. So m-m-m-much dirt. I'll nev-neve-n-never c-clean it"
-        Led Left "Hey! That's my leg! You! Come over here!"
-        VacuumRobot Right "C-c-clean nothing is clean n-nothing is c-c-c-c-c-c-clean"
+        >> sfx led_boot true
+        $LED Left "001"
+        $VACUUM_ROBOT Right "002"
+        $LED Left "003"
+        $VACUUM_ROBOT Right "004"
         ~ stern_visited = true
         -> DONE
-    - !ship_is_sinking && aquired_service_kit:
-        >> screenshake start
+    - !ship_is_sinking && acquired_service_kit:
+        >> screenshake true
         Led "No! Don't sink now!"
-        >> screenshake stop
+        >> screenshake false
         Led "Any memories might help right now. But I need a drive for that..."
         ~ ship_is_sinking = true
         -> DONE
-    - else:
+    - else: 
         -> DONE
 }
-
 
 == garbage_bin ==
 >> bgchange trash_on_ground
@@ -35,32 +38,36 @@ VacuumRobot "Neeeeeaaaaahhhh! M-m-more dirt! More tra-tra-trash! Nev-never finis
 >> moveto VacuumRobot TrashBin
 -> DONE
 
-== vacuum_robot_1 ==
-Led "Got it!"
-Led "There, that’s a lot better! Great to be on my own two feet again. Now I need to find my arm"
-VacuumRobot "Dirt! Dirt! Dirt! So much dirt! Dir dir dir dir dirt! No- no time time time time time-"
->> settrapped false
--> DONE
-
-== vacuum_robot_2 ==
-VacuumRobot "Ev- ev- everything sssssso dirty. No nada nope nein na time time time no time!"
-Led "Are you alright? You’re malfunctioning pretty bad, aren’t you?"
-VacuumRobot "Dirty- e-e-e-everything’s dirty. You-you’re d-d-dirty. I’m dirty- how did I g-g-get d-dirty? Dirt dirt dirt no time dirt-"
-Led "My name’s Led. Can- can you remember that? Led"
-VacuumRobot "L-Led. Led"
-Led "That's right, Led"
-VacuumRobot "Led is d-d-dirty!"
-Led "Huh. He’s pretty badly damaged. Poor thing must be so confused. His voice box is definitely screwed up"
-VacuumRobot "Cleandirtydirtyclean must dirty everything it’s too clean no-no that’s wrong no time no time"
-Led "Hum. I wonder if I can use the trash to get him to focus"
-Led "Hey- hey, look at this. Can you see this drinks can I’ve got here? Yes, that’s it. Do you know what this is?"
-VacuumRobot "Tr-tr-trash, Led"
-Led "Yes, yes that’s right. Well, there’s a trash can right here- would you like me to put the trash in the can?"
-VacuumRobot "Yes yes y-y-yes- clean, tidy. Nice and clean please Led not dirty, don’t have time"
-Led "Alright, good. Well, I can put it in there, but first, I want to ask you some questions. If you answer them, I’ll put it in the trashcan. Deal?"
-VacuumRobot "D- d- d- dea- DIRT! Deal"
-Led "Great, looks like I've got his attention. What should I ask?"
--> vacuum_robot_ask_table
+== vacuum_robot ==
+{
+    - !acquired_leg:
+        Led "Got it!"
+        >> sfx puzzle_complete true
+        Led "There, that’s a lot better! Great to be on my own two feet again. Now I need to find my arm"
+        VacuumRobot "Dirt! Dirt! Dirt! So much dirt! Dir dir dir dir dirt! No- no time time time time time-"
+        ~ acquired_leg = true
+        >> settrapped false
+        -> DONE
+    - else:
+        VacuumRobot "Ev- ev- everything sssssso dirty. No nada nope nein na time time time no time!"
+        Led "Are you alright? You’re malfunctioning pretty bad, aren’t you?"
+        VacuumRobot "Dirty- e-e-e-everything’s dirty. You-you’re d-d-dirty. I’m dirty- how did I g-g-get d-dirty? Dirt dirt dirt no time dirt-"
+        Led "My name’s Led. Can- can you remember that? Led"
+        VacuumRobot "L-Led. Led"
+        Led "That's right, Led"
+        VacuumRobot "Led is d-d-dirty!"
+        Led "Huh. He’s pretty badly damaged. Poor thing must be so confused. His voice box is definitely screwed up"
+        VacuumRobot "Cleandirtydirtyclean must dirty everything it’s too clean no-no that’s wrong no time no time"
+        Led "Hum. I wonder if I can use the trash to get him to focus"
+        Led "Hey- hey, look at this. Can you see this drinks can I’ve got here? Yes, that’s it. Do you know what this is?"
+        VacuumRobot "Tr-tr-trash, Led"
+        Led "Yes, yes that’s right. Well, there’s a trash can right here- would you like me to put the trash in the can?"
+        VacuumRobot "Yes yes y-y-yes- clean, tidy. Nice and clean please Led not dirty, don’t have time"
+        Led "Alright, good. Well, I can put it in there, but first, I want to ask you some questions. If you answer them, I’ll put it in the trashcan. Deal?"
+        VacuumRobot "D- d- d- dea- DIRT! Deal"
+        Led "Great, looks like I've got his attention. What should I ask?"
+        -> vacuum_robot_ask_table
+}
 
 == vacuum_robot_ask_table ==
     * [You keep saying you don't have time. Why not? What's happening?] 
@@ -123,11 +130,9 @@ Led "Damn, it's turned off. Well, that's all I'm going to get"
 -> DONE
 
 == reflection ==
->> bgchange reflection
 Led "Wow. I didn't realize how damaged I was"
 Led "My arm's gone, my head module is damaged- it looks like someone's attacked me?"
 Led "Wait, is that rust? How long have I been here?"
->> bgchange reflection
 Led "Well, staring at my reflection won't help. Let's see what else I can find"
 -> DONE
 
@@ -144,30 +149,39 @@ Led "An all-in-one tool! And it still works! Unlike my missing arm..."
 Led "Wait, that robot's arm is similar to mine- and undamaged"
 Led "That’s it! Maybe I can use its arm to replace my own!"
 >> additem AllInOneTool
-~ aquired_tool = true
+~ acquired_tool = true
 -> DONE
 
 == arm ==
 >> fadeout 1
 >> changesprite Led led_with_arm
 >> fadein 1
+>> sfx puzzle_complete true
 Led "...Yes I have it. And it moves, perfect"
-    ~ aquired_arm = true
+    ~ acquired_arm = true
 Led "If our arms are swappable... Maybe its memory logs could be as well..."
 Led "Ah, but this tool isn't sophisticated enough for that. But I'll still keep it. Just in case"
 -> DONE
 
 == horizon ==
-Led "There’s... Nothing. Only worlds of ocean"
-Led "I—I’ve done this before, looked up at the moon. The memory feels important but..."
-Led "I can't... Ugh... I can't remember! My Memory Drive fails me"
 {
-    - aquired_arm:
-        Led "Both arms and legs fully functioning... But I don’t feel whole"
+    - !ship_is_sinking:
+        Led "There’s... Nothing. Only worlds of ocean"
+        Led "I—I’ve done this before, looked up at the moon. The memory feels important but..."
+        Led "I can't... Ugh... I can't remember! My Memory Drive fails me"
+        {
+            - acquired_arm:
+                Led "Both arms and legs fully functioning... But I don’t feel whole"
+        }
+        Led "My memory- I need to find a way to restore it"
+        Led "Maybe there are answers somewhere on this ship"
+        -> DONE
+    - else:
+        Led "Maybe I'll find something here"
+        Led "Oh no! The lower part of the ship is broken, there's a big hole- there's water going into the ship!"
+        -> DONE
 }
-Led "My memory- I need to find a way to restore it"
-Led "Maybe there are answers somewhere on this ship"
--> DONE
+
 
 == door ==
 {
@@ -180,12 +194,12 @@ Led "Maybe there are answers somewhere on this ship"
 
 == pannel ==
 {
-    - !aquired_tool:
+    - !acquired_tool:
         Led "The pannel to open the doors. They're too damaged to be used, but maybe I can fix it somehow"
-    - !stern_door_open && aquired_tool:
+    - !stern_door_open && acquired_tool:
         Led "I might be able to hotwire it if I get the right angle... Oh! The all-in-one tool might be able to work here!"
         {
-            - aquired_arm:
+            - acquired_arm:
                 Led "If it can attach an arm, it can fix a door. It just might take a few seconds"
 
             - else:
@@ -196,7 +210,7 @@ Led "Maybe there are answers somewhere on this ship"
 
 == fix_pannel ==
 {
-    - !aquired_arm:
+    - !acquired_arm:
         Led "I'm sure I can use this tool to fix the pannel, but not with an arm missing"
         -> DONE
 }
@@ -205,6 +219,7 @@ Led "I can use this wire to trip – yes. That’s got it. I just need to wait t
 Led "Oh shoot, my one tool, it's all busted up! At least the door is unlocked now, I just need to reconnect this bit and..."
 >> removeitem AllInOneTool
 >> bgchange stern_door_open
+>> sfx puzzle_complete true
 Led "A human. First one I’ve seen since I woke up"
 Led "Hello! How may I be of –Oh. Oh, you're dead. Jeeze, it looks like you've been there for a while"
 Led "Poor Human. Without anyone to serve it as well"
@@ -221,10 +236,40 @@ Led "Hmmm... Maybe I can... No, there’s more damage than I thought. Nothing he
 Led "It must have been dead for a while, with all that rust. I wonder what its last thought was"
 Led "And why is it still cleaning? Whatever happened to it- to us... Must have happened all at once"
 {
-    - !aquired_arm:
+    - !acquired_arm:
         Led "Hum, I wonder... I might be able to use its arm to replace mine"
         Led "Uh... It won’t budge. So many dead robots. But I am still here. Why?"
 }
+-> DONE
+
+== recover_memory ==
+Led "Let me open up your head, my friend"
+Led "Looks like it'll still work. I'm sorry, buddy"
+Led "I’ve robbed you of your arm, and now I'm about to strip you off who you are..."
+Led "Your very essence. Your memories. I shouldn't..."
+Led "But it can't be helped. I hope you understand"
+>> sfx puzzle_complete true
+Led "It works, my friend. Thanks. I think I can remember some...thing..."
+Led "I- I remember something about... watching the moon. with... a boy. My- my master?"
+Led "He- he didn't like traveling, he was telling me... but- but his father wanted him with him"
+Led "He was launching a new ship and wanted to show off his little family unit"
+Led "And the boy didn't want to- didn't want to be a 'prop', he said"
+Led "And he said- he said that I was built to be there when his father could not"
+Led "And then he asked me about the moon. Asked if it would be around forever"
+Led "'Of course, master. Of course. No matter what, the moon will always be there'"
+Led "'Always be there in the darkness of the night. Even if you can't see it'"
+Led "Then... then he said he wanted to go to the moon"
+Led "'Well, sir, then I think one day you'll go to the moon'"
+Led "'I think you'll do whatever you set your mind to'"
+Led "That’s... that’s it? That’s all the memory drive can do"
+Led "Ug. I need extensive repairs to access everything. I need..."
+Led "Wait- I remember something else"
+Led "I remember being paralyzed. Unable to move- for some reason"
+Led "And- and my master- he was being dragged off. He was screaming, struggling"
+Led "Then he was dragged into a lifeboat. I wanted to go with him. I had to go with him"
+Led "But- but I can't. I can't, my systems are malfunctioning. All- all I can do is..."
+Led "Fall. I fell, staring up at the moon. The quiet moon. Hanging above me"
+Led "Then everything went black"
 -> DONE
 
 == item_use_error ==
@@ -232,18 +277,22 @@ Led "Hmmm... I can't use that here"
 -> DONE
 
 == funnel_load ==
-Led "There’s so many bones- human bones. Enough for at least two fully grown ones"
-Led "That worktable might have something useful on it"
-~ funnel_visited = true
+>> setscene Funnel
+{
+    - !funnel_visited:
+        Led "There’s so many bones- human bones. Enough for at least two fully grown ones"
+        Led "That worktable might have something useful on it"
+        ~ funnel_visited = true
+}
 -> DONE
 
 == worktable ==
 Led "Useless... useless... useless. Everything is worn out and useless..."
 {
-    - !aquired_service_kit:
+    - !acquired_service_kit:
         Led "Ooh! That might not be useless"
         >> additem ServiceKit
-        ~ aquired_service_kit = true
+        ~ acquired_service_kit = true
 }
 -> DONE
 
@@ -271,4 +320,87 @@ Unknown "... Kyle died. And we just had to... We were so hungry. He would not ha
 
 == clothes ==
 Led "Two sets of clothing. Ripped and stained. What's it by- oh... oh no... What did you do? What happened here?"
+-> DONE
+
+== superstructure_out_load ==
+>> setscene Superstructure_out
+{
+    - !superstructure_out_visited:
+        Led "The more my memory returns, the more questions I have..."
+        Led "Maybe the superstructure ahead will hold some answers"
+        ~ superstructure_out_visited = true
+}
+-> DONE
+
+== superstructure_left_door ==
+Led "Ugh, the door seems wedged. If it wasn't for my new arm, I think I’d fit..."
+Led "But why is it half-open? All the other doors had either been left open or auto-locked… Maybe it's being blocked"
+>> fadeout 1
+>> fadein 1
+Led "Oh! Another casualty... maybe if I can use my foot to anchor against the frame and then pull..."
+Led "There you go, you’re free now at least. But a little too late"
+Led "Even I’m looking worse for wear from that, my new arm is a little scratched and dented"
+Led "Although my original arm is good as new... Odd"
+Led "I guess I shouldn’t complain"
+-> DONE
+
+== empty_lifeboat ==
+Led "The humans would head for the lifeboats... And they’re now missing"
+Led "I really hope that my master made it off the boat"
+Led "Oh? All of the lifeboats have gone... No, there’s one still here!"
+-> DONE
+
+== remaining_lifeboat ==
+Led Left "Hum, it’s all locked up. I wonder why the humans didn’t... Crap!... Don’t shoot me I’m just a service bot!"
+-> security_bot
+
+== security_bot ==
+SecurityBot Right "Vacate the area. Now"
+Led Left "I-I- just saw another Security bot back there-"
+SecurityBot "You will be forcibly removed if you do not comply with Emergency deck restrictions 6.55&#35;. You have 7 seconds to comply, or you will be forcibly de-activated."
+Led "Wait! What’s the problem officer? I didn’t mean to- no, please don’t deactivate me! I just wanted to check the lifeboats for..."
+SecurityBot "Under Emergency protocol 6.55&#35; no bot is allowed to access the lifeboats"
+Led "Look, given the current state of the ship, we will need all the lifeboats we can get!"
+SecurityBot "Under Emergency protocol 6.55&#35; no bot is allowed to access the lifeboats"
+Led "Listen the ship is sinking. Right now. Emergency protocol 565... 465... Doesn’t matter!"
+SecurityBot "6.55&#35;"
+Led "Listen! The ship will sink. It IS sinking! We have to... I don’t think you understand!"
+SecurityBot "False, I understand Emergency protocol 6.55&#35; excellently. It is programmed into my internal hard drive and cannot be edited or corrupted.  In the event of an emergency – listed in subsection 6b – that a lifeboat or vessel is required-"
+Led "Yes, I got that bit, but I just need to-"
+SecurityBot "- only human personnel will be allowed onto lifeboats. Bots will only be able to gain admittance to lifeboats if-"
+Led "Yes, that’s me I-"
+SecurityBot "-they are either accompanied by a human or have A16 clearance. Do you meet either of these necessary criteria?"
+Led "No. I mean, I don’t know if I have A16 clearance, I don’t remember if maybe..."
+SecurityBot "Please hold... Scanning"
+Led "Thank you. That’s all I wanted-"
+SecurityBot "Scan complete. You do not"
+Led "But I’m trying to find my human master! Doesn’t that count for something?"
+SecurityBot "False. Incompatible clearance"
+Led "I really don't want to sink! Surely that’s the whole point of-"
+SecurityBot "False. Incompatible clearance"
+Led "I can’t even remember what's going on, and I’m trying to find my master and not sink on this ship, and I’ve seen so many poor bots who... I just really need your help! Can you not even comprehend what I’m talking about?"
+SecurityBot "Yes. You have no A16 clearance and under section 6.55&#35; you will be forcibly de-activated if you do not vacate the area in 7 seconds"
+Led "Thank goodness I am programmed with reason. Security bots must be programmed to follow orders at all costs. Not hugely helpful when there’s no humans around to give the orders"
+Led "I don’t even know what to do now..."
+Led "Wait, maybe I can find a human to give me that A16 clearance! Surely the Captain could help"
+Led "Wait, you’ve been standing outside here the whole time?"
+SecurityBot "My programming has assigned me to this post"
+Led "So, do you know what happened here?"
+SecurityBot "My emergency protocol was auto-activated but I do not know the events that initiated this"
+Led "But how are you still alive? I’ve found so many dead robots, what happened to them?"
+SecurityBot "My emergency protocol programming requires me to rescue all humans, not bots"
+Led "Did you see what happened to them though?"
+SecurityBot "I am required to make sure all human personnel escaped the ship, to guard the lifeboats for more survivors and to await further orders"
+Led "You didn’t even notice the bots? Fine. But there are no more humans. Or no living ones at least. I haven’t found any trace of them..."
+SecurityBot "I must await further orders and guard for survivors"
+Led "But this boat is sinking. There are no humans left. You’re going to die"
+SecurityBot "I must await further orders and guard for survivors at all costs"
+Led "Why won’t you listen? Although, your head unit is severely damaged. The protective layers look like almost disintegrated"
+Led "Your AI core is exposed, you must have suffered a great deal of damage to your internal logic centers and have to rely on its base programming"
+Led "Look... Can I fix that for you? There are enough parts around here that I could patch-"
+SecurityBot "False, my internal programming cannot be edited or corrupted and only official human personnel are authorized to tamper with my unit or my software"
+Led "But you’re leaking oil, that’ll corrode your eletronics soon and then you won’t –"
+SecurityBot "False, my internal programming cannot be edited or corrupted and only official human personnel are authorized to tamper with my unit or my software"
+Led "... If you’re sure. It’s not like I can get through to you anyway"
+Led "I suppose I’ll head back to the superstructure and try and find the bridge. Maybe I’ll find the captain or more information about the missing lifeboats"
 -> DONE
