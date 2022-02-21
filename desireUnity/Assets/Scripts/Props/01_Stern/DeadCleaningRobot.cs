@@ -1,4 +1,4 @@
 public class DeadCleaningRobot : PropBase
 {
-	protected override string FancyName { get { return "Dead Cleaning Robot"; } }
+	protected override string FancyName { get { return TranslationManager.GetTranslatedProp("@dead_cleaning_robot"); } }
 }

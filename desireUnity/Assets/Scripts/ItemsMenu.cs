@@ -5,15 +5,15 @@ using UnityEngine.EventSystems;
 
 public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private Animator animator;
+	public PlayerInteraction PlayerInteraction { get; set; }
+
+	private Animator animator;
     private GameObject[] inventorySlots;
-    private PlayerInteraction playerInteraction;
 
 	void Start()
     {
         animator = gameObject.GetComponent<Animator>();
         inventorySlots = GameObject.FindGameObjectsWithTag("ItemSlot");
-        playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
 
         for(int i = 0; i < inventorySlots.Length; i++)
 		{
@@ -29,7 +29,7 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!animator.GetBool("isDown") && !playerInteraction.isInteracting)
+        if (!animator.GetBool("isDown") && !PlayerInteraction.isInteracting)
         {
             animator.SetBool("isDown", true);
         }
@@ -48,7 +48,7 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     /// </summary>
     public void UpdateInventoryScreen(List<InventoryItem> inventory)
 	{
-        var slots = inventorySlots = GameObject.FindGameObjectsWithTag("ItemSlot");
+        var slots = GameObject.FindGameObjectsWithTag("ItemSlot");
 
         for(int i = 0; i < slots.Length; i++)
 		{

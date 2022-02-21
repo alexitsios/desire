@@ -26,13 +26,21 @@ public class CanvasManager : MonoBehaviour
 		{
 			{ SceneName.Stern, "stern_default" },
 			{ SceneName.Funnel, "funnel_default" },
-			{ SceneName.Superstructure_out, "superstructure_out_default" }
+			{ SceneName.Superstructure_out, "superstructure_out_default" },
+			{ SceneName.Superstructure_in, "superstructure_in_default" },
+			{ SceneName.Generator_room, "generator_room_default" },
+			{ SceneName.Bridge, "bridge_default" }
 		};
 	}
 
 	public void StartCanvasManager()
 	{
 		_background = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
+
+		if(!Debug.isDebugBuild)
+		{
+			Destroy(GameObject.Find("DebugBanner"));
+		}
 	}
 
 	public void UpdateBackground(string bgName)

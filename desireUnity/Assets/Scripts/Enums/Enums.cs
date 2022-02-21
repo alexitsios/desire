@@ -45,7 +45,8 @@ public enum QuestName
 	RecoverLeg,
 	OpenSternDoor,
 	CollectAllInOneTool,
-	FindMaster
+	FindMaster,
+	GetClearance
 }
 
 /// <summary>
@@ -61,18 +62,18 @@ public enum QuestStatus
 
 public enum SceneName
 {
-	Settings = 1,
-	Inventory = 2,
-	Stern = 3,
-	Funnel = 4,
-	Superstructure_out = 5
+	Stern = 1,
+	Funnel,
+	Superstructure_out,
+	Superstructure_in,
+	Generator_room,
+	Bridge
 }
 
-public enum MenuOptionType
+public enum SettingsOptionType
 {
-	Dropdown,
-	Select,
-	Button
+	Combo,
+	Slider
 }
 
 public enum Language

@@ -6,7 +6,30 @@ public class PlayerMovement : MovementBase
 {
 	public Direction direction = new Direction();
 	public float frontMoveSpeed;
-	public bool IsTrapped { get; set; }
+	public bool IsTrapped { get => _isTrapped; 
+		set { 
+			_isTrapped = value;
+
+			if(_isTrapped)
+			{
+				GetComponent<SpriteRenderer>().size = new Vector2(0.5f, 0.5f);
+				GetComponent<Animator>().SetBool("acquired_leg", false);
+				GetComponent<Animator>().SetBool("acquired_arm", false);
+			} else
+			{
+				GetComponent<SpriteRenderer>().size = new Vector2(0.25f, 0.5f);
+				GetComponent<Animator>().SetBool("acquired_leg", true);
+			}
+		} 
+	}
+	public bool AcquiredArm { get => _acquiredArm;
+		set {
+			_acquiredArm = value;
+
+			if(_acquiredArm)
+				GetComponent<Animator>().SetBool("acquired_arm", true);
+		}
+	}
 	public Animator animator;
 
 	private PlayerInteraction playerInteraction;
@@ -14,7 +37,8 @@ public class PlayerMovement : MovementBase
 	private SpriteRenderer spriteRenderer;
 	private Vector2 lastClickedPos;
 	private bool moving;
-	private Vector3 lastPosition = Vector3.zero;
+	private bool _isTrapped;
+	private bool _acquiredArm;
 
 	public float step;
 
@@ -46,6 +70,13 @@ public class PlayerMovement : MovementBase
 	}
 	private void Update()
 	{
+		if(Debug.isDebugBuild && Input.mouseScrollDelta.y != 0 && Input.GetKey(KeyCode.LeftControl))
+		{
+			var newSize = GetComponent<SpriteRenderer>().size * new Vector2(Input.mouseScrollDelta.y * 0.1f, Input.mouseScrollDelta.y * 0.1f);
+			GetComponent<SpriteRenderer>().size += newSize;
+			GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().LedSize = GetComponent<SpriteRenderer>().size;
+		}
+
 		if(playerInteraction.isInteracting)
 		{
 			lastClickedPos = transform.position;
@@ -79,7 +110,6 @@ public class PlayerMovement : MovementBase
 			}
 
 			transform.position = Vector2.MoveTowards(transform.position, lastClickedPos, step);
-			lastPosition = transform.position;
 
 			animator.SetFloat("Speed", step);
 
@@ -105,11 +135,17 @@ public class PlayerMovement : MovementBase
 				{
 					animator.SetFloat("Horizontal", 1);
 					animator.SetFloat("Vertical", 0);
+
+					if(AcquiredArm)
+						GetComponent<SpriteRenderer>().flipX = false;
 				}
 				if(lastClickedPos.x < transform.position.x)
 				{
 					animator.SetFloat("Horizontal", -1);
 					animator.SetFloat("Vertical", 0);
+
+					if(AcquiredArm)
+						GetComponent<SpriteRenderer>().flipX = true;
 				}
 			}
 

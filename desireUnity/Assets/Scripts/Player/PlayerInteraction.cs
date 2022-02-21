@@ -10,7 +10,7 @@ public class PlayerInteraction : MonoBehaviour
 
 	public ItemType _selectedItem;
 	public ContactFilter2D filter;
-	public bool isInteracting = true;
+	public bool isInteracting;
 
 	private void Start()
 	{

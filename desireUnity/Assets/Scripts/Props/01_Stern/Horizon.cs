@@ -1,4 +1,4 @@
 public class Horizon : PropBase
 {
-	protected override string FancyName { get { return "Horizon"; } }
+	protected override string FancyName { get { return TranslationManager.GetTranslatedProp("@horizon"); } }
 }

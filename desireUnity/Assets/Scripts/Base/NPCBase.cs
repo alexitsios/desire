@@ -6,6 +6,8 @@ public abstract class NPCBase : NPCMovement, IInteractable
 {
     public Flowchart Flowchart { get; set; }
     public QuestController QuestController { get; set; }
+    public TranslationManager TranslationManager { get; set; }
+
 
     protected GameManager gameManager;
     protected abstract string FancyName { get; }
@@ -14,6 +16,7 @@ public abstract class NPCBase : NPCMovement, IInteractable
     {
         Flowchart = GameObject.Find("NPCsFlowchart").GetComponent<Flowchart>();
         QuestController = GameObject.FindGameObjectWithTag("GameController").GetComponent<QuestController>();
+        TranslationManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TranslationManager>();
 
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }

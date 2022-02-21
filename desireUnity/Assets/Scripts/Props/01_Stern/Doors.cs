@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Doors : PropBase
 {
-	protected override string FancyName { get { return "Doors"; } }
+	protected override string FancyName { get { return TranslationManager.GetTranslatedProp("@doors"); } }
 
 	public override void Interact(ItemType item)
 	{

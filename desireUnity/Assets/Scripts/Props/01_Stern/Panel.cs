@@ -1,6 +1,6 @@
 public class Panel : PropBase
 {
-	protected override string FancyName { get { return "Pannel"; } }
+	protected override string FancyName { get { return TranslationManager.GetTranslatedProp("@pannel"); } }
 
 	public override void Interact(ItemType item)
 	{

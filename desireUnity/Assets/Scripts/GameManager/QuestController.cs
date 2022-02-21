@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestController : MonoBehaviour
 {
-    public Dictionary<QuestName, QuestStatus> Quests = new Dictionary<QuestName, QuestStatus>();
+    public Dictionary<QuestName, QuestStatus> Quests { get; set; } = new Dictionary<QuestName, QuestStatus>();
 
 	private void Start()
 	{ 

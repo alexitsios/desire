@@ -33,6 +33,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.3386002, y: 0.31876475, z: -0.5354357}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -89,11 +90,16 @@ MonoBehaviour:
     _sprite: {fileID: 21300000, guid: 54e5db1676a669d4c920eaca5271f744, type: 3}
   - _type: 2
     _sprite: {fileID: 21300000, guid: 1e57c82c26b4b9c40ab1f5ba99fdc13c, type: 3}
+  - _type: 5
+    _sprite: {fileID: 21300000, guid: e6f292716884e774fa3c546ba9d57244, type: 3}
   SFX:
   - sfxName: led_boot
     sfx: {fileID: 8300000, guid: b16a51d6cfc988d45aafe64442b80dba, type: 3}
   - sfxName: puzzle_complete
     sfx: {fileID: 8300000, guid: ce51f501c8556b04f8df48ad20df2a42, type: 3}
+  inventoryUI: {fileID: 1975772873509986503, guid: a99d770c0d17f804d86ad32a0912fa35, type: 3}
+  mainUI: {fileID: 3237129540963922203, guid: 39e292a9ef48e814caec2a57b9ad2374, type: 3}
+  player: {fileID: 0}
 --- !u!114 &1226066315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,13 +126,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgrounds:
   - name: stern_default
-    sprite: {fileID: 21300000, guid: b16877f1f51b8be4db68622160a34702, type: 3}
+    sprite: {fileID: 21300000, guid: cc58d0539ecc2fc469f2ecea177f7f7d, type: 3}
   - name: trash_on_ground
-    sprite: {fileID: 21300000, guid: f98a8e0c1af24cd4596d5d7f86ca51eb, type: 3}
+    sprite: {fileID: 21300000, guid: 7c8853187b07cb94a9d1379f5e40ce05, type: 3}
   - name: stern_door_open
-    sprite: {fileID: 21300000, guid: fb1bc7447d3e7e5498609fd30ae6884e, type: 3}
+    sprite: {fileID: 21300000, guid: 9b9117ab4ba683443a463a3c2f2fad5b, type: 3}
   - name: funnel_default
     sprite: {fileID: 21300000, guid: 6229d2186489d3c428a82590f9e09af8, type: 3}
+  - name: superstructure_out_default
+    sprite: {fileID: 21300000, guid: 17c623fbc34aebf48a3a92e36f9bba60, type: 3}
 --- !u!114 &1226066316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,7 +148,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textAsset: {fileID: 4900000, guid: 58358432145807748b6f325716b8ec7b, type: 3}
-  charaudio: {fileID: 8300000, guid: 2965940c483986f42b809a0ec191e5aa, type: 3}
+  characters:
+  - {fileID: 3250353814174913925, guid: 9274e8eb22ca8a042b9fad181750b917, type: 3}
+  - {fileID: 2429724655486336884, guid: 4d00fdbe54bb842468c2d4de21dc5da4, type: 3}
+  - {fileID: 1324230491785716908, guid: f99025b0ceb529b42947ca5589631cfc, type: 3}
+  - {fileID: 1426692841216215703, guid: 81cd50cd7937d3245a76042b8485dcb2, type: 3}
 --- !u!114 &7285031140089232049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608c46af1f9020143a323affd7b8e29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemObatinedDialog: {fileID: 8487959027754761227, guid: 8648ef16975c7544a820079492b81351, type: 3}
 --- !u!82 &526554797
 AudioSource:
   m_ObjectHideFlags: 0

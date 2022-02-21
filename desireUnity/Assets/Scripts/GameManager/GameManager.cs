@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class GameManager : MonoBehaviour
     public InventoryItem[] itemList;
     public AudioEffects[] SFX;
 	public bool CanCursorChange { get; set; } = true;
+    public GameObject inventoryUI;
+    public GameObject mainUI;
+    public GameObject player;
 
     private PlayerInteraction playerInteraction;
     private bool isPlaying = false;
@@ -41,7 +45,20 @@ public class GameManager : MonoBehaviour
     private Coroutine cursorWaitCoroutine;
     private InkManager _ink;
     private int playerSpawn = 1;
-    private MenuBase settingsMenu;
+    private TranslationManager _translationManager;
+    private GameObject _inventoryInstance;
+    private GameObject _mainUiInstance;
+
+    // DEBUG
+    private float _cameraSize;
+    public float CameraSize { get => _cameraSize; set { _cameraSize = value; UpdateInfoText(); } }
+    private Vector2 _ledSize;
+    public Vector2 LedSize { get => _ledSize; set { _ledSize = value; UpdateInfoText(); } }
+
+    private void UpdateInfoText()
+	{
+        GameObject.Find("InfoText").GetComponent<TextMeshProUGUI>().text = $"Camera Size: {CameraSize}\nLed Size: {{x: {LedSize.x}; y: {LedSize.y}}}";
+	}
 
     private void Awake()
     {
@@ -58,57 +75,84 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         _ink = GetComponent<InkManager>();
+        _translationManager = GetComponent<TranslationManager>();
+    }
+
+    private IEnumerator StartScene(Scene scene)
+	{
+        while(_inventoryInstance == null || _mainUiInstance == null)
+            yield return null;
+
+        GetComponent<CanvasManager>().LoadLastBackground((SceneName)scene.buildIndex);
+        flowchart.ExecuteBlock("OnLoad");
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Sets the UI to show the player's inventory whenever the UI scene finishes loading
-        if(scene.buildIndex == (int) SceneName.Inventory)
+        if(_inventoryInstance == null && scene.buildIndex != 0)
 		{
+            _inventoryInstance = Instantiate(inventoryUI);
+
             var inventory = GetComponent<InventoryManager>().Inventory;
             GameObject.FindGameObjectWithTag("ItemsMenu").GetComponent<ItemsMenu>().UpdateInventoryScreen(inventory);
-            GetComponent<InventoryManager>().StartInventoryManager();
-        }
-        else if(scene.buildIndex == (int) SceneName.Settings)
-		{
-            settingsMenu = new MenuBase()
-            {
-				Options = new List<MenuOption>() {
-					new MenuOption("Language", MenuOptionType.Dropdown),
-					new MenuOption("Graphical Quality", MenuOptionType.Dropdown)
-				}
-			};
 
-            settingsMenu.RenderMenu();
-		}
-        else if(scene.name != "00_StartGame")
+            DontDestroyOnLoad(_inventoryInstance);
+        }
+        
+        if(_mainUiInstance == null && scene.buildIndex != 0)
 		{
+            _mainUiInstance = Instantiate(mainUI);
+
+            _ink.StartInkManager();
+            interactDialog = GameObject.FindGameObjectWithTag("InteractDialog").GetComponent<TextMeshProUGUI>();
+            SetInteractDialogActive(false);
+
+            DontDestroyOnLoad(_mainUiInstance);
+        }
+
+        if(scene.name == "07_EndGame")
+		{
+            Destroy(_mainUiInstance);
+            Destroy(_inventoryInstance);
+		}
+
+        if(scene.name != "00_StartGame" && scene.name != "07_EndGame")
+		{
+            GetComponent<InventoryManager>().StartInventoryManager();
+
+            GetComponent<TranslationManager>().LoadTranslation(Language.English, (SceneName) scene.buildIndex);
             playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
 
-            // Loads the Inventory UI if it's not already loaded
-            if(!SceneManager.GetSceneByBuildIndex(1).isLoaded)
-                SceneManager.LoadScene((int) SceneName.Inventory, LoadSceneMode.Additive);
+            _inventoryInstance.GetComponentInChildren<ItemsMenu>().PlayerInteraction = playerInteraction;
 
             flowchart = GameObject.Find("CutscenesFlowchart").GetComponent<Flowchart>();
-            GetComponent<InkManager>().StartInkManager();
             GetComponent<CanvasManager>().StartCanvasManager();
-            interactDialog = GameObject.FindGameObjectWithTag("InteractDialog").GetComponent<TextMeshProUGUI>();
 
             Cursor.SetCursor(cursor.mousePointerToQuestion[0], Vector2.zero, CursorMode.Auto);
-            SetInteractDialogActive(false);
             isPlaying = true;
 
-            var player = GameObject.FindGameObjectWithTag("Player");
-            var spawnPoint = GameObject.Find($"Spawn{playerSpawn}");
+            player = GameObject.FindGameObjectWithTag("Player");
 
+            var spawnPoint = GameObject.Find($"Spawn{playerSpawn}");
             player.transform.position = spawnPoint.transform.position;
+            _ink.Interaction = player.GetComponent<PlayerInteraction>();
+
+            player.GetComponent<PlayerMovement>().IsTrapped = false;
+            player.GetComponent<PlayerMovement>().AcquiredArm = true;
 
             // Changes the scene depending on what the player already did
-            switch((SceneName) scene.buildIndex)
+            switch ((SceneName) scene.buildIndex)
 			{
                 case SceneName.Stern:
+                    // Blocks movement if this is the first time the player visits the Stern (i.e. if the game just started)
+                    if (!_ink.GetVariable<bool>("funnel_visited"))
+					{
+                        player.GetComponent<PlayerMovement>().IsTrapped = true;
+                        player.GetComponent<PlayerMovement>().AcquiredArm = false;
+					}
+
                     // Removes the All-in-One Tool
-                    if(_ink.GetVariable<bool>("acquired_tool"))
+                    if (_ink.GetVariable<bool>("acquired_tool"))
                         Destroy(GameObject.Find("AllInOneTool"));
 
                     // Moves the Vacuum Robot
@@ -120,9 +164,8 @@ public class GameManager : MonoBehaviour
                 case SceneName.Funnel:
                     break;
 			}
-            
-            GetComponent<CanvasManager>().LoadLastBackground((SceneName) scene.buildIndex);
-            flowchart.ExecuteBlock("OnLoad");
+
+            StartCoroutine(StartScene(scene));
         } 
     }
 
@@ -141,6 +184,16 @@ public class GameManager : MonoBehaviour
     {
         if(isPlaying)
 		{
+            PointerEventData pointerData = new PointerEventData(EventSystem.current)
+            {
+                pointerId = -1,
+            };
+
+            pointerData.position = Input.mousePosition;
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
+
             var textWidth = interactDialog.GetRenderedValues(true).x;
             var posX = Mathf.Clamp(Input.mousePosition.x + 40, textWidth / 2, Screen.width - (textWidth / 2));
 
@@ -152,8 +205,6 @@ public class GameManager : MonoBehaviour
     //SceneStates
     public void StartGame()
     {
-        GetComponent<TranslationManager>().LoadTranslation(Language.Brazilian_Portuguese);
-
         // Loads the first scene
         LoadSceneAndSpawnPlayer(SceneName.Stern, 1);
 
@@ -278,15 +329,22 @@ public class GameManager : MonoBehaviour
 
     public void SetInteractDialogText(string text)
 	{
-        SetInteractDialogActive(true);
-        interactDialog.text = playerInteraction._selectedItem != ItemType.NoItem ? $"{playerInteraction._selectedItem} → " : "";
+        string translatedItemName;
 
-        interactDialog.text += text;
+        if(playerInteraction._selectedItem != ItemType.NoItem)
+            translatedItemName = _translationManager.GetTranslatedItem(playerInteraction._selectedItem.ToString()) + " → ";
+        else
+            translatedItemName = "";
+
+        SetInteractDialogActive(true);
+
+        interactDialog.text = translatedItemName + text;
 	}
 
     public void LoadSceneAndSpawnPlayer(SceneName scene, int spawnIndex)
 	{
         SceneManager.LoadScene((int) scene, LoadSceneMode.Single);
+        GetComponent<TranslationManager>().LoadTranslation(Language.English, scene);
 
         playerSpawn = spawnIndex;
 	}
@@ -301,4 +359,10 @@ public class GameManager : MonoBehaviour
 
         return null;
 	}
+
+    public void StartEndingCutscene()
+	{
+        isPlaying = false;
+        SceneManager.LoadScene(7);
+    }
 }

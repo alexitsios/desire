@@ -1,7 +1,4 @@
-using Fungus;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class TranslationManager : MonoBehaviour
@@ -9,26 +6,60 @@ public class TranslationManager : MonoBehaviour
 	public TextAsset[] translationFiles;
 
 	private TextAsset _selectedFile;
-	private static Translation _translation;
+	private static TranslationBase _translation;
 
-	public void LoadTranslation(Language language)
+	public void LoadTranslation(Language language, SceneName scene)
 	{
 		_selectedFile = translationFiles[(int) language];
-
-		_translation = JsonUtility.FromJson<Translation>(_selectedFile.text);
-	}
-
-	public string GetTranslatedLine(SceneName scene, int lineIndex)
-	{
-		string[] selectedArray = null;
 
 		switch(scene)
 		{
 			case SceneName.Stern:
-				selectedArray = _translation.stern;
+				_translation = JsonConvert.DeserializeObject<SternTranslation>(_selectedFile.text);
+				break;
+			case SceneName.Funnel:
+				_translation = JsonConvert.DeserializeObject<FunnelTranslation>(_selectedFile.text);
+				break;
+			case SceneName.Superstructure_out:
+				_translation = JsonConvert.DeserializeObject<SuperstructureOutTranslation>(_selectedFile.text);
+				break;
+			case SceneName.Superstructure_in:
+				_translation = JsonConvert.DeserializeObject<SuperstructureInTranslation>(_selectedFile.text);
+				break;
+			case SceneName.Generator_room:
+				_translation = JsonConvert.DeserializeObject<GeneratorRoomTranslation>(_selectedFile.text);
+				break;
+			case SceneName.Bridge:
+				_translation = JsonConvert.DeserializeObject<BridgeTranslation>(_selectedFile.text);
 				break;
 		}
+	}
 
-		return selectedArray[lineIndex];
+	public string GetTranslatedName(string nameKey)
+	{
+		return _translation.characters[nameKey];
+	}
+
+	public string GetTranslatedProp(string propKey)
+	{
+		return _translation.props[propKey];
+	}
+
+	public string GetTranslatedItem(string itemKey)
+	{
+		return _translation.items[itemKey];
+	}
+
+	public string GetTranslatedSpecial(string key)
+	{
+		return _translation.special[key];
+	}
+
+	public string GetTranslatedLine(string lineKey)
+	{
+		if(lineKey.StartsWith('@'))
+			return _translation.GetTranslatedLine(lineKey);
+
+		return GetTranslatedSpecial(lineKey);
 	}
 }

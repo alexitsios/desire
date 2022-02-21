@@ -7,147 +7,152 @@ VAR ship_is_sinking = false
 VAR stern_visited = false
 VAR funnel_visited = false
 VAR superstructure_out_visited = false
+VAR superstructure_in_1_visited = false
+VAR superstructure_in_2_visited = false
+VAR generator_room_visited = false
+VAR power_restored = false
+VAR bridge_visited = false
+VAR talked_to_captain = false
+VAR has_clearance = false
  
 == stern_load ==
 >> setscene Stern
 {
     - !stern_visited:
+        >> sfx led_boot false
+        >> fadein 4
         >> settrapped true
-        >> fadein 2
-        >> sfx led_boot true
-        $LED Left "001"
-        $VACUUM_ROBOT Right "002"
-        $LED Left "003"
-        $VACUUM_ROBOT Right "004"
+        Led Left "@stern_load_1"
+        VacuumRobot Right "@stern_load_2"
+        Led Left "@stern_load_3"
+        VacuumRobot Right "@stern_load_4"
         ~ stern_visited = true
         -> DONE
     - !ship_is_sinking && acquired_service_kit:
         >> screenshake true
-        Led "No! Don't sink now!"
+        Led "@stern_load_5"
         >> screenshake false
-        Led "Any memories might help right now. But I need a drive for that..."
+        Led "@stern_load_6"
         ~ ship_is_sinking = true
         -> DONE
     - else: 
         -> DONE
 }
 
-== garbage_bin ==
+== stern_garbage_bin ==
 >> bgchange trash_on_ground
-VacuumRobot "Neeeeeaaaaahhhh! M-m-more dirt! More tra-tra-trash! Nev-never finish!"
+VacuumRobot "@stern_garbage_bin"
 >> moveto VacuumRobot TrashBin
 -> DONE
 
-== vacuum_robot ==
+== stern_vacuum_robot ==
 {
     - !acquired_leg:
-        Led "Got it!"
+        Led "@stern_vacuum_robot_0"
         >> sfx puzzle_complete true
-        Led "There, that’s a lot better! Great to be on my own two feet again. Now I need to find my arm"
-        VacuumRobot "Dirt! Dirt! Dirt! So much dirt! Dir dir dir dir dirt! No- no time time time time time-"
+        Led "@stern_vacuum_robot_1"
+        VacuumRobot "@stern_vacuum_robot_2"
         ~ acquired_leg = true
         >> settrapped false
         -> DONE
     - else:
-        VacuumRobot "Ev- ev- everything sssssso dirty. No nada nope nein na time time time no time!"
-        Led "Are you alright? You’re malfunctioning pretty bad, aren’t you?"
-        VacuumRobot "Dirty- e-e-e-everything’s dirty. You-you’re d-d-dirty. I’m dirty- how did I g-g-get d-dirty? Dirt dirt dirt no time dirt-"
-        Led "My name’s Led. Can- can you remember that? Led"
-        VacuumRobot "L-Led. Led"
-        Led "That's right, Led"
-        VacuumRobot "Led is d-d-dirty!"
-        Led "Huh. He’s pretty badly damaged. Poor thing must be so confused. His voice box is definitely screwed up"
-        VacuumRobot "Cleandirtydirtyclean must dirty everything it’s too clean no-no that’s wrong no time no time"
-        Led "Hum. I wonder if I can use the trash to get him to focus"
-        Led "Hey- hey, look at this. Can you see this drinks can I’ve got here? Yes, that’s it. Do you know what this is?"
-        VacuumRobot "Tr-tr-trash, Led"
-        Led "Yes, yes that’s right. Well, there’s a trash can right here- would you like me to put the trash in the can?"
-        VacuumRobot "Yes yes y-y-yes- clean, tidy. Nice and clean please Led not dirty, don’t have time"
-        Led "Alright, good. Well, I can put it in there, but first, I want to ask you some questions. If you answer them, I’ll put it in the trashcan. Deal?"
-        VacuumRobot "D- d- d- dea- DIRT! Deal"
-        Led "Great, looks like I've got his attention. What should I ask?"
+        VacuumRobot "@stern_vacuum_robot_3"
+        Led "@stern_vacuum_robot_4"
+        VacuumRobot "@stern_vacuum_robot_5"
+        Led "@stern_vacuum_robot_6"
+        VacuumRobot "@stern_vacuum_robot_7"
+        Led "@stern_vacuum_robot_8"
+        VacuumRobot "@stern_vacuum_robot_9"
+        Led "@stern_vacuum_robot_10"
+        VacuumRobot "@stern_vacuum_robot_11"
+        Led "@stern_vacuum_robot_12"
+        Led "@stern_vacuum_robot_13"
+        VacuumRobot "@stern_vacuum_robot_14"
+        Led "@stern_vacuum_robot_15"
+        VacuumRobot "@stern_vacuum_robot_16"
+        Led "@stern_vacuum_robot_17"
+        VacuumRobot "@stern_vacuum_robot_18"
+        Led "@stern_vacuum_robot_19"
         -> vacuum_robot_ask_table
 }
 
 == vacuum_robot_ask_table ==
-    * [You keep saying you don't have time. Why not? What's happening?] 
+    * [@vacuum_robot_ask_table_1] 
         -> ask_what_happened
-    * [Do- do you know what happened? Why we're both damaged?] 
+    * [@vacuum_robot_ask_table_2] 
         -> why_are_we_damaged
-    * [Do you know where the humans are?]
+    * [@vacuum_robot_ask_table_3]
         -> where_are_the_humans
-    * [I don't think I have any questions] 
+    * [@vacuum_robot_ask_table_4] 
         -> end_discussion_with_vacuum_robot
 
 == ask_what_happened ==
-Led "You keep saying you don’t have time. Why not? What’s happening?"
-VacuumRobot "The- the shhhhip. It’s g-g-going..."
-Led "Going where?"
-VacuumRobot "D-do-dow-DIRT! DIRTY!"
-Led "Hum. Guess I’m not getting that answer. Maybe I should try something else"
+Led "@ask_what_happened_1"
+VacuumRobot "@ask_what_happened_2"
+Led "@ask_what_happened_3"
+VacuumRobot "@ask_what_happened_4"
+Led "@ask_what_happened_5"
 -> vacuum_robot_ask_table
 
 == why_are_we_damaged ==
-Led "Do- do you know what happened? Why we’re both damaged?"
-VacuumRobot "I-I-I’m a cleaning robot. No defence. No a-a-attack. Only clean. No help"
-Led "What?"
-VacuumRobot "I c-c-couldn’t hhhhhhelp"
-Led "Right. Okay. Um… I wonder if I can ask anything else"
+Led "@why_are_we_damaged_1"
+VacuumRobot "@why_are_we_damaged_2"
+Led "@why_are_we_damaged_3"
+VacuumRobot "@why_are_we_damaged_4"
+Led "@why_are_we_damaged_5"
 -> vacuum_robot_ask_table
 
 == where_are_the_humans ==
-Led "Do you know where the humans are?"
-VacuumRobot "N-n-n-no, no humans. No humans but all their trash, al-al-always the wwwway with humans. Ev-ev-everywhere they go they leave tr-tr-trash"
-Led "You don’t know either, huh? Well, maybe you know something else"
+Led "@where_are_the_humans_1"
+VacuumRobot "@where_are_the_humans_2"
+Led "@where_are_the_humans_3"
 -> vacuum_robot_ask_table
 
 == end_discussion_with_vacuum_robot ==
-Led "I don’t think I have any questions"
-VacuumRobot "I have tra-tra trash so much trash to cl-cl-clear"
-Led "Yeah, I can see that"
-VacuumRobot "There is so much so much So Much SO MUCH SO MUCH SO MUCH SOOOOOOOOOOOOO MUUUUUUUUUUUUUCH!"
-Led "Are you ok?"
-VacuumRobot "..."
-VacuumRobot "..."
-VacuumRobot "So… so much dirt. So much t-t-trash, Never ge-e-et it cleaned in time"
-Led "Hey? Hello? Are you okay?"
-VacuumRobot "So unclean. You-you’re sssssso dirty. Who are you?"
-Led "What? It’s me, Led, remember?"
-VacuumRobot "Dirty!"
-Led "Drat. What could have happened to you? Something terrible. Same thing that happened to me probably. I just wish I knew what it was"
-Led "Well, I’m not going to find answers with him I guess. What else is there?"
+Led "@end_discussion_with_vacuum_robot_1"
+VacuumRobot "@end_discussion_with_vacuum_robot_2"
+Led "@end_discussion_with_vacuum_robot_3"
+VacuumRobot "@end_discussion_with_vacuum_robot_4"
+Led "@end_discussion_with_vacuum_robot_5"
+VacuumRobot "@end_discussion_with_vacuum_robot_6"
+VacuumRobot "@end_discussion_with_vacuum_robot_6"
+VacuumRobot "@end_discussion_with_vacuum_robot_7"
+Led "@end_discussion_with_vacuum_robot_8"
+VacuumRobot "@end_discussion_with_vacuum_robot_9"
+Led "@end_discussion_with_vacuum_robot_10"
+VacuumRobot "@end_discussion_with_vacuum_robot_11"
+Led "@end_discussion_with_vacuum_robot_12"
+Led "@end_discussion_with_vacuum_robot_13"
 -> DONE
 
-== data_pad ==
-Led "A Data Pad. Could’ve gotten a lot out of this, but it’s cracked and flickering. Hold on…"
->> bgchange data_pad
-> Hey. Word from Captain says we've got to double security
-More security? Why? What's wrong? <
-> I don't ask questions, man. Just get the security bots working
-Led "More security? What-"
->> bgchange data_pad
-Led "Damn, it's turned off. Well, that's all I'm going to get"
+== stern_data_pad ==
+Led "@stern_data_pad_1"
+Led "@stern_data_pad_2"
+Led "@stern_data_pad_3"
+Led "@stern_data_pad_4"
+Led "@stern_data_pad_5"
+Led "@stern_data_pad_6"
 -> DONE
 
-== reflection ==
-Led "Wow. I didn't realize how damaged I was"
-Led "My arm's gone, my head module is damaged- it looks like someone's attacked me?"
-Led "Wait, is that rust? How long have I been here?"
-Led "Well, staring at my reflection won't help. Let's see what else I can find"
+== stern_reflection ==
+Led "@stern_reflection_1"
+Led "@stern_reflection_2"
+Led "@stern_reflection_3"
+Led "@stern_reflection_4"
 -> DONE
 
-== service_bot ==
-Led "It must have broken apart like that what it fell over. Maybe that's what happened to me"
-Led "Huh. Even its internals are damaged. What could have happened to him? And the rest of them?"
-Led "They're all so dead and lifeless- but I am not. I wish I could remember..."
-Led "Ug. They are too badly damaged, I can’t access them"
-Led "Cold... Unmoving... So lifeless. And the rust..."
+== stern_service_bot ==
+Led "@stern_service_bot_1"
+Led "@stern_service_bot_2"
+Led "@stern_service_bot_3"
+Led "@stern_service_bot_4"
+Led "@stern_service_bot_5"
 -> DONE
 
 == all_in_one_tool ==
-Led "An all-in-one tool! And it still works! Unlike my missing arm..."
-Led "Wait, that robot's arm is similar to mine- and undamaged"
-Led "That’s it! Maybe I can use its arm to replace my own!"
+Led "@all_in_one_tool_1"
+Led "@all_in_one_tool_2"
+Led "@all_in_one_tool_3"
 >> additem AllInOneTool
 ~ acquired_tool = true
 -> DONE
@@ -157,250 +162,510 @@ Led "That’s it! Maybe I can use its arm to replace my own!"
 >> changesprite Led led_with_arm
 >> fadein 1
 >> sfx puzzle_complete true
-Led "...Yes I have it. And it moves, perfect"
+Led "@arm_1"
     ~ acquired_arm = true
-Led "If our arms are swappable... Maybe its memory logs could be as well..."
-Led "Ah, but this tool isn't sophisticated enough for that. But I'll still keep it. Just in case"
+Led "@arm_2"
+Led "@arm_3"
 -> DONE
 
-== horizon ==
+== stern_horizon ==
 {
     - !ship_is_sinking:
-        Led "There’s... Nothing. Only worlds of ocean"
-        Led "I—I’ve done this before, looked up at the moon. The memory feels important but..."
-        Led "I can't... Ugh... I can't remember! My Memory Drive fails me"
+        Led "@stern_horizon_1"
+        Led "@stern_horizon_2"
+        Led "@stern_horizon_3"
         {
             - acquired_arm:
-                Led "Both arms and legs fully functioning... But I don’t feel whole"
+                Led "@stern_horizon_4"
         }
-        Led "My memory- I need to find a way to restore it"
-        Led "Maybe there are answers somewhere on this ship"
+        Led "@stern_horizon_5"
+        Led "@stern_horizon_6"
         -> DONE
     - else:
-        Led "Maybe I'll find something here"
-        Led "Oh no! The lower part of the ship is broken, there's a big hole- there's water going into the ship!"
+        Led "@stern_horizon_7"
+        Led "@stern_horizon_8"
         -> DONE
 }
 
 
-== door ==
+== stern_door ==
 {
     - !stern_door_open:
-        Led "There's a door over there"
-        Led "I've searched everywhere out here but I still need more tools. Maybe there's something out there"
-        Led "The door is bolted shut. That panel next to it looks important, but it's damaged"
+        Led "@stern_door_1"
+        Led "@stern_door_2"
+        Led "@stern_door_3"
 }
 -> DONE
 
-== pannel ==
+== stern_pannel ==
 {
     - !acquired_tool:
-        Led "The pannel to open the doors. They're too damaged to be used, but maybe I can fix it somehow"
+        Led "@stern_pannel_1"
     - !stern_door_open && acquired_tool:
-        Led "I might be able to hotwire it if I get the right angle... Oh! The all-in-one tool might be able to work here!"
+        Led "@stern_pannel_2"
         {
             - acquired_arm:
-                Led "If it can attach an arm, it can fix a door. It just might take a few seconds"
+                Led "@stern_pannel_3"
 
             - else:
-                Led "But with only one arm it would be impossible to work on such a complex system"
+                Led "@stern_pannel_4"
         }
 }
 -> DONE
 
-== fix_pannel ==
+== stern_fix_pannel ==
 {
     - !acquired_arm:
-        Led "I'm sure I can use this tool to fix the pannel, but not with an arm missing"
+        Led "@stern_fix_pannel_1"
         -> DONE
 }
-Led "Hum, the electronic inverter isn’t re-connecting – it must have been out for a while..."
-Led "I can use this wire to trip – yes. That’s got it. I just need to wait to hear it click and then –"
-Led "Oh shoot, my one tool, it's all busted up! At least the door is unlocked now, I just need to reconnect this bit and..."
+Led "@stern_fix_pannel_2"
+Led "@stern_fix_pannel_3"
+Led "@stern_fix_pannel_4"
 >> removeitem AllInOneTool
 >> bgchange stern_door_open
 >> sfx puzzle_complete true
-Led "A human. First one I’ve seen since I woke up"
-Led "Hello! How may I be of –Oh. Oh, you're dead. Jeeze, it looks like you've been there for a while"
-Led "Poor Human. Without anyone to serve it as well"
-Led "Its fingers are burned, but I can’t tell what caused its death"
-Led "This Engineer’s Uniform is badly decomposed. There's a logo, but I can barely make it out"
-Led "But I don't recognize it. Hm. How long have we been here for?"
+Led "@stern_fix_pannel_5"
+Led "@stern_fix_pannel_6"
+Led "@stern_fix_pannel_7"
+Led "@stern_fix_pannel_8"
+Led "@stern_fix_pannel_9"
+Led "@stern_fix_pannel_10"
 ~ stern_door_open = true
 >> quest OpenSternDoor Completed
 -> DONE
 
-== dead_cleaning_robot ==
-Led "No signs of life. Even the broom has started to rot. What could have happened to it? To us. Maybe I can check its computer banks, see if it remembers something"
-Led "Hmmm... Maybe I can... No, there’s more damage than I thought. Nothing here to salvage"
-Led "It must have been dead for a while, with all that rust. I wonder what its last thought was"
-Led "And why is it still cleaning? Whatever happened to it- to us... Must have happened all at once"
+== stern_dead_cleaning_robot ==
+Led "@stern_dead_cleaning_robot_1"
+Led "@stern_dead_cleaning_robot_2"
+Led "@stern_dead_cleaning_robot_3"
+Led "@stern_dead_cleaning_robot_4"
 {
     - !acquired_arm:
-        Led "Hum, I wonder... I might be able to use its arm to replace mine"
-        Led "Uh... It won’t budge. So many dead robots. But I am still here. Why?"
+        Led "@stern_dead_cleaning_robot_5"
+        Led "@stern_dead_cleaning_robot_6"
 }
 -> DONE
 
 == recover_memory ==
-Led "Let me open up your head, my friend"
-Led "Looks like it'll still work. I'm sorry, buddy"
-Led "I’ve robbed you of your arm, and now I'm about to strip you off who you are..."
-Led "Your very essence. Your memories. I shouldn't..."
-Led "But it can't be helped. I hope you understand"
+Led "@recover_memory_1"
+Led "@recover_memory_2"
+Led "@recover_memory_3"
+Led "@recover_memory_4"
+Led "@recover_memory_5"
 >> sfx puzzle_complete true
-Led "It works, my friend. Thanks. I think I can remember some...thing..."
-Led "I- I remember something about... watching the moon. with... a boy. My- my master?"
-Led "He- he didn't like traveling, he was telling me... but- but his father wanted him with him"
-Led "He was launching a new ship and wanted to show off his little family unit"
-Led "And the boy didn't want to- didn't want to be a 'prop', he said"
-Led "And he said- he said that I was built to be there when his father could not"
-Led "And then he asked me about the moon. Asked if it would be around forever"
-Led "'Of course, master. Of course. No matter what, the moon will always be there'"
-Led "'Always be there in the darkness of the night. Even if you can't see it'"
-Led "Then... then he said he wanted to go to the moon"
-Led "'Well, sir, then I think one day you'll go to the moon'"
-Led "'I think you'll do whatever you set your mind to'"
-Led "That’s... that’s it? That’s all the memory drive can do"
-Led "Ug. I need extensive repairs to access everything. I need..."
-Led "Wait- I remember something else"
-Led "I remember being paralyzed. Unable to move- for some reason"
-Led "And- and my master- he was being dragged off. He was screaming, struggling"
-Led "Then he was dragged into a lifeboat. I wanted to go with him. I had to go with him"
-Led "But- but I can't. I can't, my systems are malfunctioning. All- all I can do is..."
-Led "Fall. I fell, staring up at the moon. The quiet moon. Hanging above me"
-Led "Then everything went black"
+Led "@recover_memory_6"
+Led "@recover_memory_7"
+Led "@recover_memory_8"
+Led "@recover_memory_9"
+Led "@recover_memory_10"
+Led "@recover_memory_11"
+Led "@recover_memory_12"
+Led "@recover_memory_13"
+Led "@recover_memory_14"
+Led "@recover_memory_15"
+Led "@recover_memory_16"
+Led "@recover_memory_17"
+Led "@recover_memory_18"
+Led "@recover_memory_19"
+Led "@recover_memory_20"
+Led "@recover_memory_21"
+Led "@recover_memory_22"
+Led "@recover_memory_23"
+Led "@recover_memory_24"
+Led "@recover_memory_25"
+Led "@recover_memory_26"
 -> DONE
 
 == item_use_error ==
-Led "Hmmm... I can't use that here"
+Led "!item_use_error"
 -> DONE
 
 == funnel_load ==
 >> setscene Funnel
 {
     - !funnel_visited:
-        Led "There’s so many bones- human bones. Enough for at least two fully grown ones"
-        Led "That worktable might have something useful on it"
+        Led "@funnel_load_1"
+        Led "@funnel_load_2"
         ~ funnel_visited = true
 }
 -> DONE
 
-== worktable ==
-Led "Useless... useless... useless. Everything is worn out and useless..."
+== funnel_worktable ==
+Led "@funnel_worktable_1"
 {
     - !acquired_service_kit:
-        Led "Ooh! That might not be useless"
+        Led "@funnel_worktable_2"
         >> additem ServiceKit
         ~ acquired_service_kit = true
 }
 -> DONE
 
-== letter ==
-Unknown "... know that I love you all dearly. You're all daddy's little angels."
-Unknown "And to my wife, I'm sorry it's not me who came back to you. Know that thinking of you, my darling, is all that's keeping me going."
-Unknown "But I can't survive on memories alone. My love for you encompasses the universe. I hope one day, in another lifetime, we can be together again."
-Unknown "And to whoever finds this letter- If you ever make it out, give this letter to my family, if you find them."
-Unknown "Tell them I wish I could’ve seen them. And... if you don't get out of here, well then, the sea would’ve won."
+== funnel_letter ==
+Unknown "@funnel_letter_1"
+Unknown "@funnel_letter_2"
+Unknown "@funnel_letter_3"
+Unknown "@funnel_letter_4"
+Unknown "@funnel_letter_5"
 -> DONE
 
-== bones ==
-Led "Strange- it looks like there are cuts in these bones"
-Led "I don't like this... Why are there just bones? Especially when the body by the door is intact"
-Led "And where are these cuts from"
-Led "It looks like something or someone killed these people. And... cut them up purposefully?"
+== funnel_bones ==
+Led "@funnel_bones_1"
+Led "@funnel_bones_2"
+Led "@funnel_bones_3"
+Led "@funnel_bones_4"
 -> DONE
 
 == funnel_data_pad ==
-Led "Looks like Daily Logs from the workers. Maybe reading some will prove useful"
-Unknown "Kyle, Mark and Randy here. We were working here in the Funnel Room when it happened. We got stuck. There was no way to escape..."
-Led "Ugh, I can barely make out the rest of the entry"
-Unknown "... Kyle died. And we just had to... We were so hungry. He would not have minded, I swear. God forgive me"
+Led "@funnel_data_pad_1"
+Unknown "@funnel_data_pad_2"
+Led "@funnel_data_pad_3"
+Unknown "@funnel_data_pad_4"
 -> DONE
 
-== clothes ==
-Led "Two sets of clothing. Ripped and stained. What's it by- oh... oh no... What did you do? What happened here?"
+== funnel_clothes ==
+Led "@funnel_clothes_1"
 -> DONE
 
 == superstructure_out_load ==
 >> setscene Superstructure_out
 {
     - !superstructure_out_visited:
-        Led "The more my memory returns, the more questions I have..."
-        Led "Maybe the superstructure ahead will hold some answers"
+        Led "@superstructure_out_load_1"
+        Led "@superstructure_out_load_2"
         ~ superstructure_out_visited = true
 }
 -> DONE
 
 == superstructure_left_door ==
-Led "Ugh, the door seems wedged. If it wasn't for my new arm, I think I’d fit..."
-Led "But why is it half-open? All the other doors had either been left open or auto-locked… Maybe it's being blocked"
+Led "@superstructure_left_door_1"
+Led "@superstructure_left_door_2"
 >> fadeout 1
 >> fadein 1
-Led "Oh! Another casualty... maybe if I can use my foot to anchor against the frame and then pull..."
-Led "There you go, you’re free now at least. But a little too late"
-Led "Even I’m looking worse for wear from that, my new arm is a little scratched and dented"
-Led "Although my original arm is good as new... Odd"
-Led "I guess I shouldn’t complain"
+Led "@superstructure_left_door_3"
+Led "@superstructure_left_door_4"
+Led "@superstructure_left_door_5"
+Led "@superstructure_left_door_6"
+Led "@superstructure_left_door_7"
 -> DONE
 
-== empty_lifeboat ==
-Led "The humans would head for the lifeboats... And they’re now missing"
-Led "I really hope that my master made it off the boat"
-Led "Oh? All of the lifeboats have gone... No, there’s one still here!"
+== superstructure_out_empty_lifeboat ==
+Led "@superstructure_out_empty_lifeboat_1"
+Led "@superstructure_out_empty_lifeboat_2"
+Led "@superstructure_out_empty_lifeboat_3"
 -> DONE
 
-== remaining_lifeboat ==
-Led Left "Hum, it’s all locked up. I wonder why the humans didn’t... Crap!... Don’t shoot me I’m just a service bot!"
--> security_bot
+== superstructure_out_remaining_lifeboat ==
+Led Left "@superstructure_out_remaining_lifeboat_1"
+-> superstructure_out_security_bot
 
-== security_bot ==
-SecurityBot Right "Vacate the area. Now"
-Led Left "I-I- just saw another Security bot back there-"
-SecurityBot "You will be forcibly removed if you do not comply with Emergency deck restrictions 6.55&#35;. You have 7 seconds to comply, or you will be forcibly de-activated."
-Led "Wait! What’s the problem officer? I didn’t mean to- no, please don’t deactivate me! I just wanted to check the lifeboats for..."
-SecurityBot "Under Emergency protocol 6.55&#35; no bot is allowed to access the lifeboats"
-Led "Look, given the current state of the ship, we will need all the lifeboats we can get!"
-SecurityBot "Under Emergency protocol 6.55&#35; no bot is allowed to access the lifeboats"
-Led "Listen the ship is sinking. Right now. Emergency protocol 565... 465... Doesn’t matter!"
-SecurityBot "6.55&#35;"
-Led "Listen! The ship will sink. It IS sinking! We have to... I don’t think you understand!"
-SecurityBot "False, I understand Emergency protocol 6.55&#35; excellently. It is programmed into my internal hard drive and cannot be edited or corrupted.  In the event of an emergency – listed in subsection 6b – that a lifeboat or vessel is required-"
-Led "Yes, I got that bit, but I just need to-"
-SecurityBot "- only human personnel will be allowed onto lifeboats. Bots will only be able to gain admittance to lifeboats if-"
-Led "Yes, that’s me I-"
-SecurityBot "-they are either accompanied by a human or have A16 clearance. Do you meet either of these necessary criteria?"
-Led "No. I mean, I don’t know if I have A16 clearance, I don’t remember if maybe..."
-SecurityBot "Please hold... Scanning"
-Led "Thank you. That’s all I wanted-"
-SecurityBot "Scan complete. You do not"
-Led "But I’m trying to find my human master! Doesn’t that count for something?"
-SecurityBot "False. Incompatible clearance"
-Led "I really don't want to sink! Surely that’s the whole point of-"
-SecurityBot "False. Incompatible clearance"
-Led "I can’t even remember what's going on, and I’m trying to find my master and not sink on this ship, and I’ve seen so many poor bots who... I just really need your help! Can you not even comprehend what I’m talking about?"
-SecurityBot "Yes. You have no A16 clearance and under section 6.55&#35; you will be forcibly de-activated if you do not vacate the area in 7 seconds"
-Led "Thank goodness I am programmed with reason. Security bots must be programmed to follow orders at all costs. Not hugely helpful when there’s no humans around to give the orders"
-Led "I don’t even know what to do now..."
-Led "Wait, maybe I can find a human to give me that A16 clearance! Surely the Captain could help"
-Led "Wait, you’ve been standing outside here the whole time?"
-SecurityBot "My programming has assigned me to this post"
-Led "So, do you know what happened here?"
-SecurityBot "My emergency protocol was auto-activated but I do not know the events that initiated this"
-Led "But how are you still alive? I’ve found so many dead robots, what happened to them?"
-SecurityBot "My emergency protocol programming requires me to rescue all humans, not bots"
-Led "Did you see what happened to them though?"
-SecurityBot "I am required to make sure all human personnel escaped the ship, to guard the lifeboats for more survivors and to await further orders"
-Led "You didn’t even notice the bots? Fine. But there are no more humans. Or no living ones at least. I haven’t found any trace of them..."
-SecurityBot "I must await further orders and guard for survivors"
-Led "But this boat is sinking. There are no humans left. You’re going to die"
-SecurityBot "I must await further orders and guard for survivors at all costs"
-Led "Why won’t you listen? Although, your head unit is severely damaged. The protective layers look like almost disintegrated"
-Led "Your AI core is exposed, you must have suffered a great deal of damage to your internal logic centers and have to rely on its base programming"
-Led "Look... Can I fix that for you? There are enough parts around here that I could patch-"
-SecurityBot "False, my internal programming cannot be edited or corrupted and only official human personnel are authorized to tamper with my unit or my software"
-Led "But you’re leaking oil, that’ll corrode your eletronics soon and then you won’t –"
-SecurityBot "False, my internal programming cannot be edited or corrupted and only official human personnel are authorized to tamper with my unit or my software"
-Led "... If you’re sure. It’s not like I can get through to you anyway"
-Led "I suppose I’ll head back to the superstructure and try and find the bridge. Maybe I’ll find the captain or more information about the missing lifeboats"
+== superstructure_out_security_bot == 
+{
+    - !has_clearance:
+        SecurityBot Right "@superstructure_out_security_bot_1"
+        Led Left "@superstructure_out_security_bot_2"
+        SecurityBot "@superstructure_out_security_bot_3"
+        Led "@superstructure_out_security_bot_4"
+        SecurityBot "@superstructure_out_security_bot_5"
+        Led "@superstructure_out_security_bot_6"
+        SecurityBot "@superstructure_out_security_bot_7"
+        Led "@superstructure_out_security_bot_8"
+        SecurityBot "@superstructure_out_security_bot_9"
+        Led "@superstructure_out_security_bot_10"
+        SecurityBot "@superstructure_out_security_bot_11"
+        Led "@superstructure_out_security_bot_12"
+        SecurityBot "@superstructure_out_security_bot_13"
+        Led "@superstructure_out_security_bot_14"
+        SecurityBot "@superstructure_out_security_bot_15"
+        Led "@superstructure_out_security_bot_16"
+        SecurityBot "@superstructure_out_security_bot_17"
+        Led "@superstructure_out_security_bot_18"
+        SecurityBot "@superstructure_out_security_bot_19"
+        Led "@superstructure_out_security_bot_20"
+        SecurityBot "@superstructure_out_security_bot_21"
+        Led "@superstructure_out_security_bot_22"
+        SecurityBot "@superstructure_out_security_bot_23"
+        Led "@superstructure_out_security_bot_24"
+        SecurityBot "@superstructure_out_security_bot_25"
+        Led "@superstructure_out_security_bot_26"
+        Led "@superstructure_out_security_bot_27"
+        Led "@superstructure_out_security_bot_28"
+        Led "@superstructure_out_security_bot_29"
+        SecurityBot "@superstructure_out_security_bot_30"
+        Led "@superstructure_out_security_bot_31"
+        SecurityBot "@superstructure_out_security_bot_32"
+        Led "@superstructure_out_security_bot_33"
+        SecurityBot "@superstructure_out_security_bot_34"
+        Led "@superstructure_out_security_bot_35"
+        SecurityBot "@superstructure_out_security_bot_36"
+        Led "@superstructure_out_security_bot_37"
+        SecurityBot "@superstructure_out_security_bot_38"
+        Led "@superstructure_out_security_bot_39"
+        SecurityBot "@superstructure_out_security_bot_40"
+        Led "@superstructure_out_security_bot_41"
+        Led "@superstructure_out_security_bot_42"
+        Led "@superstructure_out_security_bot_43"
+        SecurityBot "@superstructure_out_security_bot_44"
+        Led "@superstructure_out_security_bot_45"
+        SecurityBot "@superstructure_out_security_bot_44"
+        Led "@superstructure_out_security_bot_46"
+        Led "@superstructure_out_security_bot_47"
+    - else:
+        Led Left "@superstructure_out_security_bot_48"
+        SecurityBot Right "@superstructure_out_security_bot_49"
+        Led "@superstructure_out_security_bot_50"
+        SecurityBot "@superstructure_out_security_bot_51"
+        Led "@superstructure_out_security_bot_52"
+        SecurityBot "@superstructure_out_security_bot_53"
+        Led "@superstructure_out_security_bot_54"
+        SecurityBot "@superstructure_out_security_bot_55"
+        Led "@superstructure_out_security_bot_56"
+        >> quest GetClearance Completed
+}
+
+-> DONE
+
+== superstructure_in_load ==
+{
+    - !superstructure_in_1_visited:
+        Led "@superstructure_in_load_1"
+        Led "@superstructure_in_load_2"
+        Led "@superstructure_in_load_3"
+        Led "@superstructure_in_load_4"
+        Led "@superstructure_in_load_5"
+        Led "@superstructure_in_load_6"
+        Led "@superstructure_in_load_7"
+        ~ superstructure_in_1_visited = true
+    - !superstructure_in_2_visited && power_restored:
+        Led "@superstructure_in_load_8"
+        Led "@superstructure_in_load_9"
+        Led "@superstructure_in_load_10"
+        Led "@superstructure_in_load_11"
+        Led "@superstructure_in_load_12"
+        ~ superstructure_in_2_visited = true
+}
+-> DONE
+
+== superstructure_in_door ==
+>> sfx negative_beep true
+Led "@superstructure_in_door_1"
+-> DONE
+
+== superstructure_in_power_grid ==
+Led "@superstructure_in_power_grid_1"
+Led "@superstructure_in_power_grid_2"
+Led "@superstructure_in_power_grid_3"
+Led "@superstructure_in_power_grid_4"
+Led "@superstructure_in_power_grid_5"
+Led "@superstructure_in_power_grid_6"
+Led "@superstructure_in_power_grid_7"
+Led "@superstructure_in_power_grid_8"
+Led "@superstructure_in_power_grid_9"
+Led "@superstructure_in_power_grid_10"
+Led "@superstructure_in_power_grid_11"
+-> DONE
+
+== superstructure_in_data_pad ==
+Led "@superstructure_in_data_pad_1"
+Led "@superstructure_in_data_pad_2"
+Led "@superstructure_in_data_pad_3"
+Led "@superstructure_in_data_pad_4"
+Led "@superstructure_in_data_pad_5"
+Led "@superstructure_in_data_pad_6"
+Led "@superstructure_in_data_pad_7"
+Led "@superstructure_in_data_pad_8"
+Led "@superstructure_in_data_pad_9"
+Led "@superstructure_in_data_pad_10"
+-> DONE
+
+== superstructure_in_dead_bot ==
+Led "@superstructure_in_dead_bot_1"
+Led "@superstructure_in_dead_bot_2"
+Led "@superstructure_in_dead_bot_3"
+Led "@superstructure_in_dead_bot_4"
+Led "@superstructure_in_dead_bot_5"
+Led "@superstructure_in_dead_bot_6"
+Led "@superstructure_in_dead_bot_7"
+Led "@superstructure_in_dead_bot_8"
+Led "@superstructure_in_dead_bot_9"
+Led "@superstructure_in_dead_bot_10"
+Led "@superstructure_in_dead_bot_11"
+Led "@superstructure_in_dead_bot_12"
+-> DONE
+
+== superstructure_in_blood ==
+Led "@superstructure_in_blood_1"
+Led "@superstructure_in_blood_2"
+Led "@superstructure_in_blood_3"
+Led "@superstructure_in_blood_4"
+Led "@superstructure_in_blood_5"
+Led "@superstructure_in_blood_6"
+Led "@superstructure_in_blood_7"
+Led "@superstructure_in_blood_8"
+Led "@superstructure_in_blood_9"
+Led "@superstructure_in_blood_10"
+-> DONE
+
+== superstructure_in_monitor ==
+Led "@superstructure_in_monitor_1"
+-> DONE
+
+== superstructure_in_map ==
+Led "@superstructure_in_map_1"
+Led "@superstructure_in_map_2"
+Led "@superstructure_in_map_3"
+-> DONE
+
+== generator_room_load ==
+{
+    - !generator_room_visited:
+        Led "@generator_room_load_1"
+        Led "@generator_room_load_2"
+        Led "@generator_room_load_3"
+        ~ generator_room_visited = true
+        ~ power_restored = true
+}
+-> DONE
+
+== generator_room_computer ==
+Led "@generator_room_computer_1"
+Led "@generator_room_computer_2"
+Led "@generator_room_computer_3"
+Led "@generator_room_computer_4"
+Led "@generator_room_computer_5"
+-> generator_room_log_table
+
+== generator_room_log_table ==
+    * [@generator_room_log_title_1]
+        Unknown "@generator_room_log_1"
+        -> generator_room_log_table
+    * [@generator_room_log_title_2]
+        Unknown "@generator_room_log_2"
+        -> generator_room_log_table
+    * [@generator_room_log_title_3]
+        Unknown "@generator_room_log_3"
+        -> generator_room_log_table
+    * [@generator_room_log_title_4]
+        Unknown "@generator_room_log_4"
+        -> generator_room_log_table
+    * [@generator_room_log_title_5]
+        Unknown "@generator_room_log_5"
+        -> generator_room_log_table
+    * [@generator_room_log_title_6]
+        Unknown "@generator_room_log_6"
+        -> generator_room_log_table
+    * [@generator_room_log_title_7]
+        Unknown "@generator_room_log_7"
+        -> generator_room_log_table
+    * [@generator_room_log_title_return]
+        Led "@generator_room_log_return"
+        -> DONE
+
+== bridge_load ==
+Led "@bridge_load_1"
+Led "@bridge_load_2"
+Led "@bridge_load_3"
+Led "@bridge_load_4"
+Led "@bridge_load_5"
+Led "@bridge_load_6"
+Led "@bridge_load_7"
+Led "@bridge_load_8"
+Led "@bridge_load_9"
+Led "@bridge_load_10"
+Led "@bridge_load_11"
+Led "@bridge_load_12"
+Led "@bridge_load_13"
+Led "@bridge_load_14"
+Led "@bridge_load_15"
+Led "@bridge_load_16"
+Led "@bridge_load_17"
+Led "@bridge_load_18"
+-> DONE
+
+== bridge_captain ==
+{
+    - !talked_to_captain:
+        CaptainBot Right "@bridge_captain_1"
+        Led Left "@bridge_captain_2"
+        CaptainBot Right "@bridge_captain_3"
+        Led Left "@bridge_captain_4"
+        CaptainBot Right "@bridge_captain_5"
+        Led Left "@bridge_captain_6"
+        CaptainBot Right "@bridge_captain_7"
+        Led Left "@bridge_captain_8"
+        CaptainBot Right "@bridge_captain_9"
+        CaptainBot Right "@bridge_captain_10"
+        Led Left "@bridge_captain_11"
+        CaptainBot Right "@bridge_captain_12"
+        Led Left "@bridge_captain_13"
+        CaptainBot Right "@bridge_captain_14"
+        CaptainBot Right "@bridge_captain_15"
+        Led Left "@bridge_captain_16"
+        CaptainBot Right "@bridge_captain_17"
+        CaptainBot Right "@bridge_captain_18"
+        CaptainBot Right "@bridge_captain_19"
+        Led Left "@bridge_captain_20"
+        CaptainBot Right "@bridge_captain_21"
+        CaptainBot Right "@bridge_captain_22"
+        Led Left "@bridge_captain_23"
+        CaptainBot Right "@bridge_captain_24"
+        CaptainBot Right "@bridge_captain_25"
+        CaptainBot Right "@bridge_captain_26"
+        Led Left "@bridge_captain_27"
+        CaptainBot Right "@bridge_captain_28"
+        Led Left "@bridge_captain_29"
+        CaptainBot Right "@bridge_captain_30"
+        Led Left "@bridge_captain_31"
+        CaptainBot Right "@bridge_captain_32"
+        Led Left "@bridge_captain_33"
+        CaptainBot Right "@bridge_captain_34"
+        Led Left "@bridge_captain_35"
+        CaptainBot Right "@bridge_captain_36"
+        Led Left "@bridge_captain_37"
+        CaptainBot Right "@bridge_captain_38"
+        Led Left "@bridge_captain_39"
+        CaptainBot Right "@bridge_captain_40"
+        Led Left "@bridge_captain_41"
+        CaptainBot Right "@bridge_captain_42"
+        ~ talked_to_captain = true
+    - else:
+        Led Left "@bridge_captain_43"
+        CaptainBot Right "@bridge_captain_44"
+        Led Left "@bridge_captain_45"
+        CaptainBot Right "@bridge_captain_46"
+        Led Left "@bridge_captain_47"
+        CaptainBot Right "@bridge_captain_48"
+        Led Left "@bridge_captain_49"
+        CaptainBot Right "@bridge_captain_50"
+        CaptainBot Right "@bridge_captain_51"
+        CaptainBot Right "@bridge_captain_52"
+        ~ has_clearance = true
+        >> additem ClearanceCard
+}
+
+-> DONE
+
+== bridge_captain_hat ==
+Led Left "@bridge_captain_hat_1"
+CaptainBot Right "@bridge_captain_hat_2"
+CaptainBot Right "@bridge_captain_hat_3"
+-> DONE
+
+== bridge_corpse_a ==
+Led "@bridge_corpse_a_1"
+Led "@bridge_corpse_a_2"
+-> DONE
+
+== bridge_corpse_b ==
+Led "@bridge_corpse_b_1"
+Led "@bridge_corpse_b_2"
+-> DONE
+
+== bridge_data_pad ==
+Led "@bridge_data_pad_1"
+Led "@bridge_data_pad_2"
+Unknown "@bridge_data_pad_3"
+Unknown "@bridge_data_pad_4"
+Led "@bridge_data_pad_5"
+Led "@bridge_data_pad_6"
 -> DONE

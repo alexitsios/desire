@@ -6,14 +6,16 @@ public abstract class PropBase : MonoBehaviour, IInteractable
 {
 	public Flowchart Flowchart { get; set; }
     public QuestController QuestController { get; set; }
+	public TranslationManager TranslationManager { get; set; }
 
-    protected GameManager gameManager;
+	protected GameManager gameManager;
     protected abstract string FancyName { get; }
 
     void Start()
     {
         Flowchart = GameObject.Find("PropsFlowchart").GetComponent<Flowchart>();
         QuestController = GameObject.FindGameObjectWithTag("GameController").GetComponent<QuestController>();
+        TranslationManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<TranslationManager>();
 
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
@@ -35,14 +37,14 @@ public abstract class PropBase : MonoBehaviour, IInteractable
     /// </summary>
     public virtual void Interact(ItemType item)
 	{
-        if(item == ItemType.NoItem)
+		if (item == ItemType.NoItem)
 		{
-            var blockName = gameObject.name;
-            Flowchart.ExecuteBlock(blockName);
+			var blockName = gameObject.name;
+			Flowchart.ExecuteBlock(blockName);
 		}
-        else
+		else
 		{
-            Flowchart.ExecuteBlock("ItemUseError");
+			Flowchart.ExecuteBlock("ItemUseError");
 		}
 	}
 }

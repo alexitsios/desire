@@ -25,14 +25,20 @@ public class CameraMotor : MonoBehaviour
         float vertExtent = Camera.main.orthographicSize;
         float horzExtent = vertExtent * Screen.width / Screen.height;
 
-        leftBound = horzExtent - backgroundBounds.sprite.bounds.size.x / 2.0f;
-        rightBound = backgroundBounds.sprite.bounds.size.x / 2.0f - horzExtent;
-        bottomBound = vertExtent - backgroundBounds.sprite.bounds.size.y / 2.0f;
-        topBound = backgroundBounds.sprite.bounds.size.y / 2.0f - vertExtent;
+        leftBound = horzExtent - backgroundBounds.sprite.bounds.size.x * backgroundBounds.transform.localScale.x  / 2.0f;
+        rightBound = backgroundBounds.sprite.bounds.size.x * backgroundBounds.transform.localScale.x / 2.0f - horzExtent;
+        bottomBound = vertExtent - backgroundBounds.sprite.bounds.size.y * backgroundBounds.transform.localScale.y / 2.0f;
+        topBound = backgroundBounds.sprite.bounds.size.y * backgroundBounds.transform.localScale.y / 2.0f - vertExtent;
     }
 
 	private void LateUpdate ()
     {
+        if(Debug.isDebugBuild && Input.mouseScrollDelta.y != 0 && !Input.GetKey(KeyCode.LeftControl))
+		{
+            Camera.main.orthographicSize -= Input.mouseScrollDelta.y;
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().CameraSize = Camera.main.orthographicSize;
+		}
+
         Vector3 delta = Vector3.zero;
 
         // This is to check if we're inside the bounds on the X axis

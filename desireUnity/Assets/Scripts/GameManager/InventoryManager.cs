@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
     public List<InventoryItem> Inventory { get; } =  new List<InventoryItem>();
+    public GameObject itemObatinedDialog;
 
     private ItemsMenu inventoryScreen;
     private PlayerInteraction _interaction;
@@ -22,6 +25,11 @@ public class InventoryManager : MonoBehaviour
         Inventory.Add(item);
 
         inventoryScreen.UpdateInventoryScreen(Inventory);
+
+        var dialog = Instantiate(itemObatinedDialog, transform);
+        GameObject.Find("ItemObtainedText").GetComponent<TextMeshProUGUI>().text = $"You got the {item._type}";
+        GameObject.Find("ItemObtainedImage").GetComponent<Image>().sprite = item._sprite;
+        Destroy(dialog, 2f);
     }
 
     /// <summary>

@@ -10,11 +10,11 @@ using UnityEngine.Events;
 public class InkManager : MonoBehaviour
 {
     public TextAsset _textAsset;
-	public AudioClip charaudio;
+	public Character[] characters;
+	public PlayerInteraction Interaction { get; set; }
 
 	private Story _story;
 	private CanvasManager _canvasManager;
-	private PlayerInteraction _interaction;
 	private PlayerMovement _playerMovement;
     private SayDialog _sayDialog;
 	private Stage _stage;
@@ -36,7 +36,6 @@ public class InkManager : MonoBehaviour
 
 	public void StartInkManager()
 	{
-		_interaction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
 		_playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 		_canvasManager = GetComponent<CanvasManager>();
 		_gameManager = GetComponent<GameManager>();
@@ -56,7 +55,7 @@ public class InkManager : MonoBehaviour
 
 	private IEnumerator RunStory()
 	{
-		_interaction.isInteracting = true;
+		Interaction.isInteracting = true;
 		var block = _story.ContinueMaximally().Split('\n');
 
 		foreach(string line in block)
@@ -83,7 +82,8 @@ public class InkManager : MonoBehaviour
 					return;
 				}
 
-				_menuDialog.AddOption(_story.currentChoices[i].text, true, false, action);
+				var option = _translationManager.GetTranslatedLine(_story.currentChoices[i].text);
+				_menuDialog.AddOption(option, true, false, action);
 			}
 		}
 
@@ -97,7 +97,7 @@ public class InkManager : MonoBehaviour
 			}
 		}
 
-		_interaction.FinishInteraction();
+		Interaction.FinishInteraction();
 	}
 
 	private IEnumerator ProcessPath(string line)
@@ -114,20 +114,17 @@ public class InkManager : MonoBehaviour
 		{
 			var block = Regex.Split(line, "[\"]+");
 			var characterAttributes = block[0].Split(' ');
-			Character character = GameObject.Find(characterAttributes[0] + "_Character")?.GetComponent<Character>();
+			var character = GetCharacter(characterAttributes[0]);
+			if(character != null)
+				character.NameText = _translationManager.GetTranslatedName(characterAttributes[0]);
 
 			if(_stage != null && character != null)
 			{
-				foreach(var currentChar in _stage.CharactersOnStage)
-				{
-					_stage.SetDimmed(currentChar, currentChar != character);
-				}
-
-				_stage.Show(character, character.Portraits[0].name, characterAttributes[1]);
+				if(!_stage.CharactersOnStage.Contains(character))
+					_stage.Show(character, character.Portraits[0].name, characterAttributes[1]);
 			}
 
-			var lineIndex = Convert.ToInt32(block[1]);
-			var translatedLine = _translationManager.GetTranslatedLine(_currentScene, lineIndex - 1);
+			var translatedLine = _translationManager.GetTranslatedLine(block[1]);
 
 			_sayDialog.SetCharacter(character);
 			yield return StartCoroutine(_sayDialog.DoSay(translatedLine, true, true, true, false, false, null, null));
@@ -136,7 +133,7 @@ public class InkManager : MonoBehaviour
 
 	private IEnumerator ProcessCommand(string command)
 	{
-		var commandList = command.Substring(2).Trim().Split(' ');;
+		var commandList = command[2..].Trim().Split(' ');;
 
 		switch(commandList[0])
 		{
@@ -213,5 +210,16 @@ public class InkManager : MonoBehaviour
 				Enum.TryParse(commandList[1], out _currentScene);
 				break;
 		}
+	}
+
+	private Character GetCharacter(string name)
+	{
+		foreach(var character in characters)
+		{
+			if(character.name == $"{name}_Character")
+				return character;
+		}
+
+		return null;
 	}
 }
