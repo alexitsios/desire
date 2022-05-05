@@ -62,34 +62,18 @@ public class CanvasManager : MonoBehaviour
 		UpdateBackground(bg);
 	}
 
-	public IEnumerator Fade(int fadeType, float fadeTime)
+	public IEnumerator Fade(string type, float time)
 	{
-		Color color;
+		int multiplier = (type == "in" || type == "dim-in") ? -1 : 1;
+		float start = type == "in" ? 1 : type == "out" ? 0 : type == "dim-in" ? 0.7f : 0;
+		float target = type == "in" ? 0 : type == "out" ? 1 : type == "dim-in" ? 0f : 0.7f;
+
 		_fadeImage = GameObject.Find("FadeImage").GetComponent<Image>();
 
-		switch(fadeType)
+		for(float i = start; i * multiplier <= target; i += (Time.deltaTime * multiplier) / time)
 		{
-			case 0:
-				// FADE-OUT
-				for(float i = 0; i <= 1; i += Time.deltaTime / fadeTime)
-				{
-					color = new Color(0f, 0f, 0f, i);
-					_fadeImage.color = color;
-					yield return null;
-				}
-
-				break;
-
-			case 1:
-				// FADE-IN
-				for(float i = 1; i >= 0; i -= Time.deltaTime / fadeTime)
-				{
-					color = new Color(0f, 0f, 0f, i);
-					_fadeImage.color = color;
-					yield return null;
-				}
-
-				break;
+			_fadeImage.color = new Color(0f, 0f, 0f, i);
+			yield return null;
 		}
 	}
 }

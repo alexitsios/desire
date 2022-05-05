@@ -1,5 +1,7 @@
+using EnumExtensions;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class QuestController : MonoBehaviour
@@ -18,5 +20,22 @@ public class QuestController : MonoBehaviour
 	public void SetQuestStatus(QuestName questName, QuestStatus questStatus)
 	{
 		Quests[questName] = questStatus;
+
+		UpdateQuestTracker();
+	}
+
+	private void UpdateQuestTracker()
+	{
+		var text = "";
+
+		foreach(var quest in Quests)
+		{
+			if(quest.Value == QuestStatus.Active)
+			{
+				text += $"- {quest.Key.GetFullName()}\n";
+			}
+		}
+
+		GameObject.Find("QuestTrackerText").GetComponent<TMP_Text>().text = text;
 	}
 }

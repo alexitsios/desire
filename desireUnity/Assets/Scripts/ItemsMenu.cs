@@ -25,6 +25,8 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().SetCursorAction(CursorAction.ItemSelected);
             });
 		}
+
+        GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

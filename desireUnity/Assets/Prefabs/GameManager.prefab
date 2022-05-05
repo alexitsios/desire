@@ -99,6 +99,8 @@ MonoBehaviour:
     sfx: {fileID: 8300000, guid: ce51f501c8556b04f8df48ad20df2a42, type: 3}
   inventoryUI: {fileID: 1975772873509986503, guid: a99d770c0d17f804d86ad32a0912fa35, type: 3}
   mainUI: {fileID: 3237129540963922203, guid: 39e292a9ef48e814caec2a57b9ad2374, type: 3}
+  settingsUI: {fileID: 3446138416216653522, guid: 60e1ffd741a67e240b3ddeaeac5671ee, type: 3}
+  dataPadUI: {fileID: 4923905467451345925, guid: 888d424d417051948874e82619195af0, type: 3}
   player: {fileID: 0}
 --- !u!114 &1226066315
 MonoBehaviour:
@@ -132,9 +134,11 @@ MonoBehaviour:
   - name: stern_door_open
     sprite: {fileID: 21300000, guid: 9b9117ab4ba683443a463a3c2f2fad5b, type: 3}
   - name: funnel_default
-    sprite: {fileID: 21300000, guid: 6229d2186489d3c428a82590f9e09af8, type: 3}
+    sprite: {fileID: 21300000, guid: ecfd036ea5862b349b0b4b746d964608, type: 3}
   - name: superstructure_out_default
     sprite: {fileID: 21300000, guid: 17c623fbc34aebf48a3a92e36f9bba60, type: 3}
+  - name: generator_room_lit
+    sprite: {fileID: 21300000, guid: 5c8c5a75e83511e4eb6dca8ed275e87d, type: 3}
 --- !u!114 &1226066316
 MonoBehaviour:
   m_ObjectHideFlags: 0

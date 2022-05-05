@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerMovement : MovementBase
 {
-	public Direction direction = new Direction();
+	public Direction direction;
 	public float frontMoveSpeed;
 	public bool IsTrapped { get => _isTrapped; 
 		set { 
@@ -19,6 +19,7 @@ public class PlayerMovement : MovementBase
 			{
 				GetComponent<SpriteRenderer>().size = new Vector2(0.25f, 0.5f);
 				GetComponent<Animator>().SetBool("acquired_leg", true);
+				transform.GetChild(0).transform.localPosition = new Vector3(0, -0.15f, 0);
 			}
 		} 
 	}
@@ -39,6 +40,7 @@ public class PlayerMovement : MovementBase
 	private bool moving;
 	private bool _isTrapped;
 	private bool _acquiredArm;
+	private float _idleTimer = 0f;
 
 	public float step;
 
@@ -70,12 +72,7 @@ public class PlayerMovement : MovementBase
 	}
 	private void Update()
 	{
-		if(Debug.isDebugBuild && Input.mouseScrollDelta.y != 0 && Input.GetKey(KeyCode.LeftControl))
-		{
-			var newSize = GetComponent<SpriteRenderer>().size * new Vector2(Input.mouseScrollDelta.y * 0.1f, Input.mouseScrollDelta.y * 0.1f);
-			GetComponent<SpriteRenderer>().size += newSize;
-			GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().LedSize = GetComponent<SpriteRenderer>().size;
-		}
+		_idleTimer += Time.deltaTime;
 
 		if(playerInteraction.isInteracting)
 		{
@@ -90,9 +87,17 @@ public class PlayerMovement : MovementBase
 			// Only moves the character if the player has not clicked on an inventory item
 			if(EventSystem.current.currentSelectedGameObject == null)
 			{
+				_idleTimer = 0f;
+				animator.SetBool("canIdle", true);
 				lastClickedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				moving = true;
 			}
+		}
+
+		if(_idleTimer >= 5f)
+		{
+			_idleTimer = 0f;
+			animator.SetBool("canIdle", true);
 		}
 
 		UpdateSizeForDepth(spriteRenderer);
@@ -137,7 +142,9 @@ public class PlayerMovement : MovementBase
 					animator.SetFloat("Vertical", 0);
 
 					if(AcquiredArm)
+					{
 						GetComponent<SpriteRenderer>().flipX = false;
+					}
 				}
 				if(lastClickedPos.x < transform.position.x)
 				{
@@ -145,7 +152,9 @@ public class PlayerMovement : MovementBase
 					animator.SetFloat("Vertical", 0);
 
 					if(AcquiredArm)
+					{
 						GetComponent<SpriteRenderer>().flipX = true;
+					}
 				}
 			}
 
@@ -160,5 +169,10 @@ public class PlayerMovement : MovementBase
 			moving = false;
 			animator.SetFloat("Speed", 0);
 		}
+	}
+
+	public void StartBootAnimation()
+	{
+		animator.speed = 1;
 	}
 }

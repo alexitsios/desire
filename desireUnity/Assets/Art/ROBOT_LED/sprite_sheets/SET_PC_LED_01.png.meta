@@ -44,7 +44,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -132,11 +132,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -153,11 +153,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 50
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,11 +174,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -195,11 +195,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 150
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -216,11 +216,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 200
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -237,11 +237,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 250
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -258,11 +258,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 300
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -279,11 +279,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 350
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -300,11 +300,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -321,11 +321,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 450
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -342,11 +342,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 500
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -363,11 +363,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 550
-        y: 700
+        y: 400
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -383,12 +383,12 @@ TextureImporter:
       name: SET_PC_LED_01_16
       rect:
         serializedVersion: 2
-        x: 0
-        y: 600
+        x: 200
+        y: 300
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -404,12 +404,12 @@ TextureImporter:
       name: SET_PC_LED_01_17
       rect:
         serializedVersion: 2
-        x: 50
-        y: 600
+        x: 250
+        y: 300
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -425,12 +425,12 @@ TextureImporter:
       name: SET_PC_LED_01_18
       rect:
         serializedVersion: 2
-        x: 100
-        y: 600
+        x: 300
+        y: 300
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -446,12 +446,12 @@ TextureImporter:
       name: SET_PC_LED_01_19
       rect:
         serializedVersion: 2
-        x: 150
-        y: 600
+        x: 350
+        y: 300
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -467,12 +467,12 @@ TextureImporter:
       name: SET_PC_LED_01_20
       rect:
         serializedVersion: 2
-        x: 200
-        y: 600
+        x: 400
+        y: 300
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -488,12 +488,12 @@ TextureImporter:
       name: SET_PC_LED_01_21
       rect:
         serializedVersion: 2
-        x: 250
-        y: 600
+        x: 450
+        y: 300
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -509,12 +509,12 @@ TextureImporter:
       name: SET_PC_LED_01_22
       rect:
         serializedVersion: 2
-        x: 300
-        y: 600
+        x: 500
+        y: 300
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -530,12 +530,12 @@ TextureImporter:
       name: SET_PC_LED_01_23
       rect:
         serializedVersion: 2
-        x: 350
-        y: 600
+        x: 550
+        y: 300
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -551,12 +551,12 @@ TextureImporter:
       name: SET_PC_LED_01_24
       rect:
         serializedVersion: 2
-        x: 400
-        y: 600
+        x: 0
+        y: 200
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -572,12 +572,12 @@ TextureImporter:
       name: SET_PC_LED_01_25
       rect:
         serializedVersion: 2
-        x: 450
-        y: 600
+        x: 50
+        y: 200
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -593,12 +593,12 @@ TextureImporter:
       name: SET_PC_LED_01_26
       rect:
         serializedVersion: 2
-        x: 500
-        y: 600
+        x: 100
+        y: 200
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -614,12 +614,12 @@ TextureImporter:
       name: SET_PC_LED_01_27
       rect:
         serializedVersion: 2
-        x: 550
-        y: 600
+        x: 150
+        y: 200
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -636,11 +636,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 500
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -657,11 +657,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 50
-        y: 500
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -678,11 +678,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 500
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -699,11 +699,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 150
-        y: 500
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -720,11 +720,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 200
-        y: 500
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -741,11 +741,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 250
-        y: 500
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -762,11 +762,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 300
-        y: 500
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -783,11 +783,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 350
-        y: 500
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -800,175 +800,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_PC_LED_01_48
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 400
-        width: 50
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 13b326adc909b6d4d8b94de967947693
-      internalID: 1495513878
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SET_PC_LED_01_49
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 400
-        width: 50
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f007295b2c9ab244818af87ca532158
-      internalID: 347046398
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SET_PC_LED_01_50
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 400
-        width: 50
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd6e2142a4a117b49b54ccaa805b439e
-      internalID: -943231709
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SET_PC_LED_01_51
-      rect:
-        serializedVersion: 2
-        x: 150
-        y: 400
-        width: 50
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fedf652e0aacbca42bbdfa170bb9dff2
-      internalID: 1109489953
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SET_PC_LED_01_52
-      rect:
-        serializedVersion: 2
-        x: 200
-        y: 400
-        width: 50
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 93f3497c6adc6874aaf4e2e55f4fe2a1
-      internalID: 1737187356
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SET_PC_LED_01_53
-      rect:
-        serializedVersion: 2
-        x: 250
-        y: 400
-        width: 50
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ededbce5a2663a4da1f03e09822bf68
-      internalID: -992487243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SET_PC_LED_01_54
-      rect:
-        serializedVersion: 2
-        x: 300
-        y: 400
-        width: 50
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 55f0cb9e64e53944d8e0a88afe941e4a
-      internalID: 453571713
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SET_PC_LED_01_55
-      rect:
-        serializedVersion: 2
-        x: 350
-        y: 400
-        width: 50
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ebb78f5fd6a18a94b8e432f0f4ad3436
-      internalID: -372266437
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SET_PC_LED_01_64
+      name: SET_PC_LED_01_12
       rect:
         serializedVersion: 2
         x: 0
@@ -976,20 +808,20 @@ TextureImporter:
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77e1fcb738d4cf443938f613471ed6b0
-      internalID: -1155922869
+      spriteID: 1c1408807c4afce4aa5179ef8d6dd658
+      internalID: -1244090603
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_PC_LED_01_65
+      name: SET_PC_LED_01_13
       rect:
         serializedVersion: 2
         x: 50
@@ -997,20 +829,20 @@ TextureImporter:
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ed283b2a1c546a41a00d21bfb781336
-      internalID: -808941881
+      spriteID: 59b84f0989989454b9fb00cd208d1ce0
+      internalID: 1791162175
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_PC_LED_01_66
+      name: SET_PC_LED_01_14
       rect:
         serializedVersion: 2
         x: 100
@@ -1018,20 +850,20 @@ TextureImporter:
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4d6a91294dfb5744bc252cb2e2272fa
-      internalID: 1590642256
+      spriteID: da653d4761e87b341b10022733284b9e
+      internalID: 2101322634
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_PC_LED_01_67
+      name: SET_PC_LED_01_15
       rect:
         serializedVersion: 2
         x: 150
@@ -1039,98 +871,266 @@ TextureImporter:
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f54f7eaeefd9984788aeb5264266668
-      internalID: 2104375051
+      spriteID: b8d2d10124fe562439dda12e13e82ac0
+      internalID: -195909400
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_PC_LED_01_68
+      name: SET_PC_LED_01_28
       rect:
         serializedVersion: 2
         x: 200
-        y: 300
+        y: 200
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64a375a60ae06684cb71dce2e05b0d11
-      internalID: -288743444
+      spriteID: f449dac3bd558b14f8fb296743602735
+      internalID: 643899936
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_PC_LED_01_69
+      name: SET_PC_LED_01_29
       rect:
         serializedVersion: 2
         x: 250
-        y: 300
+        y: 200
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25a9786022576a34184e2886e6736e9c
-      internalID: 1113762363
+      spriteID: 0610c81af7b496b46b205fa7de06300c
+      internalID: -1257047719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_PC_LED_01_70
+      name: SET_PC_LED_01_30
       rect:
         serializedVersion: 2
         x: 300
-        y: 300
+        y: 200
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d8c25591a66de64e91ea8e786eba625
-      internalID: 1598483646
+      spriteID: c4a652cf30a38874eb99b1b2a2910834
+      internalID: -1910420528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_PC_LED_01_71
+      name: SET_PC_LED_01_31
       rect:
         serializedVersion: 2
         x: 350
-        y: 300
+        y: 200
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a6a9fc49b3748e46bc61234c5a71c96
-      internalID: -1411276640
+      spriteID: 83b4d0a203858d7428e0abc9ca5d3a6d
+      internalID: 1807972177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SET_PC_LED_01_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 50
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9b5cc457aa26bf4f908f2459deb53e4
+      internalID: -965872659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SET_PC_LED_01_41
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 0
+        width: 50
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4beaf140409142746a6f6209948e7630
+      internalID: 1405860958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SET_PC_LED_01_42
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 50
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c1203864c947ab40bc7bf8ff7386cae
+      internalID: 2125729975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SET_PC_LED_01_43
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 50
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7be80dd2e949d948b1e48271392f9c7
+      internalID: -357500709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SET_PC_LED_01_44
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 50
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f4842ba64e91ff47922bde9a0bbe612
+      internalID: 1434026906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SET_PC_LED_01_45
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 0
+        width: 50
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9e3a78a126736f42aa3ff19ea94357d
+      internalID: 1832083793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SET_PC_LED_01_46
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 50
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 052f64241e02f72469c7d7b9abcacc9d
+      internalID: 1571045641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SET_PC_LED_01_47
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 0
+        width: 50
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae52eb8547f62d6458ec62bba68d0aa5
+      internalID: 1312118216
       vertices: []
       indices: 
       edges: []
@@ -1146,134 +1146,54 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SET_PC_LED_01_88: -973566395
-      SET_PC_LED_01_51: 1109489953
-      SET_PC_LED_01_89: -1003888892
-      SET_PC_LED_01_122: 1478541001
+      SET_PC_LED_01_40: -965872659
       SET_PC_LED_01_34: 329642579
+      SET_PC_LED_01_47: 1312118216
       SET_PC_LED_01_37: 661451090
-      SET_PC_LED_01_103: -1803773911
-      SET_PC_LED_01_77: -2094347055
       SET_PC_LED_01_16: -1001424303
+      SET_PC_LED_01_41: 1405860958
       SET_PC_LED_01_0: -1682374267
+      SET_PC_LED_01_20: -1858118473
       SET_PC_LED_01_46: 1571045641
-      SET_PC_LED_01_98: 1786832529
-      SET_PC_LED_01_115: -1062629100
-      SET_PC_LED_01_124: -786851125
-      SET_PC_LED_01_113: 1362554382
-      SET_PC_LED_01_71: -1411276640
-      SET_PC_LED_01_125: -1680872765
-      SET_PC_LED_01_63: 1369305070
+      SET_PC_LED_01_45: 1832083793
+      SET_PC_LED_01_28: 643899936
       SET_PC_LED_01_23: -1080920711
-      SET_PC_LED_01_114: 788572136
-      SET_PC_LED_01_85: -1615552059
-      SET_PC_LED_01_75: 1012784707
+      SET_PC_LED_01_36: 1225957322
       SET_PC_LED_01_6: -344916810
       SET_PC_LED_01_42: 2125729975
       SET_PC_LED_01_31: 1807972177
       SET_PC_LED_01_18: -1784226764
-      SET_PC_LED_01_87: -647090799
+      SET_PC_LED_01_22: 704714793
       SET_PC_LED_01_10: -1319577824
-      SET_PC_LED_01_86: -1208906446
-      SET_PC_LED_01_61: -1542418655
+      SET_PC_LED_01_17: -1313517925
+      SET_PC_LED_01_7: -2059375466
       SET_PC_LED_01_35: 381830711
-      SET_PC_LED_01_102: 169861770
-      SET_PC_LED_01_117: 432883255
+      SET_PC_LED_01_19: -840136864
       SET_PC_LED_01_30: -1910420528
-      SET_PC_LED_01_60: 1622094290
+      SET_PC_LED_01_29: -1257047719
       SET_PC_LED_01_13: 1791162175
       SET_PC_LED_01_26: -1422295610
-      SET_PC_LED_01_109: 1486379491
-      SET_PC_LED_01_110: -321583578
+      SET_PC_LED_01_38: -496676916
+      SET_PC_LED_01_14: 2101322634
+      SET_PC_LED_01_5: -684430367
       SET_PC_LED_01_11: -1888543390
+      SET_PC_LED_01_32: -1062866259
       SET_PC_LED_01_25: -1181501223
       SET_PC_LED_01_43: -357500709
-      SET_PC_LED_01_52: 1737187356
-      SET_PC_LED_01_100: 471635021
-      SET_PC_LED_01_101: -1684860097
-      SET_PC_LED_01_106: -857749268
-      SET_PC_LED_01_121: 328911608
+      SET_PC_LED_01_27: 2010187783
       SET_PC_LED_01_4: -1794193870
+      SET_PC_LED_01_12: -1244090603
       SET_PC_LED_01_24: -1455544860
-      SET_PC_LED_01_123: -2006551697
-      SET_PC_LED_01_120: 952534968
+      SET_PC_LED_01_15: -195909400
       SET_PC_LED_01_1: 219402162
+      SET_PC_LED_01_3: 508628434
       SET_PC_LED_01_44: 1434026906
       SET_PC_LED_01_21: -220162344
-      SET_PC_LED_01_104: -175639249
-      SET_PC_LED_01_95: -422626648
       SET_PC_LED_01_39: 1652621921
-      SET_PC_LED_01_59: 796064665
-      SET_PC_LED_01_83: -406517703
-      SET_PC_LED_01_81: 1468379834
-      SET_PC_LED_01_105: 1862487803
-      SET_PC_LED_01_108: -928041143
-      SET_PC_LED_01_80: -14080458
-      SET_PC_LED_01_2: 1235493816
-      SET_PC_LED_01_67: 2104375051
-      SET_PC_LED_01_66: 1590642256
-      SET_PC_LED_01_94: -620290264
-      SET_PC_LED_01_40: -965872659
-      SET_PC_LED_01_47: 1312118216
-      SET_PC_LED_01_97: -2012885945
-      SET_PC_LED_01_55: -372266437
-      SET_PC_LED_01_41: 1405860958
-      SET_PC_LED_01_45: 1832083793
-      SET_PC_LED_01_49: 347046398
-      SET_PC_LED_01_20: -1858118473
-      SET_PC_LED_01_69: 1113762363
-      SET_PC_LED_01_53: -992487243
-      SET_PC_LED_01_111: 1703143610
-      SET_PC_LED_01_112: -454741811
-      SET_PC_LED_01_28: 643899936
-      SET_PC_LED_01_93: -1844013272
-      SET_PC_LED_01_79: -1987005879
-      SET_PC_LED_01_126: 443543049
-      SET_PC_LED_01_36: 1225957322
-      SET_PC_LED_01_62: 1280013331
-      SET_PC_LED_01_57: -821260655
-      SET_PC_LED_01_54: 453571713
-      SET_PC_LED_01_78: -1547630023
-      SET_PC_LED_01_76: 1560082726
-      SET_PC_LED_01_119: 795419695
-      SET_PC_LED_01_22: 704714793
-      SET_PC_LED_01_17: -1313517925
-      SET_PC_LED_01_127: -98650663
-      SET_PC_LED_01_7: -2059375466
-      SET_PC_LED_01_84: -2108486033
-      SET_PC_LED_01_19: -840136864
-      SET_PC_LED_01_74: 1481535688
-      SET_PC_LED_01_56: -1447480242
-      SET_PC_LED_01_29: -1257047719
-      SET_PC_LED_01_91: 230234736
-      SET_PC_LED_01_72: -561539876
-      SET_PC_LED_01_65: -808941881
-      SET_PC_LED_01_50: -943231709
-      SET_PC_LED_01_38: -496676916
-      SET_PC_LED_01_92: 1499207813
-      SET_PC_LED_01_14: 2101322634
-      SET_PC_LED_01_116: -155137500
-      SET_PC_LED_01_64: -1155922869
-      SET_PC_LED_01_5: -684430367
-      SET_PC_LED_01_32: -1062866259
-      SET_PC_LED_01_96: -2140674421
-      SET_PC_LED_01_27: 2010187783
-      SET_PC_LED_01_48: 1495513878
-      SET_PC_LED_01_73: 962702120
-      SET_PC_LED_01_90: 1451983932
-      SET_PC_LED_01_107: -1162529777
-      SET_PC_LED_01_12: -1244090603
-      SET_PC_LED_01_99: -186669701
-      SET_PC_LED_01_15: -195909400
-      SET_PC_LED_01_3: 508628434
-      SET_PC_LED_01_58: 132934564
       SET_PC_LED_01_33: -1090801128
       SET_PC_LED_01_8: 2017775179
-      SET_PC_LED_01_68: -288743444
-      SET_PC_LED_01_82: -2027953561
       SET_PC_LED_01_9: -193963890
-      SET_PC_LED_01_70: 1598483646
-      SET_PC_LED_01_118: 1133969105
+      SET_PC_LED_01_2: 1235493816
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

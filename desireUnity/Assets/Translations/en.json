@@ -25,7 +25,9 @@
         "@to_superstructure_out": "To Superstructure Acess",
         "@to_superstructure": "To Superstructure",
         "@to_generator_room": "To Generator Room",
-        "@to_bridge": "To Bridge"
+        "@to_bridge": "To Bridge",
+        "@corpse": "Corpse",
+        "@generator": "Generator"
     },
     "special": {
         "!item_use_error": "Hmmm... I can't use that here"
@@ -102,6 +104,7 @@
         "@stern_data_pad_4": "> I don't ask questions, man. Just get the security bots working",
         "@stern_data_pad_5": "More security? What-",
         "@stern_data_pad_6": "Damn, it's turned off. Well, that's all I'm going to get",
+        "@stern_data_pad_7": "It's not working anymore...",
 
         "@stern_reflection_1": "Wow. I didn't realize how damaged I was",
         "@stern_reflection_2": "My arm's gone, my head module is damaged- it looks like someone's attacked me?",
@@ -131,9 +134,8 @@
         "@stern_horizon_7": "Maybe I'll find something here",
         "@stern_horizon_8": "Oh no! The lower part of the ship is broken, there's a big hole- there's water going into the ship!",
 
-        "@stern_door_1": "There's a door over there",
-        "@stern_door_2": "I've searched everywhere out here but I still need more tools. Maybe there's something out there",
-        "@stern_door_3": "The door is bolted shut. That panel next to it looks important, but it's damaged",
+        "@stern_door_1": "I've searched everywhere out here but I still need more tools. Maybe there's something out there",
+        "@stern_door_2": "The door is bolted shut. That panel next to it looks important, but it's damaged",
 
         "@stern_pannel_1": "The pannel to open the doors. They're too damaged to be used, but maybe I can fix it somehow",
         "@stern_pannel_2": "I might be able to hotwire it if I get the right angle... Oh! The all-in-one tool might be able to work here!",
@@ -183,7 +185,9 @@
         "@recover_memory_23": "Then he was dragged into a lifeboat. I wanted to go with him. I had to go with him",
         "@recover_memory_24": "But- but I can't. I can't, my systems are malfunctioning. All- all I can do is...",
         "@recover_memory_25": "Fall. I fell, staring up at the moon. The quiet moon. Hanging above me",
-        "@recover_memory_26": "Then everything went black"
+        "@recover_memory_26": "Then everything went black",
+
+        "@recover_memory_patch": "Memory Drive restored. Preparing to configure patch"
     },
     "funnel": {
         "@funnel_load_1": "There’s so many bones- human bones. Enough for at least two fully grown ones",
@@ -192,15 +196,16 @@
         "@funnel_worktable_1": "Useless... useless... useless. Everything is worn out and useless...",
         "@funnel_worktable_2": "Ooh! That might not be useless",
 
-        "@funnel_letter_1": "... know that I love you all dearly. You're all daddy's little angels.",
-        "@funnel_letter_2": "And to my wife, I'm sorry it's not me who came back to you. Know that thinking of you, my darling, is all that's keeping me going.",
-        "@funnel_letter_3": "But I can't survive on memories alone. My love for you encompasses the universe. I hope one day, in another lifetime, we can be together again.",
-        "@funnel_letter_4": "And to whoever finds this letter- If you ever make it out, give this letter to my family, if you find them.",
-        "@funnel_letter_5": "Tell them I wish I could’ve seen them. And... if you don't get out of here, well then, the sea would’ve won.",
+        "@funnel_letter_1": "It appears to be a letter written by someone, but the paper is badly damaged",
+        "@funnel_letter_2": "... know that I love you all dearly. You're all daddy's little angels.",
+        "@funnel_letter_3": "And to my wife, I'm sorry it's not me who came back to you. Know that thinking of you, my darling, is all that's keeping me going.",
+        "@funnel_letter_4": "But I can't survive on memories alone. My love for you encompasses the universe. I hope one day, in another lifetime, we can be together again.",
+        "@funnel_letter_5": "And to whoever finds this letter- If you ever make it out, give this letter to my family, if you find them.",
+        "@funnel_letter_6": "Tell them I wish I could’ve seen them. And... if you don't get out of here, well then, the sea would’ve won.",
 
         "@funnel_bones_1": "Strange- it looks like there are cuts in these bones",
         "@funnel_bones_2": "I don't like this... Why are there just bones? Especially when the body by the door is intact",
-        "@funnel_bones_3": "And where are these cuts from",
+        "@funnel_bones_3": "And where are these cuts from?",
         "@funnel_bones_4": "It looks like something or someone killed these people. And... cut them up purposefully?",
 
         "@funnel_data_pad_1": "Looks like Daily Logs from the workers. Maybe reading some will prove useful",
@@ -208,7 +213,9 @@
         "@funnel_data_pad_3": "Ugh, I can barely make out the rest of the entry",
         "@funnel_data_pad_4": "... Kyle died. And we just had to... We were so hungry. He would not have minded, I swear. God forgive me",
 
-        "@funnel_clothes_1": "Two sets of clothing. Ripped and stained. What's it by- oh... oh no... What did you do? What happened here?"
+        "@funnel_clothes_1": "Two sets of clothing. Ripped and stained. What's it - oh... Oh no... What did you do? They wouldn't have… have hurt each other, would they? For... food? What happened here?",
+
+        "@funnel_leave_without_memory_1": "Something something about needing to recover your memory before proceeding..."
     },
     "superstructure_out": {
         "@superstructure_out_load_1": "The more my memory returns, the more questions I have...",
@@ -230,7 +237,7 @@
 
         "@superstructure_out_security_bot_1": "Vacate the area. Now",
         "@superstructure_out_security_bot_2": "I-I- just saw another Security bot back there-",
-        "@superstructure_out_security_bot_3": "You will be forcibly removed if you do not comply with Emergency deck restrictions 6.55$. You have 7 seconds to comply, or you will be forcibly de-activated",
+        "@superstructure_out_security_bot_3": "You will be forcibly removed if you do not comply with Emergency deck restrictions 6.55#. You have 7 seconds to comply, or you will be forcibly de-activated",
         "@superstructure_out_security_bot_4": "Wait! What’s the problem officer? I didn’t mean to- no, please don’t deactivate me! I just wanted to check the lifeboats for...",
         "@superstructure_out_security_bot_5": "Under Emergency protocol 6.55# no bot is allowed to access the lifeboats",
         "@superstructure_out_security_bot_6": "Look, given the current state of the ship, we will need all the lifeboats we can get!",
@@ -268,22 +275,17 @@
         "@superstructure_out_security_bot_38": "I must await further orders and guard for survivors",
         "@superstructure_out_security_bot_39": "But this boat is sinking. There are no humans left. You’re going to die",
         "@superstructure_out_security_bot_40": "I must await further orders and guard for survivors at all costs",
-        "@superstructure_out_security_bot_41": "Why won’t you listen? Although, your head unit is severely damaged. The protective layers look like almost disintegrated",
-        "@superstructure_out_security_bot_42": "Your AI core is exposed, you must have suffered a great deal of damage to your internal logic centers and have to rely on its base programming",
-        "@superstructure_out_security_bot_43": "Look... Can I fix that for you? There are enough parts around here that I could patch-",
-        "@superstructure_out_security_bot_44": "False, my internal programming cannot be edited or corrupted and only official human personnel are authorized to tamper with my unit or my software",
-        "@superstructure_out_security_bot_45": "But you’re leaking oil, that’ll corrode your eletronics soon and then you won’t –",
-        "@superstructure_out_security_bot_46": "... If you’re sure. It’s not like I can get through to you anyway",
-        "@superstructure_out_security_bot_47": "I suppose I’ll head back to the superstructure and try and find the bridge. Maybe I’ll find the captain or more information about the missing lifeboats",
-        "@superstructure_out_security_bot_48": "I have it! I have the clearance!",
-        "@superstructure_out_security_bot_49": "Under Emergency protocol 6.55# states that you may not come any closer, I will forcibly deactivate you-",
-        "@superstructure_out_security_bot_50": "No, no! I have the clearance- the A16 clearance! Here! See?",
-        "@superstructure_out_security_bot_51": "Scanning. Scanning.",
-        "@superstructure_out_security_bot_52": "Come on, come on, we don't have much time!",
-        "@superstructure_out_security_bot_53": "A16 clearance found. You may pass",
-        "@superstructure_out_security_bot_54": "You could come with me",
-        "@superstructure_out_security_bot_55": "My Captain remains, and so shall I",
-        "@superstructure_out_security_bot_56": "...Thank you"
+        "@superstructure_out_security_bot_41": "Why won’t you listen? THERE ARE NONE!",
+        "@superstructure_out_security_bot_42": "This is useless. I suppose I’ll head back to the superstructure and try and find the bridge. Maybe I’ll find the captain or more information about the missing lifeboats",
+        "@superstructure_out_security_bot_43": "I have it! I have the clearance!",
+        "@superstructure_out_security_bot_44": "Under Emergency protocol 6.55# states that you may not come any closer, I will forcibly deactivate you-",
+        "@superstructure_out_security_bot_45": "No, no! I have the clearance- the A16 clearance! Here! See?",
+        "@superstructure_out_security_bot_46": "Scanning. Scanning.",
+        "@superstructure_out_security_bot_47": "Come on, come on, we don't have much time!",
+        "@superstructure_out_security_bot_48": "A16 clearance found. You may pass",
+        "@superstructure_out_security_bot_49": "You could come with me",
+        "@superstructure_out_security_bot_50": "My Captain remains, and so shall I",
+        "@superstructure_out_security_bot_51": "...Thank you"
     },
     "superstructure_in": {
         "@superstructure_in_load_1": "Gosh, what happened in here? I can barely see anything",
@@ -349,16 +351,30 @@
         "@superstructure_in_blood_9": "What could take out every single robot though?",
         "@superstructure_in_blood_10": "Perhaps it was the same thing that damaged my memory drive...",
 
+        "@superstructure_in_corpse_1": "What on earth happened in here? This unfortunate human... Was this gun his?",
+        "@superstructure_in_corpse_2": "This human is holding something. If I roll him over... Oops forgive me, If I can just grab... Yes! He wrote the code down!",
+        "@superstructure_in_corpse_3": "I’ll check your other hand- oh! The left side of his body is almost all missing",
+        "@superstructure_in_corpse_4": "His left arm is missing. He has a bullet wound to the head",
+        "@superstructure_in_corpse_5": "From the angle of the shot, and the position of the gun, it looks... Self-inflicted",
+        "@superstructure_in_corpse_6": "Something huge must have happened to cause a human to do this",
+
         "@superstructure_in_monitor_1": "Darn, it doesn’t have power either",
 
         "@superstructure_in_map_1": "Oh, a map, that could help me find where to switch the power on",
         "@superstructure_in_map_2": "The map's a little damp but I think there’s a small emergency generator in the superstructure",
-        "@superstructure_in_map_3": "That’ll help me get to the bridge! Although I wonder why it wasn’t turned on automatically already?"
+        "@superstructure_in_map_3": "That’ll help me get to the bridge! Although I wonder why it wasn’t turned on automatically already?",
+
+        "@superstructure_in_leave_without_power_1": "There's no power. This door is blocked",
+
+        "@superstructure_in_no_access_code_1": "This door is locked by a keypad. There's just enough power to keep it powered"
     },
     "generator_room": {
-        "@generator_room_load_1": "Finally, I hope I can turn the power on from here, I just need to find some switches",
-        "@generator_room_load_2": "Yes! That’s it!",
-        "@generator_room_load_3": "I’ve reconnected the power, the lights will come on now and the doors should work too!",
+        "@generator_room_load_1": "Humm. Looks like this might be… the generator room? Maybe I can turn the power on from here, I just need to find some switches",
+
+        "@generator_room_board_1": "Yes! That’s it!",
+        "@generator_room_board_2": "I’ve reconnected the power, the lights will come on now and the doors should work too!",
+
+        "@computer_no_lights": "There's no power to use this computer",
 
         "@generator_room_computer_1": "The monitor is a little smashed still, but I think I can get it working!",
         "@generator_room_computer_2": "Ugh! The screen keeps flickering in and out, the computer must have been damaged in the crash",
@@ -375,13 +391,44 @@
         "@generator_room_log_title_7": "CREW LOG 000023",
         "@generator_room_log_title_return": "I've seen enough...",
 
-        "@generator_room_log_1": "It’s nearly time! We only have a couple days until we launch the new ship. The nerves below deck are palpable. \nWe’re all making the most of our last days on shore, but we all know how important this launch is. No one wants to admit it, but we all know. Maybe we’re all just scared to talk about it. This voyage will make or break our careers, but it's bigger than that. It’s a game-changer. We’re all just praying it goes smoothly. Bon Voyage to us I suppose.",
-        "@generator_room_log_2": "The ship hasn’t changed much, same old musty dorms as normal. The whole crew isn’t looking forwards to losing that luxury of land. Although at least we shouldn’t be worried about our safety – apparently. We’ve had a huge security upgrade before launch. The old crew were surprised, some had been working on this ship many years and swore there had never heard of the security being upgraded before. Especially when we never had any problems with the old bots. Nor any real security threat to warrant an upgrade. Official word is that we’ll be protected against anything now. I don’t know though, the new security bots seem strong enough, but there’s something about them. Maybe it’s land-made bots when I’m a seaman, but they make me uncomfortable. They don’t seem like the normal grade security bots we’re used to.",
-        "@generator_room_log_3": "Some good news for today’s log though, the man who helped make everything possible arrived on board today – and his son. As if we weren’t all nervous enough. Even the service bots seem on edge around our new guests. I’ve yet to meet them in person, but I’m unsure what to expect.",
-        "@generator_room_log_4": "We’re finally out to sea. Thank God. I always feel better with waves beneath my feet. The crew seem to have relaxed a little as well. The ship is in remarkably good shape, and everyone was very impressed with how it’s handling such rough waters. Below deck, we’ve never felt so much as a quiver despite sailing through 25ft breaks. Launching should’ve been a clue. It went so smoothly, even the security bots seemed to know their place and remain out of the way of the crew. Seems like it will be a good, smooth voyage in the end. Evidently, we were all worrying for nothing.",
-        "@generator_room_log_5": "It was a bittersweet day today. Very surreal though. We cruised over previously inaccessible waters, breaching waves and weaving between the skyscrapers and buildings that jutted out of the water. Most of the crew clung to the rails and watched in awe. I wish people on land could see this. I was one of the few crew that stayed below deck and watched through the portholes. I didn’t want the rest of the crew to see me. This was close to where my home was, and I was surprised at how sad I felt seeing it submerged. I didn’t think it would affect me but knowing the streets and buildings that were under the water beneath us felt odd.",
-        "@generator_room_log_6": "We’re somewhere along the coast right now, I can see it from the deck, but my geography has been thrown off by the power of this new engine. We move so quickly and smoothly it’s unbelievable! It feels like we’re skimming over rough seas and barely even notice any other dangers lurking under the water. It’s difficult to comprehend. Some of the more careful crew and I have been running diagnostics and have noted a strange spike in supplied power. It peaked all the readings- higher than I’ve ever seen. We’ve sent the data from the readings down to the engine room.",
-        "@generator_room_log_7": "The strange readings have continued. We hit a record high for power usage yesterday, which was bizarre in calm seas. Where is this power going? I admit I’m growing concerned with these ongoing readings, but more so by the fact that the engine creator and his new crew are all but ignoring me. The crew he brought with him ignore us at the best of times, but they seem indifferent to my concerns. We did send one of the crew to voice our worries direct to the captain, but several security bots grabbed him, and we haven’t seen him since. We’ve been told that he broke contraband rules, but rumours are spreading. No ship has sailed these waters in decades – not since I can remember anyway. The ship seems to be sailing fine, and she handles rough water’s well, but the creator’s lack of concern makes me increasingly worry about the approaching super storm on the horizon as well.",
+        "@generator_room_log_1.1": "It’s nearly time! We only have a couple days until we launch the new ship.",
+        "@generator_room_log_1.2": "The nerves below deck are palpable. We’re all making the most of our last days on shore, but we all know how important this launch is.",
+        "@generator_room_log_1.3": "No one wants to admit it, but we all know. Maybe we’re all just scared to talk about it. This voyage will make or break our careers, but it's bigger than that.",
+        "@generator_room_log_1.4": "It’s a game-changer. We’re all just praying it goes smoothly. Bon Voyage to us I suppose.",
+
+        "@generator_room_log_2.1": "The ship hasn’t changed much, same old musty dorms as normal. The whole crew isn’t looking forwards to losing that luxury of land.",
+        "@generator_room_log_2.2": "Although at least we shouldn’t be worried about our safety – apparently. We’ve had a huge security upgrade before launch. The old crew were surprised, some had been working on this ship many years and swore there had never heard of the security being upgraded before.",
+        "@generator_room_log_2.3": "Especially when we never had any problems with the old bots. Nor any real security threat to warrant an upgrade.",
+        "@generator_room_log_2.4": "Official word is that we’ll be protected against anything now. I don’t know though, the new security bots seem strong enough, but there’s something about them.",
+        "@generator_room_log_2.5": "Maybe it’s land-made bots when I’m a seaman, but they make me uncomfortable. They don’t seem like the normal grade security bots we’re used to.",
+
+        "@generator_room_log_3.1": "Some good news for today’s log though, the man who helped make everything possible arrived on board today – and his son.",
+        "@generator_room_log_3.2": "As if we weren’t all nervous enough. Even the service bots seem on edge around our new guests.",
+        "@generator_room_log_3.3": "I’ve yet to meet them in person, but I’m unsure what to expect.",
+
+        "@generator_room_log_4.1": "We’re finally out to sea. Thank God. I always feel better with waves beneath my feet.",
+        "@generator_room_log_4.2": "The crew seem to have relaxed a little as well. The ship is in remarkably good shape, and everyone was very impressed with how it’s handling such rough waters.",
+        "@generator_room_log_4.3": "Below deck, we’ve never felt so much as a quiver despite sailing through 25ft breaks. Launching should’ve been a clue.",
+        "@generator_room_log_4.4": "It went so smoothly, even the security bots seemed to know their place and remain out of the way of the crew. Seems like it will be a good, smooth voyage in the end.",
+        "@generator_room_log_4.5": "Evidently, we were all worrying for nothing.",
+
+        "@generator_room_log_5.1": "It was a bittersweet day today. Very surreal though. We cruised over previously inaccessible waters, breaching waves and weaving between the skyscrapers and buildings that jutted out of the water.",
+        "@generator_room_log_5.2": "Most of the crew clung to the rails and watched in awe. I wish people on land could see this. I was one of the few crew that stayed below deck and watched through the portholes.",
+        "@generator_room_log_5.3": "I didn’t want the rest of the crew to see me. This was close to where my home was, and I was surprised at how sad I felt seeing it submerged.",
+        "@generator_room_log_5.4": "I didn’t think it would affect me but knowing the streets and buildings that were under the water beneath us felt odd.",
+
+        "@generator_room_log_6.1": "We’re somewhere along the coast right now, I can see it from the deck, but my geography has been thrown off by the power of this new engine.",
+        "@generator_room_log_6.2": "We move so quickly and smoothly it’s unbelievable! It feels like we’re skimming over rough seas and barely even notice any other dangers lurking under the water.",
+        "@generator_room_log_6.3": "It’s difficult to comprehend. Some of the more careful crew and I have been running diagnostics and have noted a strange spike in supplied power.",
+        "@generator_room_log_6.4": "It peaked all the readings- higher than I’ve ever seen. We’ve sent the data from the readings down to the engine room.",
+
+        "@generator_room_log_7.1": "The strange readings have continued. We hit a record high for power usage yesterday, which was bizarre in calm seas.",
+        "@generator_room_log_7.2": "Where is this power going? I admit I’m growing concerned with these ongoing readings, but more so by the fact that the engine creator and his new crew are all but ignoring me.",
+        "@generator_room_log_7.3": "The crew he brought with him ignore us at the best of times, but they seem indifferent to my concerns.",
+        "@generator_room_log_7.4": "We did send one of the crew to voice our worries direct to the captain, but several security bots grabbed him, and we haven’t seen him since.",
+        "@generator_room_log_7.5": "We’ve been told that he broke contraband rules, but rumours are spreading. No ship has sailed these waters in decades – not since I can remember anyway.",
+        "@generator_room_log_7.6": "The ship seems to be sailing fine, and she handles rough water’s well, but the creator’s lack of concern makes me increasingly worry about the approaching super storm on the horizon as well.",
+
         "@generator_room_log_return": "I've seen enough..."
     },
     "bridge": {
@@ -461,8 +508,8 @@
         "@bridge_captain_hat_2": "He asked too many questions about the Ship’s real purpose. My superiors configured me to report suspicious behavior. When he was becoming too nosy, they sent someone here to talk to him",
         "@bridge_captain_hat_3": "But the conversation became heated and drew their weapons. They killed each other. I took over the ship",
 
-        "@bridge_corpse_a_1": "There's a gun wound in his head. And a gun next to them",
-        "@bridge_corpse_a_2": "The discharged casing is rusted. Dried blood on the wall behind him",
+        "@bridge_corpse_a_1": "There's a gun wound in their head. And a gun next to them",
+        "@bridge_corpse_a_2": "The discharged casing is rusted. Dried blood on the wall behind them",
 
         "@bridge_corpse_b_1": "She's been shot, too. And there's her gun",
         "@bridge_corpse_b_2": "One of these two must be the Captain",

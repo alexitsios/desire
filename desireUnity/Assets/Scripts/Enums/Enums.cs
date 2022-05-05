@@ -1,3 +1,18 @@
+using System;
+
+namespace EnumExtensions
+{
+	public static class EnumExtension
+	{
+		public static string GetFullName(this Enum value)
+		{
+			var type = value.GetType();
+			var member = type.GetMember(value.ToString());
+			return ((EnumName) member[0].GetCustomAttributes(typeof(EnumName), false)[0]).Name;
+		}
+	}
+}
+
 public enum CursorAction
 {
 	Pointer,
@@ -41,12 +56,26 @@ public enum Direction
 /// </summary>
 public enum QuestName
 {
+	[EnumName("Recover your missing arm")]
 	RecoverArm,
+
+	[EnumName("Recover your missing leg")]
 	RecoverLeg,
+
+	[EnumName("Open the door to reach the rest of the ship")]
 	OpenSternDoor,
+
+	[EnumName("Find a way to attach your missing arm")]
 	CollectAllInOneTool,
+
+	[EnumName("Find your master")]
 	FindMaster,
-	GetClearance
+
+	[EnumName("Get the clearance to embark on the life boat")]
+	GetClearance,
+
+	[EnumName("Recover your memory")]
+	RecoverMemory
 }
 
 /// <summary>

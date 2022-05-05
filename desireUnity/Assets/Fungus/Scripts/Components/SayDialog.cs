@@ -225,11 +225,11 @@ namespace Fungus
                 float alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, delta);
                 canvasGroup.alpha = alpha;
 
-                if (alpha <= 0f)
-                {                   
-                    // Deactivate dialog object once invisible
-                    gameObject.SetActive(false);
-                }
+                //if (alpha <= 0f)
+                //{                   
+                //    // Deactivate dialog object once invisible
+                //    gameObject.SetActive(false);
+                //}
             }
         }
 

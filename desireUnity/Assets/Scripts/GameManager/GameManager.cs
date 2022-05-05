@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,17 +28,23 @@ public class GameManager : MonoBehaviour
         public AudioClip sfx;
 	}
 
+    // PROPERTIES
+    public bool CanCursorChange { get; set; } = true;
+    public Settings Settings { get => _settings; set => UpdateSettings(value); }
+    //
+
     public static GameManager instance;
     public GameObject clickIndicator;
     public CursorAnimations cursor;
     public InventoryItem[] itemList;
     public AudioEffects[] SFX;
-	public bool CanCursorChange { get; set; } = true;
     public GameObject inventoryUI;
     public GameObject mainUI;
+    public GameObject settingsUI;
+    public GameObject dataPadUI;
     public GameObject player;
 
-    private PlayerInteraction playerInteraction;
+	private PlayerInteraction playerInteraction;
     private bool isPlaying = false;
     private CursorAction currentAction = CursorAction.Pointer;
     private Flowchart flowchart;
@@ -48,17 +55,11 @@ public class GameManager : MonoBehaviour
     private TranslationManager _translationManager;
     private GameObject _inventoryInstance;
     private GameObject _mainUiInstance;
-
-    // DEBUG
-    private float _cameraSize;
-    public float CameraSize { get => _cameraSize; set { _cameraSize = value; UpdateInfoText(); } }
-    private Vector2 _ledSize;
-    public Vector2 LedSize { get => _ledSize; set { _ledSize = value; UpdateInfoText(); } }
-
-    private void UpdateInfoText()
-	{
-        GameObject.Find("InfoText").GetComponent<TextMeshProUGUI>().text = $"Camera Size: {CameraSize}\nLed Size: {{x: {LedSize.x}; y: {LedSize.y}}}";
-	}
+    private GameObject _dataPadUiInstance;
+    private TMP_Text _shipWarnings;
+    private Settings _settings;
+    private float warningWaitTime;
+    private bool warningActive;
 
     private void Awake()
     {
@@ -76,19 +77,35 @@ public class GameManager : MonoBehaviour
 
         _ink = GetComponent<InkManager>();
         _translationManager = GetComponent<TranslationManager>();
+
+        Settings = new Settings()
+        {
+            Language = Language.English,
+            BeepSound = true,
+            BGVolume = 1,
+            FXVolume = 1,
+            MasterVolume = 1
+        };
     }
 
-    private IEnumerator StartScene(Scene scene)
+    private IEnumerator StartScene(Scene scene, bool fadeIn)
 	{
         while(_inventoryInstance == null || _mainUiInstance == null)
             yield return null;
 
         GetComponent<CanvasManager>().LoadLastBackground((SceneName)scene.buildIndex);
+
+		if(fadeIn)
+            yield return GetComponent<CanvasManager>().Fade("in", 1);
+
         flowchart.ExecuteBlock("OnLoad");
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if(scene.buildIndex == 8)
+            return;
+
         if(_inventoryInstance == null && scene.buildIndex != 0)
 		{
             _inventoryInstance = Instantiate(inventoryUI);
@@ -102,18 +119,31 @@ public class GameManager : MonoBehaviour
         if(_mainUiInstance == null && scene.buildIndex != 0)
 		{
             _mainUiInstance = Instantiate(mainUI);
+            _shipWarnings = GameObject.Find("ShipWarning").GetComponent<TMP_Text>();
+            _shipWarnings.CrossFadeAlpha(0, 0, false);
 
             _ink.StartInkManager();
             interactDialog = GameObject.FindGameObjectWithTag("InteractDialog").GetComponent<TextMeshProUGUI>();
             SetInteractDialogActive(false);
 
             DontDestroyOnLoad(_mainUiInstance);
+
+            if(!Settings.BeepSound)
+                GameObject.FindGameObjectWithTag("SayDialog").GetComponent<WriterAudio>().volume = 0f;
+        }
+
+        if(_dataPadUiInstance == null && scene.buildIndex != 0)
+		{
+            _dataPadUiInstance = Instantiate(dataPadUI);
+            DontDestroyOnLoad(_dataPadUiInstance);
+            _dataPadUiInstance.GetComponentInChildren<Image>().color = new Color(1f, 1f, 1f, 0);
         }
 
         if(scene.name == "07_EndGame")
 		{
             Destroy(_mainUiInstance);
             Destroy(_inventoryInstance);
+            Destroy(_dataPadUiInstance);
 		}
 
         if(scene.name != "00_StartGame" && scene.name != "07_EndGame")
@@ -140,6 +170,8 @@ public class GameManager : MonoBehaviour
             player.GetComponent<PlayerMovement>().IsTrapped = false;
             player.GetComponent<PlayerMovement>().AcquiredArm = true;
 
+            var canFadeIn = true;
+
             // Changes the scene depending on what the player already did
             switch ((SceneName) scene.buildIndex)
 			{
@@ -147,9 +179,12 @@ public class GameManager : MonoBehaviour
                     // Blocks movement if this is the first time the player visits the Stern (i.e. if the game just started)
                     if (!_ink.GetVariable<bool>("funnel_visited"))
 					{
+                        canFadeIn = false;
                         player.GetComponent<PlayerMovement>().IsTrapped = true;
                         player.GetComponent<PlayerMovement>().AcquiredArm = false;
-					}
+                        player.GetComponent<Animator>().speed = 0;
+                        player.transform.GetChild(0).transform.localPosition = new Vector3(-0.08f, -0.15f, 0);
+                    }
 
                     // Removes the All-in-One Tool
                     if (_ink.GetVariable<bool>("acquired_tool"))
@@ -165,13 +200,22 @@ public class GameManager : MonoBehaviour
                     break;
 			}
 
-            StartCoroutine(StartScene(scene));
+			if(Debug.isDebugBuild)
+			{
+                GameObject.Find("DebugInfo").GetComponent<DebugInfo>().SetDebugText((SceneName) scene.buildIndex);
+            }
+			else
+			{
+                Destroy(GameObject.Find("DebugInfo"));
+			}
+
+            StartCoroutine(StartScene(scene, canFadeIn));
         } 
     }
 
     public void OpenSettings()
 	{
-        SceneManager.LoadScene("UI_SettingsMenu", LoadSceneMode.Additive);
+        Instantiate(settingsUI, transform);
 	}
 
     //Save state
@@ -184,31 +228,25 @@ public class GameManager : MonoBehaviour
     {
         if(isPlaying)
 		{
-            PointerEventData pointerData = new PointerEventData(EventSystem.current)
-            {
-                pointerId = -1,
-            };
-
-            pointerData.position = Input.mousePosition;
-
-            List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerData, results);
-
             var textWidth = interactDialog.GetRenderedValues(true).x;
             var posX = Mathf.Clamp(Input.mousePosition.x + 40, textWidth / 2, Screen.width - (textWidth / 2));
 
             Vector3 dialogPosition = new Vector3(posX, Input.mousePosition.y - 50, 0);
             interactDialog.transform.position = dialogPosition;
         }
+
+        if(warningActive && Input.GetMouseButtonDown(0))
+		{
+            warningWaitTime = 0f;
+		}
     }
 
     //SceneStates
     public void StartGame()
     {
-        // Loads the first scene
-        LoadSceneAndSpawnPlayer(SceneName.Stern, 1);
-
-    }
+		// Loads the opening scene
+		SceneManager.LoadScene(8, LoadSceneMode.Single);
+	}
     public void GoToMainMenu()
     {
         SceneManager.LoadScene("00_StartGame");
@@ -341,13 +379,18 @@ public class GameManager : MonoBehaviour
         interactDialog.text = translatedItemName + text;
 	}
 
-    public void LoadSceneAndSpawnPlayer(SceneName scene, int spawnIndex)
+    public IEnumerator LoadSceneAndSpawnPlayer(SceneName scene, int spawnIndex, bool fadeScreen = true)
 	{
+		if(fadeScreen)
+		{
+            yield return GetComponent<CanvasManager>().Fade("out", 1);
+		}
+
         SceneManager.LoadScene((int) scene, LoadSceneMode.Single);
         GetComponent<TranslationManager>().LoadTranslation(Language.English, scene);
 
         playerSpawn = spawnIndex;
-	}
+    }
 
     public AudioClip GetSFXByName(string name)
 	{
@@ -365,4 +408,60 @@ public class GameManager : MonoBehaviour
         isPlaying = false;
         SceneManager.LoadScene(7);
     }
+
+    public void UpdateSettings(Settings newSettings)
+	{
+        _settings = newSettings;
+
+        var fxVolume = Mathf.Lerp(0f, 1f, (_settings.FXVolume + _settings.MasterVolume) / 2);
+        GetComponent<AudioSource>().volume = fxVolume;
+	}
+
+    public IEnumerator DisplayMessage(string messageId, string messageType)
+	{
+        _shipWarnings.color = messageType == "warning" ? Color.red : Color.white;
+        _shipWarnings.text = _translationManager.GetTranslatedLine(messageId);
+        _shipWarnings.CrossFadeAlpha(1, 0.5f, false);
+
+        warningWaitTime = _shipWarnings.text.Length / 10;
+
+        while(warningWaitTime > 0)
+		{
+            warningActive = true;
+            warningWaitTime -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
+		}
+
+        _shipWarnings.CrossFadeAlpha(0, 0.5f, false);
+
+        yield return new WaitForSeconds(1f);
+        warningActive = false;
+    }
+
+    public IEnumerator SetDataPadVisibility(bool active)
+	{
+        var sprite = _dataPadUiInstance.GetComponentInChildren<Image>();
+
+		if(active)
+		{
+            for(float i = 0; i <= 1; i += Time.deltaTime / 0.5f)
+            {
+                sprite.color = new Color(1f, 1f, 1f, i); ;
+                yield return null;
+            }
+
+            sprite.color = new Color(1f, 1f, 1f, 1);
+        }
+        else
+		{
+            for(float i = 1; i >= 0; i -= Time.deltaTime / 0.5f)
+            {
+                sprite.color = new Color(1f, 1f, 1f, i); ;
+                yield return null;
+            }
+
+            sprite.color = new Color(1f, 1f, 1f, 0);
+        }
+        
+	}
 }

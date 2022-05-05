@@ -132,11 +132,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 700
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -153,11 +153,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 50
-        y: 700
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,11 +174,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 700
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -195,11 +195,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 150
-        y: 700
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -216,11 +216,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 200
-        y: 700
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -237,11 +237,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 250
-        y: 700
+        y: 100
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -254,127 +254,127 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_EN_SEC_00_16
+      name: SET_EN_SEC_00_6
       rect:
         serializedVersion: 2
         x: 0
-        y: 600
+        y: 0
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e677d5bfab320e46b0d2b1f7a7e38d7
-      internalID: -1416700200
+      spriteID: 300bc60a478229648b4cf0e81f98df6b
+      internalID: -432328091
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_EN_SEC_00_17
+      name: SET_EN_SEC_00_7
       rect:
         serializedVersion: 2
         x: 50
-        y: 600
+        y: 0
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42725b79ff5340143ba41a9412662496
-      internalID: -756354995
+      spriteID: 9638a97da48ce05458ff190008d76db5
+      internalID: -341041628
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_EN_SEC_00_18
+      name: SET_EN_SEC_00_8
       rect:
         serializedVersion: 2
         x: 100
-        y: 600
+        y: 0
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb11f7cefddd0854d83708c91835c9ee
-      internalID: 268443324
+      spriteID: 2a9452a9a84f7c445b1723bcea3ed5b5
+      internalID: 1539554223
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_EN_SEC_00_19
+      name: SET_EN_SEC_00_9
       rect:
         serializedVersion: 2
         x: 150
-        y: 600
+        y: 0
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c000dce42ccba5d4f897e2ee0e3996c8
-      internalID: -841718571
+      spriteID: 57e526bfacf60444ba8b70fd4cfca2cb
+      internalID: -964208224
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_EN_SEC_00_20
+      name: SET_EN_SEC_00_10
       rect:
         serializedVersion: 2
         x: 200
-        y: 600
+        y: 0
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3f88cbd84ef4a94880dd847626b5d86
-      internalID: 917369748
+      spriteID: 5a21cf4b3b44b03449466635446565f6
+      internalID: -1803939187
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SET_EN_SEC_00_21
+      name: SET_EN_SEC_00_11
       rect:
         serializedVersion: 2
         x: 250
-        y: 600
+        y: 0
         width: 50
         height: 100
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc9f630909951634b99c2dbcf07de383
-      internalID: 2118597268
+      spriteID: d91748b536caef64db01d936e6ff0377
+      internalID: -1185625376
       vertices: []
       indices: 
       edges: []
@@ -390,134 +390,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SET_EN_SEC_00_63: 272469082
-      SET_EN_SEC_00_45: -840568610
-      SET_EN_SEC_00_34: -2134497953
-      SET_EN_SEC_00_112: 1559662772
-      SET_EN_SEC_00_124: -1543921122
-      SET_EN_SEC_00_33: -1737306778
-      SET_EN_SEC_00_104: 1027792430
-      SET_EN_SEC_00_117: 1979374651
-      SET_EN_SEC_00_24: -605499170
-      SET_EN_SEC_00_43: 1109965777
-      SET_EN_SEC_00_76: 2000089820
-      SET_EN_SEC_00_65: 1582088766
-      SET_EN_SEC_00_90: -1949865553
-      SET_EN_SEC_00_56: -496497102
-      SET_EN_SEC_00_47: 363923239
-      SET_EN_SEC_00_105: -1570472271
-      SET_EN_SEC_00_30: -1295234361
-      SET_EN_SEC_00_48: 335204196
-      SET_EN_SEC_00_44: -22065102
-      SET_EN_SEC_00_61: 1138171282
-      SET_EN_SEC_00_60: 1433551610
-      SET_EN_SEC_00_121: -1085279731
-      SET_EN_SEC_00_36: -1013049295
-      SET_EN_SEC_00_15: -632263770
-      SET_EN_SEC_00_120: 543371766
-      SET_EN_SEC_00_53: 1286338017
-      SET_EN_SEC_00_110: -569964207
-      SET_EN_SEC_00_26: 1917590526
-      SET_EN_SEC_00_54: 1369351645
-      SET_EN_SEC_00_92: 514435653
-      SET_EN_SEC_00_27: -295108759
-      SET_EN_SEC_00_32: -1807573695
-      SET_EN_SEC_00_31: 309778133
-      SET_EN_SEC_00_17: -756354995
-      SET_EN_SEC_00_93: -1750263163
-      SET_EN_SEC_00_41: -890402223
-      SET_EN_SEC_00_49: -1382578060
-      SET_EN_SEC_00_62: 517481495
-      SET_EN_SEC_00_71: 276154907
-      SET_EN_SEC_00_73: -943140646
-      SET_EN_SEC_00_88: -1878446272
-      SET_EN_SEC_00_87: -1292562463
-      SET_EN_SEC_00_46: 15514156
-      SET_EN_SEC_00_80: -534346164
-      SET_EN_SEC_00_119: -199843872
       SET_EN_SEC_00_1: -12481460
-      SET_EN_SEC_00_118: -1988378316
       SET_EN_SEC_00_11: -1185625376
-      SET_EN_SEC_00_106: -1396499457
-      SET_EN_SEC_00_14: 834777452
       SET_EN_SEC_00_9: -964208224
-      SET_EN_SEC_00_86: -1959395086
-      SET_EN_SEC_00_95: -1340357853
-      SET_EN_SEC_00_25: -1394715647
-      SET_EN_SEC_00_69: -1561925903
-      SET_EN_SEC_00_113: 1070928587
+      SET_EN_SEC_00_2: -1359920936
+      SET_EN_SEC_00_10: -1803939187
+      SET_EN_SEC_00_8: 1539554223
+      SET_EN_SEC_00_6: -432328091
+      SET_EN_SEC_00_3: -2096282886
+      SET_EN_SEC_00_5: -747279378
       SET_EN_SEC_00_0: 1694038197
-      SET_EN_SEC_00_116: 626290662
       SET_EN_SEC_00_7: -341041628
       SET_EN_SEC_00_4: 901033461
-      SET_EN_SEC_00_40: -1542972076
-      SET_EN_SEC_00_50: 986421548
-      SET_EN_SEC_00_97: -1733479344
-      SET_EN_SEC_00_108: 1284481299
-      SET_EN_SEC_00_19: -841718571
-      SET_EN_SEC_00_55: -116204740
-      SET_EN_SEC_00_28: -1523746136
-      SET_EN_SEC_00_39: 1515933001
-      SET_EN_SEC_00_122: -54660289
-      SET_EN_SEC_00_72: -1284504339
-      SET_EN_SEC_00_67: -118948973
-      SET_EN_SEC_00_123: 554326911
-      SET_EN_SEC_00_125: -162007739
-      SET_EN_SEC_00_78: 1368383720
-      SET_EN_SEC_00_107: 1477986501
-      SET_EN_SEC_00_81: -1553044627
-      SET_EN_SEC_00_2: -1359920936
-      SET_EN_SEC_00_89: -452032951
-      SET_EN_SEC_00_99: 1801128367
-      SET_EN_SEC_00_38: -1285496256
-      SET_EN_SEC_00_6: -432328091
-      SET_EN_SEC_00_79: 618731775
-      SET_EN_SEC_00_115: -1068324811
-      SET_EN_SEC_00_5: -747279378
-      SET_EN_SEC_00_100: -2110840435
-      SET_EN_SEC_00_101: -586862516
-      SET_EN_SEC_00_94: -1523277675
-      SET_EN_SEC_00_77: -1708070266
-      SET_EN_SEC_00_23: 706510513
-      SET_EN_SEC_00_12: 749603100
-      SET_EN_SEC_00_52: -834489634
-      SET_EN_SEC_00_85: -1602735311
-      SET_EN_SEC_00_82: -709521661
-      SET_EN_SEC_00_102: -2076767154
-      SET_EN_SEC_00_84: -1826416527
-      SET_EN_SEC_00_91: 1750084155
-      SET_EN_SEC_00_35: -144950866
-      SET_EN_SEC_00_13: -1604876036
-      SET_EN_SEC_00_16: -1416700200
-      SET_EN_SEC_00_70: -23709695
-      SET_EN_SEC_00_127: -1085398877
-      SET_EN_SEC_00_57: 1653420390
-      SET_EN_SEC_00_42: -1483084930
-      SET_EN_SEC_00_68: 919997670
-      SET_EN_SEC_00_98: -2115815746
-      SET_EN_SEC_00_126: 91817152
-      SET_EN_SEC_00_37: -1570707359
-      SET_EN_SEC_00_58: 1050706343
-      SET_EN_SEC_00_22: 597971212
-      SET_EN_SEC_00_75: 642420559
-      SET_EN_SEC_00_10: -1803939187
-      SET_EN_SEC_00_59: -1334368314
-      SET_EN_SEC_00_8: 1539554223
-      SET_EN_SEC_00_21: 2118597268
-      SET_EN_SEC_00_3: -2096282886
-      SET_EN_SEC_00_111: -1519152205
-      SET_EN_SEC_00_18: 268443324
-      SET_EN_SEC_00_29: 407748396
-      SET_EN_SEC_00_51: 23779252
-      SET_EN_SEC_00_20: 917369748
-      SET_EN_SEC_00_66: -1071669271
-      SET_EN_SEC_00_103: 500601430
-      SET_EN_SEC_00_96: -193063803
-      SET_EN_SEC_00_114: -980973230
-      SET_EN_SEC_00_64: 277391724
-      SET_EN_SEC_00_74: -648945118
-      SET_EN_SEC_00_109: -44281867
-      SET_EN_SEC_00_83: -1006157395
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

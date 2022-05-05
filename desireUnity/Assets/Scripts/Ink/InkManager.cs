@@ -3,9 +3,8 @@ using Ink.Runtime;
 using System;
 using System.Collections;
 using System.Text.RegularExpressions;
-using System.Web;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class InkManager : MonoBehaviour
 {
@@ -86,6 +85,10 @@ public class InkManager : MonoBehaviour
 				_menuDialog.AddOption(option, true, false, action);
 			}
 		}
+		else
+		{
+			Interaction.FinishInteraction();
+		}
 
 		if(_stage != null)
 		{
@@ -96,8 +99,6 @@ public class InkManager : MonoBehaviour
 				_stage.Hide(_stage.CharactersOnStage[0]);
 			}
 		}
-
-		Interaction.FinishInteraction();
 	}
 
 	private IEnumerator ProcessPath(string line)
@@ -138,18 +139,18 @@ public class InkManager : MonoBehaviour
 		switch(commandList[0])
 		{
 			case "fadein":
-				yield return StartCoroutine(_canvasManager.Fade(1, int.Parse(commandList[1])));
+				yield return StartCoroutine(_canvasManager.Fade("in", int.Parse(commandList[1])));
 				break;
 
 			case "fadeout":
-				yield return StartCoroutine(_canvasManager.Fade(0, int.Parse(commandList[1])));
+				yield return StartCoroutine(_canvasManager.Fade("out", int.Parse(commandList[1])));
 				break;
 
 			case "bgchange":
-				yield return StartCoroutine(_canvasManager.Fade(0, 1));
+				yield return StartCoroutine(_canvasManager.Fade("out", 1));
 				GetComponent<CanvasManager>().UpdateBackground(commandList[1]);
 				yield return new WaitForSeconds(1);
-				yield return StartCoroutine(_canvasManager.Fade(1, 1));
+				yield return StartCoroutine(_canvasManager.Fade("in", 1));
 				break;
 
 			case "moveto":
@@ -183,6 +184,7 @@ public class InkManager : MonoBehaviour
 			case "settrapped":
 				var state = bool.Parse(commandList[1]);
 				_playerMovement.IsTrapped = state;
+				GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>().speed = 1;
 
 				break;
 
@@ -208,6 +210,27 @@ public class InkManager : MonoBehaviour
 
 			case "setscene":
 				Enum.TryParse(commandList[1], out _currentScene);
+				break;
+
+			case "alert":
+				yield return _gameManager.DisplayMessage(commandList[1].Replace("\"", ""), "warning");
+				break;
+
+			case "message":
+				yield return _gameManager.DisplayMessage(commandList[1].Replace("\"", ""), "message");
+				break;
+
+			case "showdatapad":
+				var active = bool.Parse(commandList[1]);
+				yield return _gameManager.SetDataPadVisibility(active);
+				break;
+
+			case "dim":
+				yield return StartCoroutine(_canvasManager.Fade("dim-out", float.Parse(commandList[1])));
+				break;
+
+			case "undim":
+				yield return StartCoroutine(_canvasManager.Fade("dim-in", float.Parse(commandList[1])));
 				break;
 		}
 	}

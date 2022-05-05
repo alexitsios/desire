@@ -14,6 +14,11 @@ VAR power_restored = false
 VAR bridge_visited = false
 VAR talked_to_captain = false
 VAR has_clearance = false
+VAR talked_to_security_robot = false
+VAR turned_on_lights = false
+VAR memory_restored = false
+VAR has_access_code = false
+VAR stern_data_pad_read = false
  
 == stern_load ==
 >> setscene Stern
@@ -27,6 +32,9 @@ VAR has_clearance = false
         Led Left "@stern_load_3"
         VacuumRobot Right "@stern_load_4"
         ~ stern_visited = true
+        >> quest RecoverLeg Active
+        >> quest RecoverArm Active
+        >> quest RecoverMemory Active
         -> DONE
     - !ship_is_sinking && acquired_service_kit:
         >> screenshake true
@@ -54,6 +62,7 @@ VacuumRobot "@stern_garbage_bin"
         VacuumRobot "@stern_vacuum_robot_2"
         ~ acquired_leg = true
         >> settrapped false
+        >> quest RecoverLeg Completed
         -> DONE
     - else:
         VacuumRobot "@stern_vacuum_robot_3"
@@ -77,13 +86,13 @@ VacuumRobot "@stern_garbage_bin"
 }
 
 == vacuum_robot_ask_table ==
-    * [@vacuum_robot_ask_table_1] 
+    + [@vacuum_robot_ask_table_1] 
         -> ask_what_happened
-    * [@vacuum_robot_ask_table_2] 
+    + [@vacuum_robot_ask_table_2] 
         -> why_are_we_damaged
-    * [@vacuum_robot_ask_table_3]
+    + [@vacuum_robot_ask_table_3]
         -> where_are_the_humans
-    * [@vacuum_robot_ask_table_4] 
+    + [@vacuum_robot_ask_table_4] 
         -> end_discussion_with_vacuum_robot
 
 == ask_what_happened ==
@@ -126,12 +135,22 @@ Led "@end_discussion_with_vacuum_robot_13"
 -> DONE
 
 == stern_data_pad ==
-Led "@stern_data_pad_1"
-Led "@stern_data_pad_2"
-Led "@stern_data_pad_3"
-Led "@stern_data_pad_4"
-Led "@stern_data_pad_5"
-Led "@stern_data_pad_6"
+{
+    - !stern_data_pad_read:
+        Led "@stern_data_pad_1"
+        >> showdatapad true
+        >> dim 2
+        >> message "@stern_data_pad_2"
+        >> message "@stern_data_pad_3"
+        >> message "@stern_data_pad_4"
+        >> undim 2
+        >> showdatapad false
+        Led "@stern_data_pad_5"
+        Led "@stern_data_pad_6"
+        ~ stern_data_pad_read = true
+    - else:
+        Led "@stern_data_pad_7"
+}
 -> DONE
 
 == stern_reflection ==
@@ -166,6 +185,7 @@ Led "@arm_1"
     ~ acquired_arm = true
 Led "@arm_2"
 Led "@arm_3"
+>> quest RecoverArm Completed
 -> DONE
 
 == stern_horizon ==
@@ -189,12 +209,9 @@ Led "@arm_3"
 
 
 == stern_door ==
-{
-    - !stern_door_open:
-        Led "@stern_door_1"
-        Led "@stern_door_2"
-        Led "@stern_door_3"
-}
+Led "@stern_door_1"
+Led "@stern_door_2"
+>> quest OpenSternDoor Active
 -> DONE
 
 == stern_pannel ==
@@ -253,7 +270,10 @@ Led "@recover_memory_2"
 Led "@recover_memory_3"
 Led "@recover_memory_4"
 Led "@recover_memory_5"
+>> fadeout 1
+>> alert "@recover_memory_patch"
 >> sfx puzzle_complete true
+>> fadein 1
 Led "@recover_memory_6"
 Led "@recover_memory_7"
 Led "@recover_memory_8"
@@ -275,6 +295,9 @@ Led "@recover_memory_23"
 Led "@recover_memory_24"
 Led "@recover_memory_25"
 Led "@recover_memory_26"
+>> quest RecoverMemory Completed
+>> quest FindMaster Active
+~ memory_restored = true
 -> DONE
 
 == item_use_error ==
@@ -302,11 +325,14 @@ Led "@funnel_worktable_1"
 -> DONE
 
 == funnel_letter ==
-Unknown "@funnel_letter_1"
-Unknown "@funnel_letter_2"
-Unknown "@funnel_letter_3"
-Unknown "@funnel_letter_4"
-Unknown "@funnel_letter_5"
+Led "@funnel_letter_1"
+>> dim 2
+>> message "@funnel_letter_2"
+>> message "@funnel_letter_3"
+>> message "@funnel_letter_4"
+>> message "@funnel_letter_5"
+>> message "@funnel_letter_6"
+>> undim 2
 -> DONE
 
 == funnel_bones ==
@@ -318,13 +344,21 @@ Led "@funnel_bones_4"
 
 == funnel_data_pad ==
 Led "@funnel_data_pad_1"
-Unknown "@funnel_data_pad_2"
+>> showdatapad true
+>> dim 2
+>> message "@funnel_data_pad_2"
 Led "@funnel_data_pad_3"
-Unknown "@funnel_data_pad_4"
+>> message "@funnel_data_pad_4"
+>> undim 2
+>> showdatapad false
 -> DONE
 
 == funnel_clothes ==
 Led "@funnel_clothes_1"
+-> DONE
+
+== funnel_leave_without_memory ==
+Led "@funnel_leave_without_memory_1"
 -> DONE
 
 == superstructure_out_load ==
@@ -362,64 +396,65 @@ Led Left "@superstructure_out_remaining_lifeboat_1"
 == superstructure_out_security_bot == 
 {
     - !has_clearance:
-        SecurityBot Right "@superstructure_out_security_bot_1"
-        Led Left "@superstructure_out_security_bot_2"
-        SecurityBot "@superstructure_out_security_bot_3"
-        Led "@superstructure_out_security_bot_4"
-        SecurityBot "@superstructure_out_security_bot_5"
-        Led "@superstructure_out_security_bot_6"
-        SecurityBot "@superstructure_out_security_bot_7"
-        Led "@superstructure_out_security_bot_8"
-        SecurityBot "@superstructure_out_security_bot_9"
-        Led "@superstructure_out_security_bot_10"
-        SecurityBot "@superstructure_out_security_bot_11"
-        Led "@superstructure_out_security_bot_12"
-        SecurityBot "@superstructure_out_security_bot_13"
-        Led "@superstructure_out_security_bot_14"
-        SecurityBot "@superstructure_out_security_bot_15"
-        Led "@superstructure_out_security_bot_16"
-        SecurityBot "@superstructure_out_security_bot_17"
-        Led "@superstructure_out_security_bot_18"
-        SecurityBot "@superstructure_out_security_bot_19"
-        Led "@superstructure_out_security_bot_20"
-        SecurityBot "@superstructure_out_security_bot_21"
-        Led "@superstructure_out_security_bot_22"
-        SecurityBot "@superstructure_out_security_bot_23"
-        Led "@superstructure_out_security_bot_24"
-        SecurityBot "@superstructure_out_security_bot_25"
-        Led "@superstructure_out_security_bot_26"
-        Led "@superstructure_out_security_bot_27"
-        Led "@superstructure_out_security_bot_28"
-        Led "@superstructure_out_security_bot_29"
-        SecurityBot "@superstructure_out_security_bot_30"
-        Led "@superstructure_out_security_bot_31"
-        SecurityBot "@superstructure_out_security_bot_32"
-        Led "@superstructure_out_security_bot_33"
-        SecurityBot "@superstructure_out_security_bot_34"
-        Led "@superstructure_out_security_bot_35"
-        SecurityBot "@superstructure_out_security_bot_36"
-        Led "@superstructure_out_security_bot_37"
-        SecurityBot "@superstructure_out_security_bot_38"
-        Led "@superstructure_out_security_bot_39"
-        SecurityBot "@superstructure_out_security_bot_40"
-        Led "@superstructure_out_security_bot_41"
-        Led "@superstructure_out_security_bot_42"
-        Led "@superstructure_out_security_bot_43"
-        SecurityBot "@superstructure_out_security_bot_44"
-        Led "@superstructure_out_security_bot_45"
-        SecurityBot "@superstructure_out_security_bot_44"
-        Led "@superstructure_out_security_bot_46"
-        Led "@superstructure_out_security_bot_47"
+    {
+        - !talked_to_security_robot:
+            SecurityBot Right "@superstructure_out_security_bot_1"
+            Led Left "@superstructure_out_security_bot_2"
+            SecurityBot "@superstructure_out_security_bot_3"
+            Led "@superstructure_out_security_bot_4"
+            SecurityBot "@superstructure_out_security_bot_5"
+            Led "@superstructure_out_security_bot_6"
+            SecurityBot "@superstructure_out_security_bot_7"
+            Led "@superstructure_out_security_bot_8"
+            SecurityBot "@superstructure_out_security_bot_9"
+            Led "@superstructure_out_security_bot_10"
+            SecurityBot "@superstructure_out_security_bot_11"
+            Led "@superstructure_out_security_bot_12"
+            SecurityBot "@superstructure_out_security_bot_13"
+            Led "@superstructure_out_security_bot_14"
+            SecurityBot "@superstructure_out_security_bot_15"
+            Led "@superstructure_out_security_bot_16"
+            SecurityBot "@superstructure_out_security_bot_17"
+            Led "@superstructure_out_security_bot_18"
+            SecurityBot "@superstructure_out_security_bot_19"
+            Led "@superstructure_out_security_bot_20"
+            SecurityBot "@superstructure_out_security_bot_21"
+            Led "@superstructure_out_security_bot_22"
+            SecurityBot "@superstructure_out_security_bot_23"
+            Led "@superstructure_out_security_bot_24"
+            SecurityBot "@superstructure_out_security_bot_25"
+            Led "@superstructure_out_security_bot_26"
+            Led "@superstructure_out_security_bot_27"
+            Led "@superstructure_out_security_bot_28"
+            Led "@superstructure_out_security_bot_29"
+            SecurityBot "@superstructure_out_security_bot_30"
+            Led "@superstructure_out_security_bot_31"
+            SecurityBot "@superstructure_out_security_bot_32"
+            Led "@superstructure_out_security_bot_33"
+            SecurityBot "@superstructure_out_security_bot_34"
+            Led "@superstructure_out_security_bot_35"
+            SecurityBot "@superstructure_out_security_bot_36"
+            Led "@superstructure_out_security_bot_37"
+            SecurityBot "@superstructure_out_security_bot_38"
+            Led "@superstructure_out_security_bot_39"
+            SecurityBot "@superstructure_out_security_bot_40"
+            Led "@superstructure_out_security_bot_41"
+            Led "@superstructure_out_security_bot_42"
+            >> quest GetClearance Active
+            ~ talked_to_security_robot = true
+        - else:
+            Led "@superstructure_out_security_bot_42"
+    }
     - else:
-        Led Left "@superstructure_out_security_bot_48"
-        SecurityBot Right "@superstructure_out_security_bot_49"
-        Led "@superstructure_out_security_bot_50"
-        SecurityBot "@superstructure_out_security_bot_51"
-        Led "@superstructure_out_security_bot_52"
-        SecurityBot "@superstructure_out_security_bot_53"
-        Led "@superstructure_out_security_bot_54"
-        SecurityBot "@superstructure_out_security_bot_55"
-        Led "@superstructure_out_security_bot_56"
+        Led Left "@superstructure_out_security_bot_43"
+        SecurityBot Right "@superstructure_out_security_bot_44"
+        Led "@superstructure_out_security_bot_45"
+        SecurityBot "@superstructure_out_security_bot_46"
+        Led "@superstructure_out_security_bot_47"
+        SecurityBot "@superstructure_out_security_bot_48"
+        Led "@superstructure_out_security_bot_49"
+        SecurityBot "@superstructure_out_security_bot_50"
+        Led "@superstructure_out_security_bot_51"
         >> quest GetClearance Completed
 }
 
@@ -506,6 +541,16 @@ Led "@superstructure_in_blood_9"
 Led "@superstructure_in_blood_10"
 -> DONE
 
+== superstructure_in_corpse ==
+Led "@superstructure_in_corpse_1"
+Led "@superstructure_in_corpse_2"
+Led "@superstructure_in_corpse_3"
+Led "@superstructure_in_corpse_4"
+Led "@superstructure_in_corpse_5"
+Led "@superstructure_in_corpse_6"
+~ has_access_code = true
+-> DONE
+
 == superstructure_in_monitor ==
 Led "@superstructure_in_monitor_1"
 -> DONE
@@ -516,69 +561,114 @@ Led "@superstructure_in_map_2"
 Led "@superstructure_in_map_3"
 -> DONE
 
+== superstructure_in_leave_without_power ==
+Led "@superstructure_in_leave_without_power_1"
+-> DONE
+
+== superstructure_in_no_access_code ==
+Led "@superstructure_in_no_access_code_1"
+-> DONE
+
 == generator_room_load ==
 {
     - !generator_room_visited:
         Led "@generator_room_load_1"
-        Led "@generator_room_load_2"
-        Led "@generator_room_load_3"
         ~ generator_room_visited = true
-        ~ power_restored = true
 }
 -> DONE
 
+== generator_room_board ==
+Led "@generator_room_board_1"
+Led "@generator_room_board_2"
+>> bgchange generator_room_lit
+~ turned_on_lights = true
+-> DONE
+
 == generator_room_computer ==
-Led "@generator_room_computer_1"
-Led "@generator_room_computer_2"
-Led "@generator_room_computer_3"
-Led "@generator_room_computer_4"
-Led "@generator_room_computer_5"
--> generator_room_log_table
+{
+    - !turned_on_lights:
+        Led "@computer_no_lights"
+        -> DONE
+    - else:
+        Led "@generator_room_computer_1"
+        Led "@generator_room_computer_2"
+        Led "@generator_room_computer_3"
+        Led "@generator_room_computer_4"
+        Led "@generator_room_computer_5"
+        -> generator_room_log_table
+}
+
 
 == generator_room_log_table ==
-    * [@generator_room_log_title_1]
-        Unknown "@generator_room_log_1"
+    + [@generator_room_log_title_1]
+        Unknown "@generator_room_log_1.1"
+        Unknown "@generator_room_log_1.2"
+        Unknown "@generator_room_log_1.3"
+        Unknown "@generator_room_log_1.4"
         -> generator_room_log_table
-    * [@generator_room_log_title_2]
-        Unknown "@generator_room_log_2"
+    + [@generator_room_log_title_2]
+        Unknown "@generator_room_log_2.1"
+        Unknown "@generator_room_log_2.2"
+        Unknown "@generator_room_log_2.3"
+        Unknown "@generator_room_log_2.4"
+        Unknown "@generator_room_log_2.5"
         -> generator_room_log_table
-    * [@generator_room_log_title_3]
-        Unknown "@generator_room_log_3"
+    + [@generator_room_log_title_3]
+        Unknown "@generator_room_log_3.1"
+        Unknown "@generator_room_log_3.2"
+        Unknown "@generator_room_log_3.3"
         -> generator_room_log_table
-    * [@generator_room_log_title_4]
-        Unknown "@generator_room_log_4"
+    + [@generator_room_log_title_4]
+        Unknown "@generator_room_log_4.1"
+        Unknown "@generator_room_log_4.2"
+        Unknown "@generator_room_log_4.3"
+        Unknown "@generator_room_log_4.4"
+        Unknown "@generator_room_log_4.5"
         -> generator_room_log_table
-    * [@generator_room_log_title_5]
-        Unknown "@generator_room_log_5"
+    + [@generator_room_log_title_5]
+        Unknown "@generator_room_log_5.1"
+        Unknown "@generator_room_log_5.2"
+        Unknown "@generator_room_log_5.3"
+        Unknown "@generator_room_log_5.4"
         -> generator_room_log_table
-    * [@generator_room_log_title_6]
-        Unknown "@generator_room_log_6"
+    + [@generator_room_log_title_6]
+        Unknown "@generator_room_log_6.1"
+        Unknown "@generator_room_log_6.2"
+        Unknown "@generator_room_log_6.3"
+        Unknown "@generator_room_log_6.4"
         -> generator_room_log_table
-    * [@generator_room_log_title_7]
-        Unknown "@generator_room_log_7"
+    + [@generator_room_log_title_7]
+        Unknown "@generator_room_log_7.1"
+        Unknown "@generator_room_log_7.2"
+        Unknown "@generator_room_log_7.3"
+        Unknown "@generator_room_log_7.4"
+        Unknown "@generator_room_log_7.5"
+        Unknown "@generator_room_log_7.6"
         -> generator_room_log_table
-    * [@generator_room_log_title_return]
+    + [@generator_room_log_title_return]
         Led "@generator_room_log_return"
         -> DONE
 
 == bridge_load ==
+>> screenshake true
 Led "@bridge_load_1"
+>> screenshake false
 Led "@bridge_load_2"
 Led "@bridge_load_3"
 Led "@bridge_load_4"
 Led "@bridge_load_5"
 Led "@bridge_load_6"
-Led "@bridge_load_7"
-Led "@bridge_load_8"
+>> alert "@bridge_load_7"
+>> alert "@bridge_load_8"
 Led "@bridge_load_9"
 Led "@bridge_load_10"
 Led "@bridge_load_11"
 Led "@bridge_load_12"
 Led "@bridge_load_13"
-Led "@bridge_load_14"
+>> alert "@bridge_load_14"
 Led "@bridge_load_15"
 Led "@bridge_load_16"
-Led "@bridge_load_17"
+>> alert "@bridge_load_17"
 Led "@bridge_load_18"
 -> DONE
 
@@ -641,6 +731,7 @@ Led "@bridge_load_18"
         CaptainBot Right "@bridge_captain_52"
         ~ has_clearance = true
         >> additem ClearanceCard
+        >> quest GetClearance Completed
 }
 
 -> DONE

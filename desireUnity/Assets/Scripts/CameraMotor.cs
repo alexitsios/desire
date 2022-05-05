@@ -6,8 +6,8 @@ public class CameraMotor : MonoBehaviour
 {
     public Transform lookAt;
 
-    float boundX = 0.75f;
-    float boundY = 0.75f;
+    float boundX = 0.15f;
+    float boundY = 0.15f;
 
     public SpriteRenderer backgroundBounds;
 
@@ -36,7 +36,6 @@ public class CameraMotor : MonoBehaviour
         if(Debug.isDebugBuild && Input.mouseScrollDelta.y != 0 && !Input.GetKey(KeyCode.LeftControl))
 		{
             Camera.main.orthographicSize -= Input.mouseScrollDelta.y;
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().CameraSize = Camera.main.orthographicSize;
 		}
 
         Vector3 delta = Vector3.zero;
@@ -70,16 +69,19 @@ public class CameraMotor : MonoBehaviour
         }
         //transform.position += new Vector3(delta.x, delta.y, 0);
 
-        Vector3 newPosition = transform.position + new Vector3 (delta.x, delta.y, 0);
+        Vector3 newPosition = transform.position + new Vector3(delta.x, delta.y, 0);
+
+        newPosition.x = Mathf.Clamp(newPosition.x, leftBound, rightBound);
+        newPosition.y = Mathf.Clamp(newPosition.y, bottomBound, topBound);
 
         if(IsShaking)
         {
-            newPosition.x += Random.insideUnitSphere.x * 0.1f;
-            newPosition.y += Random.insideUnitSphere.y * 0.1f;
+            newPosition.x += Random.Range(-0.1f, 0.1f);
+            newPosition.y += Random.Range(-0.1f, 0.1f);
         }
 
-        newPosition.x = Mathf.Clamp (newPosition.x, leftBound, rightBound);
-        newPosition.y = Mathf.Clamp (newPosition.y, bottomBound, topBound);
+        newPosition.x = Mathf.Clamp(newPosition.x, leftBound, rightBound);
+        newPosition.y = Mathf.Clamp(newPosition.y, bottomBound, topBound);
 
         transform.position = newPosition;
     }

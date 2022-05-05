@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,6 +14,10 @@ public class InteractionTransition : PropBase
 	public int spawnPoint;
 	public string translationString;
 
+	public bool checkVariableBeforeTransition = false;
+	public string variableName;
+	public string blockOnError;
+
 	public override void OnPointerEnter(PointerEventData pointerEventData)
 	{
 		gameManager.SetCursorAction(cursorAction);
@@ -21,6 +26,15 @@ public class InteractionTransition : PropBase
 
 	public override void Interact(ItemType item)
 	{
-		gameManager.LoadSceneAndSpawnPlayer(transitionTo, spawnPoint);
+		if(checkVariableBeforeTransition)
+		{
+			if(!gameManager.GetComponent<InkManager>().GetVariable<bool>(variableName))
+			{
+				Flowchart.ExecuteBlock(blockOnError);
+				return;
+			}
+		}
+
+		StartCoroutine(gameManager.LoadSceneAndSpawnPlayer(transitionTo, spawnPoint));
 	}
 }
