@@ -89,16 +89,6 @@ public class InkManager : MonoBehaviour
 		{
 			Interaction.FinishInteraction();
 		}
-
-		if(_stage != null)
-		{
-			var characters = _stage.CharactersOnStage.Count;
-
-			for(int i = 0; i < characters; i++)
-			{
-				_stage.Hide(_stage.CharactersOnStage[0]);
-			}
-		}
 	}
 
 	private IEnumerator ProcessPath(string line)
@@ -119,16 +109,10 @@ public class InkManager : MonoBehaviour
 			if(character != null)
 				character.NameText = _translationManager.GetTranslatedName(characterAttributes[0]);
 
-			if(_stage != null && character != null)
-			{
-				if(!_stage.CharactersOnStage.Contains(character))
-					_stage.Show(character, character.Portraits[0].name, characterAttributes[1]);
-			}
-
 			var translatedLine = _translationManager.GetTranslatedLine(block[1]);
 
 			_sayDialog.SetCharacter(character);
-			yield return StartCoroutine(_sayDialog.DoSay(translatedLine, true, true, true, false, false, null, null));
+			yield return StartCoroutine(_sayDialog.DoSay(translatedLine, true, true, true, false, false, null, null, _stage, character, characterAttributes[1]));
 		}
 	}
 

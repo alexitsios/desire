@@ -225,12 +225,12 @@ namespace Fungus
                 float alpha = Mathf.MoveTowards(canvasGroup.alpha, targetAlpha, delta);
                 canvasGroup.alpha = alpha;
 
-                //if (alpha <= 0f)
-                //{                   
-                //    // Deactivate dialog object once invisible
-                //    gameObject.SetActive(false);
-                //}
-            }
+				if(alpha <= 0f)
+				{
+					// Deactivate dialog object once invisible
+					gameObject.SetActive(false);
+				}
+			}
         }
 
         protected virtual void ClearStoryText()
@@ -476,7 +476,7 @@ namespace Fungus
         /// <param name="stopVoiceover">Stop any existing voiceover audio before writing starts.</param>
         /// <param name="voiceOverClip">Voice over audio clip to play.</param>
         /// <param name="onComplete">Callback to execute when writing and player input have finished.</param>
-        public virtual IEnumerator DoSay(string text, bool clearPrevious, bool waitForInput, bool fadeWhenDone, bool stopVoiceover, bool waitForVO, AudioClip voiceOverClip, Action onComplete)
+        public virtual IEnumerator DoSay(string text, bool clearPrevious, bool waitForInput, bool fadeWhenDone, bool stopVoiceover, bool waitForVO, AudioClip voiceOverClip, Action onComplete, Stage stage = null, Character character = null, string attributes = null)
         {
             var writer = GetWriter();
 
@@ -501,6 +501,12 @@ namespace Fungus
                 }
             }
             gameObject.SetActive(true);
+
+            if(stage != null && character != null)
+			{
+                if(!stage.CharactersOnStage.Contains(character))
+                    stage.Show(character, character.Portraits[0].name, attributes);
+            }
 
             this.fadeWhenDone = fadeWhenDone;
 
