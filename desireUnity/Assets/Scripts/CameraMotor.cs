@@ -18,8 +18,6 @@ public class CameraMotor : MonoBehaviour
 
     public bool IsShaking { get; set; } = false;
 
-    //Update after char finishes moving
-
     private void Start ()
     {
         float vertExtent = Camera.main.orthographicSize;

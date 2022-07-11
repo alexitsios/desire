@@ -56,6 +56,12 @@ namespace Fungus
         protected virtual void OnDisable()
         {
             activeStages.Remove(this);
+
+            var _characters = CharactersOnStage;
+            foreach(var character in _characters.ToArray())
+			{
+                Hide(character);
+			}
         }
 
         protected virtual void Start()

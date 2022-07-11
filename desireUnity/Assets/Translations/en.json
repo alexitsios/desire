@@ -37,8 +37,9 @@
         "@stern_load_2": "So dirty. So m-m-m-much dirt. I'll nev-neve-n-never c-clean it",
         "@stern_load_3": "Hey! That's my leg! You! Come over here!",
         "@stern_load_4": "C-c-clean nothing is clean n-nothing is c-c-c-c-c-c-clean",
-        "@stern_load_5": "No! Don't sink now!",
-        "@stern_load_6": "Any memories might help right now. But I need a drive for that...",
+        "@stern_load_5": "It's too focused on cleaning... If only I could draw it's attention somehow...",
+        "@stern_load_6": "No! Don't sink now!",
+        "@stern_load_7": "Any memories might help right now. But I need a drive for that...",
 
         "@stern_garbage_bin": "Neeeeeaaaaahhhh! M-m-more dirt! More tra-tra-trash! Nev-never finish!",
 
@@ -190,8 +191,7 @@
         "@recover_memory_patch": "Memory Drive restored. Preparing to configure patch"
     },
     "funnel": {
-        "@funnel_load_1": "There’s so many bones- human bones. Enough for at least two fully grown ones",
-        "@funnel_load_2": "That worktable might have something useful on it",
+        "@funnel_load_1": "That worktable might have something useful on it",
 
         "@funnel_worktable_1": "Useless... useless... useless. Everything is worn out and useless...",
         "@funnel_worktable_2": "Ooh! That might not be useless",
@@ -203,10 +203,11 @@
         "@funnel_letter_5": "And to whoever finds this letter- If you ever make it out, give this letter to my family, if you find them.",
         "@funnel_letter_6": "Tell them I wish I could’ve seen them. And... if you don't get out of here, well then, the sea would’ve won.",
 
-        "@funnel_bones_1": "Strange- it looks like there are cuts in these bones",
-        "@funnel_bones_2": "I don't like this... Why are there just bones? Especially when the body by the door is intact",
-        "@funnel_bones_3": "And where are these cuts from?",
-        "@funnel_bones_4": "It looks like something or someone killed these people. And... cut them up purposefully?",
+        "@funnel_bones_1": "There’s so many bones- human bones. Enough for at least two fully grown ones",
+        "@funnel_bones_2": "Strange- it looks like there are cuts in these bones",
+        "@funnel_bones_3": "I don't like this... Why are there just bones? Especially when the body by the door is intact",
+        "@funnel_bones_4": "And where are these cuts from?",
+        "@funnel_bones_5": "It looks like something or someone killed these people. And... cut them up purposefully?",
 
         "@funnel_data_pad_1": "Looks like Daily Logs from the workers. Maybe reading some will prove useful",
         "@funnel_data_pad_2": "Kyle, Mark and Randy here. We were working here in the Funnel Room when it happened. We got stuck. There was no way to escape...",

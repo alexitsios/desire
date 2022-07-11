@@ -496,8 +496,6 @@ namespace Fungus
             if (stage.CharactersOnStage.Remove(options.character))
             {
             }
-
-            FinishCommand(options);
         }
 
         /// <summary>

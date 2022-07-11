@@ -31,6 +31,7 @@ VAR stern_data_pad_read = false
         VacuumRobot Right "@stern_load_2"
         Led Left "@stern_load_3"
         VacuumRobot Right "@stern_load_4"
+        Led Left "@stern_load_5"
         ~ stern_visited = true
         >> quest RecoverLeg Active
         >> quest RecoverArm Active
@@ -38,9 +39,9 @@ VAR stern_data_pad_read = false
         -> DONE
     - !ship_is_sinking && acquired_service_kit:
         >> screenshake true
-        Led "@stern_load_5"
-        >> screenshake false
         Led "@stern_load_6"
+        >> screenshake false
+        Led "@stern_load_7"
         ~ ship_is_sinking = true
         -> DONE
     - else: 
@@ -86,11 +87,11 @@ VacuumRobot "@stern_garbage_bin"
 }
 
 == vacuum_robot_ask_table ==
-    + [@vacuum_robot_ask_table_1] 
+    * [@vacuum_robot_ask_table_1] 
         -> ask_what_happened
-    + [@vacuum_robot_ask_table_2] 
+    * [@vacuum_robot_ask_table_2] 
         -> why_are_we_damaged
-    + [@vacuum_robot_ask_table_3]
+    * [@vacuum_robot_ask_table_3]
         -> where_are_the_humans
     + [@vacuum_robot_ask_table_4] 
         -> end_discussion_with_vacuum_robot
@@ -309,7 +310,6 @@ Led "!item_use_error"
 {
     - !funnel_visited:
         Led "@funnel_load_1"
-        Led "@funnel_load_2"
         ~ funnel_visited = true
 }
 -> DONE
@@ -340,6 +340,7 @@ Led "@funnel_bones_1"
 Led "@funnel_bones_2"
 Led "@funnel_bones_3"
 Led "@funnel_bones_4"
+Led "@funnel_bones_5"
 -> DONE
 
 == funnel_data_pad ==
