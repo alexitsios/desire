@@ -197,8 +197,25 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case SceneName.Funnel:
+                    SetPlayerAndShadowSize(0.6f);
                     break;
-			}
+
+                case SceneName.Superstructure_out:
+                    SetPlayerAndShadowSize(0.8f);
+                    break;
+
+                case SceneName.Superstructure_in:
+                    SetPlayerAndShadowSize(0.6f);
+                    break;
+
+                case SceneName.Generator_room:
+                    SetPlayerAndShadowSize(0.7f);
+                    break;
+
+                case SceneName.Bridge:
+                    SetPlayerAndShadowSize(0.8f);
+                    break;
+            }
 
 			if(Debug.isDebugBuild)
 			{
@@ -211,6 +228,13 @@ public class GameManager : MonoBehaviour
 
             StartCoroutine(StartScene(scene, canFadeIn));
         } 
+    }
+
+    private void SetPlayerAndShadowSize(float playerHeight)
+	{
+        player.GetComponent<SpriteRenderer>().size = new Vector2(playerHeight / 2, playerHeight);
+        player.transform.GetChild(0).localScale = new Vector3(playerHeight, playerHeight, 0f);
+        player.transform.GetChild(0).transform.localPosition = new Vector3(0f, -((playerHeight * 0.3f) - 0.01f), 0);
     }
 
     public void OpenSettings()
