@@ -19,6 +19,7 @@ VAR turned_on_lights = false
 VAR memory_restored = false
 VAR has_access_code = false
 VAR stern_data_pad_read = false
+VAR current_scene = 1
  
 == stern_load ==
 >> setscene Stern
@@ -59,6 +60,7 @@ VacuumRobot "@stern_garbage_bin"
     - !acquired_leg:
         Led "@stern_vacuum_robot_0"
         >> sfx puzzle_complete true
+        >> save
         Led "@stern_vacuum_robot_1"
         VacuumRobot "@stern_vacuum_robot_2"
         ~ acquired_leg = true
@@ -182,6 +184,7 @@ Led "@all_in_one_tool_3"
 >> changesprite Led led_with_arm
 >> fadein 1
 >> sfx puzzle_complete true
+>> save
 Led "@arm_1"
     ~ acquired_arm = true
 Led "@arm_2"
@@ -243,6 +246,7 @@ Led "@stern_fix_pannel_4"
 >> removeitem AllInOneTool
 >> bgchange stern_door_open
 >> sfx puzzle_complete true
+>> save
 Led "@stern_fix_pannel_5"
 Led "@stern_fix_pannel_6"
 Led "@stern_fix_pannel_7"
@@ -274,6 +278,7 @@ Led "@recover_memory_5"
 >> fadeout 1
 >> alert "@recover_memory_patch"
 >> sfx puzzle_complete true
+>> save
 >> fadein 1
 Led "@recover_memory_6"
 Led "@recover_memory_7"
@@ -582,6 +587,8 @@ Led "@superstructure_in_no_access_code_1"
 Led "@generator_room_board_1"
 Led "@generator_room_board_2"
 >> bgchange generator_room_lit
+>> sfx puzzle_complete true
+>> save
 ~ turned_on_lights = true
 -> DONE
 

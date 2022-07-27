@@ -68,6 +68,7 @@ public class PlayerMovement : MovementBase
 			default:
 				break;
 		}
+
 		UpdateSizeForDepth(spriteRenderer);
 	}
 	private void Update()

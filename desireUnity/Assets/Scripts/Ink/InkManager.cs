@@ -2,6 +2,7 @@ using Fungus;
 using Ink.Runtime;
 using System;
 using System.Collections;
+using System.IO;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class InkManager : MonoBehaviour
     public TextAsset _textAsset;
 	public Character[] characters;
 	public PlayerInteraction Interaction { get; set; }
+	public SceneName CurrentScene { get; set; }
 
 	private Story _story;
 	private CanvasManager _canvasManager;
@@ -21,7 +23,6 @@ public class InkManager : MonoBehaviour
 	private MenuDialog _menuDialog;
 	private QuestController _questController;
 	private TranslationManager _translationManager;
-	private SceneName _currentScene;
 
 	private void Awake()
 	{
@@ -193,7 +194,7 @@ public class InkManager : MonoBehaviour
 				break;
 
 			case "setscene":
-				Enum.TryParse(commandList[1], out _currentScene);
+				//Enum.TryParse(commandList[1], out _currentScene);
 				break;
 
 			case "alert":
@@ -216,6 +217,10 @@ public class InkManager : MonoBehaviour
 			case "undim":
 				yield return StartCoroutine(_canvasManager.Fade("dim-in", float.Parse(commandList[1])));
 				break;
+
+			case "save":
+				SaveGame();
+				break;
 		}
 	}
 
@@ -228,5 +233,33 @@ public class InkManager : MonoBehaviour
 		}
 
 		return null;
+	}
+
+	public void SaveGame()
+	{
+		_story.variablesState["current_scene"] = (int) CurrentScene;
+		var save = _story.state.ToJson();
+		File.WriteAllText("dream-chaser.sav", save);
+	}
+
+	public bool LoadGame()
+	{
+		if(!File.Exists("dream-chaser.sav"))
+		{
+			return false;
+		}
+
+		try
+		{
+			var save = File.ReadAllText("dream-chaser.sav");
+			_story.state.LoadJson(save);
+			CurrentScene = (SceneName) (int) _story.variablesState["current_scene"];
+
+			return true;
+		}
+		catch
+		{
+			return false;
+		}
 	}
 }

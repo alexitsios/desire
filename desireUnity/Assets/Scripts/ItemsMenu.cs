@@ -67,4 +67,9 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             }
         }
 	}
+
+    public void OpenSettings()
+	{
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().OpenSettings();
+	}
 }

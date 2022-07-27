@@ -4,8 +4,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -71,7 +69,6 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.DeleteAll();
         instance = this;
-        SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(gameObject);
 
@@ -226,6 +223,8 @@ public class GameManager : MonoBehaviour
                 Destroy(GameObject.Find("DebugInfo"));
 			}
 
+            _ink.CurrentScene = (SceneName) scene.buildIndex;
+
             StartCoroutine(StartScene(scene, canFadeIn));
         } 
     }
@@ -245,7 +244,29 @@ public class GameManager : MonoBehaviour
     //Save state
     public void SaveState()
     {
-        Debug.Log("SaveState");
+        _ink.SaveGame();
+    }
+
+    public void LoadGame()
+	{
+        StartCoroutine(LoadState());
+	}
+
+    private IEnumerator LoadState()
+    {
+		if(_ink.LoadGame())
+		{
+            SceneManager.LoadScene((int) _ink.CurrentScene, LoadSceneMode.Single);
+
+            if(player == null)
+			{
+                yield return null;
+			}
+
+            var playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement.IsTrapped = _ink.GetVariable<bool>("acquired_leg");
+            playerMovement.AcquiredArm = _ink.GetVariable<bool>("acquired_arm");
+		}
     }
 
     private void Update()
@@ -274,11 +295,6 @@ public class GameManager : MonoBehaviour
     public void GoToMainMenu()
     {
         SceneManager.LoadScene("00_StartGame");
-    }
-
-    public void LoadState(Scene scene, LoadSceneMode mode)
-    {
-        //Debug.Log("LoadState");
     }
 
     public void SetCursorAction(CursorAction newAction)
