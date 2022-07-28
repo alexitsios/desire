@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
     private Settings _settings;
     private float warningWaitTime;
     private bool warningActive;
+    private bool gameLoaded = false;
+    private WriterAudio wa;
 
     private void Awake()
     {
@@ -117,6 +119,7 @@ public class GameManager : MonoBehaviour
 		{
             _mainUiInstance = Instantiate(mainUI);
             _shipWarnings = GameObject.Find("ShipWarning").GetComponent<TMP_Text>();
+            wa = GameObject.FindGameObjectWithTag("SayDialog").GetComponent<WriterAudio>();
             _shipWarnings.CrossFadeAlpha(0, 0, false);
 
             _ink.StartInkManager();
@@ -126,7 +129,9 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(_mainUiInstance);
 
             if(!Settings.BeepSound)
-                GameObject.FindGameObjectWithTag("SayDialog").GetComponent<WriterAudio>().volume = 0f;
+			{
+                wa.volume = 0f;
+			}
         }
 
         if(_dataPadUiInstance == null && scene.buildIndex != 0)
@@ -136,14 +141,23 @@ public class GameManager : MonoBehaviour
             _dataPadUiInstance.GetComponentInChildren<Image>().color = new Color(1f, 1f, 1f, 0);
         }
 
-        if(scene.name == "07_EndGame")
+        if(scene.name == "00_StartGame")
+		{
+            gameLoaded = _ink.LoadGame();
+
+            if(!gameLoaded)
+			{
+                // Removes the Load button from the main menu if no save game is available
+                Destroy(GameObject.Find("Load"));
+			}
+		}
+        else if(scene.name == "07_EndGame")
 		{
             Destroy(_mainUiInstance);
             Destroy(_inventoryInstance);
             Destroy(_dataPadUiInstance);
 		}
-
-        if(scene.name != "00_StartGame" && scene.name != "07_EndGame")
+        else if(scene.name != "00_StartGame" && scene.name != "07_EndGame")
 		{
             GetComponent<InventoryManager>().StartInventoryManager();
 
@@ -254,19 +268,16 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadState()
     {
-		if(_ink.LoadGame())
+        LoadSceneAndSpawnPlayer(_ink.CurrentScene, 0, false);
+
+        if(player == null)
 		{
-            SceneManager.LoadScene((int) _ink.CurrentScene, LoadSceneMode.Single);
-
-            if(player == null)
-			{
-                yield return null;
-			}
-
-            var playerMovement = player.GetComponent<PlayerMovement>();
-            playerMovement.IsTrapped = _ink.GetVariable<bool>("acquired_leg");
-            playerMovement.AcquiredArm = _ink.GetVariable<bool>("acquired_arm");
+            yield return null;
 		}
+
+        var playerMovement = player.GetComponent<PlayerMovement>();
+        playerMovement.IsTrapped = _ink.GetVariable<bool>("acquired_leg");
+        playerMovement.AcquiredArm = _ink.GetVariable<bool>("acquired_arm");
     }
 
     private void Update()
@@ -296,6 +307,11 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("00_StartGame");
     }
+
+    public void QuitGame()
+	{
+        Application.Quit();
+	}
 
     public void SetCursorAction(CursorAction newAction)
 	{
@@ -455,7 +471,17 @@ public class GameManager : MonoBehaviour
 
         var fxVolume = Mathf.Lerp(0f, 1f, (_settings.FXVolume + _settings.MasterVolume) / 2);
         GetComponent<AudioSource>().volume = fxVolume;
-	}
+
+        if(!Settings.BeepSound)
+        {
+            wa.volume = 0f;
+        }
+
+        foreach(var prop in FindObjectsOfType<PropBase>())
+        {
+            prop.DisplayHints = Settings.ShowHints;
+        }
+    }
 
     public IEnumerator DisplayMessage(string messageId, string messageType)
 	{
@@ -502,6 +528,5 @@ public class GameManager : MonoBehaviour
 
             sprite.color = new Color(1f, 1f, 1f, 0);
         }
-        
 	}
 }
