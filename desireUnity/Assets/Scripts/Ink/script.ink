@@ -20,6 +20,9 @@ VAR memory_restored = false
 VAR has_access_code = false
 VAR stern_data_pad_read = false
 VAR current_scene = 1
+VAR interacted_with_service_bot = false
+VAR interacted_with_horizon = false
+VAR finished_talking_to_vacuum_bot = false
  
 == stern_load ==
 >> setscene Stern
@@ -28,6 +31,7 @@ VAR current_scene = 1
         >> sfx led_boot false
         >> fadein 4
         >> settrapped true
+        >> wait 3
         Led Left "@stern_load_1"
         VacuumRobot Right "@stern_load_2"
         Led Left "@stern_load_3"
@@ -61,13 +65,13 @@ VacuumRobot "@stern_garbage_bin"
         Led "@stern_vacuum_robot_0"
         >> sfx puzzle_complete true
         >> save
-        Led "@stern_vacuum_robot_1"
-        VacuumRobot "@stern_vacuum_robot_2"
         ~ acquired_leg = true
         >> settrapped false
         >> quest RecoverLeg Completed
+        Led "@stern_vacuum_robot_1"
+        VacuumRobot "@stern_vacuum_robot_2"
         -> DONE
-    - else:
+    - !finished_talking_to_vacuum_bot:
         VacuumRobot "@stern_vacuum_robot_3"
         Led "@stern_vacuum_robot_4"
         VacuumRobot "@stern_vacuum_robot_5"
@@ -86,17 +90,23 @@ VacuumRobot "@stern_garbage_bin"
         VacuumRobot "@stern_vacuum_robot_18"
         Led "@stern_vacuum_robot_19"
         -> vacuum_robot_ask_table
+    - else:
+        Led "@end_discussion_with_vacuum_robot_5"
+        VacuumRobot "@end_discussion_with_vacuum_robot_6"
+        VacuumRobot "@end_discussion_with_vacuum_robot_6"
+        Led "@end_discussion_with_vacuum_robot_13"
+        -> DONE
 }
 
 == vacuum_robot_ask_table ==
-    * [@vacuum_robot_ask_table_1] 
-        -> ask_what_happened
-    * [@vacuum_robot_ask_table_2] 
-        -> why_are_we_damaged
-    * [@vacuum_robot_ask_table_3]
-        -> where_are_the_humans
-    + [@vacuum_robot_ask_table_4] 
-        -> end_discussion_with_vacuum_robot
+* [@vacuum_robot_ask_table_1] 
+    -> ask_what_happened
+* [@vacuum_robot_ask_table_2] 
+    -> why_are_we_damaged
+* [@vacuum_robot_ask_table_3]
+    -> where_are_the_humans
++ [@vacuum_robot_ask_table_4] 
+    -> end_discussion_with_vacuum_robot
 
 == ask_what_happened ==
 Led "@ask_what_happened_1"
@@ -135,6 +145,7 @@ Led "@end_discussion_with_vacuum_robot_10"
 VacuumRobot "@end_discussion_with_vacuum_robot_11"
 Led "@end_discussion_with_vacuum_robot_12"
 Led "@end_discussion_with_vacuum_robot_13"
+~ finished_talking_to_vacuum_bot = true
 -> DONE
 
 == stern_data_pad ==
@@ -164,11 +175,17 @@ Led "@stern_reflection_4"
 -> DONE
 
 == stern_service_bot ==
-Led "@stern_service_bot_1"
-Led "@stern_service_bot_2"
-Led "@stern_service_bot_3"
-Led "@stern_service_bot_4"
-Led "@stern_service_bot_5"
+{
+    - !interacted_with_service_bot:
+        Led "@stern_service_bot_1"
+        Led "@stern_service_bot_2"
+        Led "@stern_service_bot_3"
+        Led "@stern_service_bot_4"
+        Led "@stern_service_bot_5"
+        ~ interacted_with_service_bot = true
+    - else:
+        Led "@stern_service_bot_5"
+}
 -> DONE
 
 == all_in_one_tool ==
@@ -180,9 +197,7 @@ Led "@all_in_one_tool_3"
 -> DONE
 
 == arm ==
->> fadeout 1
 >> changesprite Led led_with_arm
->> fadein 1
 >> sfx puzzle_complete true
 >> save
 Led "@arm_1"
@@ -192,21 +207,31 @@ Led "@arm_3"
 >> quest RecoverArm Completed
 -> DONE
 
+== stern_hole==
+Led "@stern_hole_1"
+-> DONE
+
 == stern_horizon ==
 {
     - !ship_is_sinking:
-        Led "@stern_horizon_1"
-        Led "@stern_horizon_2"
-        Led "@stern_horizon_3"
         {
-            - acquired_arm:
-                Led "@stern_horizon_4"
+            - !interacted_with_horizon:
+                Led Middle "@stern_horizon_1"
+                Led "@stern_horizon_2"
+                Led "@stern_horizon_3"
+                {
+                    - acquired_arm:
+                        Led "@stern_horizon_4"
+                }
+                Led "@stern_horizon_5"
+                Led "@stern_horizon_6"
+                ~ interacted_with_horizon = true
+            - else:
+                Led Middle "@stern_horizon_1"
         }
-        Led "@stern_horizon_5"
-        Led "@stern_horizon_6"
         -> DONE
     - else:
-        Led "@stern_horizon_7"
+        Led Middle "@stern_horizon_7"
         Led "@stern_horizon_8"
         -> DONE
 }
@@ -214,7 +239,6 @@ Led "@arm_3"
 
 == stern_door ==
 Led "@stern_door_1"
-Led "@stern_door_2"
 >> quest OpenSternDoor Active
 -> DONE
 

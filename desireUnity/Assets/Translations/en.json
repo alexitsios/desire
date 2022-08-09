@@ -27,7 +27,8 @@
         "@to_generator_room": "To Generator Room",
         "@to_bridge": "To Bridge",
         "@corpse": "Corpse",
-        "@generator": "Generator"
+        "@generator": "Generator",
+        "@hole": "Hole"
     },
     "special": {
         "!item_use_error": "Hmmm... I can't use that here"
@@ -43,7 +44,7 @@
 
         "@stern_garbage_bin": "Neeeeeaaaaahhhh! M-m-more dirt! More tra-tra-trash! Nev-never finish!",
 
-        "@stern_vacuum_robot_0": "Got it!",
+        "@stern_vacuum_robot_0": "Got my leg back!",
         "@stern_vacuum_robot_1": "There, that’s a lot better! Great to be on my own two feet again. Now I need to find my arm",
         "@stern_vacuum_robot_2": "Dirt! Dirt! Dirt! So much dirt! Dir dir dir dir dirt! No- no time time time time time-",
         "@stern_vacuum_robot_3": "Ev- ev- everything sssssso dirty. No nada nope nein na time time time no time!",
@@ -126,6 +127,8 @@
         "@arm_2": "If our arms are swappable... Maybe its memory logs could be as well...",
         "@arm_3": "Ah, but this tool isn't sophisticated enough for that. But I'll still keep it. Just in case",
 
+        "@stern_hole_1": "The level below is filled with water. We're lucky the ship hasn't sunk yet",
+
         "@stern_horizon_1": "There’s... Nothing. Only worlds of ocean",
         "@stern_horizon_2": "I—I’ve done this before, looked up at the moon. The memory feels important but...",
         "@stern_horizon_3": "I can't... Ugh... I can't remember! My Memory Drive fails me",
@@ -135,8 +138,7 @@
         "@stern_horizon_7": "Maybe I'll find something here",
         "@stern_horizon_8": "Oh no! The lower part of the ship is broken, there's a big hole- there's water going into the ship!",
 
-        "@stern_door_1": "I've searched everywhere out here but I still need more tools. Maybe there's something out there",
-        "@stern_door_2": "The door is bolted shut. That panel next to it looks important, but it's damaged",
+        "@stern_door_1": "The door is bolted shut. That panel next to it looks important, but it's damaged. If I had the tools needed, I could fix it",
 
         "@stern_pannel_1": "The pannel to open the doors. They're too damaged to be used, but maybe I can fix it somehow",
         "@stern_pannel_2": "I might be able to hotwire it if I get the right angle... Oh! The all-in-one tool might be able to work here!",

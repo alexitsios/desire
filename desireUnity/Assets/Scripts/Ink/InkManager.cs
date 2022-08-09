@@ -221,6 +221,10 @@ public class InkManager : MonoBehaviour
 			case "save":
 				SaveGame();
 				break;
+
+			case "wait":
+				yield return new WaitForSeconds(float.Parse(commandList[1]));
+				break;
 		}
 	}
 
