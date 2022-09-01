@@ -28,10 +28,13 @@
         "@to_bridge": "To Bridge",
         "@corpse": "Corpse",
         "@generator": "Generator",
-        "@hole": "Hole"
+        "@hole": "Hole",
+		"@jamed_door": "Door",
+		"@to_hangar": "To Hangar"
     },
     "special": {
-        "!item_use_error": "Hmmm... I can't use that here"
+        "!item_use_error": "Hmmm... I can't use that here",
+		"!jamed_door": "The door won't budge"
     },
     "stern": {
         "@stern_load_1": "Uh... Wh- what's going on? I- I don't remember- Oh crap- M- my leg! My arm! They're gone!",
@@ -369,7 +372,9 @@
 
         "@superstructure_in_leave_without_power_1": "There's no power. This door is blocked",
 
-        "@superstructure_in_no_access_code_1": "This door is locked by a keypad. There's just enough power to keep it powered"
+        "@superstructure_in_no_access_code_1": "This door is locked by a keypad. There's just enough power to keep it powered",
+
+		"@superstructure_in_to_hangar": "The level below is filled with water"
     },
     "generator_room": {
         "@generator_room_load_1": "Humm. Looks like this might be… the generator room? Maybe I can turn the power on from here, I just need to find some switches",

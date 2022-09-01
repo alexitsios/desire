@@ -24,8 +24,14 @@ public class DeadServiceRobot : PropBase
 			usedServiceKit = true;
 			blockName = "DeadServiceRobot_2";
 		}
-		else
+		else if(item == ItemType.NoItem)
+		{
 			blockName = "DeadServiceRobot_0";
+		}
+		else
+		{
+			blockName = "ItemUseError";
+		}
 
 		Flowchart.ExecuteBlock(blockName);
 	}

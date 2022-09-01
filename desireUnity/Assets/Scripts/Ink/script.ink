@@ -334,6 +334,10 @@ Led "@recover_memory_26"
 Led "!item_use_error"
 -> DONE
 
+== jamed_door ==
+Led "!jamed_door"
+-> DONE
+
 == funnel_load ==
 >> setscene Funnel
 {
@@ -597,6 +601,10 @@ Led "@superstructure_in_leave_without_power_1"
 
 == superstructure_in_no_access_code ==
 Led "@superstructure_in_no_access_code_1"
+-> DONE
+
+== superstructure_in_to_hangar ==
+Led "@superstructure_in_to_hangar"
 -> DONE
 
 == generator_room_load ==

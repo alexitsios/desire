@@ -5808,14 +5808,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634761908}
-  m_LocalRotation: {x: 0, y: 0, z: 0.92172784, w: 0.38783744}
-  m_LocalPosition: {x: 21.22, y: -5.5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.92, y: -5.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 236006151}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 134.36}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &634761910
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5829,8 +5829,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2, y: 3.89}
+  m_Offset: {x: 0.45328617, y: -0.41628337}
+  m_Size: {x: 2.9065723, y: 3.0574336}
   m_Direction: 0
 --- !u!114 &634761911
 MonoBehaviour:
@@ -6235,7 +6235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -352.9063, y: 52.263546}
+  scrollPos: {x: -346.05695, y: -55.955574}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 270.8
@@ -6535,7 +6535,7 @@ MonoBehaviour:
   suppressAllAutoSelections: 0
 --- !u!114 &687607680
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

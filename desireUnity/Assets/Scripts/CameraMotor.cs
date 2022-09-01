@@ -31,11 +31,6 @@ public class CameraMotor : MonoBehaviour
 
 	private void LateUpdate ()
     {
-        if(Debug.isDebugBuild && Input.mouseScrollDelta.y != 0 && !Input.GetKey(KeyCode.LeftControl))
-		{
-            Camera.main.orthographicSize -= Input.mouseScrollDelta.y;
-		}
-
         Vector3 delta = Vector3.zero;
 
         // This is to check if we're inside the bounds on the X axis

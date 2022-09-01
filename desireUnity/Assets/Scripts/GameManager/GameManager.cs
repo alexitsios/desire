@@ -61,6 +61,8 @@ public class GameManager : MonoBehaviour
     private bool gameLoaded = false;
     private WriterAudio wa;
 
+    private const string GAME_VERSION = "0.56";
+
     private void Awake()
     {
         if(instance != null)
@@ -150,6 +152,8 @@ public class GameManager : MonoBehaviour
                 // Removes the Load button from the main menu if no save game is available
                 Destroy(GameObject.Find("Load"));
 			}
+
+            GameObject.Find("GameVersion").GetComponent<TMP_Text>().text = $"v. {GAME_VERSION}";
 		}
         else if(scene.name == "07_EndGame")
 		{
