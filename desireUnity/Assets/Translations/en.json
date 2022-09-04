@@ -379,8 +379,12 @@
     "generator_room": {
         "@generator_room_load_1": "Humm. Looks like this might be… the generator room? Maybe I can turn the power on from here, I just need to find some switches",
 
-        "@generator_room_board_1": "Yes! That’s it!",
-        "@generator_room_board_2": "I’ve reconnected the power, the lights will come on now and the doors should work too!",
+        "@generator_room_board_look_1": "Ah, that's why there's no energy... The generator is damaged. Maybe I can fix it with the right tools",
+
+        "@generator_room_board_fix_1": "Yes! That’s it!",
+        "@generator_room_board_fix_2": "I’ve reconnected the power, the lights will come on now and the doors should work too!",
+        "@generator_room_board_fix_3": "The generator is already working. There's nothing else to do",
+		
 
         "@computer_no_lights": "There's no power to use this computer",
 

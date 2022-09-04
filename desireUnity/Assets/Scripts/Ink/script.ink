@@ -615,13 +615,23 @@ Led "@superstructure_in_to_hangar"
 }
 -> DONE
 
-== generator_room_board ==
-Led "@generator_room_board_1"
-Led "@generator_room_board_2"
->> bgchange generator_room_lit
->> sfx puzzle_complete true
->> save
-~ turned_on_lights = true
+== generator_room_board_look ==
+Led "@generator_room_board_look_1"
+-> DONE
+
+== generator_room_board_fix ==
+{
+	- !turned_on_lights:
+		Led "@generator_room_board_fix_1"
+		Led "@generator_room_board_fix_2"
+		>> bgchange generator_room_lit
+		>> sfx puzzle_complete true
+		>> save
+		>> removeitem ServiceKit
+		~ turned_on_lights = true
+	else:
+		Led "@generator_room_board_fix_3"
+}
 -> DONE
 
 == generator_room_computer ==

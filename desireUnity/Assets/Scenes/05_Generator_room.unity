@@ -524,6 +524,8 @@ GameObject:
   - component: {fileID: 997280658}
   - component: {fileID: 997280661}
   - component: {fileID: 997280660}
+  - component: {fileID: 997280663}
+  - component: {fileID: 997280662}
   m_Layer: 0
   m_Name: PropsFlowchart
   m_TagString: Untagged
@@ -555,8 +557,10 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks: []
-  selectedCommands: []
+  selectedBlocks:
+  - {fileID: 997280663}
+  selectedCommands:
+  - {fileID: 997280662}
   variables: []
   description: 
   stepPause: 0
@@ -681,7 +685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 129
   indentLevel: 0
-  path: generator_room_board
+  path: generator_room_board_fix
 --- !u!114 &997280661
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -698,16 +702,58 @@ MonoBehaviour:
     serializedVersion: 2
     x: 285.52762
     y: 127.90058
-    width: 106.16437
+    width: 123.97258
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 128
-  blockName: Generator
+  blockName: Generator_fix
   description: 
   eventHandler: {fileID: 0}
   commandList:
   - {fileID: 997280660}
+  suppressAllAutoSelections: 0
+--- !u!114 &997280662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997280653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 409214793f5282f43b48c628d03c4b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 131
+  indentLevel: 0
+  path: generator_room_board_look
+--- !u!114 &997280663
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997280653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 285.52747
+    y: 182.69513
+    width: 134.93149
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 130
+  blockName: Generator_look
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 997280662}
   suppressAllAutoSelections: 0
 --- !u!1 &1152400439
 GameObject:
