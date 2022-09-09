@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     private bool gameLoaded = false;
     private WriterAudio wa;
 
-    private const string GAME_VERSION = "0.56";
+    private const string GAME_VERSION = "0.6";
 
     private void Awake()
     {
@@ -145,13 +145,13 @@ public class GameManager : MonoBehaviour
 
         if(scene.name == "00_StartGame")
 		{
-            gameLoaded = _ink.LoadGame();
+            //gameLoaded = _ink.LoadGame();
 
-            if(!gameLoaded)
-			{
+            //if(!gameLoaded)
+            //{
                 // Removes the Load button from the main menu if no save game is available
                 Destroy(GameObject.Find("Load"));
-			}
+            //}
 
             GameObject.Find("GameVersion").GetComponent<TMP_Text>().text = $"v. {GAME_VERSION}";
 		}
@@ -272,9 +272,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadState()
     {
-        LoadSceneAndSpawnPlayer(_ink.CurrentScene, 0, false);
+        StartCoroutine(LoadSceneAndSpawnPlayer(_ink.CurrentScene, 0, false));
 
-        if(player == null)
+        while(player == null)
 		{
             yield return null;
 		}
