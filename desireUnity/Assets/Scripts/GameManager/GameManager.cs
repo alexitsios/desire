@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case SceneName.Funnel:
-                    SetPlayerAndShadowSize(0.6f);
+                    SetPlayerAndShadowSize(0.8f);
                     break;
 
                 case SceneName.Superstructure_out:
@@ -224,7 +224,7 @@ public class GameManager : MonoBehaviour
                     break;
 
                 case SceneName.Generator_room:
-                    SetPlayerAndShadowSize(0.7f);
+                    SetPlayerAndShadowSize(1f);
                     break;
 
                 case SceneName.Bridge:
