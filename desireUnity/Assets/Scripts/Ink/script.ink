@@ -629,7 +629,7 @@ Led "@generator_room_board_look_1"
 		>> save
 		>> removeitem ServiceKit
 		~ turned_on_lights = true
-	else:
+	- else:
 		Led "@generator_room_board_fix_3"
 }
 -> DONE
