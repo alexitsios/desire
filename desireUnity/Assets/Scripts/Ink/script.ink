@@ -158,9 +158,9 @@ Led #@end_discussion_with_vacuum_robot_13
         Led #@stern_data_pad_1
         >> showdatapad true
         >> dim 2
-        >> message #@stern_data_pad_2
-        >> message #@stern_data_pad_3
-        >> message #@stern_data_pad_4
+        >> message @stern_data_pad_2
+        >> message @stern_data_pad_3
+        >> message @stern_data_pad_4
         >> undim 2
         >> showdatapad false
         Led #@stern_data_pad_5
@@ -364,11 +364,11 @@ Led #@funnel_worktable_1
 == funnel_letter ==
 Led #@funnel_letter_1
 >> dim 2
->> message #@funnel_letter_2
->> message #@funnel_letter_3
->> message #@funnel_letter_4
->> message #@funnel_letter_5
->> message #@funnel_letter_6
+>> message @funnel_letter_2
+>> message @funnel_letter_3
+>> message @funnel_letter_4
+>> message @funnel_letter_5
+>> message @funnel_letter_6
 >> undim 2
 -> DONE
 
@@ -384,9 +384,9 @@ Led #@funnel_bones_5
 Led #@funnel_data_pad_1
 >> showdatapad true
 >> dim 2
->> message #@funnel_data_pad_2
+>> message @funnel_data_pad_2
 Led #@funnel_data_pad_3
->> message #@funnel_data_pad_4
+>> message @funnel_data_pad_4
 >> undim 2
 >> showdatapad false
 -> DONE
@@ -714,9 +714,9 @@ Led #@bridge_load_5
 -> DONE
 
 == bridge_monitor ==
-Led #@bridge_monitor_1
-Led #@bridge_monitor_2
-Led #@bridge_monitor_3
+Led "bridge_monitor_1
+Led "bridge_monitor_2
+Led "bridge_monitor_3
 -> bridge_monitor_log_table
 
 == bridge_monitor_log_table ==
@@ -852,7 +852,4 @@ Led #@bridge_monitor_3
 	CaptainBot #@bridge_captain_captain_table_6.9
 	CaptainBot #@bridge_captain_captain_table_6.10
 	CaptainBot #@bridge_captain_captain_table_6.11
-	>> additem ClearanceCard
-	>> quest GetClearance Completed
-	~ has_clearance = true
 	-> DONE
