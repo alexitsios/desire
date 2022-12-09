@@ -94,6 +94,19 @@ public class PlayerMovement : MovementBase
 				moving = true;
 			}
 		}
+		
+		//Hold to move
+		if (Input.GetMouseButton(0) && !playerInteraction.isInteracting)
+        	{
+			// Only moves the character if the player has not clicked on an inventory item
+			if (EventSystem.current.currentSelectedGameObject == null)
+			{
+				_idleTimer = 0f;
+				animator.SetBool("canIdle", true);
+				lastClickedPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				moving = true;
+			}
+		}
 
 		if(_idleTimer >= 5f)
 		{
