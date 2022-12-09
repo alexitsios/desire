@@ -6680,8 +6680,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1137118914}
-  - component: {fileID: 1137118916}
   - component: {fileID: 1137118915}
+  - component: {fileID: 1137118916}
   m_Layer: 0
   m_Name: DeadServiceRobot
   m_TagString: Untagged

@@ -714,9 +714,9 @@ Led #@bridge_load_5
 -> DONE
 
 == bridge_monitor ==
-Led "bridge_monitor_1
-Led "bridge_monitor_2
-Led "bridge_monitor_3
+Led #@bridge_monitor_1
+Led #@bridge_monitor_2
+Led #@bridge_monitor_3
 -> bridge_monitor_log_table
 
 == bridge_monitor_log_table ==
@@ -852,4 +852,7 @@ Led "bridge_monitor_3
 	CaptainBot #@bridge_captain_captain_table_6.9
 	CaptainBot #@bridge_captain_captain_table_6.10
 	CaptainBot #@bridge_captain_captain_table_6.11
+	>> additem ClearanceCard
+	>> quest GetClearance Completed
+	~ has_clearance = true
 	-> DONE
