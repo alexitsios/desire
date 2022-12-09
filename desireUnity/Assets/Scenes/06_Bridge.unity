@@ -330,6 +330,8 @@ GameObject:
   - component: {fileID: 327341260}
   - component: {fileID: 327341259}
   - component: {fileID: 327341261}
+  - component: {fileID: 327341263}
+  - component: {fileID: 327341262}
   m_Layer: 0
   m_Name: PropsFlowchart
   m_TagString: Untagged
@@ -368,7 +370,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 67
     y: 70
-    width: 97.27269
+    width: 98
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -392,11 +394,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 201.95802, y: 80.12404}
+  scrollPos: {x: 315.91046, y: 39.16191}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
-  zoom: 0.5500004
+  zoom: 1
   scrollViewRect:
     serializedVersion: 2
     x: -343
@@ -405,8 +407,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 327341259}
-  selectedCommands:
-  - {fileID: 327341261}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 0
@@ -432,7 +433,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 1
   indentLevel: 0
-  path: bridge_corpse_a
+  path: bridge_body
+--- !u!114 &327341262
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327341257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 409214793f5282f43b48c628d03c4b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 4
+  indentLevel: 0
+  path: bridge_monitor
+--- !u!114 &327341263
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327341257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nodeRect:
+    serializedVersion: 2
+    x: 67.089554
+    y: 125.83809
+    width: 93
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 2
+  blockName: Monitor
+  description: 
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 327341262}
+  suppressAllAutoSelections: 0
 --- !u!1001 &352193177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,6 +564,18 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.00484398
       objectReference: {fileID: 0}
+    - target: {fileID: 1565193677999097135, guid: 47b3981cd440092478861796f73f3fb7, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565193677999097135, guid: 47b3981cd440092478861796f73f3fb7, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1565193677999097135, guid: 47b3981cd440092478861796f73f3fb7, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4562601901456372006, guid: 47b3981cd440092478861796f73f3fb7, type: 3}
       propertyPath: m_Name
       value: CaptainBot
@@ -604,6 +659,18 @@ PrefabInstance:
     - target: {fileID: 4562601901456372011, guid: 47b3981cd440092478861796f73f3fb7, type: 3}
       propertyPath: m_Offset.y
       value: -0.173372
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562601901456372011, guid: 47b3981cd440092478861796f73f3fb7, type: 3}
+      propertyPath: m_SpriteTilingProperty.drawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562601901456372011, guid: 47b3981cd440092478861796f73f3fb7, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562601901456372011, guid: 47b3981cd440092478861796f73f3fb7, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47b3981cd440092478861796f73f3fb7, type: 3}
@@ -844,6 +911,7 @@ Transform:
   m_Children:
   - {fileID: 848221469}
   - {fileID: 544277588}
+  - {fileID: 1466013243}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -876,7 +944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 327341260}
+  selectedFlowchart: {fileID: 1394644673}
 --- !u!4 &816935714
 Transform:
   m_ObjectHideFlags: 1
@@ -1167,7 +1235,8 @@ PolygonCollider2D:
     m_Paths:
     - - {x: -21.533335, y: 5.4}
       - {x: -21.406366, y: -5.2145696}
-      - {x: -17.106888, y: -5.5413675}
+      - {x: -18.61667, y: -5.2640605}
+      - {x: -14.059951, y: -0.24429536}
       - {x: -6.3181095, y: 1.7687111}
       - {x: 18.46103, y: 1.7687111}
       - {x: 21.965044, y: -6.03683}
@@ -1310,11 +1379,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 259.17355, y: 136.50313}
+  scrollPos: {x: 151.71739, y: 58.946438}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
-  zoom: 0.64000034
+  zoom: 0.8800001
   scrollViewRect:
     serializedVersion: 2
     x: -343
@@ -1322,7 +1391,7 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 1394644678}
+  - {fileID: 1394644675}
   selectedCommands: []
   variables: []
   description: 
@@ -1366,7 +1435,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 67
     y: 70
-    width: 110.93747
+    width: 113.63635
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1394,7 +1463,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1394644677
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1409,7 +1478,7 @@ MonoBehaviour:
   path: item_use_error
 --- !u!114 &1394644678
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1423,7 +1492,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 70.24664
     y: 124.94922
-    width: 121.87496
+    width: 123.863625
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -1434,3 +1503,64 @@ MonoBehaviour:
   commandList:
   - {fileID: 1394644677}
   suppressAllAutoSelections: 0
+--- !u!1 &1466013242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1466013243}
+  - component: {fileID: 1466013244}
+  - component: {fileID: 1466013245}
+  m_Layer: 0
+  m_Name: Monitor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1466013243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466013242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -32.73, y: -3.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 637142429}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1466013244
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466013242}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
+--- !u!114 &1466013245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466013242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e5e95e9a468e1469f5f63b061e0ac0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

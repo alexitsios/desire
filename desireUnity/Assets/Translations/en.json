@@ -30,7 +30,8 @@
         "@generator": "Generator.",
         "@hole": "Hole.",
 		"@jamed_door": "Door.",
-		"@to_hangar": "To Hangar"
+		"@to_hangar": "To Hangar",
+		"@monitor": "Monitor"
     },
     "special": {
         "!item_use_error": "Hmmm... I can't use that here.",
