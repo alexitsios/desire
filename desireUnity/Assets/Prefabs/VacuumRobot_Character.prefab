@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25fb867d2049d41f597aefdd6b19f598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: VacuumRobot
-  nameColor: {r: 0.2627451, g: 0.25882354, b: 0.2627451, a: 1}
+  nameText: Vacuum Robot
+  nameColor: {r: 1, g: 1, b: 1, a: 1}
   soundEffect: {fileID: 0}
   portraits:
   - {fileID: 21300000, guid: 3e02959fab3eb8441a7a0b95c57a5fbd, type: 3}

@@ -8,12 +8,16 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 	public PlayerInteraction PlayerInteraction { get; set; }
 
 	private Animator animator;
-    private GameObject[] inventorySlots;
+    private GameObject[] inventorySlots = new GameObject[6];
 
 	void Start()
     {
         animator = gameObject.GetComponent<Animator>();
-        inventorySlots = GameObject.FindGameObjectsWithTag("ItemSlot");
+
+        for(var i = 1; i <= 6; i++)
+        {
+            inventorySlots[i - 1] = GameObject.Find($"Item0{i}");
+        }
 
         for(int i = 0; i < inventorySlots.Length; i++)
 		{

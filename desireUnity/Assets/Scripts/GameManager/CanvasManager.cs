@@ -36,11 +36,6 @@ public class CanvasManager : MonoBehaviour
 	public void StartCanvasManager()
 	{
 		_background = GameObject.FindGameObjectWithTag("Background").GetComponent<SpriteRenderer>();
-
-		if(!Debug.isDebugBuild)
-		{
-			Destroy(GameObject.Find("DebugBanner"));
-		}
 	}
 
 	public void UpdateBackground(string bgName)

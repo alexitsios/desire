@@ -2,14 +2,15 @@ using Fungus;
 using Ink.Runtime;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
-using TMPro;
 using UnityEngine;
 
 public class InkManager : MonoBehaviour
 {
-    public TextAsset _textAsset;
+	public TextAsset _textAsset;
 	public Character[] characters;
 	public PlayerInteraction Interaction { get; set; }
 	public SceneName CurrentScene { get; set; }
@@ -17,7 +18,7 @@ public class InkManager : MonoBehaviour
 	private Story _story;
 	private CanvasManager _canvasManager;
 	private PlayerMovement _playerMovement;
-    private SayDialog _sayDialog;
+	private SayDialog _sayDialog;
 	private Stage _stage;
 	private GameManager _gameManager;
 	private MenuDialog _menuDialog;
@@ -56,14 +57,18 @@ public class InkManager : MonoBehaviour
 	private IEnumerator RunStory()
 	{
 		Interaction.isInteracting = true;
-		var block = _story.ContinueMaximally().Split('\n');
 
-		foreach(string line in block)
+		while(_story.canContinue)
 		{
-			if(line.Equals(""))
-				continue;
+			var line = _story.Continue().Replace("\n", "");
+			var tags = _story.currentTags;
 
-			yield return StartCoroutine(ProcessPath(line));
+			if(line.Equals(""))
+			{
+				continue;
+			}
+
+			yield return StartCoroutine(ProcessPath(line, tags));
 		}
 
 		if(_story.currentChoices.Count > 0)
@@ -71,9 +76,9 @@ public class InkManager : MonoBehaviour
 			_menuDialog.SetActive(true);
 			_menuDialog.Clear();
 
-			for(int i = 0; i < _story.currentChoices.Count; ++i)
+			for(var i = 0; i < _story.currentChoices.Count; ++i)
 			{
-				int copy = i;
+				var copy = i;
 				void action()
 				{
 					_story.ChooseChoiceIndex(copy);
@@ -88,11 +93,20 @@ public class InkManager : MonoBehaviour
 		}
 		else
 		{
+			yield return new WaitForSeconds(0.5f);
+
+			var charactersOnStage = _stage.CharactersOnStage.ToList();
+
+			charactersOnStage.ForEach(c =>
+			{
+				_stage.Hide(c);
+			});
+
 			Interaction.FinishInteraction();
 		}
 	}
 
-	private IEnumerator ProcessPath(string line)
+	private IEnumerator ProcessPath(string line, List<string> tags)
 	{
 		if(line.StartsWith(">>"))
 		{
@@ -104,22 +118,28 @@ public class InkManager : MonoBehaviour
 		}
 		else
 		{
-			var block = Regex.Split(line, "[\"]+");
-			var characterAttributes = block[0].Split(' ');
-			var character = GetCharacter(characterAttributes[0]);
-			if(character != null)
-				character.NameText = _translationManager.GetTranslatedName(characterAttributes[0]);
 
-			var translatedLine = _translationManager.GetTranslatedLine(block[1]);
+			var block = Regex.Split(line, "[\"]+");
+			var character = GetCharacter(line);
+
+			if(character != null)
+			{
+				character.NameText = _translationManager.GetTranslatedName(line);
+			}
+
+			var lineId = tags.Where(t => t.StartsWith('@')).First();
+			var translatedLine = _translationManager.GetTranslatedLine(lineId);
 
 			_sayDialog.SetCharacter(character);
-			yield return StartCoroutine(_sayDialog.DoSay(translatedLine, true, true, true, false, false, null, null, _stage, character, characterAttributes[1]));
+
+			yield return StartCoroutine(_sayDialog.DoSay(translatedLine, true, true, true, false, false, null, null, _stage, character));
 		}
 	}
 
 	private IEnumerator ProcessCommand(string command)
 	{
-		var commandList = command[2..].Trim().Split(' ');;
+		var commandList = command[2..].Trim().Split(' ');
+		;
 
 		switch(commandList[0])
 		{
@@ -189,7 +209,9 @@ public class InkManager : MonoBehaviour
 				audioSource.Play();
 
 				while(waitForFinish && audioSource.isPlaying)
+				{
 					yield return null;
+				}
 
 				break;
 
@@ -233,7 +255,9 @@ public class InkManager : MonoBehaviour
 		foreach(var character in characters)
 		{
 			if(character.name == $"{name}_Character")
+			{
 				return character;
+			}
 		}
 
 		return null;

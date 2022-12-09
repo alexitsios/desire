@@ -9,10 +9,16 @@ public class Lifeboat : PropBase
 
 	public override void Interact(ItemType item)
 	{
+		if(Debug.isDebugBuild && Input.GetKey(KeyCode.LeftAlt))
+		{
+			gameManager.StartEndingCutscene();
+		}
+
 		if(QuestController.Quests[QuestName.GetClearance] == QuestStatus.Completed)
 		{
 			gameManager.StartEndingCutscene();
-		} else
+		} 
+		else
 		{
 			base.Interact(item);
 		}

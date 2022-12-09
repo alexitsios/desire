@@ -101,6 +101,7 @@ MonoBehaviour:
   mainUI: {fileID: 3237129540963922203, guid: 39e292a9ef48e814caec2a57b9ad2374, type: 3}
   settingsUI: {fileID: 3446138416216653522, guid: 60e1ffd741a67e240b3ddeaeac5671ee, type: 3}
   dataPadUI: {fileID: 4923905467451345925, guid: 888d424d417051948874e82619195af0, type: 3}
+  aboutUI: {fileID: 3237129540963922203, guid: 7fc2e6d7505718f4580cd8074dea7cf3, type: 3}
   player: {fileID: 0}
 --- !u!114 &1226066315
 MonoBehaviour:

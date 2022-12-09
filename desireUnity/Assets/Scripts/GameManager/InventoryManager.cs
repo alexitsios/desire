@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -27,7 +28,7 @@ public class InventoryManager : MonoBehaviour
         inventoryScreen.UpdateInventoryScreen(Inventory);
 
         var dialog = Instantiate(itemObatinedDialog, transform);
-        GameObject.Find("ItemObtainedText").GetComponent<TextMeshProUGUI>().text = $"You got the {item._type}";
+        GameObject.Find("ItemObtainedName").GetComponent<TextMeshProUGUI>().text = $"{item._type}";
         GameObject.Find("ItemObtainedImage").GetComponent<Image>().sprite = item._sprite;
         Destroy(dialog, 2f);
     }

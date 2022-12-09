@@ -641,7 +641,7 @@ namespace Fungus
         }
 
 
-        protected virtual void DoMoveTween(Character character, RectTransform fromPosition, RectTransform toPosition, float moveDuration, Boolean waitUntilFinished)
+        public virtual void DoMoveTween(Character character, RectTransform fromPosition, RectTransform toPosition, float moveDuration, Boolean waitUntilFinished)
         {
             PortraitOptions options = new PortraitOptions(true);
             options.character = character;

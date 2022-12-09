@@ -40,7 +40,8 @@ public class GameManager : MonoBehaviour
     public GameObject mainUI;
     public GameObject settingsUI;
     public GameObject dataPadUI;
-    public GameObject player;
+    public GameObject aboutUI;
+	public GameObject player;
 
 	private PlayerInteraction playerInteraction;
     private bool isPlaying = false;
@@ -61,7 +62,7 @@ public class GameManager : MonoBehaviour
     private bool gameLoaded = false;
     private WriterAudio wa;
 
-    private const string GAME_VERSION = "0.6";
+    private const string GAME_VERSION = "0.7";
 
     private void Awake()
     {
@@ -125,7 +126,7 @@ public class GameManager : MonoBehaviour
             _shipWarnings.CrossFadeAlpha(0, 0, false);
 
             _ink.StartInkManager();
-            interactDialog = GameObject.FindGameObjectWithTag("InteractDialog").GetComponent<TextMeshProUGUI>();
+            interactDialog = GameObject.FindGameObjectWithTag("InteractDialog").GetComponentInChildren<TextMeshProUGUI>();
             SetInteractDialogActive(false);
 
             DontDestroyOnLoad(_mainUiInstance);
@@ -232,15 +233,6 @@ public class GameManager : MonoBehaviour
                     break;
             }
 
-			if(Debug.isDebugBuild)
-			{
-                GameObject.Find("DebugInfo").GetComponent<DebugInfo>().SetDebugText((SceneName) scene.buildIndex);
-            }
-			else
-			{
-                Destroy(GameObject.Find("DebugInfo"));
-			}
-
             _ink.CurrentScene = (SceneName) scene.buildIndex;
 
             StartCoroutine(StartScene(scene, canFadeIn));
@@ -259,8 +251,20 @@ public class GameManager : MonoBehaviour
         Instantiate(settingsUI, transform);
 	}
 
-    //Save state
-    public void SaveState()
+	public void AboutUi(string action)
+	{
+        if(action == "open")
+        {
+		    Instantiate(aboutUI, transform);
+        }
+        else
+        {
+            Destroy(aboutUI);
+        }
+	}
+
+	//Save state
+	public void SaveState()
     {
         _ink.SaveGame();
     }
@@ -289,17 +293,19 @@ public class GameManager : MonoBehaviour
         if(isPlaying)
 		{
             var textWidth = interactDialog.GetRenderedValues(true).x;
-            var posX = Mathf.Clamp(Input.mousePosition.x + 40, textWidth / 2, Screen.width - (textWidth / 2));
+            var offsetX = Screen.width / 15;
+            var offsetY = Screen.height / 15;
+            var posX = Mathf.Clamp(Input.mousePosition.x + offsetX, textWidth / 2, Screen.width - (textWidth / 2));
 
-            Vector3 dialogPosition = new Vector3(posX, Input.mousePosition.y - 50, 0);
-            interactDialog.transform.position = dialogPosition;
+            Vector3 dialogPosition = new Vector3(posX, Input.mousePosition.y - offsetY, 0);
+            interactDialog.transform.parent.position = dialogPosition;
         }
 
         if(warningActive && Input.GetMouseButtonDown(0))
 		{
             warningWaitTime = 0f;
 		}
-    }
+	}
 
     //SceneStates
     public void StartGame()
@@ -422,7 +428,7 @@ public class GameManager : MonoBehaviour
 
     public void SetInteractDialogActive(bool active)
 	{
-        interactDialog.gameObject.SetActive(active);
+        interactDialog.transform.parent.gameObject.SetActive(active);
 	}
 
     public void SetInteractDialogText(string text)

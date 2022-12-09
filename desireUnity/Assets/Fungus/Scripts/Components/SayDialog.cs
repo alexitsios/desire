@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Fungus
 {
@@ -505,13 +506,29 @@ namespace Fungus
             if(stage != null && character != null)
 			{
                 if(!stage.CharactersOnStage.Contains(character))
+                {
+                    if(stage.CharactersOnStage.Count == 0)
+                    {
+                        attributes = "Center";
+                    }
+                    else
+                    {
+                        var c = stage.CharactersOnStage.First();
+                        var fromPos = stage.GetPosition("Center");
+                        var toPos = stage.GetPosition(c.NameText == "Led" ? "Left" : "Right");
+
+                        stage.DoMoveTween(c, fromPos, toPos, 1f, true);
+
+                        attributes = character.NameText != "Led" ? "Right" : "Left";
+                    }
+
                     stage.Show(character, character.Portraits[0].name, attributes);
+                }
             }
 
             this.fadeWhenDone = fadeWhenDone;
 
             // Voice over clip takes precedence over a character sound effect if provided
-
             AudioClip soundEffectClip = null;
             if (voiceOverClip != null)
             {
