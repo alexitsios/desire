@@ -189,4 +189,9 @@ public class PlayerMovement : MovementBase
 	{
 		animator.speed = 1;
 	}
+	
+	public void StopMovement()
+   	{
+		lastClickedPos = transform.position;
+	}
 }
