@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ItemsMenu : MonoBehaviour
 {
 	public PlayerInteraction PlayerInteraction { get; set; }
 
@@ -31,22 +31,6 @@ public class ItemsMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 		}
 
         GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (!animator.GetBool("isDown") && !PlayerInteraction.isInteracting)
-        {
-            animator.SetBool("isDown", true);
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (animator.GetBool("isDown"))
-        {
-            animator.SetBool("isDown", false);
-        }
     }
 
     /// <summary>
