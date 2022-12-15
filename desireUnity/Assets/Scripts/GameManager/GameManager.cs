@@ -259,7 +259,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(aboutUI);
+            Destroy(gameObject.transform.parent.gameObject);
         }
 	}
 
