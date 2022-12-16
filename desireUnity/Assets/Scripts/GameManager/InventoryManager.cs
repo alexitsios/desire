@@ -25,7 +25,7 @@ public class InventoryManager : MonoBehaviour
     {
         Inventory.Add(item);
 
-        inventoryScreen.UpdateInventoryScreen(Inventory);
+        inventoryScreen.UpdateInventoryScreen();
 
         var dialog = Instantiate(itemObatinedDialog, transform);
         GameObject.Find("ItemObtainedName").GetComponent<TextMeshProUGUI>().text = $"{item._type}";
@@ -47,7 +47,7 @@ public class InventoryManager : MonoBehaviour
             }
 		}
 
-        inventoryScreen.UpdateInventoryScreen(Inventory);
+        inventoryScreen.UpdateInventoryScreen();
     }
 
     /// <summary>
