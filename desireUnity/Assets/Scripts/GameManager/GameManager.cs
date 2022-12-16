@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     public CursorAnimations cursor;
     public InventoryItem[] itemList;
     public AudioEffects[] SFX;
-    public GameObject inventoryUI;
+    //public GameObject inventoryUI;
     public GameObject mainUI;
     public GameObject settingsUI;
     public GameObject dataPadUI;
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     private InkManager _ink;
     private int playerSpawn = 1;
     private TranslationManager _translationManager;
-    private GameObject _inventoryInstance;
+    //private GameObject _inventoryInstance;
     private GameObject _mainUiInstance;
     private GameObject _dataPadUiInstance;
     private TMP_Text _shipWarnings;
@@ -92,7 +92,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartScene(Scene scene, bool fadeIn)
     {
-        while (_inventoryInstance == null || _mainUiInstance == null)
+        //while (_inventoryInstance == null || _mainUiInstance == null)
+        while (_mainUiInstance == null)
             yield return null;
 
         GetComponent<CanvasManager>().LoadLastBackground((SceneName)scene.buildIndex);
@@ -108,7 +109,8 @@ public class GameManager : MonoBehaviour
         if (scene.buildIndex == 8)
             return;
 
-        if (_inventoryInstance == null && scene.buildIndex != 0)
+        //Added this function directly to the 
+        /*if (_inventoryInstance == null && scene.buildIndex != 0)
         {
             _inventoryInstance = Instantiate(inventoryUI);
 
@@ -116,7 +118,7 @@ public class GameManager : MonoBehaviour
             GameObject.FindGameObjectWithTag("ItemsMenu").GetComponent<ItemsMenu>().UpdateInventoryScreen(inventory);
 
             DontDestroyOnLoad(_inventoryInstance);
-        }
+        }*/
 
         if (_mainUiInstance == null && scene.buildIndex != 0)
         {
@@ -159,7 +161,7 @@ public class GameManager : MonoBehaviour
         else if (scene.name == "07_EndGame")
         {
             Destroy(_mainUiInstance);
-            Destroy(_inventoryInstance);
+            //Destroy(_inventoryInstance);
             Destroy(_dataPadUiInstance);
         }
         else if (scene.name != "00_StartGame" && scene.name != "07_EndGame")
@@ -169,7 +171,8 @@ public class GameManager : MonoBehaviour
             GetComponent<TranslationManager>().LoadTranslation(Language.English, (SceneName)scene.buildIndex);
             playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
 
-            _inventoryInstance.GetComponentInChildren<ItemsMenu>().PlayerInteraction = playerInteraction;
+            //_inventoryInstance.GetComponentInChildren<ItemsMenu>().PlayerInteraction = playerInteraction;
+            UIManager.instance.itemsMenu.PlayerInteraction = playerInteraction;
 
             flowchart = GameObject.Find("CutscenesFlowchart").GetComponent<Flowchart>();
             GetComponent<CanvasManager>().StartCanvasManager();
