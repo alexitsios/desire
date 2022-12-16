@@ -1,23 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class ItemsMenu : MonoBehaviour
 {
 	public PlayerInteraction PlayerInteraction { get; set; }
 
 	private Animator animator;
-    private GameObject[] inventorySlots = new GameObject[6];
+    [SerializeField] private GameObject[] inventorySlots;
 
-	void Start()
+    void Start()
     {
         animator = gameObject.GetComponent<Animator>();
-
-        for(var i = 1; i <= 6; i++)
-        {
-            inventorySlots[i - 1] = GameObject.Find($"Item0{i}");
-        }
 
         for(int i = 0; i < inventorySlots.Length; i++)
 		{
@@ -30,28 +24,29 @@ public class ItemsMenu : MonoBehaviour
             });
 		}
 
-        GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
+        inventorySlots[0].transform.parent.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
+        //GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
     }
 
     /// <summary>
     ///     Changes the slots on the Inventory UI to reflect the player's inventory
     /// </summary>
-    public void UpdateInventoryScreen(List<InventoryItem> inventory)
+    public void UpdateInventoryScreen()
 	{
-        var slots = GameObject.FindGameObjectsWithTag("ItemSlot");
-
-        for(int i = 0; i < slots.Length; i++)
+        //I kind of want to just cache this as GameManager.instance.inventoryManager...
+        var inventory = GameManager.instance.gameObject.GetComponent<InventoryManager>().Inventory;
+        for(int i = 0; i < inventorySlots.Length; i++)
 		{
             // If the current inventory slot contains an item, change the UI slot
             if(i < inventory.Count)
 			{
-                slots[i].GetComponent<Image>().enabled = true;
-                slots[i].GetComponent<Image>().sprite = inventory[i]._sprite;
+                inventorySlots[i].GetComponent<Image>().enabled = true;
+                inventorySlots[i].GetComponent<Image>().sprite = inventory[i]._sprite;
             }
             // Otherwise, disable the UI slot
             else
 			{
-                slots[i].GetComponent<Image>().enabled = false;
+                inventorySlots[i].GetComponent<Image>().enabled = false;
             }
         }
 	}
