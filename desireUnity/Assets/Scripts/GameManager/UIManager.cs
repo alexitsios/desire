@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -18,10 +19,20 @@ public class UIManager : MonoBehaviour
 
     public ItemsMenu itemsMenu;
     [Space]
+    public TMP_Text shipWarningText;
+    [Space]
     [SerializeField] private Button menuButton;
-
-    [SerializeField] private RectTransform inventoryPanel, tasksPanel;
     [SerializeField] private Button inventoryButton, tasksButton;
+    [Space]
+    [SerializeField] private RectTransform inventoryPanel;
+    [SerializeField] private RectTransform tasksPanel;
+
+    [Header("Pause Menu")]
+    [SerializeField] private GameObject pauseMenu;
+    [Space]
+    [SerializeField] private Button continueButton;
+    [SerializeField] private Button aboutButton, optionsButton, exitButton;
+
 
 
     private Vector2 inventoryHiddenPos = Vector2.zero, inventoryShownPos;
@@ -31,17 +42,32 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        inventoryShownPos = new Vector2(0, inventoryPanel.sizeDelta.y);
-        tasksShownPos = new Vector2(0, tasksPanel.sizeDelta.y);
+        inventoryShownPos = new Vector2(0, 300);
+        tasksShownPos = new Vector2(0, 300);
 
+        ButtonSettings();
+    }
+
+    private void ButtonSettings()
+    {
         menuButton.onClick.AddListener(OpenMenu);
         inventoryButton.onClick.AddListener(ToggleInventory);
         tasksButton.onClick.AddListener(ToggleTasks);
+
+        continueButton.onClick.AddListener(delegate 
+        {
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false); 
+        });
+
+        exitButton.onClick.AddListener(delegate { GameManager.instance.GoToMainMenu(); });
     }
 
     public void OpenMenu()
     {
         Debug.Log("Opening Menu");
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
     }
 
     private void ToggleInventory()
