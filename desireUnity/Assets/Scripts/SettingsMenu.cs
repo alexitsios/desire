@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -13,17 +14,15 @@ public class SettingsMenu : MonoBehaviour
 	[SerializeField] private Slider BgVolume;
 	[Space]
 	[SerializeField] private Button beepOn;
-	[SerializeField] private Button beepOff, hintsOn, hintsOff;
+	[SerializeField] private Button beepOff, hintsOn, hintsOff, backButton;
 
 	[SerializeField] private TMP_Text masterVolumeText, effectsVolumeText, backgroundVolumeText;
 	[Space]
-	[SerializeField] private Button backButton;
+	[SerializeField] private AudioClip testClip;
 
 	private TMP_Text beepOnText, beepOffText, hintOnText, hintOffText;
-
+	private AudioSource managerAudioSource;
 	private Color off = new(1f, 1f, 1f, 0.5f);
-
-	//private bool _finishedLoading = false;
 
 	private void Start()
 	{
@@ -64,18 +63,6 @@ public class SettingsMenu : MonoBehaviour
 		OnMasterVolumeChanged();
 		OnFXVolumeChanged();
 		OnBGVolumeChanged();
-
-		//Caching these 
-		//GameObject.Find("LanguageDropdown").GetComponent<TMP_Dropdown>().value = PlayerPrefs.GetInt("Language", 1);
-		//GameObject.Find("Slider_0").GetComponent<Slider>().value = PlayerPrefs.GetFloat("MasterVolume", 100f);
-		//GameObject.Find("Slider_1").GetComponent<Slider>().value = PlayerPrefs.GetFloat("FxVolume", 100f);
-		//GameObject.Find("Slider_2").GetComponent<Slider>().value = PlayerPrefs.GetFloat("BgVolume", 100f);
-		//GameObject.Find("BeepToggle").GetComponent<Toggle>().isOn = PlayerPrefs.GetInt("Beep", 1) == 1;
-		//GameObject.Find("HintsToggle").GetComponent<Toggle>().isOn = PlayerPrefs.GetInt("Hints", 0) == 1;
-
-		//UpdateSliderLabel(0);
-		//UpdateSliderLabel(1);
-		//UpdateSliderLabel(2);
 	}
 
 	private void ElementSettings()
@@ -83,6 +70,8 @@ public class SettingsMenu : MonoBehaviour
 		masterVolume.onValueChanged.AddListener(delegate { OnMasterVolumeChanged(); });
 		FxVolume.onValueChanged.AddListener(delegate { OnFXVolumeChanged(); });
 		BgVolume.onValueChanged.AddListener(delegate { OnBGVolumeChanged(); });
+
+		
 
 		beepOn.onClick.AddListener(delegate { ToggleBeep(true); });
 		beepOff.onClick.AddListener(delegate { ToggleBeep(false); });
@@ -100,18 +89,6 @@ public class SettingsMenu : MonoBehaviour
 		hintOnText = hintsOn.GetComponent<TMP_Text>();
 		hintOffText = hintsOff.GetComponent<TMP_Text>();
 	}
-
-	/* Separated into OnMasterVolumeChaned, OnFXVolumeChanged, OnBGVolumeChanged
-	public void UpdateSliderLabel(int sliderId)
-	{
-		if (!_finishedLoading)
-		{
-			return;
-		}
-
-		var value = GameObject.Find($"Slider_{sliderId}").GetComponent<Slider>().value;
-		GameObject.Find($"Value_{sliderId}").GetComponent<TextMeshProUGUI>().text = value.ToString();
-	}*/
 
 	private void ToggleBeep(bool enable)
 	{
@@ -144,7 +121,7 @@ public class SettingsMenu : MonoBehaviour
 			hintOffText.color = Color.white;
 		}
 
-		PlayerPrefs.SetInt("Hints", BoolToInt(enable));
+ 		PlayerPrefs.SetInt("Hints", BoolToInt(enable));
 	}
 
 	private void OnMasterVolumeChanged()
@@ -159,7 +136,7 @@ public class SettingsMenu : MonoBehaviour
 		else
 			masterVolumeText.text = vol.ToString();
 	}
-
+	
 	private void OnFXVolumeChanged()
     {
 		var vol = FxVolume.value;
@@ -176,92 +153,35 @@ public class SettingsMenu : MonoBehaviour
 		backgroundVolumeText.text = vol.ToString();
 	}
 
-	/* Separated into OnMasterVolumeChaned, OnFXVolumeChanged, OnBGVolumeChanged
-	public void SaveSettings(string settingName)
-	{
-		if (!_finishedLoading)
-		{
-			return;
-		}
-
-		switch (settingName)
-		{
-			case "Language":
-				var language = languageDropdown.value;
-				gameManager.Settings.Language = (Language)language;
-				PlayerPrefs.SetInt("Language", language);
+	//Called by EventTrigger/OnPointerUp Event on each volume slider
+	public void OnEndDrag(int sliderNumber)
+    {
+		if (managerAudioSource == null)
+			managerAudioSource = GameManager.instance.gameObject.GetComponent<AudioSource>();
+		float volume = 0;
+		switch (sliderNumber)
+        {
+			case 0:
+				Debug.Log("Master Volume Change");
+				volume = gameManager.Settings.MasterVolume;
 				break;
-			case "MasterVolume":
-				{
-					var vol = masterVolume.value;
-					gameManager.Settings.MasterVolume = vol;
-					PlayerPrefs.SetFloat("MasterVolume", vol);
-					break;
-				}
-			case "FxVolume":
-				{
-					var vol = FxVolume.value;
-					gameManager.Settings.FXVolume = vol;
-					PlayerPrefs.SetFloat("FxVolume", vol);
-					break;
-				}
-			case "BgVolume":
-				{
-					var vol = BgVolume.value;
-					gameManager.Settings.BGVolume = vol;
-					PlayerPrefs.SetFloat("BgVolume", vol);
-					break;
-				}
-		}
+			case 1:
+				Debug.Log("FX Volume Change");
+				volume = gameManager.Settings.FXVolume;
+				break;
+			case 2:
+				Debug.Log("BG Volume Change");
+				volume = gameManager.Settings.BGVolume;
+				break;
+        }
 
-		PlayerPrefs.Save();
-	}*/
+		managerAudioSource.PlayOneShot(testClip, volume);
+    }
 
 	private void CloseSettingsScreen()
 	{
 		Destroy(gameObject.transform.parent.gameObject);
 	}
-
-	/* Removing and separating to ToggleBeep and ToggleHints
-	public void SetToggleOn(string settingName)
-	{
-		string name;
-
-		if(settingName == "BeepSound")
-		{
-			gameManager.Settings.BeepSound = true;
-			name = "3";
-		}
-		else
-		{
-			gameManager.Settings.ShowHints = true;
-			name = "4";
-		}
-
-		PlayerPrefs.SetInt(settingName, 1);
-		GameObject.Find($"Value_{name}.1").GetComponent<TMP_Text>().color = new Color(1f, 1f, 1f, 1f);
-		GameObject.Find($"Value_{name}.2").GetComponent<TMP_Text>().color = new Color(1f, 1f, 1f, 0.5f);
-	}
-
-	public void SetToggleOff(string settingName)
-	{
-		string name;
-
-		if(settingName == "BeepSound")
-		{
-			gameManager.Settings.BeepSound = false;
-			name = "3";
-		}
-		else
-		{
-			gameManager.Settings.ShowHints = false;
-			name = "4";
-		}
-
-		PlayerPrefs.SetInt(settingName, 0);
-		GameObject.Find($"Value_{name}.1").GetComponent<TMP_Text>().color = new Color(1f, 1f, 1f, 0.5f);
-		GameObject.Find($"Value_{name}.2").GetComponent<TMP_Text>().color = new Color(1f, 1f, 1f, 1f);
-	}*/
 
 	//Returns 0 if false, else returns 1
 	private int BoolToInt(bool b)
@@ -276,4 +196,5 @@ public class SettingsMenu : MonoBehaviour
 		if (i == 0) return false;
 		return true;
 	}
+
 }
