@@ -69,7 +69,12 @@ public class UIManager : MonoBehaviour
             pauseMenu.SetActive(false); 
         });
 
-        exitButton.onClick.AddListener(delegate { GameManager.instance.GoToMainMenu(); });
+        exitButton.onClick.AddListener(delegate 
+        {
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+            GameManager.instance.GoToMainMenu(); 
+        });
     }
 
     public void OpenMenu()
