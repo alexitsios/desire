@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -29,11 +30,14 @@ public class UIManager : MonoBehaviour
 
     [Header("Pause Menu")]
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject aboutUi;
+    [SerializeField] private Image portrait;
+    [SerializeField] private Sprite[] characterPortrais;
+    [SerializeField] private Sprite[] menuBackgrounds;
     [Space]
     [SerializeField] private Button continueButton;
-    [SerializeField] private Button aboutButton, optionsButton, exitButton;
-
-
+    [SerializeField] private Button aboutButton, optionsButton, exitButton, closeAboutButton;
+    private Image pauseMenuBackground;
 
     private Vector2 inventoryHiddenPos = Vector2.zero, inventoryShownPos;
     private Vector2 tasksHiddenPos = Vector2.zero, tasksShownPos;
@@ -44,6 +48,7 @@ public class UIManager : MonoBehaviour
     {
         inventoryShownPos = new Vector2(0, 300);
         tasksShownPos = new Vector2(0, 300);
+        pauseMenuBackground = pauseMenu.GetComponent<Image>();
 
         ButtonSettings();
     }
@@ -51,6 +56,10 @@ public class UIManager : MonoBehaviour
     private void ButtonSettings()
     {
         menuButton.onClick.AddListener(OpenMenu);
+        aboutButton.onClick.AddListener(delegate { AboutUi(true); });
+        closeAboutButton.onClick.AddListener(delegate { AboutUi(false); });
+        optionsButton.onClick.AddListener(OpenSettings);
+
         inventoryButton.onClick.AddListener(ToggleInventory);
         tasksButton.onClick.AddListener(ToggleTasks);
 
@@ -65,9 +74,26 @@ public class UIManager : MonoBehaviour
 
     public void OpenMenu()
     {
-        Debug.Log("Opening Menu");
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
+
+        //Set the background dependent on the current scene
+        int i = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(i);
+        pauseMenuBackground.sprite = menuBackgrounds[i];
+        portrait.sprite = characterPortrais[i];
+    }
+
+    //Open/Close the About section on the main menu
+    private void AboutUi(bool open)
+    {
+        aboutUi.gameObject.SetActive(open);
+    }
+
+    //Open/Close the SettingsPanel
+    private void OpenSettings()
+    {
+        GameManager.instance.OpenSettings();
     }
 
     private void ToggleInventory()
