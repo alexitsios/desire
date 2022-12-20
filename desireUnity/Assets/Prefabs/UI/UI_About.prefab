@@ -1400,6 +1400,7 @@ GameObject:
   - component: {fileID: 3237129540963922206}
   - component: {fileID: 3237129540963922205}
   - component: {fileID: 916633371282051109}
+  - component: {fileID: 7796200326634650404}
   m_Layer: 5
   m_Name: UI_About
   m_TagString: Untagged
@@ -1494,6 +1495,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7796200326634650404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3237129540963922203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0cb7954d7252b4884a369b4131727b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3433955830394322368
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,7 +2536,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3392266249876149307}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.45672756
+  m_Size: 0.51371366
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2919,10 +2932,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5972128480033775511}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: AboutUi
-        m_Mode: 5
+      - m_Target: {fileID: 7796200326634650404}
+        m_TargetAssemblyTypeName: DeleteMe, Assembly-CSharp
+        m_MethodName: DestroySelf
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4101,14 +4114,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2529225222367899804, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
   m_PrefabInstance: {fileID: 8212559959948947212}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5972128480033775511 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2529225222367899803, guid: f0d4b9da90c94434fa65e10e9597ac32, type: 3}
-  m_PrefabInstance: {fileID: 8212559959948947212}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0bd56c3cec9bb84b8a60b80cb1c685a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
