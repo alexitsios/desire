@@ -1,4 +1,4 @@
-﻿using Fungus;
+using Fungus;
 using System;
 using System.Collections;
 using TMPro;
@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 {
     [Serializable]
     public struct CursorAnimations
-	{
+    {
         public Texture2D[] mousePointerToQuestion;
         public Texture2D[] mousePointerToRightArrow;
         public Texture2D[] mousePointerToLeftArrow;
@@ -21,10 +21,10 @@ public class GameManager : MonoBehaviour
 
     [Serializable]
     public struct AudioEffects
-	{
+    {
         public string sfxName;
         public AudioClip sfx;
-	}
+    }
 
     // PROPERTIES
     public bool CanCursorChange { get; set; } = true;
@@ -36,14 +36,14 @@ public class GameManager : MonoBehaviour
     public CursorAnimations cursor;
     public InventoryItem[] itemList;
     public AudioEffects[] SFX;
-    public GameObject inventoryUI;
+    //public GameObject inventoryUI;
     public GameObject mainUI;
     public GameObject settingsUI;
     public GameObject dataPadUI;
-    public GameObject aboutUI;
-	public GameObject player;
+    //public GameObject aboutUI;
+    public GameObject player;
 
-	private PlayerInteraction playerInteraction;
+    private PlayerInteraction playerInteraction;
     private bool isPlaying = false;
     private CursorAction currentAction = CursorAction.Pointer;
     private Flowchart flowchart;
@@ -52,21 +52,21 @@ public class GameManager : MonoBehaviour
     private InkManager _ink;
     private int playerSpawn = 1;
     private TranslationManager _translationManager;
-    private GameObject _inventoryInstance;
+    //private GameObject _inventoryInstance;
     private GameObject _mainUiInstance;
     private GameObject _dataPadUiInstance;
     private TMP_Text _shipWarnings;
     private Settings _settings;
     private float warningWaitTime;
     private bool warningActive;
-    private bool gameLoaded = false;
+    //private bool gameLoaded = false;
     private WriterAudio wa;
 
     private const string GAME_VERSION = "0.7";
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             Destroy(gameObject);
             return;
@@ -91,13 +91,14 @@ public class GameManager : MonoBehaviour
     }
 
     private IEnumerator StartScene(Scene scene, bool fadeIn)
-	{
-        while(_inventoryInstance == null || _mainUiInstance == null)
+    {
+        //while (_inventoryInstance == null || _mainUiInstance == null)
+        while (_mainUiInstance == null)
             yield return null;
 
         GetComponent<CanvasManager>().LoadLastBackground((SceneName)scene.buildIndex);
 
-		if(fadeIn)
+        if (fadeIn)
             yield return GetComponent<CanvasManager>().Fade("in", 1);
 
         flowchart.ExecuteBlock("OnLoad");
@@ -105,21 +106,22 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.buildIndex == 8)
+        if (scene.buildIndex == 8)
             return;
 
-        if(_inventoryInstance == null && scene.buildIndex != 0)
-		{
+        //Added this function directly to the 
+        /*if (_inventoryInstance == null && scene.buildIndex != 0)
+        {
             _inventoryInstance = Instantiate(inventoryUI);
 
             var inventory = GetComponent<InventoryManager>().Inventory;
             GameObject.FindGameObjectWithTag("ItemsMenu").GetComponent<ItemsMenu>().UpdateInventoryScreen(inventory);
 
             DontDestroyOnLoad(_inventoryInstance);
-        }
-        
-        if(_mainUiInstance == null && scene.buildIndex != 0)
-		{
+        }*/
+
+        if (_mainUiInstance == null && scene.buildIndex != 0)
+        {
             _mainUiInstance = Instantiate(mainUI);
             _shipWarnings = GameObject.Find("ShipWarning").GetComponent<TMP_Text>();
             wa = GameObject.FindGameObjectWithTag("SayDialog").GetComponent<WriterAudio>();
@@ -131,45 +133,46 @@ public class GameManager : MonoBehaviour
 
             DontDestroyOnLoad(_mainUiInstance);
 
-            if(!Settings.BeepSound)
-			{
+            if (!Settings.BeepSound)
+            {
                 wa.volume = 0f;
-			}
+            }
         }
 
-        if(_dataPadUiInstance == null && scene.buildIndex != 0)
-		{
+        if (_dataPadUiInstance == null && scene.buildIndex != 0)
+        {
             _dataPadUiInstance = Instantiate(dataPadUI);
             DontDestroyOnLoad(_dataPadUiInstance);
             _dataPadUiInstance.GetComponentInChildren<Image>().color = new Color(1f, 1f, 1f, 0);
         }
 
-        if(scene.name == "00_StartGame")
-		{
+        if (scene.name == "00_StartGame")
+        {
             //gameLoaded = _ink.LoadGame();
 
             //if(!gameLoaded)
             //{
-                // Removes the Load button from the main menu if no save game is available
-                Destroy(GameObject.Find("Load"));
+            // Removes the Load button from the main menu if no save game is available
+            Destroy(GameObject.Find("Load"));
             //}
 
             GameObject.Find("GameVersion").GetComponent<TMP_Text>().text = $"v. {GAME_VERSION}";
-		}
-        else if(scene.name == "07_EndGame")
-		{
+        }
+        else if (scene.name == "07_EndGame")
+        {
             Destroy(_mainUiInstance);
-            Destroy(_inventoryInstance);
+            //Destroy(_inventoryInstance);
             Destroy(_dataPadUiInstance);
-		}
-        else if(scene.name != "00_StartGame" && scene.name != "07_EndGame")
-		{
+        }
+        else if (scene.name != "00_StartGame" && scene.name != "07_EndGame")
+        {
             GetComponent<InventoryManager>().StartInventoryManager();
 
-            GetComponent<TranslationManager>().LoadTranslation(Language.English, (SceneName) scene.buildIndex);
+            GetComponent<TranslationManager>().LoadTranslation(Language.English, (SceneName)scene.buildIndex);
             playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
 
-            _inventoryInstance.GetComponentInChildren<ItemsMenu>().PlayerInteraction = playerInteraction;
+            //_inventoryInstance.GetComponentInChildren<ItemsMenu>().PlayerInteraction = playerInteraction;
+            UIManager.instance.itemsMenu.PlayerInteraction = playerInteraction;
 
             flowchart = GameObject.Find("CutscenesFlowchart").GetComponent<Flowchart>();
             GetComponent<CanvasManager>().StartCanvasManager();
@@ -189,12 +192,12 @@ public class GameManager : MonoBehaviour
             var canFadeIn = true;
 
             // Changes the scene depending on what the player already did
-            switch ((SceneName) scene.buildIndex)
-			{
+            switch ((SceneName)scene.buildIndex)
+            {
                 case SceneName.Stern:
                     // Blocks movement if this is the first time the player visits the Stern (i.e. if the game just started)
                     if (!_ink.GetVariable<bool>("funnel_visited"))
-					{
+                    {
                         canFadeIn = false;
                         player.GetComponent<PlayerMovement>().IsTrapped = true;
                         player.GetComponent<PlayerMovement>().AcquiredArm = false;
@@ -207,7 +210,7 @@ public class GameManager : MonoBehaviour
                         Destroy(GameObject.Find("AllInOneTool"));
 
                     // Moves the Vacuum Robot
-                    if(_ink.GetVariable<bool>("acquired_leg"))
+                    if (_ink.GetVariable<bool>("acquired_leg"))
                         GameObject.Find("VacuumRobot").transform.position = GameObject.Find("TrashBin").transform.position;
 
                     break;
@@ -233,55 +236,73 @@ public class GameManager : MonoBehaviour
                     break;
             }
 
-            _ink.CurrentScene = (SceneName) scene.buildIndex;
+            _ink.CurrentScene = (SceneName)scene.buildIndex;
 
             StartCoroutine(StartScene(scene, canFadeIn));
-        } 
+        }
     }
 
     private void SetPlayerAndShadowSize(float playerHeight)
-	{
+    {
         player.GetComponent<SpriteRenderer>().size = new Vector2(playerHeight / 2, playerHeight);
         player.transform.GetChild(0).localScale = new Vector3(playerHeight, playerHeight, 0f);
         player.transform.GetChild(0).transform.localPosition = new Vector3(0f, -((playerHeight * 0.3f) - 0.01f), 0);
     }
 
     public void OpenSettings()
-	{
+    {
         Instantiate(settingsUI, transform);
-	}
+    }
 
+    /*
+     * Moved to MainMenuManager
+    //Open/Close the About section on the main menu
+    private GameObject aboutGo;
 	public void AboutUi(string action)
 	{
         if(action == "open")
         {
-		    Instantiate(aboutUI, transform);
+            if (aboutGo == null)
+            {
+                var go = Instantiate(aboutUI, transform);
+                aboutGo = go;
+                go.GetComponentInChildren<Button>().onClick.AddListener(delegate
+                {
+                    this.AboutUi("close");
+                });
+            }
+            else
+            {
+                aboutGo.gameObject.SetActive(true);
+            }
         }
         else
         {
-            Destroy(gameObject.transform.parent.gameObject);
+            aboutGo.gameObject.SetActive(false);
         }
 	}
+    */
 
-	//Save state
-	public void SaveState()
+
+    //Save state
+    public void SaveState()
     {
         _ink.SaveGame();
     }
 
     public void LoadGame()
-	{
+    {
         StartCoroutine(LoadState());
-	}
+    }
 
     private IEnumerator LoadState()
     {
         StartCoroutine(LoadSceneAndSpawnPlayer(_ink.CurrentScene, 0, false));
 
-        while(player == null)
-		{
+        while (player == null)
+        {
             yield return null;
-		}
+        }
 
         var playerMovement = player.GetComponent<PlayerMovement>();
         playerMovement.IsTrapped = _ink.GetVariable<bool>("acquired_leg");
@@ -290,8 +311,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(isPlaying)
-		{
+        if (isPlaying)
+        {
             var textWidth = interactDialog.GetRenderedValues(true).x;
             var offsetX = Screen.width / 15;
             var offsetY = Screen.height / 15;
@@ -301,64 +322,68 @@ public class GameManager : MonoBehaviour
             interactDialog.transform.parent.position = dialogPosition;
         }
 
-        if(warningActive && Input.GetMouseButtonDown(0))
-		{
+        if (warningActive && Input.GetMouseButtonDown(0))
+        {
             warningWaitTime = 0f;
-		}
-	}
+        }
+    }
 
+    /*
+     * Moved to MainMenuManager
     //SceneStates
     public void StartGame()
     {
 		// Loads the opening scene
 		SceneManager.LoadScene(8, LoadSceneMode.Single);
 	}
+    */
+
     public void GoToMainMenu()
     {
         SceneManager.LoadScene("00_StartGame");
     }
 
     public void QuitGame()
-	{
+    {
         Application.Quit();
-	}
+    }
 
     public void SetCursorAction(CursorAction newAction)
-	{
-        if(newAction == CursorAction.Wait)
-		{
+    {
+        if (newAction == CursorAction.Wait)
+        {
             cursorWaitCoroutine = StartCoroutine(SetCursorToWait());
             CanCursorChange = false;
-		}
+        }
         else
             StartCoroutine(AnimateCursorTransition(currentAction, newAction));
     }
 
     public IEnumerator SetCursorToWait()
-	{
+    {
         var textureArray = cursor.mouseWait;
         int i = 0;
 
         // Continuously animate the Wait cursor. This coroutine only stops when explicitly told to
-        while(true)
-		{
+        while (true)
+        {
             Cursor.SetCursor(textureArray[i++ % textureArray.Length], Vector2.zero, CursorMode.Auto);
             yield return new WaitForSeconds(0.1f);
         }
-	}
+    }
 
     public void EndCursorWait()
-	{
+    {
         CanCursorChange = true;
         StopCoroutine(cursorWaitCoroutine);
         Cursor.SetCursor(cursor.mousePointerToRightArrow[0], Vector2.zero, CursorMode.Auto);
-	}
+    }
 
     /// <summary>
     ///     Animates the cursor from the current action to the desired action
     /// </summary>
     private IEnumerator AnimateCursorTransition(CursorAction currentAction, CursorAction newAction)
-	{
+    {
         Texture2D[] textureArray = null;
         bool isAnimationReversed;
         bool isAnimationLooped = false;
@@ -366,9 +391,9 @@ public class GameManager : MonoBehaviour
         // If the animation is going from <Action> to Pointer, then play the animation from Pointer to <Action>, but reversed
         isAnimationReversed = (newAction == CursorAction.Pointer);
 
-        if(CanCursorChange)
-		{
-            switch((isAnimationReversed) ? currentAction : newAction)
+        if (CanCursorChange)
+        {
+            switch ((isAnimationReversed) ? currentAction : newAction)
             {
                 case CursorAction.LeftArrow:
                     textureArray = cursor.mousePointerToLeftArrow;
@@ -394,48 +419,47 @@ public class GameManager : MonoBehaviour
 
             this.currentAction = newAction;
 
-            if(textureArray != null)
-			{
+            if (textureArray != null)
+            {
                 // If the animation is not reversed, applies the frames from the animation array going from 0 to (size - 1)
                 // If the animation IS reversed, applies the frames going from (size - 1) to 0
-                for(int i = 0; i < textureArray.Length; i++)
-		        {
+                for (int i = 0; i < textureArray.Length; i++)
+                {
                     var j = (isAnimationReversed ? (textureArray.Length - i - 1) : i);
 
                     Cursor.SetCursor(textureArray[j], Vector2.zero, CursorMode.Auto);
                     yield return new WaitForSeconds(0.05f);
-			    }
+                }
             }
 
-            if(isAnimationLooped)
+            if (isAnimationLooped)
                 SetCursorAction(this.currentAction);
         }
-
-	}
+    }
 
     public InventoryItem GetItemProperties(ItemType type)
-	{
-        foreach(var item in itemList)
-		{
-            if(item._type == type)
-			{
+    {
+        foreach (var item in itemList)
+        {
+            if (item._type == type)
+            {
                 return item;
-			}
-		}
+            }
+        }
 
         return new InventoryItem(ItemType.NoItem, null);
-	}
+    }
 
     public void SetInteractDialogActive(bool active)
-	{
+    {
         interactDialog.transform.parent.gameObject.SetActive(active);
-	}
+    }
 
     public void SetInteractDialogText(string text)
-	{
+    {
         string translatedItemName;
 
-        if(playerInteraction._selectedItem != ItemType.NoItem)
+        if (playerInteraction._selectedItem != ItemType.NoItem)
             translatedItemName = _translationManager.GetTranslatedItem(playerInteraction._selectedItem.ToString()) + " → ";
         else
             translatedItemName = "";
@@ -443,70 +467,70 @@ public class GameManager : MonoBehaviour
         SetInteractDialogActive(true);
 
         interactDialog.text = translatedItemName + text;
-	}
+    }
 
     public IEnumerator LoadSceneAndSpawnPlayer(SceneName scene, int spawnIndex, bool fadeScreen = true)
-	{
-		if(fadeScreen)
-		{
+    {
+        if (fadeScreen)
+        {
             yield return GetComponent<CanvasManager>().Fade("out", 1);
-		}
+        }
 
-        SceneManager.LoadScene((int) scene, LoadSceneMode.Single);
+        SceneManager.LoadScene((int)scene, LoadSceneMode.Single);
         GetComponent<TranslationManager>().LoadTranslation(Language.English, scene);
 
         playerSpawn = spawnIndex;
     }
 
     public AudioClip GetSFXByName(string name)
-	{
-        foreach(var clip in SFX)
-		{
-            if(clip.sfxName == name)
+    {
+        foreach (var clip in SFX)
+        {
+            if (clip.sfxName == name)
                 return clip.sfx;
-		}
+        }
 
         return null;
-	}
+    }
 
     public void StartEndingCutscene()
-	{
+    {
         isPlaying = false;
         SceneManager.LoadScene(7);
     }
 
     public void UpdateSettings(Settings newSettings)
-	{
+    {
         _settings = newSettings;
 
         var fxVolume = Mathf.Lerp(0f, 1f, (_settings.FXVolume + _settings.MasterVolume) / 2);
         GetComponent<AudioSource>().volume = fxVolume;
 
-        if(!Settings.BeepSound)
+        if (!Settings.BeepSound)
         {
             wa.volume = 0f;
         }
 
-        foreach(var prop in FindObjectsOfType<PropBase>())
+        foreach (var prop in FindObjectsOfType<PropBase>())
         {
             prop.DisplayHints = Settings.ShowHints;
         }
     }
 
     public IEnumerator DisplayMessage(string messageId, string messageType)
-	{
+    {
         _shipWarnings.color = messageType == "warning" ? Color.red : Color.white;
         _shipWarnings.text = _translationManager.GetTranslatedLine(messageId);
         _shipWarnings.CrossFadeAlpha(1, 0.5f, false);
 
         warningWaitTime = _shipWarnings.text.Length / 10;
 
-        while(warningWaitTime > 0)
-		{
+        while (warningWaitTime > 0)
+        {
             warningActive = true;
             warningWaitTime -= 0.1f;
             yield return new WaitForSeconds(0.1f);
-		}
+        }
 
         _shipWarnings.CrossFadeAlpha(0, 0.5f, false);
 
@@ -515,12 +539,12 @@ public class GameManager : MonoBehaviour
     }
 
     public IEnumerator SetDataPadVisibility(bool active)
-	{
+    {
         var sprite = _dataPadUiInstance.GetComponentInChildren<Image>();
 
-		if(active)
-		{
-            for(float i = 0; i <= 1; i += Time.deltaTime / 0.5f)
+        if (active)
+        {
+            for (float i = 0; i <= 1; i += Time.deltaTime / 0.5f)
             {
                 sprite.color = new Color(1f, 1f, 1f, i); ;
                 yield return null;
@@ -529,8 +553,8 @@ public class GameManager : MonoBehaviour
             sprite.color = new Color(1f, 1f, 1f, 1);
         }
         else
-		{
-            for(float i = 1; i >= 0; i -= Time.deltaTime / 0.5f)
+        {
+            for (float i = 1; i >= 0; i -= Time.deltaTime / 0.5f)
             {
                 sprite.color = new Color(1f, 1f, 1f, i); ;
                 yield return null;
@@ -538,5 +562,5 @@ public class GameManager : MonoBehaviour
 
             sprite.color = new Color(1f, 1f, 1f, 0);
         }
-	}
+    }
 }
