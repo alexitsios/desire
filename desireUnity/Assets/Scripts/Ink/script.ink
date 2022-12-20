@@ -758,12 +758,10 @@ Led "bridge_monitor_3
 	- !log_4_read:
 		Led #@bridge_body_1
 		Led #@bridge_body_2
-		Led #@bridge_body_3
-		Led #@bridge_body_4
 		-> DONE
 	- else:
-		Led #@bridge_body_5
-		Led #@bridge_body_6
+		Led #@bridge_body_3
+		Led #@bridge_body_4
 		~ acquired_passcode = true
 		-> DONE
 }
