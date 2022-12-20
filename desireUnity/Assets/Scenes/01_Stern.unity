@@ -288,7 +288,6 @@ GameObject:
   - component: {fileID: 171817216}
   - component: {fileID: 171817218}
   - component: {fileID: 171817217}
-  - component: {fileID: 171817219}
   m_Layer: 0
   m_Name: Horizon
   m_TagString: Untagged
@@ -349,18 +348,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.401102, y: 2.619977}
   m_EdgeRadius: 0
---- !u!114 &171817219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171817215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d57a0d8255670842852dd84d0d10ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &236006150
 GameObject:
   m_ObjectHideFlags: 0
@@ -5807,7 +5794,6 @@ GameObject:
   - component: {fileID: 634761909}
   - component: {fileID: 634761910}
   - component: {fileID: 634761911}
-  - component: {fileID: 634761912}
   m_Layer: 0
   m_Name: DeadCleaningRobot
   m_TagString: Untagged
@@ -5858,18 +5844,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcbb7d3a9302dd64bb972cf99f394209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &634761912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 634761908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d57a0d8255670842852dd84d0d10ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &686340699
 GameObject:
   m_ObjectHideFlags: 0
@@ -5881,7 +5855,6 @@ GameObject:
   - component: {fileID: 686340700}
   - component: {fileID: 686340702}
   - component: {fileID: 686340701}
-  - component: {fileID: 686340703}
   m_Layer: 0
   m_Name: Pothole
   m_TagString: Untagged
@@ -5932,18 +5905,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.18}
   m_Size: {x: 3.9, y: 1.4}
   m_Direction: 1
---- !u!114 &686340703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686340699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d57a0d8255670842852dd84d0d10ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &687607634
 GameObject:
   m_ObjectHideFlags: 0
@@ -6624,7 +6585,6 @@ GameObject:
   m_Component:
   - component: {fileID: 870851504}
   - component: {fileID: 870851505}
-  - component: {fileID: 870851506}
   m_Layer: 0
   m_Name: backColliders
   m_TagString: Untagged
@@ -6676,18 +6636,6 @@ PolygonCollider2D:
       - {x: -15.611234, y: 1.8}
       - {x: 7.3777323, y: 1.9105952}
       - {x: 7.359955, y: 3.2292726}
---- !u!114 &870851506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 870851503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d57a0d8255670842852dd84d0d10ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &926199348
 GameObject:
   m_ObjectHideFlags: 0
@@ -6794,7 +6742,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1151136474}
   - component: {fileID: 1151136475}
-  - component: {fileID: 1151136476}
   m_Layer: 0
   m_Name: frontColliders
   m_TagString: Untagged
@@ -6848,18 +6795,6 @@ PolygonCollider2D:
       - {x: -18, y: -1}
       - {x: 18, y: -1}
       - {x: 18, y: 3.699518}
---- !u!114 &1151136476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151136473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d57a0d8255670842852dd84d0d10ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1214899834
 GameObject:
   m_ObjectHideFlags: 0
@@ -6964,7 +6899,6 @@ GameObject:
   - component: {fileID: 1295980031}
   - component: {fileID: 1295980032}
   - component: {fileID: 1295980033}
-  - component: {fileID: 1295980034}
   m_Layer: 0
   m_Name: Hole
   m_TagString: Untagged
@@ -7013,18 +6947,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 089a0d49f56b6d64c8d41d3b4fb9ab09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1295980034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295980030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d57a0d8255670842852dd84d0d10ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1488812635
@@ -7415,7 +7337,6 @@ GameObject:
   - component: {fileID: 1967492986}
   - component: {fileID: 1967492988}
   - component: {fileID: 1967492987}
-  - component: {fileID: 1967492989}
   m_Layer: 0
   m_Name: sideColliders
   m_TagString: Untagged
@@ -7498,18 +7419,6 @@ PolygonCollider2D:
       - {x: -1.0849504, y: 4.968544}
       - {x: -1.0457271, y: -3.942147}
       - {x: 1.9686546, y: 0.3893537}
---- !u!114 &1967492989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967492985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d57a0d8255670842852dd84d0d10ff7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1991825431
 GameObject:
   m_ObjectHideFlags: 0
