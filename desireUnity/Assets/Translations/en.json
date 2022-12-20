@@ -117,7 +117,7 @@
         "@stern_reflection_3": "Wait, is that rust? How long have I been here?",
         "@stern_reflection_4": "Well, staring at my reflection won't help. Let's see what else I can find.",
 
-        "@stern_service_bot_1": "It must have broken apart like that what it fell over. Maybe that's what happened to me.",
+        "@stern_service_bot_1": "It must have broken apart like that when it fell over. Maybe that's what happened to me.",
         "@stern_service_bot_2": "Huh. Even its internals are damaged. What could have happened to him? And the rest of them?",
         "@stern_service_bot_3": "They're all so dead and lifeless- but I am not. I wish I could remember...",
         "@stern_service_bot_4": "Ug. They are too badly damaged, I can’t access them.",
@@ -487,11 +487,9 @@
 		"@bridge_log_5.3": "Someone to put the blame on... What will happen to me and my family...",
 
 		"@bridge_body_1": "Another dead human",
-		"@bridge_body_2": "Oxygen levels in this sector are below the minimum for life sustenance",
-		"@bridge_body_3": "Cause: CO2 Scrubbers Failure",
-		"@bridge_body_4": "So, the Captain suffocated",
-		"@bridge_body_5": "Let’s see, the log mentioned that the captain kept the passcode in his left shoe",
-		"@bridge_body_6": "Yes, here it is. The passcode is Bagel?",
+		"@bridge_body_2": "I wonder what led the captain to commit suicide",
+		"@bridge_body_3": "Let’s see, the log mentioned that the captain kept the passcode in his left shoe",
+		"@bridge_body_4": "Yes, here it is. The passcode is Bagel?",
 
 		"@bridge_captain_1": "Bagel...",
 		"@bridge_captain_2": "The system is booting. It’ll take only a moment...",

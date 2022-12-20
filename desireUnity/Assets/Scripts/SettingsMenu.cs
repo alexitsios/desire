@@ -2,120 +2,199 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SettingsMenu : MonoBehaviour
 {
-	private bool _finishedLoading = false;
+	private GameManager gameManager;
+
+	[SerializeField] private TMP_Dropdown languageDropdown;
+	[SerializeField] private Slider masterVolume;
+	[SerializeField] private Slider FxVolume;
+	[SerializeField] private Slider BgVolume;
+	[Space]
+	[SerializeField] private Button beepOn;
+	[SerializeField] private Button beepOff, hintsOn, hintsOff, backButton;
+
+	[SerializeField] private TMP_Text masterVolumeText, effectsVolumeText, backgroundVolumeText;
+	[Space]
+	[SerializeField] private AudioClip testClip;
+
+	private TMP_Text beepOnText, beepOffText, hintOnText, hintOffText;
+	private AudioSource managerAudioSource;
+	private Color off = new(1f, 1f, 1f, 0.5f);
 
 	private void Start()
 	{
-		_finishedLoading = true;
+		gameManager = GameManager.instance;
 
-		GameObject.Find("LanguageDropdown").GetComponent<TMP_Dropdown>().value = PlayerPrefs.GetInt("Language", 1);
-		GameObject.Find("Slider_0").GetComponent<Slider>().value = PlayerPrefs.GetFloat("MasterVolume", 100f);
-		GameObject.Find("Slider_1").GetComponent<Slider>().value = PlayerPrefs.GetFloat("FxVolume", 100f);
-		GameObject.Find("Slider_2").GetComponent<Slider>().value = PlayerPrefs.GetFloat("BgVolume", 100f);
-		//GameObject.Find("BeepToggle").GetComponent<Toggle>().isOn = PlayerPrefs.GetInt("Beep", 1) == 1;
-		//GameObject.Find("HintsToggle").GetComponent<Toggle>().isOn = PlayerPrefs.GetInt("Hints", 0) == 1;
+		//_finishedLoading = true;
 
-		UpdateSliderLabel(0);
-		UpdateSliderLabel(1);
-		UpdateSliderLabel(2);
+		languageDropdown.value = PlayerPrefs.GetInt("Language", 1);
+		masterVolume.value = PlayerPrefs.GetFloat("MasterVolume", 100f);
+		FxVolume.value = PlayerPrefs.GetFloat("FxVolume", 100f);
+		BgVolume.value = PlayerPrefs.GetFloat("BgVolume", 100f);
+
+		ElementSettings();
+		FindAdditionalComponents();		
+
+		if (IntToBool(PlayerPrefs.GetInt("BeepSound")))
+		{
+			beepOnText.color = Color.white;
+			beepOffText.color = off;
+		}
+		else
+		{
+			beepOnText.color = off;
+			beepOffText.color = Color.white;
+		}
+
+		if (IntToBool(PlayerPrefs.GetInt("Hints")))
+		{
+			hintOnText.color = Color.white;
+			hintOffText.color = off;
+		}
+		else
+		{
+			hintOnText.color = off;
+			hintOffText.color = Color.white;
+		}
+
+		OnMasterVolumeChanged();
+		OnFXVolumeChanged();
+		OnBGVolumeChanged();
 	}
 
-	public void UpdateSliderLabel(int sliderId)
+	private void ElementSettings()
+    {
+		masterVolume.onValueChanged.AddListener(delegate { OnMasterVolumeChanged(); });
+		FxVolume.onValueChanged.AddListener(delegate { OnFXVolumeChanged(); });
+		BgVolume.onValueChanged.AddListener(delegate { OnBGVolumeChanged(); });
+
+		
+
+		beepOn.onClick.AddListener(delegate { ToggleBeep(true); });
+		beepOff.onClick.AddListener(delegate { ToggleBeep(false); });
+
+		hintsOn.onClick.AddListener(delegate { ToggleHints(true); });
+		hintsOff.onClick.AddListener(delegate { ToggleHints(false); });
+
+		backButton.onClick.AddListener(CloseSettingsScreen);
+	}
+
+	private void FindAdditionalComponents()
+    {
+		beepOnText = beepOn.GetComponent<TMP_Text>();
+		beepOffText = beepOff.GetComponent<TMP_Text>();
+		hintOnText = hintsOn.GetComponent<TMP_Text>();
+		hintOffText = hintsOff.GetComponent<TMP_Text>();
+	}
+
+	private void ToggleBeep(bool enable)
 	{
-		if(!_finishedLoading)
+		gameManager.Settings.BeepSound = enable;
+		if (enable)
 		{
-			return;
+			beepOnText.color = Color.white;
+			beepOffText.color = off;
+		}
+		else
+		{
+			beepOnText.color = off;
+			beepOffText.color = Color.white;
 		}
 
-		var value = GameObject.Find($"Slider_{sliderId}").GetComponent<Slider>().value;
-		GameObject.Find($"Value_{sliderId}").GetComponent<TextMeshProUGUI>().text = value.ToString();
+		PlayerPrefs.SetInt("BeepSound", BoolToInt(enable));
 	}
 
-	public void SaveSettings(string settingName)
+	private void ToggleHints(bool enable)
 	{
-		if(!_finishedLoading)
+		gameManager.Settings.ShowHints = enable;
+		if (enable)
 		{
-			return;
+			hintOnText.color = Color.white;
+			hintOffText.color = off;
+		}
+		else
+		{
+			hintOnText.color = off;
+			hintOffText.color = Color.white;
 		}
 
-		var gc = GetComponentInParent<GameManager>();
-
-		switch(settingName)
-		{
-			case "Language":
-				var language = GameObject.Find("LanguageDropdown").GetComponent<TMP_Dropdown>().value;
-				gc.Settings.Language = (Language) language;
-				PlayerPrefs.SetInt("Language", language);
-				break;
-			case "MasterVolume":
-				var masterVolume = GameObject.Find("Slider_0").GetComponent<Slider>().value;
-				gc.Settings.MasterVolume = masterVolume;
-				PlayerPrefs.SetFloat("MasterVolume", masterVolume);
-				break;
-			case "FxVolume":
-				var fxVolume = GameObject.Find("Slider_1").GetComponent<Slider>().value;
-				gc.Settings.FXVolume = fxVolume;
-				PlayerPrefs.SetFloat("FxVolume", fxVolume);
-				break;
-			case "BgVolume":
-				var bgVolume = GameObject.Find("Slider_2").GetComponent<Slider>().value;
-				gc.Settings.BGVolume = bgVolume;
-				PlayerPrefs.SetFloat("BgVolume", bgVolume);
-				break;
-		}
-
-		PlayerPrefs.Save();
+ 		PlayerPrefs.SetInt("Hints", BoolToInt(enable));
 	}
 
-	public void CloseSettingsScreen()
+	private void OnMasterVolumeChanged()
+    {
+		var vol = masterVolume.value;
+		gameManager.Settings.MasterVolume = vol;
+		PlayerPrefs.SetFloat("MasterVolume", vol);
+		if (masterVolumeText == null)
+        {
+			Debug.Log("Master null");
+        }
+		else
+			masterVolumeText.text = vol.ToString();
+	}
+	
+	private void OnFXVolumeChanged()
+    {
+		var vol = FxVolume.value;
+		gameManager.Settings.FXVolume = vol;
+		PlayerPrefs.SetFloat("FxVolume", vol);
+		effectsVolumeText.text = vol.ToString();
+	}
+
+	private void OnBGVolumeChanged()
+    {
+		var vol = BgVolume.value;
+		gameManager.Settings.BGVolume = vol;
+		PlayerPrefs.SetFloat("BgVolume", vol);
+		backgroundVolumeText.text = vol.ToString();
+	}
+
+	//Called by EventTrigger/OnPointerUp Event on each volume slider
+	public void OnEndDrag(int sliderNumber)
+    {
+		if (managerAudioSource == null)
+			managerAudioSource = GameManager.instance.gameObject.GetComponent<AudioSource>();
+		float volume = 0;
+		switch (sliderNumber)
+        {
+			case 0:
+				Debug.Log("Master Volume Change");
+				volume = gameManager.Settings.MasterVolume;
+				break;
+			case 1:
+				Debug.Log("FX Volume Change");
+				volume = gameManager.Settings.FXVolume;
+				break;
+			case 2:
+				Debug.Log("BG Volume Change");
+				volume = gameManager.Settings.BGVolume;
+				break;
+        }
+
+		managerAudioSource.PlayOneShot(testClip, volume);
+    }
+
+	private void CloseSettingsScreen()
 	{
 		Destroy(gameObject.transform.parent.gameObject);
 	}
 
-	public void SetToggleOn(string settingName)
+	//Returns 0 if false, else returns 1
+	private int BoolToInt(bool b)
 	{
-		string name;
-
-		var gc = GetComponentInParent<GameManager>();
-
-		if(settingName == "BeepSound")
-		{
-			gc.Settings.BeepSound = true;
-			name = "3";
-		}
-		else
-		{
-			gc.Settings.ShowHints = true;
-			name = "4";
-		}
-
-		PlayerPrefs.SetInt(settingName, 1);
-		GameObject.Find($"Value_{name}.1").GetComponent<TMP_Text>().color = new Color(1f, 1f, 1f, 1f);
-		GameObject.Find($"Value_{name}.2").GetComponent<TMP_Text>().color = new Color(1f, 1f, 1f, 0.5f);
+		if (b == false) return 0;
+		return 1;
 	}
 
-	public void SetToggleOff(string settingName)
+	//Returns false if 0, else returns true
+	private bool IntToBool(int i)
 	{
-		string name;
-
-		var gc = GetComponentInParent<GameManager>();
-
-		if(settingName == "BeepSound")
-		{
-			gc.Settings.BeepSound = false;
-			name = "3";
-		}
-		else
-		{
-			gc.Settings.ShowHints = false;
-			name = "4";
-		}
-
-		PlayerPrefs.SetInt(settingName, 0);
-		GameObject.Find($"Value_{name}.1").GetComponent<TMP_Text>().color = new Color(1f, 1f, 1f, 0.5f);
-		GameObject.Find($"Value_{name}.2").GetComponent<TMP_Text>().color = new Color(1f, 1f, 1f, 1f);
+		if (i == 0) return false;
+		return true;
 	}
+
 }
