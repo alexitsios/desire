@@ -9,6 +9,8 @@ public class Ending : MonoBehaviour
 {
 	Image fadeImage;
 	TMP_Text credits;
+	[SerializeField]
+	private int creditWaitTime = 4;
 
 	private void Start()
 	{
@@ -43,7 +45,7 @@ public class Ending : MonoBehaviour
 
 		credits.gameObject.SetActive(true);
 
-		yield return new WaitForSeconds(4);
+		yield return new WaitForSeconds(creditWaitTime);
 
 		SceneManager.LoadScene("00_StartGame");
 	}
