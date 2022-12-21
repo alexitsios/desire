@@ -6,8 +6,11 @@ public class PlayerMovement : MovementBase
 {
 	public Direction direction;
 	public float frontMoveSpeed;
-	public bool IsTrapped { get => _isTrapped; 
-		set { 
+	public bool IsTrapped
+	{
+		get => _isTrapped;
+		set
+		{
 			_isTrapped = value;
 
 			if(_isTrapped)
@@ -15,22 +18,29 @@ public class PlayerMovement : MovementBase
 				GetComponent<SpriteRenderer>().size = new Vector2(0.5f, 0.5f);
 				GetComponent<Animator>().SetBool("acquired_leg", false);
 				GetComponent<Animator>().SetBool("acquired_arm", false);
-			} else
+			}
+			else
 			{
 				GetComponent<SpriteRenderer>().size = new Vector2(0.25f, 0.5f);
 				GetComponent<Animator>().SetBool("acquired_leg", true);
 				transform.GetChild(0).transform.localPosition = new Vector3(0, -0.15f, 0);
 			}
-		} 
+		}
 	}
-	public bool AcquiredArm { get => _acquiredArm;
-		set {
+	public bool AcquiredArm
+	{
+		get => _acquiredArm;
+		set
+		{
 			_acquiredArm = value;
 
 			if(_acquiredArm)
+			{
 				GetComponent<Animator>().SetBool("acquired_arm", true);
+			}
 		}
 	}
+
 	public Animator animator;
 
 	private PlayerInteraction playerInteraction;
@@ -94,12 +104,12 @@ public class PlayerMovement : MovementBase
 				moving = true;
 			}
 		}
-		
+
 		//Hold to move
-		if (Input.GetMouseButton(0) && !playerInteraction.isInteracting)
-        	{
+		if(Input.GetMouseButton(0) && !playerInteraction.isInteracting)
+		{
 			// Only moves the character if the player has not clicked on an inventory item
-			if (EventSystem.current.currentSelectedGameObject == null)
+			if(EventSystem.current.currentSelectedGameObject == null)
 			{
 				_idleTimer = 0f;
 				animator.SetBool("canIdle", true);
@@ -132,8 +142,8 @@ public class PlayerMovement : MovementBase
 
 			animator.SetFloat("Speed", step);
 
-			float xDifference = Math.Abs(transform.position.x - lastClickedPos.x);
-			float yDifference = Math.Abs(transform.position.y - lastClickedPos.y);
+			var xDifference = Math.Abs(transform.position.x - lastClickedPos.x);
+			var yDifference = Math.Abs(transform.position.y - lastClickedPos.y);
 
 			if(yDifference > xDifference)
 			{
@@ -142,6 +152,7 @@ public class PlayerMovement : MovementBase
 					animator.SetFloat("Vertical", 1);
 					animator.SetFloat("Horizontal", 0);
 				}
+
 				if(lastClickedPos.y < transform.position.y)
 				{
 					animator.SetFloat("Vertical", -1);
@@ -160,6 +171,7 @@ public class PlayerMovement : MovementBase
 						GetComponent<SpriteRenderer>().flipX = false;
 					}
 				}
+
 				if(lastClickedPos.x < transform.position.x)
 				{
 					animator.SetFloat("Horizontal", -1);
@@ -188,5 +200,10 @@ public class PlayerMovement : MovementBase
 	public void StartBootAnimation()
 	{
 		animator.speed = 1;
+	}
+
+	public void StopMovement()
+	{
+		lastClickedPos = transform.position;
 	}
 }
