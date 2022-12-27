@@ -18,11 +18,18 @@ public class InteractionTransition : PropBase
 	public string variableName;
 	public string blockOnError;
 
-	public override void OnPointerEnter(PointerEventData pointerEventData)
-	{
+    public override void OnMouseEnter()
+    {
 		gameManager.SetCursorAction(cursorAction);
 		gameManager.SetInteractDialogText(FancyName);
 	}
+
+    /*Switched to OnMouseEnter
+     * public override void OnPointerEnter(PointerEventData pointerEventData)
+	{
+		gameManager.SetCursorAction(cursorAction);
+		gameManager.SetInteractDialogText(FancyName);
+	}*/
 
 	public override void Interact(ItemType item)
 	{
