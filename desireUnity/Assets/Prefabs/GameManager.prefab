@@ -97,11 +97,9 @@ MonoBehaviour:
     sfx: {fileID: 8300000, guid: b16a51d6cfc988d45aafe64442b80dba, type: 3}
   - sfxName: puzzle_complete
     sfx: {fileID: 8300000, guid: ce51f501c8556b04f8df48ad20df2a42, type: 3}
-  inventoryUI: {fileID: 1975772873509986503, guid: a99d770c0d17f804d86ad32a0912fa35, type: 3}
-  mainUI: {fileID: 3237129540963922203, guid: 39e292a9ef48e814caec2a57b9ad2374, type: 3}
-  settingsUI: {fileID: 3446138416216653522, guid: 60e1ffd741a67e240b3ddeaeac5671ee, type: 3}
+  mainUI: {fileID: 3237129540963922203, guid: 1cf23777360f5f54fbff7f0815fbbf9b, type: 3}
+  settingsUI: {fileID: 3446138416216653522, guid: 1f4c5fd9d21e9664ca32b67210366aa2, type: 3}
   dataPadUI: {fileID: 4923905467451345925, guid: 888d424d417051948874e82619195af0, type: 3}
-  aboutUI: {fileID: 3237129540963922203, guid: 7fc2e6d7505718f4580cd8074dea7cf3, type: 3}
   player: {fileID: 0}
 --- !u!114 &1226066315
 MonoBehaviour:
