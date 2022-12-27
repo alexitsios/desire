@@ -19,7 +19,19 @@ public class Doors : PropBase
 		}
 	}
 
-	public override void OnPointerEnter(PointerEventData pointerEventData)
+    public override void OnMouseEnter()
+    {
+		if (QuestController.Quests[QuestName.OpenSternDoor] == QuestStatus.Completed)
+		{
+			gameManager.SetCursorAction(CursorAction.LeftArrow);
+			gameManager.SetInteractDialogText("Go to Funnel");
+		}
+		else
+			base.OnMouseEnter();
+    }
+
+    /* Switched to OnMouseEnter
+     * public override void OnPointerEnter(PointerEventData pointerEventData)
 	{
 		if(QuestController.Quests[QuestName.OpenSternDoor] == QuestStatus.Completed)
 		{
@@ -28,5 +40,5 @@ public class Doors : PropBase
 		}
 		else
 			base.OnPointerEnter(pointerEventData);
-	}
+	}*/
 }
