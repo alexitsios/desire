@@ -14,7 +14,8 @@ public class InventoryManager : MonoBehaviour
 
 	public void StartInventoryManager()
 	{
-        inventoryScreen = GameObject.FindGameObjectWithTag("ItemsMenu").GetComponent<ItemsMenu>();
+        inventoryScreen = UIManager.instance.itemsMenu;
+        //inventoryScreen = GameObject.FindGameObjectWithTag("ItemsMenu").GetComponent<ItemsMenu>();
         _interaction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
 	}
 
@@ -25,6 +26,7 @@ public class InventoryManager : MonoBehaviour
     {
         Inventory.Add(item);
 
+        if (inventoryScreen == null) inventoryScreen = UIManager.instance.itemsMenu;
         inventoryScreen.UpdateInventoryScreen();
 
         var dialog = Instantiate(itemObatinedDialog, transform);
