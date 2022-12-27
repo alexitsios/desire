@@ -3749,8 +3749,8 @@ MonoBehaviour:
   menuButton: {fileID: 7015087624461216972}
   inventoryButton: {fileID: 5159942613981067634}
   tasksButton: {fileID: 8574611406641567536}
-  inventoryPanel: {fileID: 914199755530946521}
-  tasksPanel: {fileID: 8830903818576501555}
+  inventoryPanel: {fileID: 2947157840056865031}
+  tasksPanel: {fileID: 12542589810473840}
   pauseMenu: {fileID: 3237129542473189990}
   aboutUi: {fileID: 4738249432684492004}
   portrait: {fileID: 1200513735285168787}
