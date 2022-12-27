@@ -55,17 +55,34 @@ public abstract class PropBase : MonoBehaviour, IInteractable
         Destroy(hint);
 	}
 
+    public virtual void OnMouseEnter()
+    {
+        //Debug.Log("Mouse Enter");
+        gameManager.SetCursorAction(CursorAction.Question);
+        gameManager.SetInteractDialogText(FancyName);
+    }
+
+    public virtual void OnMouseExit()
+    {
+        //Debug.Log("Mouse Exit");
+        gameManager.SetCursorAction(CursorAction.Pointer);
+        gameManager.SetInteractDialogActive(false);
+    }
+
+    /* Switched to OnMouseEnter
     public virtual void OnPointerEnter(PointerEventData pointerEventData)
 	{
+        Debug.Log("Pointer Enter");
         gameManager.SetCursorAction(CursorAction.Question);
         gameManager.SetInteractDialogText(FancyName);
 	}
 
     public virtual void OnPointerExit(PointerEventData pointerEventData)
 	{
+        Debug.Log("Pointer Exit");
         gameManager.SetCursorAction(CursorAction.Pointer);
         gameManager.SetInteractDialogActive(false);
-    }
+    }*/
 
     /// <summary>
     ///     Default implementation of Interact. Override if you want to execute different code

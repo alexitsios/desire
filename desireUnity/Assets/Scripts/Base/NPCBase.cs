@@ -21,6 +21,19 @@ public abstract class NPCBase : NPCMovement, IInteractable
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
+    public virtual void OnMouseEnter()
+    {
+        gameManager.SetCursorAction(CursorAction.Dialog);
+        gameManager.SetInteractDialogText(FancyName);
+    }
+
+    public virtual void OnMouseExit()
+    {
+        gameManager.SetCursorAction(CursorAction.Pointer);
+        gameManager.SetInteractDialogActive(false);
+    }
+
+    /* Switched to OnMouseEnter
     public virtual void OnPointerEnter(PointerEventData pointerEventData)
     {
         gameManager.SetCursorAction(CursorAction.Dialog);
@@ -31,7 +44,7 @@ public abstract class NPCBase : NPCMovement, IInteractable
     {
         gameManager.SetCursorAction(CursorAction.Pointer);
         gameManager.SetInteractDialogActive(false);
-    }
+    }*/
 
     /// <summary>
     ///     Default implementation of Interact. Override if you want to execute different code

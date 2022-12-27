@@ -23,6 +23,19 @@ public abstract class ItemBase : MonoBehaviour, IInteractable
 		gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 	}
 
+	public virtual void OnMouseEnter()
+    {
+		gameManager.SetCursorAction(CursorAction.Question);
+		gameManager.SetInteractDialogText(FancyName);
+	}
+
+	public virtual void OnMouseExit()
+    {
+		gameManager.SetCursorAction(CursorAction.Pointer);
+		gameManager.SetInteractDialogActive(false);
+	}
+
+	/* Switched to OnMouseEnter
 	public virtual void OnPointerEnter(PointerEventData pointerEventData)
 	{
 		gameManager.SetCursorAction(CursorAction.Question);
@@ -33,7 +46,7 @@ public abstract class ItemBase : MonoBehaviour, IInteractable
 	{
 		gameManager.SetCursorAction(CursorAction.Pointer);
 		gameManager.SetInteractDialogActive(false);
-	}
+	}*/
 
 	public abstract void Interact(ItemType item);
 }
