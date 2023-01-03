@@ -460,7 +460,7 @@ public class GameManager : MonoBehaviour
         string translatedItemName;
 
         if (playerInteraction._selectedItem != ItemType.NoItem)
-            translatedItemName = _translationManager.GetTranslatedItem(playerInteraction._selectedItem.ToString()) + " → ";
+            translatedItemName = _translationManager.GetTranslatedItem(playerInteraction._selectedItem.ToString()) + " > ";
         else
             translatedItemName = "";
 
