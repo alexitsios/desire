@@ -304,7 +304,7 @@ Led #@recover_memory_3
 Led #@recover_memory_4
 Led #@recover_memory_5
 >> fadeout 1
->> alert
+>> alert @recover_memory_patch
 >> sfx puzzle_complete true
 >> save
 >> fadein 1
@@ -608,7 +608,7 @@ Led #@superstructure_in_no_access_code_1
 -> DONE
 
 == superstructure_in_to_hangar ==
-Led
+Led #@superstructure_in_to_hangar
 -> DONE
 
 == generator_room_load ==
@@ -620,7 +620,12 @@ Led
 -> DONE
 
 == generator_room_board_look ==
-Led #@generator_room_board_look_1
+{
+	- !turned_on_lights:
+		Led #@generator_room_board_look_1
+	- else:
+		Led #@generator_room_board_fix_3
+}
 -> DONE
 
 == generator_room_board_fix ==
@@ -641,7 +646,7 @@ Led #@generator_room_board_look_1
 == generator_room_computer ==
 {
     - !turned_on_lights:
-        Led
+        Led #@computer_no_lights
         -> DONE
     - else:
         Led #@generator_room_computer_1
@@ -651,7 +656,6 @@ Led #@generator_room_board_look_1
         Led #@generator_room_computer_5
         -> generator_room_log_table
 }
-
 
 == generator_room_log_table ==
 + [@generator_room_log_title_1]
