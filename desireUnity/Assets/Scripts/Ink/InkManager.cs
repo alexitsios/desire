@@ -127,7 +127,7 @@ public class InkManager : MonoBehaviour
 				character.NameText = _translationManager.GetTranslatedName(line);
 			}
 
-			var lineId = tags.Where(t => t.StartsWith('@')).FirstOrDefault();
+			var lineId = tags.Where(t => t.StartsWith('@') || t.StartsWith('!')).FirstOrDefault();
 			var translatedLine = _translationManager.GetTranslatedLine(lineId);
 
 			_sayDialog.SetCharacter(character);
@@ -139,7 +139,6 @@ public class InkManager : MonoBehaviour
 	private IEnumerator ProcessCommand(string command)
 	{
 		var commandList = command[2..].Trim().Split(' ');
-		;
 
 		switch(commandList[0])
 		{
