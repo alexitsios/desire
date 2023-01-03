@@ -97,7 +97,7 @@ MonoBehaviour:
     sfx: {fileID: 8300000, guid: b16a51d6cfc988d45aafe64442b80dba, type: 3}
   - sfxName: puzzle_complete
     sfx: {fileID: 8300000, guid: ce51f501c8556b04f8df48ad20df2a42, type: 3}
-  mainUI: {fileID: 3237129540963922203, guid: 56042792b017f8c4abc910ab608adf38, type: 3}
+  mainUI: {fileID: 3237129540963922203, guid: 39e292a9ef48e814caec2a57b9ad2374, type: 3}
   settingsUI: {fileID: 3446138416216653522, guid: 4fb0504af8c0cfb4098b36f45ec6eca7, type: 3}
   dataPadUI: {fileID: 4923905467451345925, guid: 888d424d417051948874e82619195af0, type: 3}
   player: {fileID: 0}
