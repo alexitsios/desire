@@ -493,7 +493,6 @@ Led #@superstructure_out_remaining_lifeboat_1
         Led #@superstructure_out_security_bot_49
         SecurityBot #@superstructure_out_security_bot_50
         Led #@superstructure_out_security_bot_51
-        >> quest GetClearance Completed
 }
 
 -> DONE
@@ -708,19 +707,24 @@ Led #@superstructure_in_to_hangar
 	-> DONE
 
 == bridge_load ==
->> screenshake true
-Led #@bridge_load_1
->> screenshake false
-Led #@bridge_load_2
-Led #@bridge_load_3
-Led #@bridge_load_4
-Led #@bridge_load_5
+{
+	- !bridge_visited:
+		>> screenshake true
+		Led #@bridge_load_1
+		>> screenshake false
+		Led #@bridge_load_2
+		Led #@bridge_load_3
+		Led #@bridge_load_4
+		Led #@bridge_load_5
+		~ bridge_visited = true
+}
 -> DONE
 
+
 == bridge_monitor ==
-Led "bridge_monitor_1
-Led "bridge_monitor_2
-Led "bridge_monitor_3
+Led #@bridge_monitor_1
+Led #@bridge_monitor_2
+Led #@bridge_monitor_3
 -> bridge_monitor_log_table
 
 == bridge_monitor_log_table ==
@@ -772,7 +776,7 @@ Led "bridge_monitor_3
 
 == bridge_captain ==
 {
-	- acquired_passcode:
+	- acquired_passcode && !has_clearance:
 		Led #@bridge_captain_1
 		Led #@bridge_captain_2
 		CaptainBot #@bridge_captain_3
@@ -781,13 +785,16 @@ Led "bridge_monitor_3
 		Led #@bridge_captain_6
 		CaptainBot #@bridge_captain_7
 		-> bridge_captain_ask_table
-	- else:
+	- !acquired_passcode:
 		Led #@bridge_captain_8
 		Led #@bridge_captain_9
 		Led #@bridge_captain_10
 		Led #@bridge_captain_11
 		Led #@bridge_captain_12
 		Led #@bridge_captain_13
+		-> DONE
+	- else:
+		-> bridge_captain_end_dialog ->
 		-> DONE
 }
 
@@ -847,11 +854,18 @@ Led "bridge_monitor_3
 	CaptainBot #@bridge_captain_captain_table_6.2
 	Led #@bridge_captain_captain_table_6.3
 	CaptainBot #@bridge_captain_captain_table_6.4
-	Led #@bridge_captain_captain_table_6.5
-	CaptainBot #@bridge_captain_captain_table_6.6
-	Led #@bridge_captain_captain_table_6.7
-	CaptainBot #@bridge_captain_captain_table_6.8
-	CaptainBot #@bridge_captain_captain_table_6.9
-	CaptainBot #@bridge_captain_captain_table_6.10
+	-> bridge_captain_end_dialog ->
 	CaptainBot #@bridge_captain_captain_table_6.11
+	>> additem ClearanceCard
+	>> quest GetClearance Completed
+	~ has_clearance = true
 	-> DONE
+
+== bridge_captain_end_dialog ==
+Led #@bridge_captain_captain_table_6.5
+CaptainBot #@bridge_captain_captain_table_6.6
+Led #@bridge_captain_captain_table_6.7
+CaptainBot #@bridge_captain_captain_table_6.8
+CaptainBot #@bridge_captain_captain_table_6.9
+CaptainBot #@bridge_captain_captain_table_6.10
+->->
