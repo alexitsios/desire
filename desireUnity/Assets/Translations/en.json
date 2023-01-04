@@ -8,8 +8,8 @@
     },
 	"ui": {
 		"NewItem": "You got a new item!",
-		"Inventory": "Inventário",
-		"Tasks": "Objetivos"
+		"Inventory": "Inventory",
+		"Tasks": "Tasks"
 	},
     "items": {
         "AllInOneTool": "All-in-One Tool.",

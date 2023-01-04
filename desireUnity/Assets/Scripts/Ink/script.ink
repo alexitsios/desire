@@ -703,7 +703,7 @@ Led #@superstructure_in_to_hangar
 	Unknown #@generator_room_log_7.6
 	-> generator_room_log_table
 + [@generator_room_log_title_return]
-	Led
+	Led #@generator_room_log_return
 	-> DONE
 
 == bridge_load ==

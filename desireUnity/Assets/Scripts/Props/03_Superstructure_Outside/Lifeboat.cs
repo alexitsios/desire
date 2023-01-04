@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using Fungus;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Lifeboat : PropBase
 {
-    protected override string FancyName { get { return "Lifeboat"; } }
+	protected override string FancyName { get { return "Lifeboat"; } }
 
 	public override void Interact(ItemType item)
 	{
@@ -14,13 +12,17 @@ public class Lifeboat : PropBase
 			gameManager.StartEndingCutscene();
 		}
 
-		if(QuestController.Quests[QuestName.GetClearance] == QuestStatus.Completed)
+		if(item == ItemType.ClearanceCard)
+		{
+			GameObject.Find("NPCsFlowchart").GetComponent<Flowchart>().ExecuteBlock("SecurityRobot");
+		}
+		else if(QuestController.Quests[QuestName.GetClearance] == QuestStatus.Completed && item == ItemType.NoItem)
 		{
 			gameManager.StartEndingCutscene();
-		} 
+		}
 		else
 		{
-			base.Interact(item);
+			Flowchart.ExecuteBlock("ItemUseError");
 		}
 	}
 }
