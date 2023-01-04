@@ -437,6 +437,7 @@ GameObject:
   - component: {fileID: 6421823746277137824}
   - component: {fileID: 3972779299414908121}
   - component: {fileID: 5666440819233489102}
+  - component: {fileID: 7892555691810570601}
   m_Layer: 5
   m_Name: ItemObtainedDialog
   m_TagString: Untagged
@@ -526,3 +527,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7892555691810570601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487959027754761227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ed5089d159e2246bc1df452834edab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSprite: {fileID: 7705680300032310875}
+  itemName: {fileID: 127868234230386644}
+  dialogBody: {fileID: 1803262605589604816}

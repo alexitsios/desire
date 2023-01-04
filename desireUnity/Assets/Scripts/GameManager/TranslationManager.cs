@@ -50,6 +50,11 @@ public class TranslationManager : MonoBehaviour
 		return _translation.items[itemKey];
 	}
 
+	public string GetTranslatedItem(ItemType itemType)
+	{
+		return GetTranslatedItem(itemType.ToString());
+	}
+
 	public string GetTranslatedSpecial(string key)
 	{
 		return _translation.special[key];
@@ -58,8 +63,15 @@ public class TranslationManager : MonoBehaviour
 	public string GetTranslatedLine(string lineKey)
 	{
 		if(lineKey.StartsWith('@'))
+		{
 			return _translation.GetTranslatedLine(lineKey);
+		}
 
 		return GetTranslatedSpecial(lineKey);
+	}
+
+	public string GetTranslatedUi(string uiKey)
+	{
+		return _translation.ui[uiKey];
 	}
 }

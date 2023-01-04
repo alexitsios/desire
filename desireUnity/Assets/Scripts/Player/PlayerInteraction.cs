@@ -95,4 +95,9 @@ public class PlayerInteraction : MonoBehaviour
 	{
 		_selectedItem = item;
 	}
+
+	public string GetTranslatedActiveItemName()
+	{
+		return _selectedItem == ItemType.NoItem ? "" : _gameManager.TranslationManager.GetTranslatedItem(_selectedItem);
+	}
 }

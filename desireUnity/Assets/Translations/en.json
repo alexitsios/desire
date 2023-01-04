@@ -6,9 +6,15 @@
         "Unknown": "Unknown",
         "CaptainBot": "Captain Robot"
     },
+	"ui": {
+		"NewItem": "You got a new item!",
+		"Inventory": "Inventory",
+		"Tasks": "Tasks"
+	},
     "items": {
         "AllInOneTool": "All-in-One Tool.",
-        "ServiceKit": "Service Kit"
+        "ServiceKit": "Service Kit",
+		"ClearanceCard": "Clearance Card"
     },
     "props": {
         "@data_pad": "Data Pad.",
