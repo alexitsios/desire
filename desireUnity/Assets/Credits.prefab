@@ -67,31 +67,95 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '* credits*
+  m_text: 'Credits:
 
-
-    This is some Example Credits
-
-
-    *******
-
-
-    Somebody
-    | Art
-
-
-    Sombody Else | Programming
-
-
-    Some "Else" body | Music
+    Project lead, production, game & narrative design by Alex
+    Itsios
 
 
 
+    Lead Programming by Vitor Maduro
+
+
+    Additional Programmers
+
+    Joss
+    Chi
+
+    Derek Gooding
+
+
+    Music & SFX by Joaquin D. Garza
 
 
 
-    Thanks
-    For Playing'
+    Background
+    art by Felipe Benini (Typeh_)
+
+
+
+    Dialogue sprites by Ventraq
+
+
+
+    Pixel
+    Sprites & Animation by Whomself
+
+
+
+    GUI by Roman
+
+
+
+    Lead Writing by A.
+    C. Kass
+
+
+
+    Game Writing & Dialogues in order of contribution:
+
+
+
+    Lehi
+    Bon-Newman (discord: LehioftheSea#1347 )
+
+    Jess s. (discord: Jess_S#1295)
+
+    Freya
+    s.
+
+    Cody Ross
+
+    Alex Itsios
+
+    Plot overview and short outline by Alex
+    Itsios.
+
+
+
+    Extended outline by Cody Ross (discord: Kanata Uguu~#7260)
+
+
+
+    Logo
+    Design by Dareevan
+
+
+
+    Special thanks to:
+
+
+
+    Narcissus (for creating the
+    security bot''s concept sketch and line art).
+
+    Darkness Lord
+
+    Waikikired
+    (for sketching out draft concepts for the first three locations).
+
+    Cotton
+    Bottom (for helping us out with initial programming).'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
