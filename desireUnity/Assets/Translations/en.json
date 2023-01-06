@@ -1,5 +1,9 @@
 {
-    "characters": {
+    "credits": {
+		"presents": "Funigami presents",
+		"title": "The Sinking of the Dream Chaser"
+	},
+	"characters": {
         "Led": "Led",
         "VacuumRobot": "Vacuum Robot",
         "SecurityBot": "Security Robot",
@@ -9,7 +13,11 @@
 	"ui": {
 		"NewItem": "You got a new item!",
 		"Inventory": "Inventory",
-		"Tasks": "Tasks"
+		"Tasks": "Tasks",
+		"Start": "Start",
+		"About": "About",
+		"Options": "Options",
+		"Exit": "Exit"
 	},
     "items": {
         "AllInOneTool": "All-in-One Tool.",

@@ -1,8 +1,6 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -30,15 +28,15 @@ public class SettingsMenu : MonoBehaviour
 
 		//_finishedLoading = true;
 
-		languageDropdown.value = PlayerPrefs.GetInt("Language", 1);
+		languageDropdown.value = PlayerPrefs.GetInt("Language", 0);
 		masterVolume.value = PlayerPrefs.GetFloat("MasterVolume", 100f);
 		FxVolume.value = PlayerPrefs.GetFloat("FxVolume", 100f);
 		BgVolume.value = PlayerPrefs.GetFloat("BgVolume", 100f);
 
 		ElementSettings();
-		FindAdditionalComponents();		
+		FindAdditionalComponents();
 
-		if (IntToBool(PlayerPrefs.GetInt("BeepSound")))
+		if(IntToBool(PlayerPrefs.GetInt("BeepSound")))
 		{
 			beepOnText.color = Color.white;
 			beepOffText.color = off;
@@ -49,7 +47,7 @@ public class SettingsMenu : MonoBehaviour
 			beepOffText.color = Color.white;
 		}
 
-		if (IntToBool(PlayerPrefs.GetInt("Hints")))
+		if(IntToBool(PlayerPrefs.GetInt("Hints")))
 		{
 			hintOnText.color = Color.white;
 			hintOffText.color = off;
@@ -66,24 +64,52 @@ public class SettingsMenu : MonoBehaviour
 	}
 
 	private void ElementSettings()
-    {
-		masterVolume.onValueChanged.AddListener(delegate { OnMasterVolumeChanged(); });
-		FxVolume.onValueChanged.AddListener(delegate { OnFXVolumeChanged(); });
-		BgVolume.onValueChanged.AddListener(delegate { OnBGVolumeChanged(); });
+	{
+		languageDropdown.onValueChanged.AddListener(delegate
+		{
+			OnLanguageChanged();
+		});
 
-		
+		masterVolume.onValueChanged.AddListener(delegate
+		{ 
+			OnMasterVolumeChanged(); 
+		});
 
-		beepOn.onClick.AddListener(delegate { ToggleBeep(true); });
-		beepOff.onClick.AddListener(delegate { ToggleBeep(false); });
+		FxVolume.onValueChanged.AddListener(delegate
+		{ 
+			OnFXVolumeChanged(); 
+		});
 
-		hintsOn.onClick.AddListener(delegate { ToggleHints(true); });
-		hintsOff.onClick.AddListener(delegate { ToggleHints(false); });
+		BgVolume.onValueChanged.AddListener(delegate
+		{ 
+			OnBGVolumeChanged(); 
+		});
+
+		beepOn.onClick.AddListener(delegate
+		{ 
+			ToggleBeep(true); 
+		});
+
+		beepOff.onClick.AddListener(delegate
+		{ 
+			ToggleBeep(false); 
+		});
+
+		hintsOn.onClick.AddListener(delegate
+		{ 
+			ToggleHints(true); 
+		});
+
+		hintsOff.onClick.AddListener(delegate
+		{ 
+			ToggleHints(false); 
+		});
 
 		backButton.onClick.AddListener(CloseSettingsScreen);
 	}
 
 	private void FindAdditionalComponents()
-    {
+	{
 		beepOnText = beepOn.GetComponent<TMP_Text>();
 		beepOffText = beepOff.GetComponent<TMP_Text>();
 		hintOnText = hintsOn.GetComponent<TMP_Text>();
@@ -93,7 +119,7 @@ public class SettingsMenu : MonoBehaviour
 	private void ToggleBeep(bool enable)
 	{
 		gameManager.Settings.BeepSound = enable;
-		if (enable)
+		if(enable)
 		{
 			beepOnText.color = Color.white;
 			beepOffText.color = off;
@@ -110,7 +136,7 @@ public class SettingsMenu : MonoBehaviour
 	private void ToggleHints(bool enable)
 	{
 		gameManager.Settings.ShowHints = enable;
-		if (enable)
+		if(enable)
 		{
 			hintOnText.color = Color.white;
 			hintOffText.color = off;
@@ -121,24 +147,34 @@ public class SettingsMenu : MonoBehaviour
 			hintOffText.color = Color.white;
 		}
 
- 		PlayerPrefs.SetInt("Hints", BoolToInt(enable));
+		PlayerPrefs.SetInt("Hints", BoolToInt(enable));
+	}
+
+	private void OnLanguageChanged()
+	{
+		var language = languageDropdown.value;
+
+		gameManager.Settings.Language = (Language) language;
+		gameManager.TranslationManager.LoadBaseTranslation();
+
+		PlayerPrefs.SetInt("Language", language);
 	}
 
 	private void OnMasterVolumeChanged()
-    {
+	{
 		var vol = masterVolume.value;
 		gameManager.Settings.MasterVolume = vol;
 		PlayerPrefs.SetFloat("MasterVolume", vol);
-		if (masterVolumeText == null)
-        {
+		if(masterVolumeText == null)
+		{
 			Debug.Log("Master null");
-        }
+		}
 		else
 			masterVolumeText.text = vol.ToString();
 	}
-	
+
 	private void OnFXVolumeChanged()
-    {
+	{
 		var vol = FxVolume.value;
 		gameManager.Settings.FXVolume = vol;
 		PlayerPrefs.SetFloat("FxVolume", vol);
@@ -146,7 +182,7 @@ public class SettingsMenu : MonoBehaviour
 	}
 
 	private void OnBGVolumeChanged()
-    {
+	{
 		var vol = BgVolume.value;
 		gameManager.Settings.BGVolume = vol;
 		PlayerPrefs.SetFloat("BgVolume", vol);
@@ -155,12 +191,12 @@ public class SettingsMenu : MonoBehaviour
 
 	//Called by EventTrigger/OnPointerUp Event on each volume slider
 	public void OnEndDrag(int sliderNumber)
-    {
-		if (managerAudioSource == null)
+	{
+		if(managerAudioSource == null)
 			managerAudioSource = GameManager.instance.gameObject.GetComponent<AudioSource>();
 		float volume = 0;
-		switch (sliderNumber)
-        {
+		switch(sliderNumber)
+		{
 			case 0:
 				Debug.Log("Master Volume Change");
 				volume = gameManager.Settings.MasterVolume;
@@ -173,10 +209,10 @@ public class SettingsMenu : MonoBehaviour
 				Debug.Log("BG Volume Change");
 				volume = gameManager.Settings.BGVolume;
 				break;
-        }
+		}
 
 		managerAudioSource.PlayOneShot(testClip, volume);
-    }
+	}
 
 	private void CloseSettingsScreen()
 	{
@@ -186,14 +222,19 @@ public class SettingsMenu : MonoBehaviour
 	//Returns 0 if false, else returns 1
 	private int BoolToInt(bool b)
 	{
-		if (b == false) return 0;
+		if(b == false)
+			return 0;
 		return 1;
 	}
 
 	//Returns false if 0, else returns true
 	private bool IntToBool(int i)
 	{
-		if (i == 0) return false;
+		if(i == 0)
+		{
+			return false;
+		}
+
 		return true;
 	}
 

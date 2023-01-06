@@ -428,7 +428,10 @@ Led #@superstructure_out_empty_lifeboat_3
 -> DONE
 
 == superstructure_out_remaining_lifeboat ==
-Led #@superstructure_out_remaining_lifeboat_1
+{
+	- !has_clearance:
+		Led #@superstructure_out_remaining_lifeboat_1
+}
 -> superstructure_out_security_bot
 
 == superstructure_out_security_bot == 

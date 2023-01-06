@@ -96,7 +96,8 @@ public enum SceneName
 	Superstructure_out,
 	Superstructure_in,
 	Generator_room,
-	Bridge
+	Bridge,
+	OpeningCredits = 8
 }
 
 public enum SettingsOptionType

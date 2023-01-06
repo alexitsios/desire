@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
 		{
 			GetComponent<InventoryManager>().StartInventoryManager();
 
-			GetComponent<TranslationManager>().LoadTranslation(Language.English, (SceneName) scene.buildIndex);
+			GetComponent<TranslationManager>().LoadSceneTranslation(Settings.Language, (SceneName) scene.buildIndex);
 			playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInteraction>();
 
 			//_inventoryInstance.GetComponentInChildren<ItemsMenu>().PlayerInteraction = playerInteraction;
@@ -495,7 +495,7 @@ public class GameManager : MonoBehaviour
 		}
 
 		SceneManager.LoadScene((int) scene, LoadSceneMode.Single);
-		GetComponent<TranslationManager>().LoadTranslation(Language.English, scene);
+		GetComponent<TranslationManager>().LoadSceneTranslation(Settings.Language, scene);
 
 		playerSpawn = spawnIndex;
 	}

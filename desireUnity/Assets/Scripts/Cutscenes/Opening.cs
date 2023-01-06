@@ -5,16 +5,20 @@ using UnityEngine.UI;
 
 public class Opening : MonoBehaviour
 {
-    RawImage fadeImage;
-    TMP_Text text1;
-    TMP_Text text2;
+    private RawImage fadeImage;
+    private TMP_Text text1;
+    private TMP_Text text2;
+	private GameManager gameManager;
 
 	private void Start()
 	{
 		fadeImage = GameObject.Find("FadeImage").GetComponent<RawImage>();
 		text1 = GameObject.Find("Text1").GetComponent<TMP_Text>();
 		text2 = GameObject.Find("Text2").GetComponent<TMP_Text>();
+		gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
+		text1.text = gameManager.TranslationManager.GetTranslatedCredit("presents");
+		text2.text = gameManager.TranslationManager.GetTranslatedCredit("title");
 		text2.gameObject.SetActive(false);
 
 		StartCoroutine(StartCutscene());

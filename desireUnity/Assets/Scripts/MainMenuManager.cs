@@ -1,3 +1,4 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,13 +28,11 @@ public class MainMenuManager : MonoBehaviour
         PlayerPrefs.SetInt("BeepSound", 1);
         PlayerPrefs.SetInt("Hints", 1);
     }
-
     private void StartGame()
     {
-        // Loads the opening scene
-        SceneManager.LoadScene(8, LoadSceneMode.Single);
+		// Loads the opening scene
+		SceneManager.LoadScene(8, LoadSceneMode.Single);
     }
-
 
     //Open/Close the About section on the main menu
     private void AboutUi(bool open)
