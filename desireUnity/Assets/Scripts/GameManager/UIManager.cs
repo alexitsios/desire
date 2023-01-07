@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Fungus;
 
 public class UIManager : MonoBehaviour
 {
@@ -36,12 +37,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite[] menuBackgrounds;
     [Space]
     [SerializeField] private Button continueButton;
-    [SerializeField] private Button aboutButton, optionsButton, exitButton, closeAboutButton;
+    [SerializeField] private Button aboutButton, optionsButton, exitButton;//, closeAboutButton;
     private Image pauseMenuBackground;
 
     private Vector2 inventoryHiddenPos = Vector2.zero, inventoryShownPos;
     private Vector2 tasksHiddenPos = Vector2.zero, tasksShownPos;
-    private bool inventoryOpen, tasksOpen;
+    public bool inventoryOpen, tasksOpen;
     private float timeToMove = 0.2f;
 
     private void Start()
@@ -57,11 +58,11 @@ public class UIManager : MonoBehaviour
     {
         menuButton.onClick.AddListener(OpenMenu);
         aboutButton.onClick.AddListener(delegate { AboutUi(true); });
-        closeAboutButton.onClick.AddListener(delegate { AboutUi(false); });
+        //closeAboutButton.onClick.AddListener(delegate { AboutUi(false); });
         optionsButton.onClick.AddListener(OpenSettings);
 
-        inventoryButton.onClick.AddListener(ToggleInventory);
-        tasksButton.onClick.AddListener(ToggleTasks);
+        //inventoryButton.onClick.AddListener(ToggleInventory);
+        //tasksButton.onClick.AddListener(ToggleTasks);
 
         continueButton.onClick.AddListener(delegate 
         {
@@ -85,14 +86,14 @@ public class UIManager : MonoBehaviour
         //Set the background dependent on the current scene
         int i = SceneManager.GetActiveScene().buildIndex;
         Debug.Log(i);
-        pauseMenuBackground.sprite = menuBackgrounds[i];
-        portrait.sprite = characterPortrais[i];
+        //auseMenuBackground.sprite = menuBackgrounds[i];
+        //portrait.sprite = characterPortrais[i];
     }
 
     //Open/Close the About section on the main menu
     private void AboutUi(bool open)
     {
-        aboutUi.gameObject.SetActive(open);
+        aboutUi.SetActive(open);
     }
 
     //Open/Close the SettingsPanel
@@ -101,37 +102,51 @@ public class UIManager : MonoBehaviour
         GameManager.instance.OpenSettings();
     }
 
-    private void ToggleInventory()
+    private void Update()
     {
-        var end = inventoryShownPos;
-        if (inventoryOpen) end = inventoryHiddenPos;
-        StartCoroutine(LerpPanel(inventoryPanel, inventoryPanel.anchoredPosition, end));
-        inventoryOpen = !inventoryOpen;
-
         if (inventoryOpen)
-        {
-            itemsMenu.UpdateInventoryScreen();
-        }
+            LerpPanel(inventoryPanel, inventoryShownPos);
+        else
+            LerpPanel(inventoryPanel, inventoryHiddenPos);
+        if (tasksOpen)
+            LerpPanel(tasksPanel, tasksShownPos);
+        else
+            LerpPanel(tasksPanel, tasksHiddenPos);
     }
 
-    private void ToggleTasks()
-    {
-        var end = tasksShownPos;
-        if (tasksOpen) end = tasksHiddenPos;
-        StartCoroutine(LerpPanel(tasksPanel, tasksPanel.anchoredPosition, end));
-        tasksOpen = !tasksOpen;
-    }
+    //private void ToggleInventory()
+    //{
+    //    var end = inventoryShownPos;
+    //    if (inventoryOpen) end = inventoryHiddenPos;
+    //    StartCoroutine(LerpPanel(inventoryPanel, end));
+    //    inventoryOpen = !inventoryOpen;
 
-    private IEnumerator LerpPanel(RectTransform panel, Vector2 startPos, Vector2 endPos)
-    {
-        float t = 0;
-        while (t < timeToMove)
-        {
-            panel.anchoredPosition = Vector2.Lerp(startPos, endPos, (t / timeToMove));
-            t += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
+    //    if (inventoryOpen)
+    //    {
+    //        itemsMenu.UpdateInventoryScreen();
+    //    }
+    //}
 
-        panel.anchoredPosition = endPos;
+    //private void ToggleTasks()
+    //{
+    //    var end = tasksShownPos;
+    //    if (tasksOpen) end = tasksHiddenPos;
+    //    StartCoroutine(LerpPanel(tasksPanel, end));
+    //    tasksOpen = !tasksOpen;
+    //}
+    private void LerpPanel(RectTransform panel, Vector2 endPos) => LerpPanel(panel, panel.anchoredPosition, endPos);
+    private void LerpPanel(RectTransform panel, Vector2 startPos, Vector2 endPos)
+    {
+        //float t = 0;
+        //while (t < timeToMove)
+        //{
+        //    panel.anchoredPosition = Vector2.Lerp(startPos, endPos, (t / timeToMove));
+        //    t += Time.deltaTime;
+        //}
+        float movementAmount = Time.deltaTime / timeToMove;
+        if(Vector2.Distance(startPos, endPos) > movementAmount)
+            panel.anchoredPosition = Vector2.Lerp(startPos, endPos, movementAmount);
+        else
+            panel.anchoredPosition = endPos;
     }
 }

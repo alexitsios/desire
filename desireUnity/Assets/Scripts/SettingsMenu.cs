@@ -216,7 +216,7 @@ public class SettingsMenu : MonoBehaviour
 
 	private void CloseSettingsScreen()
 	{
-		Destroy(gameObject.transform.parent.gameObject);
+		Destroy(gameObject);
 	}
 
 	//Returns 0 if false, else returns 1

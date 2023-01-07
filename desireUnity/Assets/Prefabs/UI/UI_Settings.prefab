@@ -2333,9 +2333,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 3446138416216653522}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e0cb7954d7252b4884a369b4131727b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f3b84f2de332224894b3e9029de063e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  languageDropdown: {fileID: 5460597351364050268}
+  masterVolume: {fileID: 1469062467587362938}
+  FxVolume: {fileID: 3466066199931849758}
+  BgVolume: {fileID: 2566595675197490518}
+  beepOn: {fileID: 2701796026803624690}
+  beepOff: {fileID: 5695621729040835437}
+  hintsOn: {fileID: 7464245936805834054}
+  hintsOff: {fileID: 6783397578833137239}
+  backButton: {fileID: 3231805349321133792}
+  masterVolumeText: {fileID: 3409686055079829673}
+  effectsVolumeText: {fileID: 90306342410432921}
+  backgroundVolumeText: {fileID: 4664025845679855947}
+  testClip: {fileID: 0}
 --- !u!1 &3471556633886723149
 GameObject:
   m_ObjectHideFlags: 0

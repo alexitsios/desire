@@ -1400,7 +1400,7 @@ GameObject:
   - component: {fileID: 3237129540963922206}
   - component: {fileID: 3237129540963922205}
   - component: {fileID: 916633371282051109}
-  - component: {fileID: 7796200326634650404}
+  - component: {fileID: 8477951688247852279}
   m_Layer: 5
   m_Name: UI_About
   m_TagString: Untagged
@@ -1495,7 +1495,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7796200326634650404
+--- !u!114 &8477951688247852279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1504,7 +1504,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3237129540963922203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e0cb7954d7252b4884a369b4131727b, type: 3}
+  m_Script: {fileID: 11500000, guid: 984b8d7b7d3d32742acf844d022e4080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3433955830394322368
@@ -2535,8 +2535,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4407028642963847521}
   m_HandleRect: {fileID: 3392266249876149307}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.51371366
+  m_Value: 0.9996393
+  m_Size: 0.51353335
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2932,9 +2932,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7796200326634650404}
-        m_TargetAssemblyTypeName: DeleteMe, Assembly-CSharp
-        m_MethodName: DestroySelf
+      - m_Target: {fileID: 8477951688247852279}
+        m_TargetAssemblyTypeName: DisableSelf, Assembly-CSharp
+        m_MethodName: Disable
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3133,10 +3133,10 @@ RectTransform:
   m_Father: {fileID: 27889032248495098}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -518.3877}
-  m_SizeDelta: {x: 0, y: 1036.7751}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -32.45056, y: -518.3876}
+  m_SizeDelta: {x: 2510.3057, y: 2132.7751}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6413132795125101219
 GameObject:
@@ -3406,8 +3406,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -894, y: -574}
+  m_AnchoredPosition: {x: -9.271484, y: 0}
+  m_SizeDelta: {x: -393.3357, y: -574}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4184762193414798546
 CanvasRenderer:

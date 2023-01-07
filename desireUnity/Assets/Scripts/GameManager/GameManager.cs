@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 	//private bool gameLoaded = false;
 	private WriterAudio wa;
 
-	private const string GAME_VERSION = "0.7";
+	private const string GAME_VERSION = "0.81";
 
 	private void Awake()
 	{

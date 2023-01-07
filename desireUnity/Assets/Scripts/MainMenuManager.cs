@@ -19,7 +19,7 @@ public class MainMenuManager : MonoBehaviour
         startButton.onClick.AddListener(StartGame);
 
         aboutButton.onClick.AddListener(delegate { AboutUi(true); });
-        closeAbout.onClick.AddListener(delegate { AboutUi(false); });
+        //closeAbout.onClick.AddListener(delegate { AboutUi(false); });
 
         optionsButton.onClick.AddListener(OpenSettings);
 
