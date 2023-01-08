@@ -509,17 +509,11 @@ namespace Fungus
                 {
                     if(stage.CharactersOnStage.Count == 0)
                     {
-                        attributes = "Center";
+                        attributes = "Left";
                     }
                     else
                     {
-                        var c = stage.CharactersOnStage.First();
-                        var fromPos = stage.GetPosition("Center");
-                        var toPos = stage.GetPosition(c.NameText == "Led" ? "Left" : "Right");
-
-                        stage.DoMoveTween(c, fromPos, toPos, 1f, true);
-
-                        attributes = character.NameText != "Led" ? "Right" : "Left";
+                        attributes = "Right";
                     }
 
                     stage.Show(character, character.Portraits[0].name, attributes);
