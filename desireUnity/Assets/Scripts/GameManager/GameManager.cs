@@ -350,7 +350,11 @@ public class GameManager : MonoBehaviour
 
 	public void GoToMainMenu()
 	{
-		SceneManager.LoadScene("00_StartGame");
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+		foreach (GameObject go in allObjects)
+			if (go.activeInHierarchy )//&& go != this.gameObject)
+				Destroy(go);
+        SceneManager.LoadScene("00_StartGame");
 	}
 
 	public void QuitGame()

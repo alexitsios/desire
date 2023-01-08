@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
         {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
-            GameManager.instance.GoToMainMenu(); 
+            GameManager.instance.GoToMainMenu();
         });
     }
 
