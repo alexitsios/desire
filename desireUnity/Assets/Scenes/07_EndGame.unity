@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6031357840754484669, guid: 2fecae39864547b43ac21d225543100e, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6031357840754484669, guid: 2fecae39864547b43ac21d225543100e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -164,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6031357840754484669, guid: 2fecae39864547b43ac21d225543100e, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -1226
+      value: -400
       objectReference: {fileID: 0}
     - target: {fileID: 6031357840754484669, guid: 2fecae39864547b43ac21d225543100e, type: 3}
       propertyPath: m_SizeDelta.y
@@ -234,110 +234,51 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Credits:
 
-        Project lead, production, game & narrative design
+        Project Lead, Production, Game & Narrative Design
+        by Alex Itsios
 
-        Alex
-        Itsios
+        
 
+        Programming by Vitor Maduro, Derek Gooding,
+        and Space Sorcerer Studio
 
+        
 
-        Lead Programming
+        Music & SFX by Joaquin D.
+        Garza
 
-        Vitor Maduro
+        
 
+        Background art by Felipe Benini
 
-        Additional
-        Programmers
-
-        Joss Chi
-
-        Derek Gooding
-
-
-        Music & SFX
-
-        Joaquin
-        D. Garza
-
-
-
-        Background art
-
-        Felipe Benini (Typeh_)
-
-
+        
 
         Dialogue
-        sprites
+        sprites by Ventraq
 
-        Ventraq
+        
 
+        Pixel Sprites & Animation by Whomself
 
-
-        Pixel Sprites & Animation
-
-        Whomself
-
-
+        
 
         GUI
+        by Roman
 
-        Roman
+        
 
+        Game Writing by  A. C. Kass, Lehi Bon-Newman,
+        Jess s.,  Freya s., Cody Ross, Alex Itsios.
 
-
-        Lead
-        Writing
-
-        A. C. Kass
-
-
-
-        Game Writing & Dialogues in order
-        of contribution:
-
-
-
-        Lehi Bon-Newman (discord: LehioftheSea#1347 )
-
-        Jess
-        s. (discord: Jess_S#1295)
-
-        Freya s.
-
-        Cody Ross
-
-        Alex
-        Itsios
-
-        Plot overview and short outline by Alex Itsios.
-
-
-
-        Extended
-        outline by Cody Ross (discord: Kanata Uguu~#7260)
-
-
+        
 
         Logo Design
         by Dareevan
 
+        
 
-
-        Special thanks to:
-
-
-
-        Narcissus (for creating
-        the security bot''s concept sketch and line art).
-
-        Darkness Lord
-
-        Waikikired
-        (for sketching out draft concepts for the first three locations).
-
-        Cotton
-        Bottom (for helping us out with initial programming).'
+        Special thanks to: Narcissus, Darkness Lord,
+        Waikikired, Cotton Bottom.'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fecae39864547b43ac21d225543100e, type: 3}
@@ -765,4 +706,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4c9017b0d905f40a9aef3a35bdb5ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creditWaitTime: 50
+  creditWaitTime: 25
