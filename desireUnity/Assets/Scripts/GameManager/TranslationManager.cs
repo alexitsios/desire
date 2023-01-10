@@ -92,4 +92,9 @@ public class TranslationManager : MonoBehaviour
 	{
 		return _baseTranslation.credits[creditKey];
 	}
+
+	public string GetTranslatedEndingLine(string lineKey)
+	{
+		return _baseTranslation.ending[lineKey];
+	}
 }

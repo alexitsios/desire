@@ -10,6 +10,12 @@
         "Unknown": "Unknown",
         "CaptainBot": "Captain Robot"
     },
+	"ending": {
+		"@ending_1": "I made it just in time. Now I need to get to the shore",
+		"@ending_2": "The Promised Land... It should be somewhere here.",
+		"@ending_3": "Master?",
+		"@ending_4": "Led?"
+	},
 	"ui": {
 		"NewItem": "You got a new item!",
 		"Inventory": "Inventory",

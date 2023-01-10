@@ -17,6 +17,7 @@ TagManager:
   - MenuDialog
   - InteractDialog
   - SettingsMenu
+  - Text
   layers:
   - Default
   - TransparentFX

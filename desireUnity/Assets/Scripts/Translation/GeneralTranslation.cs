@@ -8,4 +8,5 @@ public class GeneralTranslation
 	public Dictionary<string, string> special;
 	public Dictionary<string, string> ui;
 	public Dictionary<string, string> credits;
+	public Dictionary<string, string> ending;
 }
