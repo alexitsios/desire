@@ -4,8 +4,7 @@ public class StopMovement : MonoBehaviour
 {
     private void OnCollisionStay2D(Collision2D collision)
     {
-        var player = collision.gameObject.GetComponent<PlayerMovement>();
-        if (player != null)
+        if (collision.gameObject.TryGetComponent<PlayerMovement>(out var player))
         {
             player.StopMovement();
         }

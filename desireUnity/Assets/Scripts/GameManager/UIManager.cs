@@ -104,14 +104,16 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (inventoryOpen)
+        if (inventoryOpen )
             LerpPanel(inventoryPanel, inventoryShownPos);
         else
             LerpPanel(inventoryPanel, inventoryHiddenPos);
-        if (tasksOpen)
+        if (tasksOpen )
             LerpPanel(tasksPanel, tasksShownPos);
         else
             LerpPanel(tasksPanel, tasksHiddenPos);
+        
+            
     }
 
     //private void ToggleInventory()
