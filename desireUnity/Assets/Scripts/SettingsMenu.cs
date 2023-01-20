@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Fungus;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -19,13 +20,14 @@ public class SettingsMenu : MonoBehaviour
 	[SerializeField] private AudioClip testClip;
 
 	private TMP_Text beepOnText, beepOffText, hintOnText, hintOffText;
-	private AudioSource managerAudioSource;
+	private MusicManager musicManager;
+	//private AudioSource managerAudioSource;
 	private Color off = new(1f, 1f, 1f, 0.5f);
 
 	private void Start()
 	{
 		gameManager = GameManager.instance;
-
+		musicManager = GameObject.Find("FungusManager").GetComponent<MusicManager>();
 		//_finishedLoading = true;
 
 		languageDropdown.value = PlayerPrefs.GetInt("Language", 0);
@@ -171,6 +173,8 @@ public class SettingsMenu : MonoBehaviour
 		}
 		else
 			masterVolumeText.text = vol.ToString();
+
+		musicManager.OnVolumesChanged(gameManager.Settings.MasterVolume, gameManager.Settings.BGVolume, gameManager.Settings.FXVolume);
 	}
 
 	private void OnFXVolumeChanged()
@@ -179,6 +183,8 @@ public class SettingsMenu : MonoBehaviour
 		gameManager.Settings.FXVolume = vol;
 		PlayerPrefs.SetFloat("FxVolume", vol);
 		effectsVolumeText.text = vol.ToString();
+
+		musicManager.OnVolumesChanged(gameManager.Settings.MasterVolume, gameManager.Settings.BGVolume, gameManager.Settings.FXVolume);
 	}
 
 	private void OnBGVolumeChanged()
@@ -187,31 +193,40 @@ public class SettingsMenu : MonoBehaviour
 		gameManager.Settings.BGVolume = vol;
 		PlayerPrefs.SetFloat("BgVolume", vol);
 		backgroundVolumeText.text = vol.ToString();
+
+		musicManager.OnVolumesChanged(gameManager.Settings.MasterVolume, gameManager.Settings.BGVolume, gameManager.Settings.FXVolume);
 	}
 
 	//Called by EventTrigger/OnPointerUp Event on each volume slider
 	public void OnEndDrag(int sliderNumber)
 	{
-		if(managerAudioSource == null)
-			managerAudioSource = GameManager.instance.gameObject.GetComponent<AudioSource>();
+		if(musicManager == null)
+        {
+			musicManager = GameObject.Find("FungusManager").GetComponent<MusicManager>();
+		}
+
 		float volume = 0;
 		switch(sliderNumber)
 		{
 			case 0:
-				Debug.Log("Master Volume Change");
+				//Debug.Log("Master Volume Change");
 				volume = gameManager.Settings.MasterVolume;
 				break;
 			case 1:
-				Debug.Log("FX Volume Change");
-				volume = gameManager.Settings.FXVolume;
+				//Debug.Log("FX Volume Change");
+				volume = gameManager.Settings.FXVolume * gameManager.Settings.MasterVolume;
 				break;
 			case 2:
-				Debug.Log("BG Volume Change");
-				volume = gameManager.Settings.BGVolume;
+				//Debug.Log("BG Volume Change");
+				volume = gameManager.Settings.BGVolume * gameManager.Settings.MasterVolume;
+				//volume = Mathf.Lerp(0f, 1f, (gameManager.Settings.BGVolume + gameManager.Settings.MasterVolume) / 2);
 				break;
 		}
 
-		managerAudioSource.PlayOneShot(testClip, volume);
+		if (testClip != null && musicManager != null)
+        {
+			musicManager.PlaySound(testClip, volume, true);
+        }
 	}
 
 	private void CloseSettingsScreen()
@@ -223,7 +238,9 @@ public class SettingsMenu : MonoBehaviour
 	private int BoolToInt(bool b)
 	{
 		if(b == false)
+        {
 			return 0;
+        }
 		return 1;
 	}
 
@@ -234,8 +251,6 @@ public class SettingsMenu : MonoBehaviour
 		{
 			return false;
 		}
-
 		return true;
 	}
-
 }

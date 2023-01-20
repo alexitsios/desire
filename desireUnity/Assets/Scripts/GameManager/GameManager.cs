@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 	private float warningWaitTime;
 	private bool warningActive;
 	//private bool gameLoaded = false;
-	private WriterAudio wa;
+	private WriterAudio writerAudio;
 
 	private const string GAME_VERSION = "0.81";
 
@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
 		{
 			_mainUiInstance = Instantiate(mainUI);
 			_shipWarnings = GameObject.Find("ShipWarning").GetComponent<TMP_Text>();
-			wa = GameObject.FindGameObjectWithTag("SayDialog").GetComponent<WriterAudio>();
+			writerAudio = GameObject.FindGameObjectWithTag("SayDialog").GetComponent<WriterAudio>();
 			_shipWarnings.CrossFadeAlpha(0, 0, false);
 
 			_ink.StartInkManager();
@@ -140,9 +140,10 @@ public class GameManager : MonoBehaviour
 
 			DontDestroyOnLoad(_mainUiInstance);
 
+			writerAudio.volume = Settings.MasterVolume * Settings.FXVolume;
 			if(!Settings.BeepSound)
 			{
-				wa.volume = 0f;
+				writerAudio.volume = 0f;
 			}
 		}
 
@@ -527,12 +528,16 @@ public class GameManager : MonoBehaviour
 	{
 		_settings = newSettings;
 
-		var fxVolume = Mathf.Lerp(0f, 1f, (_settings.FXVolume + _settings.MasterVolume) / 2);
-		GetComponent<AudioSource>().volume = fxVolume;
-
-		if(!Settings.BeepSound)
-		{
-			wa.volume = 0f;
+		//var fxVolume = Mathf.Lerp(0f, 1f, (_settings.FXVolume + _settings.MasterVolume) / 2);
+		//GetComponent<AudioSource>().volume = fxVolume; //Removing this here to see if it's being used at all
+		
+		if (writerAudio != null)
+        {
+			writerAudio.volume = _settings.MasterVolume * _settings.FXVolume;
+			if (!Settings.BeepSound)
+			{
+				writerAudio.volume = 0f;
+			}
 		}
 
 		foreach(var prop in FindObjectsOfType<PropBase>())

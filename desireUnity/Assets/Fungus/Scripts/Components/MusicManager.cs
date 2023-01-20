@@ -83,9 +83,11 @@ namespace Fungus
         /// </summary>
         /// <param name="soundClip">The sound effect clip to play.</param>
         /// <param name="volume">The volume level of the sound effect.</param>
-        public virtual void PlaySound(AudioClip soundClip, float volume)
+        public virtual void PlaySound(AudioClip soundClip, float volume = 1, bool volumeOverride = false)
         {
-            audioSourceSoundEffect.PlayOneShot(soundClip, volume);
+            //audioSourceSoundEffect.PlayOneShot(soundClip, volume);
+            if (volumeOverride) audioSourceSoundEffect.PlayOneShot(soundClip, volume);
+            else audioSourceSoundEffect.PlayOneShot(soundClip);
         }
 
         /// <summary>
@@ -98,7 +100,7 @@ namespace Fungus
         {
             audioSourceAmbiance.loop = loop;
             audioSourceAmbiance.clip = soundClip;
-            audioSourceAmbiance.volume = volume;
+            //audioSourceAmbiance.volume = volume;
             audioSourceAmbiance.Play();
         }
 
@@ -188,6 +190,17 @@ namespace Fungus
             audioSourceAmbiance.clip = null;
         }
 
+        public bool SoundEffectIsPlaying()
+        {
+            return audioSourceSoundEffect.isPlaying;
+        }
+
+        public void OnVolumesChanged(float master, float music, float fx)
+        {
+            audioSourceMusic.volume = master * music;
+            audioSourceAmbiance.volume = master * music;
+            audioSourceSoundEffect.volume = master * fx;
+        }
         #endregion
     }
 }
