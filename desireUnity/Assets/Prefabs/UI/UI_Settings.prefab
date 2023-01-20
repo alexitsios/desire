@@ -1592,9 +1592,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5745498331387794665}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 100
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2345,9 +2345,9 @@ MonoBehaviour:
   hintsOn: {fileID: 7464245936805834054}
   hintsOff: {fileID: 6783397578833137239}
   backButton: {fileID: 3231805349321133792}
-  masterVolumeText: {fileID: 3409686055079829673}
-  effectsVolumeText: {fileID: 90306342410432921}
-  backgroundVolumeText: {fileID: 4664025845679855947}
+  masterVolumeValue: {fileID: 4496492246736466372}
+  effectsVolumeValue: {fileID: 1245811633912780960}
+  backgroundVolumeValue: {fileID: 7971326185897068119}
   testClip: {fileID: 0}
 --- !u!1 &3471556633886723149
 GameObject:
@@ -2954,9 +2954,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2026993840666913128}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 100
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3249,9 +3249,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8332453817234158582}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 100
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3902,9 +3902,9 @@ MonoBehaviour:
   hintsOn: {fileID: 7464245936805834054}
   hintsOff: {fileID: 6783397578833137239}
   backButton: {fileID: 3231805349321133792}
-  masterVolumeText: {fileID: 4496492246736466372}
-  effectsVolumeText: {fileID: 1245811633912780960}
-  backgroundVolumeText: {fileID: 7971326185897068119}
+  masterVolumeValue: {fileID: 0}
+  effectsVolumeValue: {fileID: 0}
+  backgroundVolumeValue: {fileID: 0}
   testClip: {fileID: 8300000, guid: 774486030b696474e8b3cf7f178123da, type: 3}
 --- !u!1 &6298016960061180337
 GameObject:

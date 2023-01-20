@@ -15,7 +15,7 @@ public class SettingsMenu : MonoBehaviour
 	[SerializeField] private Button beepOn;
 	[SerializeField] private Button beepOff, hintsOn, hintsOff, backButton;
 
-	[SerializeField] private TMP_Text masterVolumeText, effectsVolumeText, backgroundVolumeText;
+	[SerializeField] private TMP_Text masterVolumeValue, effectsVolumeValue, backgroundVolumeValue;
 	[Space]
 	[SerializeField] private AudioClip testClip;
 
@@ -31,9 +31,9 @@ public class SettingsMenu : MonoBehaviour
 		//_finishedLoading = true;
 
 		languageDropdown.value = PlayerPrefs.GetInt("Language", 0);
-		masterVolume.value = PlayerPrefs.GetFloat("MasterVolume", 100f);
-		FxVolume.value = PlayerPrefs.GetFloat("FxVolume", 100f);
-		BgVolume.value = PlayerPrefs.GetFloat("BgVolume", 100f);
+		masterVolume.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
+		FxVolume.value = PlayerPrefs.GetFloat("FxVolume", 1f);
+		BgVolume.value = PlayerPrefs.GetFloat("BgVolume", 1f);
 
 		ElementSettings();
 		FindAdditionalComponents();
@@ -167,12 +167,13 @@ public class SettingsMenu : MonoBehaviour
 		var vol = masterVolume.value;
 		gameManager.Settings.MasterVolume = vol;
 		PlayerPrefs.SetFloat("MasterVolume", vol);
-		if(masterVolumeText == null)
+		//I don't know why I need to check if it's null when it's assigned in inspector
+		//but for some reason it's throwing an error as being null maybe half of the time
+		//and yet it still works... IDK 
+		if (masterVolumeValue != null) 
 		{
-			Debug.Log("Master null");
+			masterVolumeValue.text = Mathf.RoundToInt(vol * 100).ToString();
 		}
-		else
-			masterVolumeText.text = vol.ToString();
 
 		musicManager.OnVolumesChanged(gameManager.Settings.MasterVolume, gameManager.Settings.BGVolume, gameManager.Settings.FXVolume);
 	}
@@ -182,7 +183,10 @@ public class SettingsMenu : MonoBehaviour
 		var vol = FxVolume.value;
 		gameManager.Settings.FXVolume = vol;
 		PlayerPrefs.SetFloat("FxVolume", vol);
-		effectsVolumeText.text = vol.ToString();
+		if (effectsVolumeValue != null)
+        {
+			effectsVolumeValue.text = Mathf.RoundToInt(vol * 100).ToString();
+		}
 
 		musicManager.OnVolumesChanged(gameManager.Settings.MasterVolume, gameManager.Settings.BGVolume, gameManager.Settings.FXVolume);
 	}
@@ -192,7 +196,10 @@ public class SettingsMenu : MonoBehaviour
 		var vol = BgVolume.value;
 		gameManager.Settings.BGVolume = vol;
 		PlayerPrefs.SetFloat("BgVolume", vol);
-		backgroundVolumeText.text = vol.ToString();
+		if (backgroundVolumeValue != null)
+        {
+			backgroundVolumeValue.text = Mathf.RoundToInt(vol * 100).ToString();
+		}
 
 		musicManager.OnVolumesChanged(gameManager.Settings.MasterVolume, gameManager.Settings.BGVolume, gameManager.Settings.FXVolume);
 	}

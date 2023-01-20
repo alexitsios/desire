@@ -195,10 +195,10 @@ namespace Fungus
             return audioSourceSoundEffect.isPlaying;
         }
 
-        public void OnVolumesChanged(float master, float music, float fx)
+        public void OnVolumesChanged(float master, float background, float fx)
         {
-            audioSourceMusic.volume = master * music;
-            audioSourceAmbiance.volume = master * music;
+            audioSourceMusic.volume = master * background;
+            audioSourceAmbiance.volume = master * background;
             audioSourceSoundEffect.volume = master * fx;
         }
         #endregion
