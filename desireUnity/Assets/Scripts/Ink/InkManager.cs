@@ -24,6 +24,7 @@ public class InkManager : MonoBehaviour
 	private MenuDialog _menuDialog;
 	private QuestController _questController;
 	private TranslationManager _translationManager;
+	private MusicManager _musicManager;
 
 	private void Awake()
 	{
@@ -202,12 +203,17 @@ public class InkManager : MonoBehaviour
 				var sound = commandList[1];
 				var waitForFinish = bool.Parse(commandList[2]);
 				var clip = _gameManager.GetSFXByName(sound);
-				var audioSource = GetComponent<AudioSource>();
 
-				audioSource.clip = clip;
-				audioSource.Play();
+				if (_musicManager == null)
+                {
+					_musicManager = GameObject.Find("FungusManager").GetComponent<MusicManager>();
+				}
+				//var audioSource = GetComponent<AudioSource>();
+				_musicManager.PlaySound(clip);
+				//audioSource.clip = clip;
+				//audioSource.Play();
 
-				while(waitForFinish && audioSource.isPlaying)
+				while(waitForFinish && _musicManager.SoundEffectIsPlaying())
 				{
 					yield return null;
 				}
