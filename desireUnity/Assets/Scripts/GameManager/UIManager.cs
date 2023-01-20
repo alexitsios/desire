@@ -67,7 +67,8 @@ public class UIManager : MonoBehaviour
         continueButton.onClick.AddListener(delegate 
         {
             Time.timeScale = 1;
-            pauseMenu.SetActive(false); 
+            pauseMenu.SetActive(false);
+            GameManager.instance.CanCursorChange = true;
         });
 
         exitButton.onClick.AddListener(delegate 
@@ -80,6 +81,9 @@ public class UIManager : MonoBehaviour
 
     public void OpenMenu()
     {
+        Cursor.SetCursor(GameManager.instance.cursor.mousePointerToRightArrow[0], Vector2.zero, CursorMode.Auto);
+        GameManager.instance.CanCursorChange = false;
+
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
 
