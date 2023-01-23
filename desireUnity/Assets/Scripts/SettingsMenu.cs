@@ -69,7 +69,7 @@ public class SettingsMenu : MonoBehaviour
 	{
 		languageDropdown.onValueChanged.AddListener(delegate
 		{
-			OnLanguageChanged();
+			//OnLanguageChanged();
 		});
 
 		masterVolume.onValueChanged.AddListener(delegate
