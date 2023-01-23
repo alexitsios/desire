@@ -217,6 +217,7 @@ public class GameManager : MonoBehaviour
 					if(_ink.GetVariable<bool>("acquired_tool"))
 					{
 						Destroy(GameObject.Find("AllInOneTool"));
+						GameObject.Find("FungusManager").GetComponent<MusicManager>().PlaySound(GetSFXByName("rumble"));
 					}
 
 					// Moves the Vacuum Robot
@@ -245,6 +246,7 @@ public class GameManager : MonoBehaviour
 
 				case SceneName.Bridge:
 					SetPlayerAndShadowSize(0.8f);
+					GameObject.Find("FungusManager").GetComponent<MusicManager>().PlaySound(GetSFXByName("rumble"));
 					break;
 			}
 

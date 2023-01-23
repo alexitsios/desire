@@ -18,6 +18,7 @@ public class Lifeboat : PropBase
 		}
 		else if(QuestController.Quests[QuestName.GetClearance] == QuestStatus.Completed && item == ItemType.NoItem)
 		{
+			GameObject.Find("FungusManager").GetComponent<MusicManager>().PlaySound(gameManager.GetSFXByName("rumble"));
 			gameManager.StartEndingCutscene();
 		}
 		else
