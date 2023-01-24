@@ -40,8 +40,11 @@ public abstract class PropBase : MonoBehaviour, IInteractable
 
     private void AddHintIcon()
 	{
+        if (hint != null) return;
         hint = new GameObject("HintIcon");
-        hint.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        var parentScale = new Vector3(1/ transform.localScale.x, 1 / transform.localScale.y, 1/ transform.localScale.z ); 
+        //get the inverse scaling since this child will naturally conform to the parent and needs to be normalized
+        hint.transform.localScale = new Vector3(0.1f * parentScale.x, 0.1f * parentScale.y, 0.1f * parentScale.z); //based on parent scaling
         hint.transform.localPosition = new Vector3(0f, 0f, 0f);
         var image = hint.AddComponent<SpriteRenderer>();
         var texture = Resources.Load<Texture2D>("magnifier");

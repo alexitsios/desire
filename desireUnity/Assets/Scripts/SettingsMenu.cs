@@ -149,7 +149,12 @@ public class SettingsMenu : MonoBehaviour
 			hintOffText.color = Color.white;
 		}
 
-		PlayerPrefs.SetInt("Hints", BoolToInt(enable));
+        foreach (var prop in FindObjectsOfType<PropBase>())
+        {
+            prop.DisplayHints = enable;
+        }
+
+        PlayerPrefs.SetInt("Hints", BoolToInt(enable));
 	}
 
 	private void OnLanguageChanged()
