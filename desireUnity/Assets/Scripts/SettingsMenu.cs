@@ -31,9 +31,9 @@ public class SettingsMenu : MonoBehaviour
 		//_finishedLoading = true;
 
 		languageDropdown.value = PlayerPrefs.GetInt("Language", 0);
-		masterVolume.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
+		masterVolume.value = PlayerPrefs.GetFloat("MasterVolume", 0.3f);
 		FxVolume.value = PlayerPrefs.GetFloat("FxVolume", 1f);
-		BgVolume.value = PlayerPrefs.GetFloat("BgVolume", 1f);
+		BgVolume.value = PlayerPrefs.GetFloat("BgVolume", 0.3f);
 
 		ElementSettings();
 		FindAdditionalComponents();
@@ -157,15 +157,15 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetInt("Hints", BoolToInt(enable));
 	}
 
-	private void OnLanguageChanged()
-	{
-		var language = languageDropdown.value;
+	//private void OnLanguageChanged()
+	//{
+	//	var language = languageDropdown.value;
 
-		gameManager.Settings.Language = (Language) language;
-		gameManager.TranslationManager.LoadBaseTranslation();
+	//	gameManager.Settings.Language = (Language) language;
+	//	gameManager.TranslationManager.LoadBaseTranslation();
 
-		PlayerPrefs.SetInt("Language", language);
-	}
+	//	PlayerPrefs.SetInt("Language", language);
+	//}
 
 	private void OnMasterVolumeChanged()
 	{

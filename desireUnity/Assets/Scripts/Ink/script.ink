@@ -76,6 +76,7 @@ VacuumRobot #@stern_garbage_bin
         VacuumRobot #@stern_vacuum_robot_2
         -> DONE
     - !finished_talking_to_vacuum_bot:
+        Led #@end_discussion_with_vacuum_robot_5
         VacuumRobot #@stern_vacuum_robot_3
         Led #@stern_vacuum_robot_4
         VacuumRobot #@stern_vacuum_robot_5
@@ -803,6 +804,7 @@ Led #@bridge_monitor_3
 
 == bridge_captain_ask_table ==
 * [@bridge_captain_ask_table_title_1]
+	Led #@bridge_spaceholder
 	CaptainBot #@bridge_captain_captain_table_1.1
 	Led #@bridge_captain_captain_table_1.2
 	CaptainBot #@bridge_captain_captain_table_1.3
@@ -810,6 +812,7 @@ Led #@bridge_monitor_3
 	CaptainBot #@bridge_captain_captain_table_1.5
 	-> bridge_captain_ask_table
 * [@bridge_captain_ask_table_title_2]
+	Led #@bridge_spaceholder
 	CaptainBot #@bridge_captain_captain_table_2.1
 	CaptainBot #@bridge_captain_captain_table_2.2
 	CaptainBot #@bridge_captain_captain_table_2.3
@@ -821,6 +824,7 @@ Led #@bridge_monitor_3
 	CaptainBot #@bridge_captain_captain_table_2.9
 	-> bridge_captain_ask_table
 * [@bridge_captain_ask_table_title_3]
+	Led #@bridge_spaceholder
 	CaptainBot #@bridge_captain_captain_table_3.1
 	CaptainBot #@bridge_captain_captain_table_3.2
 	Led #@bridge_captain_captain_table_3.3
@@ -834,11 +838,13 @@ Led #@bridge_monitor_3
 	~ can_ask_about_bomb = true
 	-> bridge_captain_ask_table
 * { can_ask_about_robots } [@bridge_captain_ask_table_title_4]
+	Led #@bridge_spaceholder
 	CaptainBot #@bridge_captain_captain_table_4.1
 	CaptainBot #@bridge_captain_captain_table_4.2
 	CaptainBot #@bridge_captain_captain_table_4.3
 	-> bridge_captain_ask_table
 * { can_ask_about_bomb } [@bridge_captain_ask_table_title_5]
+	Led #@bridge_spaceholder
 	CaptainBot #@bridge_captain_captain_table_5.1
 	Led #@bridge_captain_captain_table_5.2
 	CaptainBot #@bridge_captain_captain_table_5.3

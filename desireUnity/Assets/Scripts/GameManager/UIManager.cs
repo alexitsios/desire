@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using Fungus;
 
 public class UIManager : MonoBehaviour
 {
@@ -43,7 +40,7 @@ public class UIManager : MonoBehaviour
     private Vector2 inventoryHiddenPos = Vector2.zero, inventoryShownPos;
     private Vector2 tasksHiddenPos = Vector2.zero, tasksShownPos;
     public bool inventoryOpen, tasksOpen;
-    private float timeToMove = 0.2f;
+    private readonly float timeToMove = 0.2f;
 
     private void Start()
     {
@@ -103,6 +100,7 @@ public class UIManager : MonoBehaviour
     //Open/Close the SettingsPanel
     private void OpenSettings()
     {
+        GameManager.instance.CanCursorChange = false;
         GameManager.instance.OpenSettings();
     }
 

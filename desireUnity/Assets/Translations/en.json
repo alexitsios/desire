@@ -242,7 +242,7 @@
 
         "@funnel_clothes_1": "Two sets of clothing. Ripped and stained. What's it - oh... Oh no... What did you do? They wouldn't have… have hurt each other, would they? For... food? What happened here?",
 
-        "@funnel_leave_without_memory_1": "Something something about needing to recover your memory before proceeding..."
+        "@funnel_leave_without_memory_1": "If I am to go any further, I'll need to recover my memory first."
     },
     "superstructure_out": {
         "@superstructure_out_load_1": "The more my memory returns, the more questions I have...",
@@ -465,6 +465,7 @@
         "@generator_room_log_return": "I've seen enough..."
     },
     "bridge": {
+        "@bridge_spaceholder": "",
         "@bridge_load_1": "It must be coming from the Ship’s experimental engine",
         "@bridge_load_2": "I was worried the ship would sink at any moment. But now I wonder if it’ll explode first",
         "@bridge_load_3": "Would I drown and short-circuit?",

@@ -2158,7 +2158,7 @@ MonoBehaviour:
   waitForFrames: 1
 --- !u!114 &2003258977
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2170,12 +2170,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 3
   indentLevel: 0
-  volume: 0.2
+  volume: 0.1
   fadeDuration: 1
   waitUntilFinished: 1
 --- !u!114 &2003258978
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
