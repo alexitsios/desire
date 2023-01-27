@@ -47,6 +47,7 @@ VAR can_ask_about_bomb = false
         >> quest RecoverMemory Active
         -> DONE
     - !ship_is_sinking && acquired_service_kit:
+	  >> sfx rumble false
         >> screenshake true
         Led #@stern_load_6
         >> screenshake false
@@ -59,6 +60,7 @@ VAR can_ask_about_bomb = false
 
 == stern_garbage_bin ==
 >> bgchange trash_on_ground
+Led #@stern_spaceholder
 VacuumRobot #@stern_garbage_bin
 >> moveto VacuumRobot TrashBin
 -> DONE
@@ -440,6 +442,7 @@ Led #@superstructure_out_empty_lifeboat_3
     - !has_clearance:
     {
         - !talked_to_security_robot:
+		Led #@superstructure_spaceholder
             SecurityBot #@superstructure_out_security_bot_1
             Led #@superstructure_out_security_bot_2
             SecurityBot #@superstructure_out_security_bot_3
@@ -713,6 +716,7 @@ Led #@superstructure_in_to_hangar
 == bridge_load ==
 {
 	- !bridge_visited:
+		>> sfx rumble false
 		>> screenshake true
 		Led #@bridge_load_1
 		>> screenshake false

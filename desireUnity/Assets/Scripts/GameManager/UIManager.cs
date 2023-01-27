@@ -94,6 +94,7 @@ public class UIManager : MonoBehaviour
     //Open/Close the About section on the main menu
     private void AboutUi(bool open)
     {
+        GameManager.instance.CanCursorChange = false;
         aboutUi.SetActive(open);
     }
 

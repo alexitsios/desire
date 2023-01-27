@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61dddfdc5e0e44ca298d8f46f7f5a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedFlowchart: {fileID: 845995056}
+  selectedFlowchart: {fileID: 923412782}
 --- !u!4 &192890731
 Transform:
   m_ObjectHideFlags: 1
@@ -859,9 +859,9 @@ GameObject:
   - component: {fileID: 923412781}
   - component: {fileID: 923412780}
   - component: {fileID: 923412784}
-  - component: {fileID: 923412783}
   - component: {fileID: 923412786}
   - component: {fileID: 923412785}
+  - component: {fileID: 923412787}
   m_Layer: 0
   m_Name: PropsFlowchart
   m_TagString: Untagged
@@ -951,8 +951,9 @@ MonoBehaviour:
     width: 1114
     height: 859
   selectedBlocks:
-  - {fileID: 923412786}
-  selectedCommands: []
+  - {fileID: 923412784}
+  selectedCommands:
+  - {fileID: 923412787}
   variables: []
   description: 
   stepPause: 0
@@ -964,21 +965,6 @@ MonoBehaviour:
   hideCommands: []
   luaEnvironment: {fileID: 0}
   luaBindingName: flowchart
---- !u!114 &923412783
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923412778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409214793f5282f43b48c628d03c4b38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 3
-  indentLevel: 0
-  path: superstructure_out_remaining_lifeboat
 --- !u!114 &923412784
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -993,7 +979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 114.271194
+    x: 113.240265
     y: 165.24425
     width: 97.42268
     height: 40
@@ -1004,7 +990,7 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 0}
   commandList:
-  - {fileID: 923412783}
+  - {fileID: 923412787}
   suppressAllAutoSelections: 0
 --- !u!114 &923412785
 MonoBehaviour:
@@ -1048,6 +1034,21 @@ MonoBehaviour:
   commandList:
   - {fileID: 923412785}
   suppressAllAutoSelections: 0
+--- !u!114 &923412787
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923412778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 409214793f5282f43b48c628d03c4b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 128
+  indentLevel: 0
+  path: superstructure_out_security_bot
 --- !u!1 &1204694686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,7 +1788,8 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 1690953737}
-  selectedCommands: []
+  selectedCommands:
+  - {fileID: 1690953736}
   variables: []
   description: 
   stepPause: 0

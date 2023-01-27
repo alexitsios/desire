@@ -58,6 +58,8 @@
 		"!jamed_door": "The door won't budge"
     },
     "stern": {
+        "@stern_spaceholder": "",
+
         "@stern_load_1": "Uh... Wh- what's going on? I- I don't remember- Oh crap- M- my leg! My arm! They're gone!",
         "@stern_load_2": "So dirty. So m-m-m-much dirt. I'll nev-neve-n-never c-clean it.",
         "@stern_load_3": "Hey! That's my leg! You! Come over here!",
@@ -245,6 +247,8 @@
         "@funnel_leave_without_memory_1": "If I am to go any further, I'll need to recover my memory first."
     },
     "superstructure_out": {
+        "@superstructure_spaceholder": "",
+
         "@superstructure_out_load_1": "The more my memory returns, the more questions I have...",
         "@superstructure_out_load_2": "Maybe the superstructure ahead will hold some answers.",
 

@@ -81,10 +81,11 @@ public class GameManager : MonoBehaviour
 		_ink = GetComponent<InkManager>();
 		_translationManager = GetComponent<TranslationManager>();
 
-		Settings = new Settings()
+        Settings = new Settings()
 		{
 			Language = Language.English,
 			BeepSound = true,
+			ShowHints = false,
 			BGVolume = 1,
 			FXVolume = 1,
 			MasterVolume = 1

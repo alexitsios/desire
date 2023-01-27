@@ -5,6 +5,6 @@ public class Settings
 	public float FXVolume { get; set; } = 1f;
 	public float BGVolume { get; set; } = 0.3f;
 	public bool BeepSound { get; set; } = true;
-	public bool ShowHints { get; set; }
+	public bool ShowHints { get; set; } = false;
 
 }
