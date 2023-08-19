@@ -37,6 +37,6 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-tsodc*/
+# tsodc*/
 *.zip
 bin/
